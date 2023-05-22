@@ -46,4 +46,14 @@ struct FirebaseAuthModel {
         }
     }
     
+    
+    func changeUserName(newName: String){
+        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+        changeRequest?.displayName = newName
+        changeRequest?.commitChanges { error in
+          print(error!)
+        }
+    }
+    
+    
 }

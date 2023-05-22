@@ -23,7 +23,8 @@ struct SettingView: View {
     @AppStorage("name") var name = "ゲストユーザー"
     
     @State private var appleAuthStatus: MusicAuthorization.Status
-    
+    @State private var logOutAlert: Bool = false
+    @State private var isSettingName = false
     
     init() {
         _appleAuthStatus = .init(initialValue: MusicAuthorization.currentStatus)
@@ -58,19 +59,39 @@ struct SettingView: View {
                 Text("ユーザーステータス")
             }
             Section{
-                NavigationLink(destination: NameSettingView(), label: {Text("ユーザー名:　\(name)")})
+                Button {
+                    isSettingName.toggle()
+                } label: {
+                    Text("ユーザー名:　\(name)")
+                }
+                .fullScreenCover(isPresented: $isSettingName) {
+                    NameSettingView()
+                }
+
                 NavigationLink(destination: PasswordResetView(), label: {Text("パスワードの変更")})
             }header: {
                 Text("ユーザ情報の変更")
             }
             
             
-            NavigationLink(destination: LogOutView(),
-                           label: {Text("ログアウト")
+            Button(action: {
+                self.logOutAlert = true
+            }, label: {
+                Text("ログアウト")
                     .foregroundColor(.red)
                     .bold()
             })
-            
+            .alert("本当にログアウトしますか？", isPresented: $logOutAlert) {
+                Button("OK"){
+                    do {
+                        try Auth.auth().signOut()
+                    }
+                    catch let error as NSError {
+                        print(error)
+                    }
+                }
+                Button("キャンセル"){}
+            }
         }
     }
 }

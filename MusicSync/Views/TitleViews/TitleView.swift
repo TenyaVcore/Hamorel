@@ -53,11 +53,12 @@ struct TitleView: View {
                                 .scaledToFit()
                                 .frame(width: 50)
                         })
-
-
                     }
                 }
                 
+                if appleAuthStatus != .authorized{
+                    AppleMusicAuthView()
+                }
                 
             }
         }
