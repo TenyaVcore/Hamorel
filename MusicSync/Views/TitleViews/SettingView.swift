@@ -21,6 +21,7 @@ struct SettingModel: Identifiable {
 struct SettingView: View {
     
     @AppStorage("name") var name = "ゲストユーザー"
+    @AppStorage("isLogined") var isLogined: Bool = false
     
     @State private var appleAuthStatus: MusicAuthorization.Status
     @State private var logOutAlert: Bool = false
@@ -37,7 +38,14 @@ struct SettingView: View {
                 HStack{
                     Text("現在のログインステータス：")
                     
-                    Text(Auth.auth().currentUser?.isAnonymous ?? true ? "ゲストとしてログイン" : "メールアドレスでログイン")
+                    switch Auth.auth().currentUser?.isAnonymous{
+                    case true:
+                        Text("ゲストとしてログイン")
+                    case false:
+                        Text("メールアドレスでログイン")
+                    default:
+                        Text("未定義")
+                    }
                 }
                 HStack{
                     Text("現在のApple Music ステータス:")
@@ -82,15 +90,18 @@ struct SettingView: View {
                     .bold()
             })
             .alert("本当にログアウトしますか？", isPresented: $logOutAlert) {
+                Button("キャンセル"){}
+
                 Button("OK"){
                     do {
                         try Auth.auth().signOut()
+                        isLogined = false
                     }
                     catch let error as NSError {
                         print(error)
                     }
                 }
-                Button("キャンセル"){}
+                
             }
         }
     }

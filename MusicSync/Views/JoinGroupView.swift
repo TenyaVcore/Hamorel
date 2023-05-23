@@ -21,6 +21,7 @@ struct JoinGroupView: View {
                     .keyboardType(.numberPad)
                     .autocapitalization(.none)
                     .frame(minWidth: 170)
+                    .padding()
                     .overlay(
                         RoundedRectangle(cornerRadius: 2)
                             .stroke(.red,lineWidth: 3)

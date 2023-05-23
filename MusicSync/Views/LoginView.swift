@@ -17,6 +17,7 @@ struct LogInView: View {
     @State var password:String = ""
     @State var errorMessages = ""
     
+    var model = FirebaseAuthModel()
     
     var body: some View {
         if isLogined {
@@ -59,7 +60,7 @@ struct LogInView: View {
                 
                 
                 Button {
-                    
+                    model.loginAsGuest()
                     isLogined = true
                 } label: {
                     ButtonView(text: "ゲストとしてログイン", buttonColor: .teal)

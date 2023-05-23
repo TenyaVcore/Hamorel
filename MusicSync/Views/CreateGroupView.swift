@@ -20,6 +20,11 @@ struct CreateGroupView: View {
         
         ZStack{
             VStack{
+                ProgressView("ユーザーを待機中")
+                    .font(.title2)
+                    .padding(.top, 50)
+                
+                
                 List(viewModel.usersData){ userdata in
                     Text(userdata.name)
                 }
@@ -32,17 +37,18 @@ struct CreateGroupView: View {
                 }
                 
                 Text("room Pin:\(viewModel.pubRoomPin)")
+                    .font(.title)
                     .padding(30)
                 
-                NavigationLink("プレイリストを作成する",
-                               destination: CreatePlaylistView(roomPin: viewModel.pubRoomPin, usersData: viewModel.usersData))
+                NavigationLink(destination: CreatePlaylistView(roomPin: viewModel.pubRoomPin, usersData: viewModel.usersData), label: {ButtonView(text: "プレイリストを作成する", buttonColor: .blue)})
                 .disabled(viewModel.usersData.count <= 1)
+                .padding()
                 
                 
                 Spacer()
             }
             
-            if LoadingControl.shared.isLoading { LoadingView() }
+            //if LoadingControl.shared.isLoading { LoadingView() }
             
         }
        

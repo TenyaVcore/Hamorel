@@ -50,6 +50,7 @@
 		BA85A17D2A1B111F009C1CDD /* FirestoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A17C2A1B111F009C1CDD /* FirestoreModel.swift */; };
 		BA85A17F2A1B114B009C1CDD /* AppleMusicLibraryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A17E2A1B114B009C1CDD /* AppleMusicLibraryModel.swift */; };
 		BA85A1812A1B1565009C1CDD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA85A1802A1B1565009C1CDD /* GoogleService-Info.plist */; };
+		BA85A1832A1B6B20009C1CDD /* GroupButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1822A1B6B20009C1CDD /* GroupButtonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		BA85A17C2A1B111F009C1CDD /* FirestoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreModel.swift; sourceTree = "<group>"; };
 		BA85A17E2A1B114B009C1CDD /* AppleMusicLibraryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicLibraryModel.swift; sourceTree = "<group>"; };
 		BA85A1802A1B1565009C1CDD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BA85A1822A1B6B20009C1CDD /* GroupButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +239,7 @@
 				BA85A16A2A1B0F7F009C1CDD /* LoadingView.swift */,
 				BA85A16C2A1B0F9F009C1CDD /* CreatePlaylistView.swift */,
 				BA85A16E2A1B0FB7009C1CDD /* ButtonView.swift */,
+				BA85A1822A1B6B20009C1CDD /* GroupButtonView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 				BA85A1692A1B0F61009C1CDD /* AfterJoinView.swift in Sources */,
 				BA85A15F2A1B0EA7009C1CDD /* NameSettingView.swift in Sources */,
 				BA85A1742A1B1054009C1CDD /* JoinGroupViewModel.swift in Sources */,
+				BA85A1832A1B6B20009C1CDD /* GroupButtonView.swift in Sources */,
 				BA6CF9192A1B0D180066B55E /* PasswordResetView.swift in Sources */,
 				BA6CF8C72A1B0A480066B55E /* MusicSyncApp.swift in Sources */,
 				BA6CF9172A1B0CF90066B55E /* ProvisionalRegistrationView.swift in Sources */,
@@ -604,6 +608,7 @@
 				DEVELOPMENT_TEAM = P4P28KTQQK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "ミュージックライブラリへのアクセス権限が必要です。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -633,6 +638,7 @@
 				DEVELOPMENT_TEAM = P4P28KTQQK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "ミュージックライブラリへのアクセス権限が必要です。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

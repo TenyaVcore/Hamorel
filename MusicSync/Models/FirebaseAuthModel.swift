@@ -42,7 +42,7 @@ struct FirebaseAuthModel {
         Auth.auth().signInAnonymously(){ result, error in
             guard let user = result?.user else { return }
             let uid = user.uid
-            print(uid)
+            print("ゲストID: \(uid)")
         }
     }
     

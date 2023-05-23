@@ -25,9 +25,11 @@ struct HomeView: View {
                 Text(Name)
                     .font(.system(size: 25, weight: .bold, design: .default))
                 
-                NavigationLink(destination: CreateGroupView(name: Name),label: {Text("グループ作成").bold()})
+                NavigationLink(destination: CreateGroupView(name: Name),
+                               label: {GroupButtonView(text: "グループを作成", buttonColor: .blue)})
                     .padding(40)
-                NavigationLink(destination: JoinGroupView(name: Name), label: {Text("グループに参加").bold()})
+                NavigationLink(destination: JoinGroupView(name: Name),
+                               label: {GroupButtonView(text: "グループに参加", buttonColor: .red)})
                 
             }
         }

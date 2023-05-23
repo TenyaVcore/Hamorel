@@ -18,9 +18,11 @@ struct PasswordResetView: View {
             Text("パスワードをリセット")
                 .font(.largeTitle)
                 .bold()
+                .padding(10)
             
             Text("メールアドレスにパスワード再設定用メールを送信します")
                 .multilineTextAlignment(.center)
+                .padding(.horizontal, 40)
                 
             
             TextField("メールアドレスを入力", text: $email)

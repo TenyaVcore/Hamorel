@@ -25,6 +25,14 @@ class CreatePlaylistViewModel: ObservableObject {
             songs = musicModel.merge(item1: songs, item2: downloadData[i])
         }
         
+        var limitedSongs = MusicItemCollection<Song>()
+        
+        if songs.count > 99 {
+            for i in 0...100 {
+                limitedSongs += MusicItemCollection<Song>(arrayLiteral: songs[i])
+            }
+        }
+        
         let completeSongs = songs
         
         Task{try await MusicLibrary.shared.createPlaylist(name: "created Playlist", items: completeSongs )}
