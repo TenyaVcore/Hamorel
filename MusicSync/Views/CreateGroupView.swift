@@ -30,10 +30,10 @@ struct CreateGroupView: View {
                 }
                 .onAppear {
                     LoadingControl.shared.showLoading()
-                    let result = viewModel.createGroup(userName: name)
-                    listener = result.0
-                    viewModel.pubRoomPin = result.1
-                    
+                    viewModel.createGroup(userName: name) { Listener, roomPin  in
+                        listener = Listener
+                        viewModel.pubRoomPin = roomPin
+                    }
                 }
                 
                 Text("room Pin:\(viewModel.pubRoomPin)")

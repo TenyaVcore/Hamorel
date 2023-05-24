@@ -56,7 +56,6 @@ class JoinGroupViewModel: ObservableObject {
                 self.errorMessage = error.localizedDescription
             }
         }
-        
         return listener
     }
     

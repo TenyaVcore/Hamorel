@@ -11,6 +11,7 @@ import MusicKit
 struct TitleView: View {
     
     @State private var appleAuthStatus: MusicAuthorization.Status
+    @State private var isAnimation: Bool = false
     
     init() {
         _appleAuthStatus = .init(initialValue: MusicAuthorization.currentStatus)
@@ -25,8 +26,8 @@ struct TitleView: View {
                     Spacer()
                     
                     Text("MUSIC SYNC")
-                        .font(.system(size: 60,weight: .bold))
-                        .foregroundColor(.white)
+                        .font(.system(size: 55,weight: .bold))
+                        .foregroundColor(.black)
                         .padding(18)
                     
                     
@@ -43,7 +44,6 @@ struct TitleView: View {
                     Spacer()
                     
                 }
-                .background(.black)
                 .toolbar {
                     ToolbarItem (placement: .navigationBarTrailing){
                         NavigationLink(destination:SettingView() ,
@@ -58,7 +58,14 @@ struct TitleView: View {
                 
                 if appleAuthStatus != .authorized{
                     AppleMusicAuthView()
+                        .scaleEffect(isAnimation ? 1 : 0)
+                        .animation(.easeIn, value: isAnimation)
+                        .onAppear(){
+                            isAnimation = true
+                        }
                 }
+                    
+                    
                 
             }
         }

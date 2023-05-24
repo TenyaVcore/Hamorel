@@ -46,28 +46,33 @@ class CreateGroupViewModel: ObservableObject {
     }
     
     
-    func createGroup(userName: String) -> (ListenerRegistration?, Int) {
+    func createGroup(userName: String, completion: @escaping (ListenerRegistration?, Int) -> Void) {
         var listener: ListenerRegistration?
         var roomPin: Int = 0
         
-        musicModel.loadLibrary { [self] result  in
+        musicModel.loadLibrary { [weak self] result  in
+            guard let self = self else { return }
+            
             switch result {
             case .success(let songs):
-                roomPin = model.createRoom(createMiss: 0, user: userName)
-                model.separate(item: songs, roomPin: roomPin)
-                listener = addListener(roomPin: roomPin)
+                roomPin = self.model.createRoom(createMiss: 0, user: userName)
+                self.model.separate(item: songs, roomPin: roomPin)
+                listener = self.addListener(roomPin: roomPin)
                 
-                pubRoomPin = roomPin
-                LoadingControl.shared.hideLoading()
+                DispatchQueue.main.async {
+                    self.pubRoomPin = roomPin
+                    LoadingControl.shared.hideLoading()
+                    completion(listener, roomPin)
+                }
                 
             case .failure(let error):
-                self.errorMessage = error.localizedDescription
+                DispatchQueue.main.async {
+                    self.errorMessage = error.localizedDescription
+                    completion(nil, roomPin)
+                }
             }
         }
-       
-        return (listener , roomPin)
     }
-    
     func exitGroup(roomPin: Int){
         model.exitRoom(roomPin: roomPin)
     }
