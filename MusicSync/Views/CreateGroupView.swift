@@ -48,7 +48,7 @@ struct CreateGroupView: View {
                 Spacer()
             }
             
-            //if LoadingControl.shared.isLoading { LoadingView() }
+            if LoadingControl.shared.isLoading { LoadingView() }
             
         }
        

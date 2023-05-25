@@ -16,6 +16,9 @@ struct CreatePlaylistView: View {
     var body: some View {
         VStack{
             Text("プレイリストを作成しました！")
+                .padding(40)
+            
+            ButtonView(text: "OK", buttonColor: .blue)
         }
         .onAppear{
             viewModel.createsPlaylist(roomPin: roomPin, usersData: usersData)

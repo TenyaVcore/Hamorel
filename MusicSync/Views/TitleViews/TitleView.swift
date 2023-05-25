@@ -10,6 +10,8 @@ import MusicKit
 
 struct TitleView: View {
     
+    @EnvironmentObject var transData: EnvironmentData
+    
     @State private var appleAuthStatus: MusicAuthorization.Status
     @State private var isAnimation: Bool = false
     
@@ -53,16 +55,18 @@ struct TitleView: View {
                                 .scaledToFit()
                                 .frame(width: 50)
                         })
+                        
+                        
                     }
                 }
                 
                 if appleAuthStatus != .authorized{
                     AppleMusicAuthView()
-                        .scaleEffect(isAnimation ? 1 : 0)
-                        .animation(.easeIn, value: isAnimation)
-                        .onAppear(){
-                            isAnimation = true
-                        }
+//                        .scaleEffect(isAnimation ? 1 : 0)
+//                        .animation(.easeIn, value: isAnimation)
+//                        .onAppear(){
+//                            isAnimation = true
+//                        }
                 }
                     
                     
@@ -71,6 +75,14 @@ struct TitleView: View {
         }
     }
 }
+
+
+//titleに戻る用
+class EnvironmentData: ObservableObject {
+    @Published var isNavigationActive: Binding<Bool> = Binding<Bool>.constant(false)
+}
+
+
 
 struct TitleView_Previews: PreviewProvider {
     static var previews: some View {
