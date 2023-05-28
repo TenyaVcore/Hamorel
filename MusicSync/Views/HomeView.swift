@@ -20,38 +20,6 @@ struct HomeView: View {
     
     let libraryModel = AppleMusicLibraryModel()
     let firestoreModel = FirestoreModel()
-    //テスト
-    
-    func fetchUserDataTest(completion: @escaping (Result<MusicItemCollection<Song>, Error>) -> Void) {
-        var usersSongs: MusicItemCollection<Song> = MusicItemCollection<Song>()
-        let dispatchGroup = DispatchGroup()
-        let dispatchQueue = DispatchQueue(label: "queue", attributes: .concurrent)
-        let doc = Firestore.firestore().collection("room").document(String(239006)).collection("insideRoom").document("A4700E05-9D3A-44E2-AE0F-04B99B1E583F").collection("songs")
-        
-        for i in 1...15 {
-            dispatchGroup.enter() // dispatchGroupに入場
-            
-            dispatchQueue.async(group: dispatchGroup) {
-                doc.document(String(i)).getDocument(as: UserSongs.self) { result in
-                    switch result {
-                    case .success(let data):
-                        usersSongs += data.songs
-                        
-                    case .failure(let error):
-                        print("error: \(error)")
-                    }
-                    
-                    dispatchGroup.leave() // dispatchGroupから退出
-                }
-            }
-        }
-        
-        dispatchGroup.notify(queue: .main) {
-            completion(.success(usersSongs))
-        }
-    }
-
-    //テスト終わり
     
     var body: some View {
             
@@ -71,27 +39,6 @@ struct HomeView: View {
                                label: {GroupButtonView(text: "グループに参加", buttonColor: .red)})
                 
                 
-                //テスト
-                
-                
-//                Button("download") {
-//
-//                    firestoreModel.downloadData(roomPin: 239006, usersData: [UserData(id: "A4700E05-9D3A-44E2-AE0F-04B99B1E583F", name: "なつみかん")]) { result in
-//                        switch result{
-//                        case .success(let songs):
-//                            print(songs)
-//                            let addSong = songs[0]
-//
-//                            Task{try await MusicLibrary.shared.createPlaylist(name: "test Playlist", items: addSong )}
-//
-//                        case .failure(let error):
-//                            print(error)
-//                        }
-//                    }
-//
-//                }.padding(60)
-                
-                //テスト終わり
             }
         }
     }
