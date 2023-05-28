@@ -41,10 +41,6 @@ struct CreateGroupView: View {
                     .font(.title)
                     .padding(30)
                 
-                Button("user Data", action: {print(viewModel.usersData)})
-                
-                
-              
                 
                 
                 NavigationLink(destination: CreatePlaylistView(roomPin: viewModel.pubRoomPin, usersData: viewModel.usersData), label: {ButtonView(text: "プレイリストを作成する", buttonColor: .blue)})

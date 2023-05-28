@@ -109,31 +109,6 @@ struct FirestoreModel {
     }
     
     
-    func downloadDataOld(roomPin: Int, usersData: [UserData]) -> [MusicItemCollection<Song>] {
-        var songsCollection:[MusicItemCollection<Song>] = []
-        
-        usersData.forEach { userData in
-            
-            var usersSongs :MusicItemCollection<Song> = MusicItemCollection<Song>()
-            let doc = db.collection("room").document(String(roomPin)).collection("insideRoom").document(userData.id).collection("songs")
-            
-            for i in 1..<100{
-                doc.document(String(i)).getDocument(as: UserSongs.self) { result in
-                    switch result {
-                    case .success(let data):
-                        usersSongs += data.songs
-                        
-                    case .failure(let error):
-                        print("error: \(error)")
-                    }
-                }
-            }
-            songsCollection.append(usersSongs)
-        }
-        
-        return songsCollection
-    }
-    
     //usersDataのそれぞれのユーザーに対してfetchUserDataを行い、[MusicItemCollection]の形に格納
     func downloadData(roomPin: Int, usersData: [UserData], completion: @escaping (Result<[MusicItemCollection<Song>], Error>) -> Void ) {
         let dispatchGroup = DispatchGroup()
@@ -141,6 +116,7 @@ struct FirestoreModel {
         var songsCollection:[MusicItemCollection<Song>] = []
         
         usersData.forEach { userData in
+            dispatchGroup.enter()
             dispatchQueue.async(group: dispatchGroup){
                 fetchUserData(roomPin: roomPin, userData: userData) { result in
                     switch result {
@@ -150,6 +126,7 @@ struct FirestoreModel {
                     case .failure(let error):
                         print("error: \(error)")
                     }
+                    dispatchGroup.leave()
                 }
             }
             dispatchGroup.notify(queue: .main){
