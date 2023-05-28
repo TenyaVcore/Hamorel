@@ -29,6 +29,7 @@ struct AfterJoinView: View {
                 }
                 
                 
+                
                 NavigationLink("プレイリストを作成する",
                                destination: CreatePlaylistView(roomPin: Int(roomPin) ?? 0, usersData: viewModel.usersData))
                 

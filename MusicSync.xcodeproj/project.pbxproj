@@ -236,10 +236,8 @@
 				BA85A1642A1B0F1C009C1CDD /* CreateGroupView.swift */,
 				BA85A1662A1B0F43009C1CDD /* JoinGroupView.swift */,
 				BA85A1682A1B0F61009C1CDD /* AfterJoinView.swift */,
-				BA85A16A2A1B0F7F009C1CDD /* LoadingView.swift */,
 				BA85A16C2A1B0F9F009C1CDD /* CreatePlaylistView.swift */,
-				BA85A16E2A1B0FB7009C1CDD /* ButtonView.swift */,
-				BA85A1822A1B6B20009C1CDD /* GroupButtonView.swift */,
+				BA85A1842A21B90C009C1CDD /* ViewComponents */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -271,6 +269,16 @@
 				BA85A17E2A1B114B009C1CDD /* AppleMusicLibraryModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		BA85A1842A21B90C009C1CDD /* ViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				BA85A16E2A1B0FB7009C1CDD /* ButtonView.swift */,
+				BA85A16A2A1B0F7F009C1CDD /* LoadingView.swift */,
+				BA85A1822A1B6B20009C1CDD /* GroupButtonView.swift */,
+			);
+			path = ViewComponents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

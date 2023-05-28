@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import FirebaseFirestoreSwift
+import MusicKit
 
 struct CreateGroupView: View {
     
@@ -40,8 +41,14 @@ struct CreateGroupView: View {
                     .font(.title)
                     .padding(30)
                 
+                Button("user Data", action: {print(viewModel.usersData)})
+                
+                
+              
+                
+                
                 NavigationLink(destination: CreatePlaylistView(roomPin: viewModel.pubRoomPin, usersData: viewModel.usersData), label: {ButtonView(text: "プレイリストを作成する", buttonColor: .blue)})
-                .disabled(viewModel.usersData.count <= 1)
+                //.disabled(viewModel.usersData.count <= 1)
                 .padding()
                 
                 

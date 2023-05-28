@@ -109,7 +109,7 @@ struct FirestoreModel {
     }
     
     
-    func downloadData(roomPin: Int, usersData: [UserData]) -> [MusicItemCollection<Song>] {
+    func downloadDataOld(roomPin: Int, usersData: [UserData]) -> [MusicItemCollection<Song>] {
         var songsCollection:[MusicItemCollection<Song>] = []
         
         usersData.forEach { userData in
@@ -132,6 +132,60 @@ struct FirestoreModel {
         }
         
         return songsCollection
+    }
+    
+    //usersDataのそれぞれのユーザーに対してfetchUserDataを行い、[MusicItemCollection]の形に格納
+    func downloadData(roomPin: Int, usersData: [UserData], completion: @escaping (Result<[MusicItemCollection<Song>], Error>) -> Void ) {
+        let dispatchGroup = DispatchGroup()
+        let dispatchQueue = DispatchQueue(label: "queue2", attributes: .concurrent)
+        var songsCollection:[MusicItemCollection<Song>] = []
+        
+        usersData.forEach { userData in
+            dispatchQueue.async(group: dispatchGroup){
+                fetchUserData(roomPin: roomPin, userData: userData) { result in
+                    switch result {
+                    case .success(let songs):
+                        songsCollection.append(songs)
+                        
+                    case .failure(let error):
+                        print("error: \(error)")
+                    }
+                }
+            }
+            dispatchGroup.notify(queue: .main){
+                completion(.success(songsCollection))
+            }
+        }
+    }
+    
+    //ユーザーの曲情報をfireStoreからダウンロードし1つのMusicItemCollectionにまとめて返す
+    func fetchUserData(roomPin: Int, userData: UserData, completion: @escaping (Result<MusicItemCollection<Song>, Error>) -> Void){
+        var usersSongs :MusicItemCollection<Song> = MusicItemCollection<Song>()
+        let dispatchGroup = DispatchGroup()
+        let dispatchQueue = DispatchQueue(label: "queue", attributes: .concurrent)
+        let doc = db.collection("room").document(String(roomPin)).collection("insideRoom").document(userData.id).collection("songs")
+        
+        for i in 1...15 {
+            dispatchGroup.enter()
+            
+            dispatchQueue.async(group: dispatchGroup) {
+                doc.document(String(i)).getDocument(as: UserSongs.self) { result in
+                    switch result {
+                    case .success(let data):
+                        usersSongs += data.songs
+                        
+                    case .failure(let error):
+                        print("error: \(error)")
+                    }
+                    
+                    dispatchGroup.leave()
+                }
+            }
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            completion(.success(usersSongs))
+        }
     }
     
     
