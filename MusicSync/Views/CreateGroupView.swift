@@ -14,6 +14,8 @@ struct CreateGroupView: View {
     
     @StateObject var viewModel = CreateGroupViewModel()
     @State var listener: ListenerRegistration?
+    @State private var isActive = false
+    @Binding var isTitleViewActive: Bool
     
     var name: String
     
@@ -43,7 +45,15 @@ struct CreateGroupView: View {
                 
                 
                 
-                NavigationLink(destination: CreatePlaylistView(roomPin: viewModel.pubRoomPin, usersData: viewModel.usersData), label: {ButtonView(text: "プレイリストを作成する", buttonColor: .blue)})
+                NavigationLink(destination: CreatePlaylistView(isTitleViewActive: $isTitleViewActive, roomPin: viewModel.pubRoomPin, usersData: viewModel.usersData),
+                               isActive: $isActive){
+                    Button {
+                        self.isActive = true
+                    } label: {
+                        ButtonView(text: "プレイリストを作成する", buttonColor: .blue)
+                    }
+                }
+                .isDetailLink(false)
                 //.disabled(viewModel.usersData.count <= 1)
                 .padding()
                 
@@ -66,7 +76,8 @@ struct CreateGroupView: View {
 }
 
 struct createGroupView_Previews: PreviewProvider {
+    @State static var state = true
     static var previews: some View {
-        CreateGroupView(name: "preuser")
+        CreateGroupView(isTitleViewActive: $state , name: "preuser")
     }
 }

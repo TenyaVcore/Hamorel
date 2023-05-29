@@ -14,6 +14,7 @@ struct TitleView: View {
     
     @State private var appleAuthStatus: MusicAuthorization.Status
     @State private var isAnimation: Bool = false
+    @State private var isActive = false
     
     init() {
         _appleAuthStatus = .init(initialValue: MusicAuthorization.currentStatus)
@@ -40,7 +41,12 @@ struct TitleView: View {
                         .padding(50)
                     
                     
-                    NavigationLink(destination: LogInView(), label: {StartButtonView()})
+                    NavigationLink(destination: LogInView(isTitleViewActive: $isActive),isActive: $isActive ,
+                                   label: {Button(action: {
+                        self.isActive = true
+                    }, label: {
+                        StartButtonView()
+                    })})
                         .padding()
                     
                     Spacer()

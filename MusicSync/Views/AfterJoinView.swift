@@ -12,7 +12,10 @@ import FirebaseFirestoreSwift
 struct AfterJoinView: View {
     @StateObject var viewModel = JoinGroupViewModel()
     @State private var isLoading = true
-    @State var listener: ListenerRegistration?
+    @State private var listener: ListenerRegistration?
+    @State private var isActive = false
+    @Binding var isTitleViewActive: Bool
+    
     
     var name: String
     var roomPin: String
@@ -29,9 +32,14 @@ struct AfterJoinView: View {
                 }
                 
                 
-                
-                NavigationLink("プレイリストを作成する",
-                               destination: CreatePlaylistView(roomPin: Int(roomPin) ?? 0, usersData: viewModel.usersData))
+                NavigationLink(destination: CreatePlaylistView(isTitleViewActive: $isTitleViewActive, roomPin: Int(roomPin) ?? 0, usersData: viewModel.usersData),
+                               isActive: $isActive){
+                    Button {
+                        self.isActive = true
+                    } label: {
+                        ButtonView(text: "プレイリストを作成する", buttonColor: .blue)
+                    }
+                }
                 
             }
             if isLoading {
@@ -48,7 +56,8 @@ struct AfterJoinView: View {
 }
 
 struct afterJoinView_Previews: PreviewProvider {
+    @State static var state = true
     static var previews: some View {
-        AfterJoinView(name: "userName", roomPin: "333333")
+        AfterJoinView(isTitleViewActive: $state, name: "userName", roomPin: "333333")
     }
 }

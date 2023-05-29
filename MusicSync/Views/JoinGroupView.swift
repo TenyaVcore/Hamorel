@@ -11,6 +11,8 @@ import SwiftUI
 
 struct JoinGroupView: View {
     @State private var roomPin:String = ""
+    @State private var isActive = false
+    @Binding var isTitleViewActive: Bool
     
     var name: String
     
@@ -28,15 +30,26 @@ struct JoinGroupView: View {
                     )
                     .padding(.horizontal, 160)
                 
-                NavigationLink("join group!", destination: AfterJoinView(name: name, roomPin: roomPin))
-                    .disabled(roomPin == "")
-                    .padding(40)
+                    
+                NavigationLink(destination: AfterJoinView(isTitleViewActive: $isTitleViewActive, name: name, roomPin: roomPin),
+                               isActive: $isActive){
+                    Button {
+                        self.isActive = true
+                    } label: {
+                        ButtonView(text: "グループに参加", buttonColor: roomPin == "" ? .gray : .blue)
+                    }
+                }
+                .isDetailLink(false)
+                //.disabled(viewModel.usersData.count <= 1)
+                .disabled(roomPin == "")
+                .padding(40)
             }
     }
 }
 
 struct joinGroupView_Previews: PreviewProvider {
+    @State static var state = true
     static var previews: some View {
-        JoinGroupView(name: "testUser")
+        JoinGroupView(isTitleViewActive: $state, name: "testUser")
     }
 }
