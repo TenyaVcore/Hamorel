@@ -23,6 +23,10 @@ struct AfterJoinView: View {
     var body: some View {
         ZStack{
             VStack{
+                ProgressView("ユーザーを待機中")
+                    .font(.title2)
+                    .padding(.top, 50)
+                
                 List(viewModel.usersData){ userdata in
                     Text(userdata.name)
                 }
@@ -50,7 +54,7 @@ struct AfterJoinView: View {
             if let listener = listener {
                 listener.remove()
             }
-            viewModel.exitGroup(roomPin: Int(roomPin) ?? 0)
+            //viewModel.exitGroup(roomPin: Int(roomPin) ?? 0)
         }
     }
 }

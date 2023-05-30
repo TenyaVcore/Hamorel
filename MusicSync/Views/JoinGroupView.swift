@@ -36,12 +36,12 @@ struct JoinGroupView: View {
                     Button {
                         self.isActive = true
                     } label: {
-                        ButtonView(text: "グループに参加", buttonColor: roomPin == "" ? .gray : .blue)
+                        ButtonView(text: "グループに参加", buttonColor: roomPin.count != 6 ? .gray : .blue)
                     }
                 }
                 .isDetailLink(false)
                 //.disabled(viewModel.usersData.count <= 1)
-                .disabled(roomPin == "")
+                .disabled(roomPin.count != 6)
                 .padding(40)
             }
     }

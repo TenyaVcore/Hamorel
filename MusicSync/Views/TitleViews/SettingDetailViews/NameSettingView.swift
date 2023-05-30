@@ -21,6 +21,7 @@ struct NameSettingView: View {
                 .onAppear(){
                     updateName = name
                 }
+                .textFieldStyle(.roundedBorder)
                 .padding(60)
             
             

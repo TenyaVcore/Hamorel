@@ -15,10 +15,9 @@ struct FirebaseAuthModel {
         
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let user = result?.user {
-                //作成成功の場合(resultにuserが格納されている。
-                let request = user.createProfileChangeRequest() //リクエスト構築
-                request.displayName = name //名前を設定
-                request.commitChanges { error in  //リクエスト送信
+                let request = user.createProfileChangeRequest()
+                request.displayName = name
+                request.commitChanges { error in
                     if error == nil {
                         user.sendEmailVerification() { error  in //メールアドレスに確認メールが送信される。
                             if error == nil {
@@ -51,7 +50,7 @@ struct FirebaseAuthModel {
         let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
         changeRequest?.displayName = newName
         changeRequest?.commitChanges { error in
-          print(error!)
+            print(error?.localizedDescription ?? "error" )
         }
     }
     

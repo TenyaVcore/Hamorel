@@ -16,7 +16,8 @@ struct HomeView: View {
     var Name:String
     
     @State private var isLoading = false
-    @State private var isActive = false
+    @State private var isCreateActive = false
+    @State private var isJoinActive = false
     @Binding var isTitleViewActive: Bool
     
     
@@ -36,9 +37,9 @@ struct HomeView: View {
                 
                 
                 NavigationLink(destination: CreateGroupView(isTitleViewActive: $isTitleViewActive, name: Name),
-                               isActive: $isActive){
+                               isActive: $isCreateActive){
                     Button {
-                        self.isActive = true
+                        self.isCreateActive = true
                     } label: {
                         GroupButtonView(text: "グループを作成", buttonColor: .blue)
                     }
@@ -48,9 +49,9 @@ struct HomeView: View {
                                .padding(40)
                 
                 NavigationLink(destination: JoinGroupView(isTitleViewActive: $isTitleViewActive, name: Name),
-                               isActive: $isActive){
+                               isActive: $isJoinActive){
                     Button {
-                        self.isActive = true
+                        self.isJoinActive = true
                     } label: {
                         GroupButtonView(text: "グループに参加", buttonColor: .red)
                     }

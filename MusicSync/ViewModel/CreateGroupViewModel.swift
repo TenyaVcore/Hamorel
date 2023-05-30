@@ -38,8 +38,9 @@ class CreateGroupViewModel: ObservableObject {
             self.usersData = document.map { (queryDocumentSnapshot) -> UserData in
                 let data = queryDocumentSnapshot.data()
                 let name = data["name"] as? String ?? ""
+                let id = data["id"] as? String ?? "000000"
                 
-                return UserData(name: name)
+                return UserData(id: id, name: name)
             }
         }
         return listener
@@ -58,10 +59,9 @@ class CreateGroupViewModel: ObservableObject {
                 roomPin = self.model.createRoom(createMiss: 0, user: userName)
                 self.model.separate(item: songs, roomPin: roomPin)
                 listener = self.addListener(roomPin: roomPin)
-                
+                LoadingControl.shared.hideLoading()
                 DispatchQueue.main.async {
                     self.pubRoomPin = roomPin
-                    LoadingControl.shared.hideLoading()
                     completion(listener, roomPin)
                 }
                 

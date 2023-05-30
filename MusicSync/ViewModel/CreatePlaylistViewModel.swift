@@ -25,7 +25,7 @@ class CreatePlaylistViewModel: ObservableObject {
                 let count = downloadData.count
                 songs = downloadData[0]
                 
-                for i in 1...count{
+                for i in 1..<count{
                     songs = musicModel.merge(item1: songs, item2: downloadData[i])
                 }
                 

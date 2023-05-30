@@ -35,8 +35,9 @@ class JoinGroupViewModel: ObservableObject {
             self.usersData = document.map { (queryDocumentSnapshot) -> UserData in
                 let data = queryDocumentSnapshot.data()
                 let name = data["name"] as? String ?? ""
+                let id = data["id"] as? String ?? "111111"
                 
-                return UserData(name: name)
+                return UserData(id: id, name: name)
             }
         }
         return listener

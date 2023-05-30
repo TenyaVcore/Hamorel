@@ -10,12 +10,8 @@ import MusicKit
 
 struct AppleMusicAuthView: View {
     
-    @State private var appleAuthStatus: MusicAuthorization.Status
+    @Binding var appleAuthStatus: MusicAuthorization.Status
     
-    
-    init() {
-        _appleAuthStatus = .init(initialValue: MusicAuthorization.currentStatus)
-    }
     
     
     var body: some View {
@@ -64,8 +60,9 @@ struct AppleMusicAuthView: View {
 }
 
 struct appleMusicAuthView_Previews: PreviewProvider {
+    @State static var status = MusicAuthorization.Status.authorized
     static var previews: some View {
-        AppleMusicAuthView()
+        AppleMusicAuthView(appleAuthStatus: $status)
             .previewLayout(.sizeThatFits)
     }
 }

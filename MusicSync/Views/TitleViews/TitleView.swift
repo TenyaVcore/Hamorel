@@ -12,7 +12,7 @@ struct TitleView: View {
     
     @EnvironmentObject var transData: EnvironmentData
     
-    @State private var appleAuthStatus: MusicAuthorization.Status
+    @State var appleAuthStatus: MusicAuthorization.Status
     @State private var isAnimation: Bool = false
     @State private var isActive = false
     
@@ -66,10 +66,10 @@ struct TitleView: View {
                     }
                 }
                 
-                if appleAuthStatus != .authorized{
-                    AppleMusicAuthView()
-//                        .scaleEffect(isAnimation ? 1 : 0)
-//                        .animation(.easeIn, value: isAnimation)
+                if appleAuthStatus != .authorized {
+                    AppleMusicAuthView(appleAuthStatus: $appleAuthStatus)
+                        .scaleEffect(appleAuthStatus != .authorized ? 1 : 0)
+                        .animation(.easeIn, value: appleAuthStatus != .authorized)
 //                        .onAppear(){
 //                            isAnimation = true
 //                        }
