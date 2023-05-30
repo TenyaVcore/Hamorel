@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA6195262A2598C100FD5ECF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA6195252A2598C100FD5ECF /* GoogleService-Info.plist */; };
 		BA6CF8C72A1B0A480066B55E /* MusicSyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6CF8C62A1B0A480066B55E /* MusicSyncApp.swift */; };
 		BA6CF8CB2A1B0A490066B55E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA6CF8CA2A1B0A490066B55E /* Assets.xcassets */; };
 		BA6CF8CE2A1B0A490066B55E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA6CF8CD2A1B0A490066B55E /* Preview Assets.xcassets */; };
@@ -49,7 +50,6 @@
 		BA85A17B2A1B10F4009C1CDD /* FirebaseAuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A17A2A1B10F4009C1CDD /* FirebaseAuthModel.swift */; };
 		BA85A17D2A1B111F009C1CDD /* FirestoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A17C2A1B111F009C1CDD /* FirestoreModel.swift */; };
 		BA85A17F2A1B114B009C1CDD /* AppleMusicLibraryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A17E2A1B114B009C1CDD /* AppleMusicLibraryModel.swift */; };
-		BA85A1812A1B1565009C1CDD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA85A1802A1B1565009C1CDD /* GoogleService-Info.plist */; };
 		BA85A1832A1B6B20009C1CDD /* GroupButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1822A1B6B20009C1CDD /* GroupButtonView.swift */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +71,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA6195252A2598C100FD5ECF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BA6CF8C32A1B0A480066B55E /* MusicSync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6CF8C62A1B0A480066B55E /* MusicSyncApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSyncApp.swift; sourceTree = "<group>"; };
 		BA6CF8CA2A1B0A490066B55E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,7 +104,6 @@
 		BA85A17A2A1B10F4009C1CDD /* FirebaseAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthModel.swift; sourceTree = "<group>"; };
 		BA85A17C2A1B111F009C1CDD /* FirestoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreModel.swift; sourceTree = "<group>"; };
 		BA85A17E2A1B114B009C1CDD /* AppleMusicLibraryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicLibraryModel.swift; sourceTree = "<group>"; };
-		BA85A1802A1B1565009C1CDD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BA85A1822A1B6B20009C1CDD /* GroupButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -174,7 +174,7 @@
 				BA85A1702A1B0FCA009C1CDD /* ViewModel */,
 				BA85A1772A1B1092009C1CDD /* Models */,
 				BA6CF8CC2A1B0A490066B55E /* Preview Content */,
-				BA85A1802A1B1565009C1CDD /* GoogleService-Info.plist */,
+				BA6195252A2598C100FD5ECF /* GoogleService-Info.plist */,
 			);
 			path = MusicSync;
 			sourceTree = "<group>";
@@ -405,7 +405,7 @@
 			files = (
 				BA6CF8CE2A1B0A490066B55E /* Preview Assets.xcassets in Resources */,
 				BA6CF8CB2A1B0A490066B55E /* Assets.xcassets in Resources */,
-				BA85A1812A1B1565009C1CDD /* GoogleService-Info.plist in Resources */,
+				BA6195262A2598C100FD5ECF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
