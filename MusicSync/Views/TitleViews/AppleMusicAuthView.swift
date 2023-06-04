@@ -52,7 +52,7 @@ struct AppleMusicAuthView: View {
                 }
                 
             }
-            .background(.white)
+            .background(.background)
             .border(Color.blue, width: 8)
             .cornerRadius(10)
         }

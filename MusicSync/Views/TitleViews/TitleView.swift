@@ -57,7 +57,7 @@ struct TitleView: View {
                         NavigationLink(destination:SettingView() ,
                                        label: {Image(systemName: "gearshape")
                                 .resizable()
-                                .foregroundColor(.black)
+                                .foregroundColor(.primary)
                                 .scaledToFit()
                                 .frame(width: 50)
                         })
