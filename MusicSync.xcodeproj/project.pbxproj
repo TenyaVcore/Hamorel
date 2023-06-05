@@ -171,7 +171,7 @@
 				BA6CF8C62A1B0A480066B55E /* MusicSyncApp.swift */,
 				BA85A15A2A1B0DCC009C1CDD /* Views */,
 				BA6CF8CA2A1B0A490066B55E /* Assets.xcassets */,
-				BA85A1702A1B0FCA009C1CDD /* ViewModel */,
+				BA85A1702A1B0FCA009C1CDD /* ViewModels */,
 				BA85A1772A1B1092009C1CDD /* Models */,
 				BA6CF8CC2A1B0A490066B55E /* Preview Content */,
 				BA6195252A2598C100FD5ECF /* GoogleService-Info.plist */,
@@ -250,14 +250,14 @@
 			path = SettingDetailViews;
 			sourceTree = "<group>";
 		};
-		BA85A1702A1B0FCA009C1CDD /* ViewModel */ = {
+		BA85A1702A1B0FCA009C1CDD /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				BA85A1712A1B0FF7009C1CDD /* CreateGroupViewModel.swift */,
 				BA85A1732A1B1054009C1CDD /* JoinGroupViewModel.swift */,
 				BA85A1752A1B107F009C1CDD /* CreatePlaylistViewModel.swift */,
 			);
-			path = ViewModel;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		BA85A1772A1B1092009C1CDD /* Models */ = {
