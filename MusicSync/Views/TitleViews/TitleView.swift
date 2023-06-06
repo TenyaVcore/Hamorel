@@ -76,6 +76,21 @@ struct TitleView: View {
                             }
                         }
                     }
+                    
+                    Button("1つだけ作成"){
+                        model.fetchUserData(roomPin: 613901, userData: UserData(id: "29048C80-15EE-401B-8F9B-F661B2EA4C54", name: "さいと"), completion: { result in
+                            do{
+                                let data = try result.get()
+                                print("data: \(data)")
+                                Task{
+                                    do {try await MusicLibrary.shared.createPlaylist(name: "1つ", items: data)}
+                                    catch{print("error: \(error)")}
+                                }
+                            }catch{
+                                print("error: \(error)")
+                            }
+                        })
+                    }
                     //終わり
                     
                     NavigationLink(destination: LogInView(isTitleViewActive: $isActive),isActive: $isActive ,
