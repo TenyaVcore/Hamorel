@@ -12,6 +12,7 @@ struct TitleView: View {
     
     //テスト
     var model = FirestoreModel()
+    var musicmodel = AppleMusicLibraryModel()
     
     @EnvironmentObject var transData: EnvironmentData
     
@@ -43,42 +44,23 @@ struct TitleView: View {
                         .scaledToFit()
                         .padding(50)
                     //テスト
-                    Button("プレイリスト作成"){
-                        model.downloadData(roomPin: 613901, usersData: [UserData(id: "29048C80-15EE-401B-8F9B-F661B2EA4C54", name: "さいと"), UserData(id: "A4700E05-9D3A-44E2-AE0F-04B99B1E583F" , name: "なつみかん")]) { result in
+                    Button("ライブラリから"){
+                        musicmodel.loadLibrary { result in
                             do{
-                                let data = try result.get()
-                                print("data[0]")
-                                print(data[0])
-                                 
-                                print("data[1]")
-                                print(data[1])
-                                
+                                let res = try result.get()
+                                print(res)
                                 Task{
-                                    do{
-                                        try await MusicLibrary.shared.createPlaylist(name: "1st Playlist", items: data[0] )
-                                        print("1st finish")
-                                    }catch{
-                                        print("error: \(error)")
-                                    }
-                                    
-                                    do{
-                                        try await MusicLibrary.shared.createPlaylist(name: "2nd Playlist", items: data[1] )
-                                        print("2nd finish")
-                                    }catch{
-                                        print("error: \(error)")
-                                    }
+                                    do {try await MusicLibrary.shared.createPlaylist(name: "1つ", items: res)}
+                                    catch{print("error: \(error)")}
                                 }
-                                
-                                
-                                
-                            } catch {
-                                print("error: \(error)")
+                            }catch{
+                                print(error)
                             }
                         }
                     }
                     
                     Button("1つだけ作成"){
-                        model.fetchUserData(roomPin: 613901, userData: UserData(id: "29048C80-15EE-401B-8F9B-F661B2EA4C54", name: "さいと"), completion: { result in
+                        model.fetchUserData(roomPin: 489366, userData: UserData(id: "29048C80-15EE-401B-8F9B-F661B2EA4C54", name: "さいと"), completion: { result in
                             do{
                                 let data = try result.get()
                                 print("data: \(data)")
@@ -90,7 +72,8 @@ struct TitleView: View {
                                 print("error: \(error)")
                             }
                         })
-                    }
+                    }.padding()
+                    
                     //終わり
                     
                     NavigationLink(destination: LogInView(isTitleViewActive: $isActive),isActive: $isActive ,

@@ -21,6 +21,7 @@ struct AppleMusicLibraryModel: LibraryGetting {
             for j in 0 ..< longerItem.count{
                 if longerItem[j].title == smallerItem[i].title && longerItem[j].artists == smallerItem[i].artists {
                     mergedItem += MusicItemCollection(arrayLiteral: smallerItem[i])
+                    break
                 }
             }
         }
@@ -44,25 +45,13 @@ struct AppleMusicLibraryModel: LibraryGetting {
         Task{
             do {
                 let res:MusicItemCollection<Song>
-                try await res = loadLibraryAsync(limit: 20)
+                try await res = loadLibraryAsync(limit: 0)
                 completion(.success(res))
             }catch{
                 completion(.failure(error))
             }
         }
     }
-    
-    func loadLibrary100(completion: @escaping (Result<MusicItemCollection<Song>, Error>) -> Void) {
-        Task{
-            do {
-                let res:MusicItemCollection<Song>
-                try await res = loadLibraryAsync(limit: 100)
-                completion(.success(res))
-            }catch{
-                completion(.failure(error))
-            }
-        }
-    }
-    
+        
     
 }

@@ -90,7 +90,7 @@ struct FirestoreModel {
         }
     }
     
-    //fire storeの1MB制限を超えないために楽曲情報を分割
+    //fire storeの1MB制限を超えないために楽曲情報を700曲ごとに分割
     func separate(item: MusicItemCollection<Song>, roomPin: Int) {
         var count = 1
         var startIndex = 0
@@ -172,7 +172,7 @@ struct FirestoreModel {
                     completion(.success(usersSongs))
                 }
             }else{
-                print("count error")
+                print("count error : \(String(describing: error))")
             }
             
         }
