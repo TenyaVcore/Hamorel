@@ -181,32 +181,5 @@ struct FirestoreModel {
     }
     
     
-//    func downloadDataAsync(roomPin: Int, usersData: [UserData]) async throws -> [MusicItemCollection<Song>]{
-//        var usersSongs :MusicItemCollection<Song> = MusicItemCollection<Song>()
-//        let dispatchGroup = DispatchGroup()
-//        let dispatchQueue = DispatchQueue(label: "queue", attributes: .concurrent)
-//        var songsCollection:[MusicItemCollection<Song>] = []
-//        usersData.forEach { userData in
-//            let doc = db.collection("room").document(String(roomPin)).collection("insideRoom").document(userData.id).collection("songs")
-//            for i in 1...15 {
-//                dispatchGroup.enter()
-//
-//                dispatchQueue.async(group: dispatchGroup) {
-//                    doc.document(String(i)).getDocument(as: UserSongs.self) { result in
-//                        switch result {
-//                        case .success(let data):
-//                            usersSongs += data.songs
-//
-//                        case .failure(let error):
-//                            print("error: \(error)")
-//                        }
-//
-//                        dispatchGroup.leave()
-//                    }
-//                }
-//            }
-//        }
-//    }
-    
     
 }
