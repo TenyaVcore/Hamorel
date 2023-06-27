@@ -44,36 +44,36 @@ struct TitleView: View {
                         .scaledToFit()
                         .padding(50)
                     //テスト
-                    Button("ライブラリから"){
-                        musicmodel.loadLibrary { result in
-                            do{
-                                let res = try result.get()
-                                print(res)
-                                Task{
-                                    do {try await MusicLibrary.shared.createPlaylist(name: "1つ", items: res)}
-                                    catch{print("error: \(error)")}
-                                }
-                            }catch{
-                                print(error)
-                            }
-                        }
-                    }
-                    
-                    Button("1つだけ作成"){
-                        model.fetchUserData(roomPin: 489366, userData: UserData(id: "29048C80-15EE-401B-8F9B-F661B2EA4C54", name: "さいと"), completion: { result in
-                            do{
-                                let data = try result.get()
-                                print("data: \(data)")
-                                Task{
-                                    do {try await MusicLibrary.shared.createPlaylist(name: "1つ", items: data)}
-                                    catch{print("error: \(error)")}
-                                }
-                            }catch{
-                                print("error: \(error)")
-                            }
-                        })
-                    }.padding()
-                    
+//                    Button("ライブラリから"){
+//                        musicmodel.loadLibrary { result in
+//                            do{
+//                                let res = try result.get()
+//                                print(res)
+//                                Task{
+//                                    do {try await MusicLibrary.shared.createPlaylist(name: "1つ", items: res)}
+//                                    catch{print("error: \(error)")}
+//                                }
+//                            }catch{
+//                                print(error)
+//                            }
+//                        }
+//                    }
+//
+//                    Button("1つだけ作成"){
+//                        model.fetchUserData(roomPin: 489366, userData: UserData(id: "29048C80-15EE-401B-8F9B-F661B2EA4C54", name: "さいと"), completion: { result in
+//                            do{
+//                                let data = try result.get()
+//                                print("data: \(data)")
+//                                Task{
+//                                    do {try await MusicLibrary.shared.createPlaylist(name: "1つ", items: data)}
+//                                    catch{print("error: \(error)")}
+//                                }
+//                            }catch{
+//                                print("error: \(error)")
+//                            }
+//                        })
+//                    }.padding()
+//
                     //終わり
                     
                     NavigationLink(destination: LogInView(isTitleViewActive: $isActive),isActive: $isActive ,

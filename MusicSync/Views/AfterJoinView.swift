@@ -43,6 +43,11 @@ struct AfterJoinView: View {
                     } label: {
                         ButtonView(text: "プレイリストを作成する", buttonColor: .blue)
                     }
+                    .alert("エラー：\(viewModel.errorMessage)", isPresented: $viewModel.isShowingAlert){
+                        Button("戻る"){
+                            isTitleViewActive = false
+                        }
+                    }
                 }
                 
             }

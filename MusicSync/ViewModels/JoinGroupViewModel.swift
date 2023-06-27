@@ -14,6 +14,7 @@ import FirebaseFirestoreSwift
 class JoinGroupViewModel: ObservableObject {
     @Published var usersData :[UserData]
     @Published var errorMessage = ""
+    @Published var isShowingAlert = false
     
     var model = FirestoreModel()
     var musicModel = AppleMusicLibraryModel()
@@ -55,6 +56,7 @@ class JoinGroupViewModel: ObservableObject {
                 listener = addListener(roomPin: roomPin)
             case .failure(let error):
                 self.errorMessage = error.localizedDescription
+                self.isShowingAlert = true
             }
         }
         return listener

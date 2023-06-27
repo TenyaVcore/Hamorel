@@ -13,6 +13,7 @@ struct JoinGroupView: View {
     @State private var roomPin:String = ""
     @State private var isActive = false
     @Binding var isTitleViewActive: Bool
+    @StateObject var viewModel = JoinGroupViewModel()
     
     var name: String
     
@@ -40,7 +41,7 @@ struct JoinGroupView: View {
                     }
                 }
                 .isDetailLink(false)
-                //.disabled(viewModel.usersData.count <= 1)
+                .disabled(viewModel.usersData.count <= 1)
                 .disabled(roomPin.count != 6)
                 .padding(40)
             }

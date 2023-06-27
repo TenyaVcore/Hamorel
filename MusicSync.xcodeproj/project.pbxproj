@@ -170,7 +170,6 @@
 			children = (
 				BA6CF8C62A1B0A480066B55E /* MusicSyncApp.swift */,
 				BA85A15A2A1B0DCC009C1CDD /* Views */,
-				BA6CF8CA2A1B0A490066B55E /* Assets.xcassets */,
 				BA85A1702A1B0FCA009C1CDD /* ViewModels */,
 				BA85A1772A1B1092009C1CDD /* Models */,
 				BA6CF8CC2A1B0A490066B55E /* Preview Content */,
@@ -182,6 +181,7 @@
 		BA6CF8CC2A1B0A490066B55E /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				BA6CF8CA2A1B0A490066B55E /* Assets.xcassets */,
 				BA6CF8CD2A1B0A490066B55E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
