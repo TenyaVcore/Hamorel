@@ -34,9 +34,9 @@ struct CreatePlaylistView: View {
     }
 }
 
-//struct createPlaylistView_Previews: PreviewProvider {
-//    @State static var state = true
-//    static var previews: some View {
-//        CreatePlaylistView(isTitleViewActive: $state, roomPin: 0, usersData: [UserData(name: "aa")])
-//    }
-//}
+struct createPlaylistView_Previews: PreviewProvider {
+    @State static var state = true
+    static var previews: some View {
+        CreatePlaylistView(isTitleViewActive: $state, roomPin: 0, usersData: [UserData(name: "aa")])
+    }
+}

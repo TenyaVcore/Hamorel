@@ -16,12 +16,12 @@ class JoinGroupViewModel: ObservableObject {
     @Published var errorMessage = ""
     @Published var isShowingAlert = false
     
-    var model = FirestoreModel()
+    var storeModel = FirestoreModel()
     var musicModel = AppleMusicLibraryModel()
     
     init(usersData: [UserData] = [UserData](), model: FirestoreModel = FirestoreModel(), musicModel:AppleMusicLibraryModel = AppleMusicLibraryModel()) {
         self.usersData = usersData
-        self.model = model
+        self.storeModel = model
         self.musicModel = musicModel
     }
     
@@ -48,22 +48,35 @@ class JoinGroupViewModel: ObservableObject {
     func joinGroup(roomPin: Int, user: String) -> ListenerRegistration? {
         var listener: ListenerRegistration?
         
-        musicModel.loadLibrary { [self] result  in
+        musicModel.loadLibrary { [weak self] result in
             switch result {
             case .success(let songs):
-                model.joinRoom(roomPin: roomPin, user: user)
-                model.separate(item: songs, roomPin: roomPin)
-                listener = addListener(roomPin: roomPin)
+                self?.storeModel.joinRoom(roomPin: roomPin, user: user) { joinRoomResult in
+                    switch joinRoomResult {
+                    case .success:
+                        self?.storeModel.separate(item: songs, roomPin: roomPin)
+                        listener = self?.addListener(roomPin: roomPin)
+                    case .failure(let joinError):
+                        print("部屋がありません")
+                        self?.errorMessage = joinError.localizedDescription
+                        self?.isShowingAlert = true
+                        
+                    }
+                }
+                
             case .failure(let error):
-                self.errorMessage = error.localizedDescription
-                self.isShowingAlert = true
+                self?.errorMessage = error.localizedDescription
+                self?.isShowingAlert = true
             }
         }
+        
         return listener
     }
     
+    
+    
     func exitGroup(roomPin: Int){
-        model.exitRoom(roomPin: roomPin)
+        storeModel.exitRoom(roomPin: roomPin)
     }
     
 }

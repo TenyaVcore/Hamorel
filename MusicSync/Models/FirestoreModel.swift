@@ -24,6 +24,21 @@ struct UserSongs :Codable {
 
 
 
+enum joinRoomError: Error {
+    case roomPinIsNotExist
+    case otherError(Error)
+
+    var localizedDescription: String {
+        switch self {
+        case .roomPinIsNotExist: return "room Pinが存在しません"
+        case .otherError(let error): return "予期せぬエラーが発生しました。詳細: （\(error)）"
+        
+        }
+    }
+}
+
+
+
 struct FirestoreModel {
     
     let db = Firestore.firestore()
@@ -60,7 +75,7 @@ struct FirestoreModel {
     
     
     
-    func joinRoom(roomPin: Int, user: String) {
+    func joinRoom(roomPin: Int, user: String, completion: @escaping (Result<String,joinRoomError>) -> Void) {
         
         let data = db.collection("room").document(String(roomPin))
         let userData = UserData(name: user)
@@ -70,11 +85,14 @@ struct FirestoreModel {
                 print("exist roomPin")
                 do{
                     try db.collection("room").document(String(roomPin)).collection("insideRoom").document(uniqueId).setData(from:userData)
+                    completion(.success("successfully joined room"))
                 }catch{
                     print("error writing userData error:\(error)")
+                    completion(.failure(.otherError(error)))
                 }
             } else {
                 print("roomPin is not exist")
+                completion(.failure(.roomPinIsNotExist))
             }
         }
     }

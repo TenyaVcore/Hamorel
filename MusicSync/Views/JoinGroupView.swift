@@ -23,13 +23,13 @@ struct JoinGroupView: View {
                 TextField("roomPinを入力", text: $roomPin)
                     .keyboardType(.numberPad)
                     .autocapitalization(.none)
-                    .frame(minWidth: 170)
+                    .font(.system(size: 35))
                     .padding()
                     .overlay(
                         RoundedRectangle(cornerRadius: 2)
                             .stroke(.red,lineWidth: 3)
                     )
-                    .padding(.horizontal, 160)
+                    .padding(40)
                 
                     
                 NavigationLink(destination: AfterJoinView(isTitleViewActive: $isTitleViewActive, name: name, roomPin: roomPin),
@@ -41,7 +41,6 @@ struct JoinGroupView: View {
                     }
                 }
                 .isDetailLink(false)
-                .disabled(viewModel.usersData.count <= 1)
                 .disabled(roomPin.count != 6)
                 .padding(40)
             }
