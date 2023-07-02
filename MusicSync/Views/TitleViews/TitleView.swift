@@ -17,7 +17,7 @@ struct TitleView: View {
     @EnvironmentObject var transData: EnvironmentData
     
     @State var appleAuthStatus: MusicAuthorization.Status
-    @State private var isAnimation: Bool = false
+    @State private var isAnimating: Bool = false
     @State private var isActive = false
     
     init() {
@@ -105,9 +105,8 @@ struct TitleView: View {
                     AppleMusicAuthView(appleAuthStatus: $appleAuthStatus)
                         .scaleEffect(appleAuthStatus != .authorized ? 1 : 0)
                         .animation(.easeIn, value: appleAuthStatus != .authorized)
-                    
-                    
                 }
+                
             }
         }
     }
