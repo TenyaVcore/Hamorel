@@ -14,7 +14,7 @@ struct TitleView: View {
     var model = FirestoreModel()
     var musicmodel = AppleMusicLibraryModel()
     
-    @EnvironmentObject var transData: EnvironmentData
+    
     
     @State var appleAuthStatus: MusicAuthorization.Status
     @State private var isAnimating: Bool = false
@@ -76,7 +76,7 @@ struct TitleView: View {
 //
                     //終わり
                     
-                    NavigationLink(destination: LogInView(isTitleViewActive: $isActive),isActive: $isActive ,
+                    NavigationLink(destination: LogInView(),isActive: $isActive ,
                                    label: {Button(action: {
                         self.isActive = true
                     }, label: {
@@ -113,10 +113,6 @@ struct TitleView: View {
 }
 
 
-//titleに戻る用
-class EnvironmentData: ObservableObject {
-    @Published var isNavigationActive: Binding<Bool> = Binding<Bool>.constant(false)
-}
 
 
 

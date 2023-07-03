@@ -209,9 +209,6 @@
 			children = (
 				BA6CF90B2A1B0BA80066B55E /* TitleView.swift */,
 				BA6CF90D2A1B0BED0066B55E /* StartButtonView.swift */,
-				BA6CF90F2A1B0C280066B55E /* AppleMusicAuthView.swift */,
-				BA6CF9112A1B0C530066B55E /* SettingView.swift */,
-				BA85A15D2A1B0E1F009C1CDD /* SettingDetailViews */,
 			);
 			path = TitleViews;
 			sourceTree = "<group>";
@@ -230,6 +227,9 @@
 			isa = PBXGroup;
 			children = (
 				BA6CF9132A1B0C840066B55E /* TitleViews */,
+				BA6CF90F2A1B0C280066B55E /* AppleMusicAuthView.swift */,
+				BA6CF9112A1B0C530066B55E /* SettingView.swift */,
+				BA85A15D2A1B0E1F009C1CDD /* SettingDetailViews */,
 				BA85A15B2A1B0DE5009C1CDD /* LoginView.swift */,
 				BA85A1592A1B0DA2009C1CDD /* EmailAuthViews */,
 				BA85A1622A1B0EF2009C1CDD /* HomeView.swift */,

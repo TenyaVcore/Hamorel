@@ -54,8 +54,10 @@ struct CreateGroupView: View {
                     }
                 }
                 .isDetailLink(false)
-                //.disabled(viewModel.usersData.count <= 1)
+                .disabled(viewModel.usersData.count <= 1)
                 .padding()
+                
+                
                 
                 
                 Spacer()
