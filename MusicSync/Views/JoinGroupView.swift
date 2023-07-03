@@ -1,5 +1,5 @@
 //
-//  AfterJoinView.swift
+//  JoinGroupView.swift
 //  MusicSync
 //
 //  Created by 田川展也 on R 5/05/22.
@@ -64,7 +64,7 @@ struct JoinGroupView: View {
     }
 }
 
-struct afterJoinView_Previews: PreviewProvider {
+struct JoinGroupView_Previews: PreviewProvider {
     @State static var state = true
     static var previews: some View {
         JoinGroupView(isTitleViewActive: $state, name: "userName", roomPin: "333333")

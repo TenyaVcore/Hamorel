@@ -32,7 +32,7 @@ class CreatePlaylistViewModel: ObservableObject {
                 
                 let completeSongs = songs
                 
-                Task{try await MusicLibrary.shared.createPlaylist(name: "created Playlist", items: completeSongs )}
+                Task{try await MusicLibrary.shared.createPlaylist(name: "Music Sync Playlist", items: completeSongs )}
 
                 
             case .failure(let error):
