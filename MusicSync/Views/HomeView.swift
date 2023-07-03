@@ -14,7 +14,7 @@ import FirebaseFirestoreSwift
 
 struct HomeView: View {
     
-    var name:String
+    @AppStorage("name") var name = "ゲストユーザー"
     
     @State var appleAuthStatus: MusicAuthorization.Status
     @State private var isCreateActive = false
@@ -27,9 +27,8 @@ struct HomeView: View {
     let firestoreModel = FirestoreModel()
     let model = JoinGroupViewModel()
     
-    init(name: String, isTitleViewActive: Binding<Bool>) {
+    init(isTitleViewActive: Binding<Bool>) {
         _appleAuthStatus = .init(initialValue: MusicAuthorization.currentStatus)
-        self.name = name
         self._isTitleViewActive = isTitleViewActive
     }
     
@@ -130,6 +129,7 @@ struct HomeView: View {
 struct homeView_Previews: PreviewProvider {
     @State static var active = true
     static var previews: some View {
-        HomeView(name: "preview name", isTitleViewActive: $active)
+        HomeView(isTitleViewActive: $active)
     }
 }
+

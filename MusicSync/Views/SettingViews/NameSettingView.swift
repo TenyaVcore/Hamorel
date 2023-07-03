@@ -17,11 +17,17 @@ struct NameSettingView: View {
     
     var body: some View {
         VStack{
+            
+            Text("新しい名前を入力")
+                .font(.title)
+                .bold()
+            
             TextField("ユーザー名を入力してください", text: $updateName)
                 .onAppear(){
                     updateName = name
                 }
                 .textFieldStyle(.roundedBorder)
+                .autocapitalization(.none)
                 .padding(60)
             
             
@@ -33,7 +39,7 @@ struct NameSettingView: View {
             } label: {
                 ButtonView(text: "OK", buttonColor: .blue)
             }
-            .padding()
+            .padding(20)
             
             Button{
                 dismiss()

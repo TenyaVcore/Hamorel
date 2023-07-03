@@ -23,7 +23,7 @@ struct LogInView: View {
     
     var body: some View {
         if isLogined {
-            HomeView(name: name, isTitleViewActive: $isActive)
+            HomeView(isTitleViewActive: $isActive)
         }else{
             VStack{
                 
@@ -36,10 +36,16 @@ struct LogInView: View {
                 Text(errorMessages)
                     .foregroundColor(.red)
                 
-                TextField("mail address", text: $email).textFieldStyle(.roundedBorder)
+                TextField("mail address", text: $email)
+                    .textFieldStyle(.roundedBorder)
                     .padding(.horizontal, 50)
-                TextField("password", text: $password).textFieldStyle(.roundedBorder)
+                    .autocapitalization(.none)
+                
+                TextField("password", text: $password)
+                    .textFieldStyle(.roundedBorder)
+                    .autocapitalization(.none)
                     .padding(.horizontal, 50).padding(.vertical, 15)
+
                 
                 Button(action: {
                     Auth.auth().signIn(withEmail: email, password: password) { result, error in
