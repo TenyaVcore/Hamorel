@@ -69,6 +69,7 @@
 
 /* Begin PBXFileReference section */
 		BA6195252A2598C100FD5ECF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BA68DF062A52F9F000DE546A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BA6CF8C32A1B0A480066B55E /* MusicSync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6CF8C62A1B0A480066B55E /* MusicSyncApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSyncApp.swift; sourceTree = "<group>"; };
 		BA6CF8CA2A1B0A490066B55E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -162,6 +163,7 @@
 		BA6CF8C52A1B0A480066B55E /* MusicSync */ = {
 			isa = PBXGroup;
 			children = (
+				BA68DF062A52F9F000DE546A /* Info.plist */,
 				BA6CF8C62A1B0A480066B55E /* MusicSyncApp.swift */,
 				BA85A15A2A1B0DCC009C1CDD /* Views */,
 				BA85A1702A1B0FCA009C1CDD /* ViewModels */,
@@ -596,10 +598,10 @@
 				DEVELOPMENT_TEAM = P4P28KTQQK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MusicSync/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "ミュージックライブラリへのアクセス権限が必要です。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -626,10 +628,10 @@
 				DEVELOPMENT_TEAM = P4P28KTQQK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MusicSync/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "ミュージックライブラリへのアクセス権限が必要です。";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
