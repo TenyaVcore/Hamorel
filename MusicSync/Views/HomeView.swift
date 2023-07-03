@@ -20,16 +20,16 @@ struct HomeView: View {
     @State private var isCreateActive = false
     @State private var isJoinActive = false
     @State private var roomPin:String = ""
-    @Binding var isTitleViewActive: Bool
+    @Binding var isLoginViewActive: Bool
     
     
     let libraryModel = AppleMusicLibraryModel()
     let firestoreModel = FirestoreModel()
     let model = JoinGroupViewModel()
     
-    init(isTitleViewActive: Binding<Bool>) {
+    init(isLoginViewActive: Binding<Bool>) {
         _appleAuthStatus = .init(initialValue: MusicAuthorization.currentStatus)
-        self._isTitleViewActive = isTitleViewActive
+        self._isLoginViewActive = isLoginViewActive
     }
     
     
@@ -43,7 +43,7 @@ struct HomeView: View {
                         .padding(30)
                     
                     
-                    NavigationLink(destination: CreateGroupView(isTitleViewActive: $isTitleViewActive, name: name),
+                    NavigationLink(destination: CreateGroupView(isLoginViewActive: $isLoginViewActive, name: name),
                                    isActive: $isCreateActive){
                         Button {
                             self.isCreateActive = true
@@ -71,7 +71,7 @@ struct HomeView: View {
                         .frame(maxWidth: 350)
                     
                     
-                    NavigationLink(destination: JoinGroupView(isTitleViewActive: $isTitleViewActive, name: name, roomPin: roomPin),
+                    NavigationLink(destination: JoinGroupView(isLoginViewActive: $isLoginViewActive, name: name, roomPin: roomPin),
                                    isActive: $isJoinActive){
                         Button {
                             self.isJoinActive = true
@@ -129,7 +129,7 @@ struct HomeView: View {
 struct homeView_Previews: PreviewProvider {
     @State static var active = true
     static var previews: some View {
-        HomeView(isTitleViewActive: $active)
+        HomeView(isLoginViewActive: $active)
     }
 }
 

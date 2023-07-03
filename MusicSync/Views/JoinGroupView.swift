@@ -14,7 +14,7 @@ struct JoinGroupView: View {
     @State private var isLoading = true
     @State private var listener: ListenerRegistration?
     @State private var isActive = false
-    @Binding var isTitleViewActive: Bool
+    @Binding var isLoginViewActive: Bool
     
     
     var name: String
@@ -36,7 +36,7 @@ struct JoinGroupView: View {
                 }
                 
                 
-                NavigationLink(destination: CreatePlaylistView(isTitleViewActive: $isTitleViewActive, roomPin: Int(roomPin) ?? 0, usersData: viewModel.usersData),
+                NavigationLink(destination: CreatePlaylistView(isLoginViewActive: $isLoginViewActive, roomPin: Int(roomPin) ?? 0, usersData: viewModel.usersData),
                                isActive: $isActive){
                     Button {
                         self.isActive = true
@@ -45,7 +45,7 @@ struct JoinGroupView: View {
                     }
                     .alert("エラー：\(viewModel.errorMessage)", isPresented: $viewModel.isShowingAlert){
                         Button("OK"){
-                            isTitleViewActive = false
+                            isLoginViewActive = false
                         }
                     }
                 }
@@ -67,6 +67,6 @@ struct JoinGroupView: View {
 struct JoinGroupView_Previews: PreviewProvider {
     @State static var state = true
     static var previews: some View {
-        JoinGroupView(isTitleViewActive: $state, name: "userName", roomPin: "333333")
+        JoinGroupView(isLoginViewActive: $state, name: "userName", roomPin: "333333")
     }
 }

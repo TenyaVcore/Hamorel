@@ -23,7 +23,7 @@ struct LogInView: View {
     
     var body: some View {
         if isLogined {
-            HomeView(isTitleViewActive: $isActive)
+            HomeView(isLoginViewActive: $isActive)
         }else{
             VStack{
                 
