@@ -71,7 +71,7 @@ struct HomeView: View {
                         .frame(maxWidth: 350)
                     
                     
-                    NavigationLink(destination: AfterJoinView(isTitleViewActive: $isTitleViewActive, name: name, roomPin: roomPin),
+                    NavigationLink(destination: JoinGroupView(isTitleViewActive: $isTitleViewActive, name: name, roomPin: roomPin),
                                    isActive: $isJoinActive){
                         Button {
                             self.isJoinActive = true

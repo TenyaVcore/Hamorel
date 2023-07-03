@@ -9,7 +9,7 @@ import SwiftUI
 import Firebase
 import FirebaseFirestoreSwift
 
-struct AfterJoinView: View {
+struct JoinGroupView: View {
     @StateObject var viewModel = JoinGroupViewModel()
     @State private var isLoading = true
     @State private var listener: ListenerRegistration?
@@ -67,6 +67,6 @@ struct AfterJoinView: View {
 struct afterJoinView_Previews: PreviewProvider {
     @State static var state = true
     static var previews: some View {
-        AfterJoinView(isTitleViewActive: $state, name: "userName", roomPin: "333333")
+        JoinGroupView(isTitleViewActive: $state, name: "userName", roomPin: "333333")
     }
 }

@@ -36,7 +36,7 @@
 		BA85A15F2A1B0EA7009C1CDD /* NameSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A15E2A1B0EA7009C1CDD /* NameSettingView.swift */; };
 		BA85A1632A1B0EF2009C1CDD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1622A1B0EF2009C1CDD /* HomeView.swift */; };
 		BA85A1652A1B0F1C009C1CDD /* CreateGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1642A1B0F1C009C1CDD /* CreateGroupView.swift */; };
-		BA85A1692A1B0F61009C1CDD /* AfterJoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1682A1B0F61009C1CDD /* AfterJoinView.swift */; };
+		BA85A1692A1B0F61009C1CDD /* JoinGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1682A1B0F61009C1CDD /* JoinGroupView.swift */; };
 		BA85A16B2A1B0F7F009C1CDD /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A16A2A1B0F7F009C1CDD /* LoadingView.swift */; };
 		BA85A16D2A1B0F9F009C1CDD /* CreatePlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A16C2A1B0F9F009C1CDD /* CreatePlaylistView.swift */; };
 		BA85A16F2A1B0FB7009C1CDD /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A16E2A1B0FB7009C1CDD /* ButtonView.swift */; };
@@ -87,7 +87,7 @@
 		BA85A15E2A1B0EA7009C1CDD /* NameSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameSettingView.swift; sourceTree = "<group>"; };
 		BA85A1622A1B0EF2009C1CDD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		BA85A1642A1B0F1C009C1CDD /* CreateGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupView.swift; sourceTree = "<group>"; };
-		BA85A1682A1B0F61009C1CDD /* AfterJoinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfterJoinView.swift; sourceTree = "<group>"; };
+		BA85A1682A1B0F61009C1CDD /* JoinGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGroupView.swift; sourceTree = "<group>"; };
 		BA85A16A2A1B0F7F009C1CDD /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		BA85A16C2A1B0F9F009C1CDD /* CreatePlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaylistView.swift; sourceTree = "<group>"; };
 		BA85A16E2A1B0FB7009C1CDD /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
@@ -217,7 +217,7 @@
 				BA85A1592A1B0DA2009C1CDD /* EmailAuthViews */,
 				BA85A1622A1B0EF2009C1CDD /* HomeView.swift */,
 				BA85A1642A1B0F1C009C1CDD /* CreateGroupView.swift */,
-				BA85A1682A1B0F61009C1CDD /* AfterJoinView.swift */,
+				BA85A1682A1B0F61009C1CDD /* JoinGroupView.swift */,
 				BA85A16C2A1B0F9F009C1CDD /* CreatePlaylistView.swift */,
 				BA85A1842A21B90C009C1CDD /* ViewComponents */,
 			);
@@ -426,7 +426,7 @@
 				BA85A17D2A1B111F009C1CDD /* FirestoreModel.swift in Sources */,
 				BA85A15C2A1B0DE5009C1CDD /* LoginView.swift in Sources */,
 				BA85A16F2A1B0FB7009C1CDD /* ButtonView.swift in Sources */,
-				BA85A1692A1B0F61009C1CDD /* AfterJoinView.swift in Sources */,
+				BA85A1692A1B0F61009C1CDD /* JoinGroupView.swift in Sources */,
 				BA85A15F2A1B0EA7009C1CDD /* NameSettingView.swift in Sources */,
 				BA85A1742A1B1054009C1CDD /* JoinGroupViewModel.swift in Sources */,
 				BA85A1832A1B6B20009C1CDD /* GroupButtonView.swift in Sources */,
