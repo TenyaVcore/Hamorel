@@ -5,7 +5,7 @@
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIColorName</key>
-		<string>LaunchScreenColor</string>
+		<string>BackGroundColor</string>
 		<key>UIImageName</key>
 		<string>MusicSync_logo</string>
 	</dict>
