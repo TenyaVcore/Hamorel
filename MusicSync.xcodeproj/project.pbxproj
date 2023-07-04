@@ -69,7 +69,7 @@
 
 /* Begin PBXFileReference section */
 		BA6195252A2598C100FD5ECF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		BA68DF062A52F9F000DE546A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		BA68DF062A52F9F000DE546A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA6CF8C32A1B0A480066B55E /* MusicSync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6CF8C62A1B0A480066B55E /* MusicSyncApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSyncApp.swift; sourceTree = "<group>"; };
 		BA6CF8CA2A1B0A490066B55E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -163,13 +163,13 @@
 		BA6CF8C52A1B0A480066B55E /* MusicSync */ = {
 			isa = PBXGroup;
 			children = (
-				BA68DF062A52F9F000DE546A /* Info.plist */,
 				BA6CF8C62A1B0A480066B55E /* MusicSyncApp.swift */,
 				BA85A15A2A1B0DCC009C1CDD /* Views */,
 				BA85A1702A1B0FCA009C1CDD /* ViewModels */,
 				BA85A1772A1B1092009C1CDD /* Models */,
 				BA6CF8CC2A1B0A490066B55E /* Preview Content */,
 				BA6195252A2598C100FD5ECF /* GoogleService-Info.plist */,
+				BA68DF062A52F9F000DE546A /* Info.plist */,
 				BA6CF8CA2A1B0A490066B55E /* Assets.xcassets */,
 			);
 			path = MusicSync;

@@ -40,7 +40,7 @@ struct HomeView: View {
                 VStack{
                     Text("Name: \(name)")
                         .font(.system(size: 25, weight: .bold, design: .default))
-                        .padding(30)
+                        .padding(.bottom, 30)
                     
                     
                     NavigationLink(destination: CreateGroupView(isLoginViewActive: $isLoginViewActive, name: name),
@@ -59,6 +59,7 @@ struct HomeView: View {
                     
                     
                     TextField("roomPin(6桁)を入力", text: $roomPin)
+                        .multilineTextAlignment(.center)
                         .keyboardType(.numberPad)
                         .autocapitalization(.none)
                         .font(.system(size: 25))
@@ -87,6 +88,8 @@ struct HomeView: View {
                             .bold()
                             .foregroundColor(.red)
                             .padding(.horizontal, 40)
+                    }else{
+                        Text("\n")
                     }
                     
                     
