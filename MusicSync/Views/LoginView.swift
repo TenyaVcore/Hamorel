@@ -12,18 +12,15 @@ struct LogInView: View {
     @AppStorage("isLogined") var isLogined: Bool = false
     @AppStorage("name") var name = "ゲストユーザー"
     
-    @EnvironmentObject var transData: EnvironmentData
-    
     @State private var email:String = ""
     @State private var password:String = ""
     @State private var errorMessages = ""
-    @State private var isActive = false
     
     var model = FirebaseAuthModel()
     
     var body: some View {
         if isLogined {
-            HomeView(isLoginViewActive: $isActive)
+            HomeView()
         }else{
             VStack{
                 
@@ -78,9 +75,7 @@ struct LogInView: View {
     }
 }
 
-class EnvironmentData: ObservableObject {
-    @Published var isNavigationActive: Binding<Bool> = Binding<Bool>.constant(false)
-}
+
 
 struct LoginView_Previews: PreviewProvider {
     @State static var active = true

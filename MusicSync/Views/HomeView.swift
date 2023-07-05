@@ -16,34 +16,47 @@ struct HomeView: View {
     
     @AppStorage("name") var name = "ゲストユーザー"
     
+    @EnvironmentObject var transData: EnvironmentData
+    
     @State var appleAuthStatus: MusicAuthorization.Status
     @State private var isCreateActive = false
     @State private var isJoinActive = false
     @State private var roomPin:String = ""
-    @Binding var isLoginViewActive: Bool
-    
+    @State private var isActive = false
     
     let libraryModel = AppleMusicLibraryModel()
     let firestoreModel = FirestoreModel()
     let model = JoinGroupViewModel()
     
-    init(isLoginViewActive: Binding<Bool>) {
+    init() {
         _appleAuthStatus = .init(initialValue: MusicAuthorization.currentStatus)
-        self._isLoginViewActive = isLoginViewActive
     }
     
-    
+     
     
     var body: some View {
         NavigationView{
             ZStack{
                 VStack{
-                    Text("Name: \(name)")
-                        .font(.system(size: 25, weight: .bold, design: .default))
-                        .padding(.bottom, 30)
+                    
+                    ZStack{
+                        Color("BackGroundColor")
+                        
+                        VStack{
+                            Image("logo")
+                                .resizable()
+                                .scaledToFit()
+                                .padding(10)
+                            
+                            Text("Name: \(name)")
+                                .font(.system(size: 25, weight: .bold, design: .default))
+                                .padding(.bottom, 10)
+                        }
+                    }
+                    .padding(.vertical, 10)
                     
                     
-                    NavigationLink(destination: CreateGroupView(isLoginViewActive: $isLoginViewActive, name: name),
+                    NavigationLink(destination: CreateGroupView(isLoginViewActive: $isActive, name: name),
                                    isActive: $isCreateActive){
                         Button {
                             self.isCreateActive = true
@@ -72,7 +85,7 @@ struct HomeView: View {
                         .frame(maxWidth: 350)
                     
                     
-                    NavigationLink(destination: JoinGroupView(isLoginViewActive: $isLoginViewActive, name: name, roomPin: roomPin),
+                    NavigationLink(destination: JoinGroupView(isLoginViewActive: $isActive, name: name, roomPin: roomPin),
                                    isActive: $isJoinActive){
                         Button {
                             self.isJoinActive = true
@@ -128,11 +141,15 @@ struct HomeView: View {
 }
 
 
+class EnvironmentData: ObservableObject {
+    @Published var isNavigationActive: Binding<Bool> = Binding<Bool>.constant(false)
+}
+
 
 struct homeView_Previews: PreviewProvider {
     @State static var active = true
     static var previews: some View {
-        HomeView(isLoginViewActive: $active)
+        HomeView()
     }
 }
 
