@@ -11,25 +11,45 @@ struct CreatePlaylistView: View {
     @StateObject var viewModel = CreatePlaylistViewModel()
     
     @Binding var isLoginViewActive: Bool
+    @State var isShowingAlert = false
+    @State var createdPlaylist = false
     
     var roomPin: Int
     var usersData: [UserData]
     
     var body: some View {
-        VStack{
-            Text("プレイリストを作成しました！")
-                .padding(40)
-            
-            Button {
-                self.isLoginViewActive = false
-            } label: {
-                ButtonView(text: "OK", buttonColor: .blue)
+        ZStack{
+            VStack{
+                Text("プレイリストを作成しました！")
+                    .padding(40)
+                
+                Button {
+                    self.isLoginViewActive = false
+                } label: {
+                    ButtonView(text: "OK", buttonColor: .blue)
+                }
+                .alert("エラー：\(viewModel.errorMessage)", isPresented: $isShowingAlert){
+                    Button("OK"){
+                        isLoginViewActive = false
+                    }
+                }
             }
-
+            
+            LoadingView()
             
         }
         .onAppear{
-            viewModel.createsPlaylist(roomPin: roomPin, usersData: usersData)
+            print("create playlist")
+            viewModel.createsPlaylist(roomPin: roomPin, usersData: usersData){ result in
+                switch result{
+                case .success(let name):
+                    self.createdPlaylist = true
+                    
+                case .failure(let error):
+                    isShowingAlert = true
+                }
+            }
+            
         }
     }
 }

@@ -14,8 +14,9 @@ class CreatePlaylistViewModel: ObservableObject {
     
     var storeModel = FirestoreModel()
     var musicModel = AppleMusicLibraryModel()
+    @Published var errorMessage = ""
     
-    func createsPlaylist(roomPin: Int, usersData: [UserData]){
+    func createsPlaylist(roomPin: Int, usersData: [UserData],completion: @escaping (Result<String,Error>) -> Void){
         var songs = MusicItemCollection<Song>()
         var downloadData = [MusicItemCollection<Song>]()
         storeModel.downloadData(roomPin: roomPin, usersData: usersData) { [self] result in
@@ -30,13 +31,15 @@ class CreatePlaylistViewModel: ObservableObject {
                 }
                 
                 
-                let completeSongs = songs
+                let mergedSongs = songs
                 
-                Task{try await MusicLibrary.shared.createPlaylist(name: "Music Sync Playlist", items: completeSongs )}
-
+                Task{try await MusicLibrary.shared.createPlaylist(name: "Music Sync Playlist", items: mergedSongs )}
+                completion(.success("name"))
                 
             case .failure(let error):
                 print("error: \(error)")
+                errorMessage = error.localizedDescription
+                completion(.failure(error))
             }
         }
         
