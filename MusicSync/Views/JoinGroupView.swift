@@ -52,7 +52,7 @@ struct JoinGroupView: View {
                 
             }
             if isLoading {
-                LoadingView()
+                LoadingView(text: "Now loading")
             }
         }
         .onDisappear {

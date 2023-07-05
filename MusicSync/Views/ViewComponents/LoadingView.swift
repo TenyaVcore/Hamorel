@@ -8,17 +8,37 @@
 import SwiftUI
 
 struct LoadingView: View {
+    @State var isAnimating = false
+    var text: String
+    
     var body: some View {
         ZStack{
-            Color(.black)
-                .opacity(0.1)
+            Color("BackGroundColor")
                 .edgesIgnoringSafeArea(.all)
                 .disabled(true)
             
-            ProgressView("Now loading...")
-                .padding(80)
-                .background(Color(uiColor: .lightGray))
-                .cornerRadius(12)
+            VStack{
+                
+                Image("logo")
+                    .resizable()
+                    .scaledToFit()
+                    .rotationEffect(.degrees(isAnimating ? 360 : 0))
+                    .animation(
+                        .linear(duration: 2).repeatForever(autoreverses: false),
+                        value: isAnimating)
+                    .onAppear{
+                        isAnimating = true
+                    }
+                
+                Text(text)
+                    .font(.largeTitle)
+                    .bold()
+                    .foregroundColor(.white)
+                    .padding()
+            }
+            .padding(50)
+            
+            
         }
     }
 }
@@ -40,6 +60,6 @@ class LoadingControl: ObservableObject {
 
 struct loadingView_Previews: PreviewProvider {
     static var previews: some View {
-        LoadingView()
+        LoadingView(text: "Now loading...")
     }
 }

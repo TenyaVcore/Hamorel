@@ -12,7 +12,7 @@ struct CreatePlaylistView: View {
     
     @Binding var isLoginViewActive: Bool
     @State var isShowingAlert = false
-    @State var createdPlaylist = false
+    @State var isLoading = true
     
     var roomPin: Int
     var usersData: [UserData]
@@ -20,14 +20,21 @@ struct CreatePlaylistView: View {
     var body: some View {
         ZStack{
             VStack{
-                Text("プレイリストを作成しました！")
+                Image("playlist image")
+                    .resizable()
+                    .scaledToFit()
+                    .border(Color.blue, width: 3)
                     .padding(40)
+                Text("プレイリストを作成しました！\nAppleMusicを確認してみよう！")
+                    .font(.title2)
+                    
                 
                 Button {
                     self.isLoginViewActive = false
                 } label: {
                     ButtonView(text: "OK", buttonColor: .blue)
                 }
+                .padding(40)
                 .alert("エラー：\(viewModel.errorMessage)", isPresented: $isShowingAlert){
                     Button("OK"){
                         isLoginViewActive = false
@@ -35,7 +42,7 @@ struct CreatePlaylistView: View {
                 }
             }
             
-            LoadingView()
+            if isLoading{ LoadingView(text: "Now loading")}
             
         }
         .onAppear{
@@ -43,7 +50,7 @@ struct CreatePlaylistView: View {
             viewModel.createsPlaylist(roomPin: roomPin, usersData: usersData){ result in
                 switch result{
                 case .success(let name):
-                    self.createdPlaylist = true
+                    self.isLoading = false
                     
                 case .failure(let error):
                     isShowingAlert = true
@@ -57,6 +64,6 @@ struct CreatePlaylistView: View {
 struct createPlaylistView_Previews: PreviewProvider {
     @State static var state = true
     static var previews: some View {
-        CreatePlaylistView(isLoginViewActive: $state, roomPin: 0, usersData: [UserData(name: "aa")])
+        CreatePlaylistView(isLoginViewActive: $state, isLoading: false, roomPin: 0, usersData: [UserData(name: "aa")])
     }
 }
