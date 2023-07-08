@@ -54,6 +54,7 @@ struct CreatePlaylistView: View {
                     
                 case .failure(let error):
                     isShowingAlert = true
+                    
                 }
             }
             
