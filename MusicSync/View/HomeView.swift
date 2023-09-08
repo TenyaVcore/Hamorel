@@ -32,28 +32,16 @@ struct HomeView: View {
         _appleAuthStatus = .init(initialValue: MusicAuthorization.currentStatus)
     }
     
-     
+    
     
     var body: some View {
         NavigationView{
             ZStack{
                 VStack{
                     
-                    ZStack{
-                        Color("BackGroundColor")
-                        
-                        VStack{
-                            Image("logo")
-                                .resizable()
-                                .scaledToFit()
-                                .padding(10)
-                            
-                            Text("Name: \(name)")
-                                .font(.system(size: 25, weight: .bold, design: .default))
-                                .padding(.bottom, 10)
-                        }
-                    }
-                    .padding(.vertical, 10)
+                    Text("Name: \(name)")
+                        .font(.system(size: 25, weight: .bold, design: .default))
+                        .padding(.bottom, 10)
                     
                     
                     NavigationLink(destination: CreateGroupView(isLoginViewActive: $isActive, name: name),
