@@ -63,9 +63,10 @@ struct SettingView: View {
                         Text("不明なエラー")
                     }
                 }
-            }header: {
+            } header: {
                 Text("ユーザーステータス")
             }
+            
             Section{
                 Button {
                     isSettingName.toggle()
@@ -75,12 +76,19 @@ struct SettingView: View {
                 .fullScreenCover(isPresented: $isSettingName) {
                     NameSettingView()
                 }
-
+                
                 NavigationLink(destination: PasswordResetView(), label: {Text("パスワードの変更")})
-            }header: {
+            } header: {
                 Text("ユーザ情報の変更")
             }
             
+            Section{
+                NavigationLink(destination: LicenceView(), label: {Text("ライセンス情報")})
+                
+                
+            } header: {
+                Text("アプリ情報")
+            }
             
             Button(action: {
                 self.logOutAlert = true

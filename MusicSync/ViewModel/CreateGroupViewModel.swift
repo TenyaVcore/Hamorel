@@ -74,7 +74,6 @@ class CreateGroupViewModel: ObservableObject {
         }
     }
     
-    
     func exitGroup(roomPin: Int){
         model.exitRoom(roomPin: roomPin)
     }

@@ -63,7 +63,7 @@ struct CreateGroupView: View {
                 Spacer()
             }
             
-            if LoadingControl.shared.isLoading { LoadingView(text: "Now loading...") }
+            //if LoadingControl.shared.isLoading { LoadingView(text: "Now loading...") }
             
         }
        
@@ -78,7 +78,7 @@ struct CreateGroupView: View {
 }
 
 struct createGroupView_Previews: PreviewProvider {
-    @State static var state = true
+    @State static var state = false
     static var previews: some View {
         CreateGroupView(isLoginViewActive: $state , name: "preuser")
     }

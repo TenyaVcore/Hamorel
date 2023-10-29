@@ -195,9 +195,6 @@ struct FirestoreModel {
             
         }
         
-        
     }
-    
-    
     
 }

@@ -49,6 +49,8 @@
 		BA85A17D2A1B111F009C1CDD /* FirestoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A17C2A1B111F009C1CDD /* FirestoreModel.swift */; };
 		BA85A17F2A1B114B009C1CDD /* AppleMusicLibraryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A17E2A1B114B009C1CDD /* AppleMusicLibraryModel.swift */; };
 		BA85A1832A1B6B20009C1CDD /* GroupButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1822A1B6B20009C1CDD /* GroupButtonView.swift */; };
+		BAD00A3F2AE4F7B60015109B /* LicenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD00A3E2AE4F7B60015109B /* LicenceView.swift */; };
+		BAD00A422AE51CEA0015109B /* LicenseList in Frameworks */ = {isa = PBXBuildFile; productRef = BAD00A412AE51CEA0015109B /* LicenseList */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +104,7 @@
 		BA85A17C2A1B111F009C1CDD /* FirestoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreModel.swift; sourceTree = "<group>"; };
 		BA85A17E2A1B114B009C1CDD /* AppleMusicLibraryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicLibraryModel.swift; sourceTree = "<group>"; };
 		BA85A1822A1B6B20009C1CDD /* GroupButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupButtonView.swift; sourceTree = "<group>"; };
+		BAD00A3E2AE4F7B60015109B /* LicenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenceView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAD00A422AE51CEA0015109B /* LicenseList in Frameworks */,
 				BA6CF8F62A1B0B090066B55E /* FirebaseAnalyticsSwift in Frameworks */,
 				BA6CF8F22A1B0B090066B55E /* FirebaseAnalytics in Frameworks */,
 				BA6CF90A2A1B0B090066B55E /* FirebaseInstallations in Frameworks */,
@@ -234,6 +238,7 @@
 			children = (
 				BA6CF9112A1B0C530066B55E /* SettingView.swift */,
 				BA85A15E2A1B0EA7009C1CDD /* NameSettingView.swift */,
+				BAD00A3E2AE4F7B60015109B /* LicenceView.swift */,
 			);
 			path = SettingViews;
 			sourceTree = "<group>";
@@ -283,6 +288,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				BAD00A442AE51D1A0015109B /* PBXTargetDependency */,
 			);
 			name = MusicSync;
 			packageProductDependencies = (
@@ -299,6 +305,7 @@
 				BA6CF9052A1B0B090066B55E /* FirebaseFirestoreCombine-Community */,
 				BA6CF9072A1B0B090066B55E /* FirebaseFirestoreSwift */,
 				BA6CF9092A1B0B090066B55E /* FirebaseInstallations */,
+				BAD00A412AE51CEA0015109B /* LicenseList */,
 			);
 			productName = MusicSync;
 			productReference = BA6CF8C32A1B0A480066B55E /* MusicSync.app */;
@@ -374,6 +381,7 @@
 			mainGroup = BA6CF8BA2A1B0A480066B55E;
 			packageReferences = (
 				BA6CF8F02A1B0B090066B55E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				BAD00A402AE51CEA0015109B /* XCRemoteSwiftPackageReference "LicenseList" */,
 			);
 			productRefGroup = BA6CF8C42A1B0A480066B55E /* Products */;
 			projectDirPath = "";
@@ -436,6 +444,7 @@
 				BA85A15F2A1B0EA7009C1CDD /* NameSettingView.swift in Sources */,
 				BA85A1742A1B1054009C1CDD /* JoinGroupViewModel.swift in Sources */,
 				BA85A1832A1B6B20009C1CDD /* GroupButtonView.swift in Sources */,
+				BAD00A3F2AE4F7B60015109B /* LicenceView.swift in Sources */,
 				BA6CF9192A1B0D180066B55E /* PasswordResetView.swift in Sources */,
 				BA6CF8C72A1B0A480066B55E /* MusicSyncApp.swift in Sources */,
 				BA6CF9172A1B0CF90066B55E /* ProvisionalRegistrationView.swift in Sources */,
@@ -473,6 +482,10 @@
 			isa = PBXTargetDependency;
 			target = BA6CF8C22A1B0A480066B55E /* MusicSync */;
 			targetProxy = BA6CF8DE2A1B0A4A0066B55E /* PBXContainerItemProxy */;
+		};
+		BAD00A442AE51D1A0015109B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = BAD00A432AE51D1A0015109B /* PrepareLicenseList */;
 		};
 /* End PBXTargetDependency section */
 
@@ -777,6 +790,14 @@
 				minimumVersion = 10.0.0;
 			};
 		};
+		BAD00A402AE51CEA0015109B /* XCRemoteSwiftPackageReference "LicenseList" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/cybozu/LicenseList";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -844,6 +865,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BA6CF8F02A1B0B090066B55E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseInstallations;
+		};
+		BAD00A412AE51CEA0015109B /* LicenseList */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BAD00A402AE51CEA0015109B /* XCRemoteSwiftPackageReference "LicenseList" */;
+			productName = LicenseList;
+		};
+		BAD00A432AE51D1A0015109B /* PrepareLicenseList */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BAD00A402AE51CEA0015109B /* XCRemoteSwiftPackageReference "LicenseList" */;
+			productName = "plugin:PrepareLicenseList";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -35,7 +35,7 @@ struct HomeView: View {
     
     
     var body: some View {
-        NavigationView{
+        NavigationStack{
             ZStack{
                 VStack{
                     
@@ -117,12 +117,6 @@ struct HomeView: View {
                         })
                     }
                 }
-                
-//                if appleAuthStatus != .authorized {
-//                    AppleMusicAuthView(appleAuthStatus: $appleAuthStatus)
-//                        .scaleEffect(appleAuthStatus != .authorized ? 1 : 0)
-//                        .animation(.easeIn, value: appleAuthStatus != .authorized)
-//                }
             }
         }
     }
