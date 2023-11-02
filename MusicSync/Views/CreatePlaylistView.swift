@@ -10,8 +10,6 @@ import SwiftUI
 struct CreatePlaylistView: View {
     @StateObject var viewModel = CreatePlaylistViewModel()
     
-    @Binding var isLoginViewActive: Bool
-    
     var roomPin: Int
     var usersData: [UserData]
     
@@ -21,7 +19,6 @@ struct CreatePlaylistView: View {
                 .padding(40)
             
             Button {
-                self.isLoginViewActive = false
             } label: {
                 ButtonView(text: "OK", buttonColor: .blue)
             }
@@ -37,6 +34,6 @@ struct CreatePlaylistView: View {
 struct createPlaylistView_Previews: PreviewProvider {
     @State static var state = true
     static var previews: some View {
-        CreatePlaylistView(isLoginViewActive: $state, roomPin: 0, usersData: [UserData(name: "aa")])
+        CreatePlaylistView(roomPin: 0, usersData: [UserData(name: "aa")])
     }
 }

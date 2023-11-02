@@ -17,111 +17,108 @@ struct HomeView: View {
     @AppStorage("name") var name = "ゲストユーザー"
     
     @State var appleAuthStatus: MusicAuthorization.Status
-    @State private var isCreateActive = false
-    @State private var isJoinActive = false
-    @State private var roomPin:String = ""
-    @Binding var isLoginViewActive: Bool
+    @State private var path = [String]()
+    
     
     
     let libraryModel = AppleMusicLibraryModel()
-    let firestoreModel = FirestoreModel()
-    let model = JoinGroupViewModel()
     
-    init(isLoginViewActive: Binding<Bool>) {
+    init() {
         _appleAuthStatus = .init(initialValue: MusicAuthorization.currentStatus)
-        self._isLoginViewActive = isLoginViewActive
     }
     
     
     
     var body: some View {
-        NavigationView{
-            ZStack{
-                VStack{
-                    Text("Name: \(name)")
-                        .font(.system(size: 25, weight: .bold, design: .default))
-                        .padding(.bottom, 30)
-                    
-                    
-                    NavigationLink(destination: CreateGroupView(isLoginViewActive: $isLoginViewActive, name: name),
-                                   isActive: $isCreateActive){
-                        Button {
-                            self.isCreateActive = true
-                        } label: {
-                            GroupButtonView(text: "グループを作成", buttonColor: .blue)
-                        }
-                    }
-                                   .isDetailLink(false)
-                                   .padding(40)
-                    
-                    
-                    Divider()
-                    
-                    
-                    TextField("roomPin(6桁)を入力", text: $roomPin)
-                        .multilineTextAlignment(.center)
-                        .keyboardType(.numberPad)
-                        .autocapitalization(.none)
-                        .font(.system(size: 25))
-                        .padding()
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 2)
-                                .stroke(.red,lineWidth: 3)
-                        )
-                        .padding(40)
-                        .frame(maxWidth: 350)
-                    
-                    
-                    NavigationLink(destination: JoinGroupView(isLoginViewActive: $isLoginViewActive, name: name, roomPin: roomPin),
-                                   isActive: $isJoinActive){
-                        Button {
-                            self.isJoinActive = true
-                        } label: {
-                            GroupButtonView(text: "グループに参加", buttonColor: roomPin.count != 6 ? .red.opacity(0.4) : .red)
-                        }
-                    }
-                                   .isDetailLink(false)
-                                   .disabled(roomPin.count != 6)
-                                   
-                    if roomPin.count != 6 {
-                        Text("グループに参加するには\n６桁のroomPinを入力してください")
-                            .bold()
-                            .foregroundColor(.red)
-                            .padding(.horizontal, 40)
-                    }else{
-                        Text("\n")
-                    }
-                    
-                    
-                }
-                .toolbar {
-                    ToolbarItem (placement: .navigationBarTrailing){
-                        NavigationLink(destination:SettingView() ,
-                                       label: {Image(systemName: "gearshape")
-                                .resizable()
-                                .foregroundColor(.primary)
-                                .scaledToFit()
-                                .frame(width: 50)
-                        })
-                    }
-                }
-                .toolbar{
-                    ToolbarItem (placement: .navigationBarLeading){
-                        NavigationLink(destination:SettingView() ,
-                                       label: {Image(systemName: "questionmark.circle")
-                                .resizable()
-                                .foregroundColor(.primary)
-                                .scaledToFit()
-                                .frame(width: 50)
-                        })
-                    }
-                }
+        let bounds = UIScreen.main.bounds
+        let screenHeight = Int(bounds.height)
+        
+        NavigationStack{
+            VStack{
+                Spacer()
                 
-//                if appleAuthStatus != .authorized {
-//                    AppleMusicAuthView(appleAuthStatus: $appleAuthStatus)
-//                        .scaleEffect(appleAuthStatus != .authorized ? 1 : 0)
-//                        .animation(.easeIn, value: appleAuthStatus != .authorized)
-//                }
+                Image("MusicSync_logo")
+                    .resizable()
+                    .scaledToFit()
+                
+                Spacer()
+                
+                ZStack{
+                    RoundedCorners(color: .white, tl: 20, tr: 20, bl: 0, br: 0)
+                        .ignoresSafeArea()
+                        .frame(height: (CGFloat(screenHeight) / 2))
+                    
+                    VStack{
+                        Text("ようこそ\(name)さん")
+                            .font(.title3)
+                            .fontWeight(.bold)
+                            .padding(.top, 10)
+                        
+                        Text("友人家族と音楽で繋がろう")
+                            .font(.title3)
+                            .fontWeight(.bold)
+                            .padding(.bottom, 30)
+    
+                        NavigationLink(value: NavigationLinkItem.create){
+                            Text("部屋を作成する")
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .frame(width: 300, height: 50)
+                                .background(Color("Color_primary"))
+                                .cornerRadius(10)
+                        }
+                        .padding(.bottom, 20)
+                        
+                        NavigationLink(value: NavigationLinkItem.enter){
+                            Text("部屋に参加する")
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .foregroundColor(.black)
+                                .frame(width: 300, height: 50)
+                                .background(Color("Color_secondary"))
+                                .cornerRadius(10)
+                        }
+                        .padding(.bottom, 10)
+                    
+                        
+                        Divider()
+                        
+                        NavigationLink(value: NavigationLinkItem.login){
+                            Text("ログイン")
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .foregroundColor(.black)
+                                .frame(width: 300, height: 50)
+                                .background(Color("Color_secondary"))
+                                .cornerRadius(10)
+                        }
+                        .padding(.vertical, 10)
+                        
+                        
+                    }
+                    
+                }
+            }
+            .background {
+                Color("Color_primary")
+                    .ignoresSafeArea()
+            }
+            .navigationDestination(for: NavigationLinkItem.self) { item in
+                switch item {
+                case .create:
+                    CreateGroupView(name: name)
+                case .enter:
+                    EnterRoomPinView()
+                case .join:
+                    JoinGroupView(name: name, roomPin: "000")
+                case .home:
+                    HomeView()
+                case .setting:
+                    SettingView()
+                case .login:
+                    LogInView()
+                }
             }
         }
     }
@@ -132,7 +129,7 @@ struct HomeView: View {
 struct homeView_Previews: PreviewProvider {
     @State static var active = true
     static var previews: some View {
-        HomeView(isLoginViewActive: $active)
+        HomeView()
     }
 }
 

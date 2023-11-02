@@ -9,7 +9,6 @@ import SwiftUI
 import Firebase
 
 struct LogInView: View {
-    @AppStorage("isLogined") var isLogined: Bool = false
     @AppStorage("name") var name = "ゲストユーザー"
     
     @EnvironmentObject var transData: EnvironmentData
@@ -22,9 +21,6 @@ struct LogInView: View {
     var model = FirebaseAuthModel()
     
     var body: some View {
-        if isLogined {
-            HomeView(isLoginViewActive: $isActive)
-        }else{
             VStack{
                 
                 Text("LOG IN")
@@ -51,7 +47,6 @@ struct LogInView: View {
                     Auth.auth().signIn(withEmail: email, password: password) { result, error in
                         if let user = result?.user {
                             name = user.displayName ?? ""
-                            isLogined = true
                         }
                     }
                 }, label: {
@@ -69,14 +64,13 @@ struct LogInView: View {
                 
                 Button {
                     model.loginAsGuest()
-                    isLogined = true
                 } label: {
                     ButtonView(text: "ゲストとしてログイン", buttonColor: .teal)
                 }.padding()
             }
         }
     }
-}
+
 
 class EnvironmentData: ObservableObject {
     @Published var isNavigationActive: Binding<Bool> = Binding<Bool>.constant(false)

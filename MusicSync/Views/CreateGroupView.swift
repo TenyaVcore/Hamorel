@@ -15,7 +15,6 @@ struct CreateGroupView: View {
     @StateObject var viewModel = CreateGroupViewModel()
     @State var listener: ListenerRegistration?
     @State private var isActive = false
-    @Binding var isLoginViewActive: Bool
     
     var name: String
     
@@ -45,7 +44,7 @@ struct CreateGroupView: View {
                 
                 
                 
-                NavigationLink(destination: CreatePlaylistView(isLoginViewActive: $isLoginViewActive, roomPin: viewModel.pubRoomPin, usersData: viewModel.usersData),
+                NavigationLink(destination: CreatePlaylistView(roomPin: viewModel.pubRoomPin, usersData: viewModel.usersData),
                                isActive: $isActive){
                     Button {
                         self.isActive = true
@@ -80,6 +79,6 @@ struct CreateGroupView: View {
 struct createGroupView_Previews: PreviewProvider {
     @State static var state = true
     static var previews: some View {
-        CreateGroupView(isLoginViewActive: $state , name: "preuser")
+        CreateGroupView(name: "preuser")
     }
 }
