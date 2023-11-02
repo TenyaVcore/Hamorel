@@ -8,11 +8,38 @@
 import SwiftUI
 
 struct MemberListCell: View {
+    let name:String
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack{
+            Circle()
+                .foregroundStyle(Color.gray)
+                .frame(width: 40, height: 40)
+                .padding(.horizontal, 15)
+            
+            Text(name)
+                .bold()
+            
+            Spacer()
+            
+            Button {
+                
+            } label: {
+                Text("削除")
+                    .foregroundStyle(Color.red)
+                    .padding(7)
+                    .border(Color.red, width: 2)
+                    .padding(.trailing, 15)
+            
+                    
+            
+            }
+
+            
+        }
     }
 }
 
 #Preview {
-    MemberListCell()
+    MemberListCell(name: "ユーザー名")
 }
