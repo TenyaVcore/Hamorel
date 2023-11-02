@@ -60,24 +60,12 @@ struct HomeView: View {
                             .padding(.bottom, 30)
     
                         NavigationLink(value: NavigationLinkItem.create){
-                            Text("部屋を作成する")
-                                .font(.title3)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .frame(width: 300, height: 50)
-                                .background(Color("Color_primary"))
-                                .cornerRadius(10)
+                            ButtonView(text: "ルームを作成する", textColor: .white, buttonColor: Color("Color_primary"))
                         }
                         .padding(.bottom, 20)
                         
                         NavigationLink(value: NavigationLinkItem.enter){
-                            Text("部屋に参加する")
-                                .font(.title3)
-                                .fontWeight(.bold)
-                                .foregroundColor(.black)
-                                .frame(width: 300, height: 50)
-                                .background(Color("Color_secondary"))
-                                .cornerRadius(10)
+                            ButtonView(text: "ルームに参加する", textColor: .black, buttonColor: Color("Color_secondary"))
                         }
                         .padding(.bottom, 10)
                     
