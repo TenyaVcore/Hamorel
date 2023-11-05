@@ -45,6 +45,7 @@ class EmailRegisterViewModel: ObservableObject {
         let errorMessage = validateForm(name: name, email: email, password: password)
         if let errorMessage = errorMessage {
             completion(errorMessage)
+            return
         }
         
         authModel.createUser(email: email, name: name, password: password){ error in
@@ -55,7 +56,7 @@ class EmailRegisterViewModel: ObservableObject {
                     case .invalidEmail:
                         errorMessage = "メールアドレスの形式が違います。"
                     case .emailAlreadyInUse:
-                        errorMessage = "このメールアドレスはすでに使われています。"
+                        errorMessage = "このメールアドレスはすでに使用されています。"
                     case .weakPassword:
                         errorMessage = "パスワードが脆弱です。"
                     case .userNotFound, .wrongPassword:
