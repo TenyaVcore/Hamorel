@@ -110,7 +110,7 @@ struct HomeView: View {
                 case .setting:
                     SettingView()
                 case .login:
-                    LogInView()
+                    LogInView(path: $path)
                 case .passwordReset:
                     PasswordResetView()
                 case .register:
@@ -122,8 +122,6 @@ struct HomeView: View {
         }
     }
 }
-
-
 
 struct homeView_Previews: PreviewProvider {
     @State static var active = true

@@ -9,27 +9,22 @@ import SwiftUI
 import Firebase
 
 struct LogInView: View {
-    @AppStorage("name") var name = "ゲストユーザー"
-    
-    @EnvironmentObject var transData: EnvironmentData
-    
     @State private var email:String = ""
     @State private var password:String = ""
-    @State private var errorMessages = ""
-    @State private var isActive = false
+    @State private var errorMessage = ""
+    @State private var isSuccessLogin = false
+    @Binding var path: [NavigationLinkItem]
     
     var model = FirebaseAuthModel()
     
     var body: some View {
             VStack{
-                
                 Text("LOG IN")
                     .font(.largeTitle)
                     .bold()
                     .padding(.bottom, 40)
                     
-                
-                Text(errorMessages)
+                Text(errorMessage)
                     .foregroundColor(.red)
                 
                 TextField("mail address", text: $email)
@@ -37,17 +32,14 @@ struct LogInView: View {
                     .padding(.horizontal, 50)
                     .autocapitalization(.none)
                 
-                TextField("password", text: $password)
+                SecureField("password", text: $password)
                     .textFieldStyle(.roundedBorder)
                     .autocapitalization(.none)
                     .padding(.horizontal, 50).padding(.vertical, 15)
-
                 
                 Button(action: {
                     Auth.auth().signIn(withEmail: email, password: password) { result, error in
-                        if let user = result?.user {
-                            name = user.displayName ?? ""
-                        }
+                        isSuccessLogin = true
                     }
                 }, label: {
                     ButtonView(text: "ログイン", buttonColor: .blue)
@@ -62,22 +54,28 @@ struct LogInView: View {
                 }.padding()
                 
                 Button {
-                    model.loginAsGuest()
+                    model.loginAsGuest(){ error in
+                        if let error = error {
+                            errorMessage = "エラーが発生しました"
+                        }else{
+                            isSuccessLogin = true
+                        }
+                    }
                 } label: {
                     ButtonView(text: "ゲストとしてログイン", buttonColor: .teal)
                 }.padding()
             }
+            .alert("ログインに成功しました", isPresented: $isSuccessLogin) {
+                Button("OK") {
+                    path.removeAll()
+                }
+            }
         }
     }
 
-
-class EnvironmentData: ObservableObject {
-    @Published var isNavigationActive: Binding<Bool> = Binding<Bool>.constant(false)
-}
-
 struct LoginView_Previews: PreviewProvider {
-    @State static var active = true
+    @State static var path = [NavigationLinkItem]()
     static var previews: some View {
-        LogInView()
+        LogInView(path: $path)
     }
 }
