@@ -14,9 +14,9 @@ struct EmailRegisterView: View {
     @State private var email:String = ""
     @State private var password:String = ""
     @State private var errorMessage = ""
-    @Binding var path:[NavigationLinkItem]
+    @Binding var path: [NavigationLinkItem]
+    @StateObject var viewModel = EmailRegisterViewModel()
     
-    var authModel = FirebaseAuthModel()
     
     var body: some View {
         VStack{
@@ -57,49 +57,17 @@ struct EmailRegisterView: View {
                 .autocapitalization(.none)
             
             Button(action: {
-                if !validateForm() {
-                    return
+                viewModel.createUser(email: email, name: name, password: password) { error in
+                    if let error = error{
+                        errorMessage = error
+                    } else {
+                        path.append(NavigationLinkItem.provision)
+                    }
                 }
-                
-                if let error = authModel.createUser(email: email, name: name, password: password) {
-                    errorMessage = error.localizedDescription
-                } else {
-                    path.append(NavigationLinkItem.provision)
-                }
-                
             }, label: {
                 ButtonView(text: "登録する", buttonColor: .colorPrimary)
             }).padding()
         }
-    }
-    
-    private func validateForm() -> Bool {
-        //name
-        if self.name.count < 2 || self.name.count > 20 {
-            errorMessage = "ユーザー名は2文字以上20文字以下で入力してください"
-            return false
-        }
-        
-        //email
-        if !self.email.contains("@") {
-            errorMessage = "メールアドレスを正しく入力してください"
-            return false
-        }
-        
-        //password
-        if self.password.count < 8 || self.password.count > 20 {
-            errorMessage = "パスワードは8文字以上20文字以下で入力してください"
-            return false
-        }
-        if self.password.rangeOfCharacter(from: .decimalDigits) == nil {
-            errorMessage = "パスワードは文字列と数字の両方を含めてください"
-            return false
-        }
-        if Int(self.password) != nil {
-            errorMessage = "パスワードは文字列と数字の両方を含めてください"
-            return false
-        }
-        return true
     }
 }
 

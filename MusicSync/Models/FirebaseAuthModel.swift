@@ -10,31 +10,32 @@ import SwiftUI
 
 struct FirebaseAuthModel {
     
-    func createUser(email: String,name: String, password: String) -> Error? {
-        var errors:Error? = nil
-        
+    func createUser(email: String,name: String, password: String, completion:@escaping (Error?)->Void ){
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let user = result?.user {
                 let request = user.createProfileChangeRequest()
                 request.displayName = name
                 request.commitChanges { error in
                     if error == nil {
-                        user.sendEmailVerification() { error  in //メールアドレスに確認メールが送信される。
+                        user.sendEmailVerification() { error  in 
+                            //メールアドレスに確認メールが送信。
                             if error == nil {
+                                //成功
+                                completion(error)
                             }
                         }
                     }else{
                         print("リクエスト送信失敗 error:\(error!)")
-                        errors = error
+                        completion(error)
                     }
                 }
             }else{
                 print("ユーザ作成失敗 error:\(error!)")
-                errors = error
+                completion(error)
             }
         }
-        return errors
     }
+
     
     
     func loginAsGuest(){
