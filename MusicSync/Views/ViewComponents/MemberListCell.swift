@@ -14,8 +14,9 @@ struct MemberListCell: View {
         HStack{
             Circle()
                 .foregroundStyle(Color.gray)
-                .frame(width: 40, height: 40)
+                .frame(width: 35)
                 .padding(.horizontal, 15)
+                .padding(.vertical, 4)
             
             Text(name)
                 .bold()
@@ -34,9 +35,9 @@ struct MemberListCell: View {
                     
             
             }
-
-            
         }
+        //.border(Color.black, width: 2)
+        .padding(.horizontal, 1)
     }
 }
 

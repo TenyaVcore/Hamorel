@@ -10,8 +10,9 @@ import Foundation
 enum NavigationLinkItem: Hashable{
     case home
     case create
-    case join(Int)
+    case join(String)
     case enter
+    case playlist(String)
     case setting
     case login
 }

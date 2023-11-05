@@ -10,61 +10,64 @@ import Firebase
 import FirebaseFirestoreSwift
 
 struct JoinGroupView: View {
-    @StateObject var viewModel = JoinGroupViewModel()
-    @State private var isLoading = true
-    @State private var listener: ListenerRegistration?
-    @State private var isActive = false
     
+    @State var listener: ListenerRegistration?
+    @StateObject var viewModel = CreateGroupViewModel()
+    @Binding var path: NavigationPath
     
     var name: String
-    var roomPin: String
+    var roomPin = "--- ---"
     
     var body: some View {
-        ZStack{
-            VStack{
-                ProgressView("ユーザーを待機中")
-                    .font(.title2)
-                    .padding(.top, 50)
+        VStack{
+            ZStack{
+                Rectangle()
+                    .foregroundStyle(Color("Color_primary"))
+                    .frame(width: 340, height:120)
+                    .cornerRadius(20)
                 
-                List(viewModel.usersData){ userdata in
-                    Text(userdata.name)
+                VStack{
+                    Text("Room Pin")
+                        .font(.largeTitle)
+                        .foregroundStyle(.white)
+                        .bold()
+                    
+                    Text((roomPin))
+                        .font(.largeTitle)
+                        .foregroundStyle(.white)
+                        .bold()
                 }
-                .onAppear{
-                    listener = viewModel.joinGroup(roomPin: Int(roomPin) ?? 0, user: name)
-                    isLoading = false
-                }
-                
-                
-                NavigationLink(destination: CreatePlaylistView(roomPin: Int(roomPin) ?? 0, usersData: viewModel.usersData),
-                               isActive: $isActive){
-                    Button {
-                        self.isActive = true
-                    } label: {
-                        ButtonView(text: "プレイリストを作成する", buttonColor: .blue)
-                    }
-                    .alert("エラー：\(viewModel.errorMessage)", isPresented: $viewModel.isShowingAlert){
-                        Button("OK"){
-                        }
-                    }
-                }
-                
             }
-            if isLoading {
-                LoadingView()
+            
+            Text("ルームに参加中のメンバー 1/5 ")
+                .font(.title2)
+                
+            List{
+                MemberListCell(name: "ユーザ1")
+                MemberListCell(name: "ユーザ2")
+                MemberListCell(name: "ユーザ3")
+                MemberListCell(name: "ユーザ4")
+                MemberListCell(name: "ユーザ5")
             }
-        }
-        .onDisappear {
-            if let listener = listener {
-                listener.remove()
-            }
-            //viewModel.exitGroup(roomPin: Int(roomPin) ?? 0)
+            .listStyle(PlainListStyle())
+            
+            Text("ホストの操作を待機しています...")
+            
+            Button(action: {
+                path.removeLast()
+            }, label: {
+                ButtonView(text: "roomを退出する", textColor: .black, buttonColor: Color("Color_secondary"))
+            })
+            .padding(.bottom, 10)
         }
     }
 }
 
 struct JoinGroupView_Previews: PreviewProvider {
     @State static var state = true
+    @State static var path = NavigationPath()
     static var previews: some View {
-        JoinGroupView(name: "userName", roomPin: "333333")
+        
+        JoinGroupView(path: $path, name: "userName", roomPin: "333333")
     }
 }

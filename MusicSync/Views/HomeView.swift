@@ -17,9 +17,7 @@ struct HomeView: View {
     @AppStorage("name") var name = "ゲストユーザー"
     
     @State var appleAuthStatus: MusicAuthorization.Status
-    @State private var path = [String]()
-    
-    
+    @State private var path = NavigationPath()
     
     let libraryModel = AppleMusicLibraryModel()
     
@@ -33,7 +31,7 @@ struct HomeView: View {
         let bounds = UIScreen.main.bounds
         let screenHeight = Int(bounds.height)
         
-        NavigationStack{
+        NavigationStack(path: $path){
             VStack{
                 Spacer()
                 
@@ -46,7 +44,7 @@ struct HomeView: View {
                 ZStack{
                     RoundedCorners(color: .white, tl: 20, tr: 20, bl: 0, br: 0)
                         .ignoresSafeArea()
-                        .frame(height: (CGFloat(screenHeight) / 2))
+                        .frame(height: (CGFloat(screenHeight) / 1.8))
                     
                     VStack{
                         Text("ようこそ\(name)さん")
@@ -83,9 +81,7 @@ struct HomeView: View {
                         }
                         .padding(.vertical, 10)
                         
-                        
                     }
-                    
                 }
             }
             .background {
@@ -95,11 +91,13 @@ struct HomeView: View {
             .navigationDestination(for: NavigationLinkItem.self) { item in
                 switch item {
                 case .create:
-                    CreateGroupView(name: name)
+                    CreateGroupView(path: $path, name: name)
                 case .enter:
-                    EnterRoomPinView()
-                case .join:
-                    JoinGroupView(name: name, roomPin: "000")
+                    EnterRoomPinView(path: $path)
+                case .join(let roomPin):
+                    JoinGroupView(path: $path ,name: name, roomPin: roomPin)
+                case .playlist(let roomPin):
+                    CreatePlaylistView(roomPin: roomPin, usersData: [])
                 case .home:
                     HomeView()
                 case .setting:

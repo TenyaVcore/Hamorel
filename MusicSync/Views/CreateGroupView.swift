@@ -12,73 +12,68 @@ import MusicKit
 
 struct CreateGroupView: View {
     
-    @StateObject var viewModel = CreateGroupViewModel()
     @State var listener: ListenerRegistration?
-    @State private var isActive = false
+    @State var nextFlag = false
+    @StateObject var viewModel = CreateGroupViewModel()
+    @Binding var path: NavigationPath
     
     var name: String
+    var roomPin = "0"
     
     var body: some View {
-        
-        ZStack{
-            VStack{
-                ProgressView("ユーザーを待機中")
-                    .font(.title2)
-                    .padding(.top, 50)
+        VStack{
+            ZStack{
+                Rectangle()
+                    .foregroundStyle(Color("Color_primary"))
+                    .frame(width: 340, height:120)
+                    .cornerRadius(20)
                 
-                
-                List(viewModel.usersData){ userdata in
-                    Text(userdata.name)
+                VStack{
+                    Text("Room Pin")
+                        .font(.largeTitle)
+                        .foregroundStyle(.white)
+                        .bold()
+                    
+                    Text((roomPin))
+                        .font(.largeTitle)
+                        .foregroundStyle(.white)
+                        .bold()
                 }
-                .onAppear {
-                    LoadingControl.shared.showLoading()
-                    viewModel.createGroup(userName: name) { Listener, roomPin  in
-                        listener = Listener
-                        viewModel.pubRoomPin = roomPin
-                    }
-                }
-                
-                Text("room Pin:\(viewModel.pubRoomPin)")
-                    .font(.title)
-                    .padding(30)
-                
-                
-                
-                NavigationLink(destination: CreatePlaylistView(roomPin: viewModel.pubRoomPin, usersData: viewModel.usersData),
-                               isActive: $isActive){
-                    Button {
-                        self.isActive = true
-                    } label: {
-                        ButtonView(text: "プレイリストを作成する", buttonColor: .blue)
-                    }
-                }
-                .isDetailLink(false)
-                .disabled(viewModel.usersData.count <= 1)
-                .padding()
-                
-                
-                
-                
-                Spacer()
             }
             
-            if LoadingControl.shared.isLoading { LoadingView() }
-            
-        }
-       
-        .onDisappear {
-            if let listener = listener {
-                listener.remove()
+            Text("ルームに参加中のメンバー 1/5 ")
+                .font(.title2)
+                
+            List{
+                MemberListCell(name: "ユーザ1")
+                MemberListCell(name: "ユーザ2")
+                MemberListCell(name: "ユーザ3")
+                MemberListCell(name: "ユーザ4")
+                MemberListCell(name: "ユーザ5")
             }
+            .listStyle(PlainListStyle())
             
-            viewModel.exitGroup(roomPin: viewModel.pubRoomPin)
+            
+            NavigationLink(value: NavigationLinkItem.playlist(roomPin)) {
+                ButtonView(text: "次へ", buttonColor: Color("Color_primary"))
+            }
+
+            
+            
+            Button(action: {
+                path.removeLast()
+            }, label: {
+                ButtonView(text: "roomを解散する", textColor: .black, buttonColor: Color("Color_secondary"))
+            })
+            .padding(.bottom, 10)
         }
     }
 }
 
 struct createGroupView_Previews: PreviewProvider {
     @State static var state = true
+    @State static var path = NavigationPath()
     static var previews: some View {
-        CreateGroupView(name: "preuser")
+        CreateGroupView(path: $path ,name: "preuser")
     }
 }
