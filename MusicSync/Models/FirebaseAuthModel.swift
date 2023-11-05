@@ -35,17 +35,19 @@ struct FirebaseAuthModel {
             }
         }
     }
-
     
-    
-    func loginAsGuest(){
+    func loginAsGuest(completion:@escaping (Error?)->Void){
         Auth.auth().signInAnonymously(){ result, error in
-            guard let user = result?.user else { return }
-            let uid = user.uid
-            print("ゲストID: \(uid)")
+            if let user = result?.user{
+                let uid = user.uid
+                print("ゲストログイン成功")
+                print("ゲストID: \(uid)")
+            }else{
+                print("ゲストログイン失敗")
+            }
+            completion(error)
         }
     }
-    
     
     func changeUserName(newName: String){
         let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
