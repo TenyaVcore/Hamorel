@@ -112,7 +112,7 @@ struct HomeView: View {
                 case .login:
                     LogInView(path: $path)
                 case .passwordReset:
-                    PasswordResetView()
+                    PasswordResetView(path: $path)
                 case .register:
                     EmailRegisterView(path: $path)
                 case .provision:
