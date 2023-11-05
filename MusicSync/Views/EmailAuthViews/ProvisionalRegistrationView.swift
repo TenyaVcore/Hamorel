@@ -8,12 +8,17 @@
 import SwiftUI
 
 struct ProvisionalRegistrationView: View {
+    @Binding var path: [NavigationLinkItem]
+    
     var body: some View {
         VStack{
             Text("メールアドレスに確認メールを送信しました")
             
-            Text("ログイン画面へ")
-                .padding(30)
+            Button {
+                path.removeLast(path.count - 1)
+            } label: {
+                ButtonView(text: "ログイン画面に戻る", buttonColor: .colorPrimary)
+            }
             
             Text("メールが届かない場合")
         }
@@ -21,7 +26,8 @@ struct ProvisionalRegistrationView: View {
 }
 
 struct ProvisionalRegistrationView_Previews: PreviewProvider {
+    @State static var path = [NavigationLinkItem]()
     static var previews: some View {
-        ProvisionalRegistrationView()
+        ProvisionalRegistrationView(path: $path)
     }
 }

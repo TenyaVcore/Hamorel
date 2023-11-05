@@ -16,8 +16,8 @@ struct HomeView: View {
     
     @AppStorage("name") var name = "ゲストユーザー"
     
-    @State var appleAuthStatus: MusicAuthorization.Status
-    @State private var path = NavigationPath()
+    @State private var appleAuthStatus: MusicAuthorization.Status
+    @State private var path :[NavigationLinkItem] = []
     
     let libraryModel = AppleMusicLibraryModel()
     
@@ -56,7 +56,7 @@ struct HomeView: View {
                             .font(.title3)
                             .fontWeight(.bold)
                             .padding(.bottom, 30)
-    
+                        
                         NavigationLink(value: NavigationLinkItem.create){
                             ButtonView(text: "ルームを作成する", textColor: .white, buttonColor: Color("Color_primary"))
                         }
@@ -65,8 +65,7 @@ struct HomeView: View {
                         NavigationLink(value: NavigationLinkItem.enter){
                             ButtonView(text: "ルームに参加する", textColor: .black, buttonColor: Color("Color_secondary"))
                         }
-                        .padding(.bottom, 10)
-                    
+                        .padding(.bottom, 10)                        
                         
                         Divider()
                         
@@ -80,13 +79,21 @@ struct HomeView: View {
                                 .cornerRadius(10)
                         }
                         .padding(.vertical, 10)
-                        
                     }
                 }
             }
             .background {
                 Color("Color_primary")
                     .ignoresSafeArea()
+            }
+            .toolbar{
+                ToolbarItem(placement: .topBarLeading) {
+                    NavigationLink(value: NavigationLinkItem.setting) {
+                        Image(systemName: "gearshape.fill")
+                            .foregroundColor(.white)
+                            .font(.title)
+                    }
+                }
             }
             .navigationDestination(for: NavigationLinkItem.self) { item in
                 switch item {
@@ -104,6 +111,12 @@ struct HomeView: View {
                     SettingView()
                 case .login:
                     LogInView()
+                case .passwordReset:
+                    PasswordResetView()
+                case .register:
+                    EmailRegisterView(path: $path)
+                case .provision:
+                    ProvisionalRegistrationView(path: $path)
                 }
             }
         }

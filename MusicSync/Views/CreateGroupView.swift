@@ -15,7 +15,7 @@ struct CreateGroupView: View {
     @State var listener: ListenerRegistration?
     @State var nextFlag = false
     @StateObject var viewModel = CreateGroupViewModel()
-    @Binding var path: NavigationPath
+    @Binding var path: [NavigationLinkItem]
     
     var name: String
     var roomPin = "0"
@@ -72,7 +72,7 @@ struct CreateGroupView: View {
 
 struct createGroupView_Previews: PreviewProvider {
     @State static var state = true
-    @State static var path = NavigationPath()
+    @State static var path = [NavigationLinkItem]()
     static var previews: some View {
         CreateGroupView(path: $path ,name: "preuser")
     }

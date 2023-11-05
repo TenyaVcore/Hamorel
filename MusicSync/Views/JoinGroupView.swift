@@ -13,10 +13,10 @@ struct JoinGroupView: View {
     
     @State var listener: ListenerRegistration?
     @StateObject var viewModel = CreateGroupViewModel()
-    @Binding var path: NavigationPath
+    @Binding var path: [NavigationLinkItem]
     
     var name: String
-    var roomPin = "--- ---"
+    var roomPin = "000000"
     
     var body: some View {
         VStack{
@@ -65,7 +65,7 @@ struct JoinGroupView: View {
 
 struct JoinGroupView_Previews: PreviewProvider {
     @State static var state = true
-    @State static var path = NavigationPath()
+    @State static var path = [NavigationLinkItem]()
     static var previews: some View {
         
         JoinGroupView(path: $path, name: "userName", roomPin: "333333")

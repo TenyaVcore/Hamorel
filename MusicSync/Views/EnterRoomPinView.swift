@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EnterRoomPinView: View {
     @State var roomPin = "000000"
-    @Binding var path: NavigationPath
+    @Binding var path: [NavigationLinkItem]
     
     var body: some View {
         VStack{
@@ -51,6 +51,6 @@ struct EnterRoomPinView: View {
 }
 
 #Preview {
-    @State var path = NavigationPath()
+    @State var path = [NavigationLinkItem]()
     return EnterRoomPinView(path: $path)
 }

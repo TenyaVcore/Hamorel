@@ -53,14 +53,13 @@ struct LogInView: View {
                     ButtonView(text: "ログイン", buttonColor: .blue)
                 }).padding()
                 
-                NavigationLink(destination: PasswordResetView(), label: {
+                NavigationLink(value: NavigationLinkItem.passwordReset) {
                     ButtonView(text: "パスワードを忘れた方はこちら", buttonColor: .gray)
-                }).padding()
+                }.padding()
                 
-                NavigationLink(destination: EmailRegisterView(), label: {
+                NavigationLink(value: NavigationLinkItem.register) {
                     ButtonView(text: "未登録の方はこちら", buttonColor: .gray)
-                }).padding()
-                
+                }.padding()
                 
                 Button {
                     model.loginAsGuest()

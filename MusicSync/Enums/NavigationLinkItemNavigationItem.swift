@@ -15,4 +15,7 @@ enum NavigationLinkItem: Hashable{
     case playlist(String)
     case setting
     case login
+    case passwordReset
+    case register
+    case provision
 }
