@@ -4,9 +4,6 @@
 //
 //  Created by 田川展也 on R 5/05/22.
 //
-
-import SwiftUI
-
 import SwiftUI
 import MusicKit
 import Firebase
@@ -24,8 +21,6 @@ struct HomeView: View {
     init() {
         _appleAuthStatus = .init(initialValue: MusicAuthorization.currentStatus)
     }
-    
-    
     
     var body: some View {
         let bounds = UIScreen.main.bounds
