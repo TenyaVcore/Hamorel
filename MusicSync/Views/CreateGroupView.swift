@@ -55,9 +55,9 @@ struct CreateGroupView: View {
                 })
                 .padding(.bottom, 10)
             }
-            if viewModel.isLoading {
-                LoadingView(message: "ルームを作成中")
-            }
+            LoadingView(message: "ルームを作成中")
+                .opacity(viewModel.isLoading ? 1 : 0)
+                .animation(.easeInOut, value: viewModel.isLoading)
         }
         .onAppear {
             do {
