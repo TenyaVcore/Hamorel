@@ -18,13 +18,14 @@ struct LoadingView: View {
         ZStack {
             Color("Color_primary")
                 .ignoresSafeArea()
+
             VStack {
                 Image("logo")
                     .resizable()
                     .scaledToFit()
-                    .rotationEffect(.degrees(isAnimating ? 360 : 0))
+                    .rotationEffect(.degrees(isAnimating ? 3600 : 0))
                     .animation(
-                        .linear(duration: 3).repeatForever(autoreverses: false),
+                        .linear(duration: 30).repeatForever(autoreverses: false),
                         value: isAnimating
                     )
 
