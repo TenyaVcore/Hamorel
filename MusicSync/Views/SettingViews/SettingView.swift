@@ -7,31 +7,30 @@
 
 import SwiftUI
 
-import SwiftUI
 import MusicKit
 import Firebase
 import FirebaseFirestoreSwift
 
 struct SettingView: View {
-    
+
     @State private var appleAuthStatus: MusicAuthorization.Status
     @State private var logOutAlert = false
     @State private var isSettingName = false
-    
+
     var name: String
-    
+
     init() {
         _appleAuthStatus = .init(initialValue: MusicAuthorization.currentStatus)
         name = Auth.auth().currentUser?.displayName ?? "ゲストユーザ"
     }
-    
+
     var body: some View {
-        List{
-            Section{
-                HStack{
+        List {
+            Section {
+                HStack {
                     Text("現在のログインステータス：")
-                    
-                    switch Auth.auth().currentUser?.isAnonymous{
+
+                    switch Auth.auth().currentUser?.isAnonymous {
                     case true:
                         Text("ゲストとしてログイン")
                     case false:
@@ -40,9 +39,9 @@ struct SettingView: View {
                         Text("未定義")
                     }
                 }
-                HStack{
+                HStack {
                     Text("現在のApple Music ステータス:")
-                    
+
                     switch appleAuthStatus {
                     case .notDetermined:
                         Text("未定義")
@@ -59,7 +58,7 @@ struct SettingView: View {
             }header: {
                 Text("ユーザーステータス")
             }
-            Section{
+            Section {
                 Button {
                     isSettingName.toggle()
                 } label: {
@@ -68,15 +67,15 @@ struct SettingView: View {
                 .fullScreenCover(isPresented: $isSettingName) {
                     NameSettingView()
                 }
-                
+
                 NavigationLink(value: NavigationLinkItem.passwordReset) {
                     Text("パスワードの変更")
                 }
             }header: {
                 Text("ユーザ情報の変更")
             }
-            
-            if Auth.auth().currentUser?.isAnonymous != nil{
+
+            if Auth.auth().currentUser?.isAnonymous != nil {
                 Button(action: {
                     self.logOutAlert = true
                 }, label: {
@@ -85,18 +84,17 @@ struct SettingView: View {
                         .bold()
                 })
                 .alert("本当にログアウトしますか？", isPresented: $logOutAlert) {
-                    Button("キャンセル"){}
-                    
-                    Button("OK"){
+                    Button("キャンセル") {}
+
+                    Button("OK") {
                         do {
                             try Auth.auth().signOut()
-                        }
-                        catch let error as NSError {
+                        } catch let error as NSError {
                             print(error)
                         }
                     }
                 }
-            }else{
+            } else {
                 NavigationLink(value: NavigationLinkItem.login) {
                     Text("ログイン")
                 }

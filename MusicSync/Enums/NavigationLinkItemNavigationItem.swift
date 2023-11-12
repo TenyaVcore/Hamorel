@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum NavigationLinkItem: Hashable{
+enum NavigationLinkItem: Hashable {
     case home
     case create
     case join(String)

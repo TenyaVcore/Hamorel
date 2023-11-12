@@ -9,15 +9,15 @@ import SwiftUI
 import Firebase
 
 struct PasswordResetView: View {
-    
+
     @State var email: String = ""
     @State var errorMessage: String = ""
     @State var isSuccessSending = false
-    @Binding var path:[NavigationLinkItem]
-    
+    @Binding var path: [NavigationLinkItem]
+
     var body: some View {
-        VStack{
-            ZStack{
+        VStack {
+            ZStack {
                 Color("Color_primary")
                     .frame(height: 200)
                     .cornerRadius(30)
@@ -25,28 +25,28 @@ struct PasswordResetView: View {
                     .padding(.top, 40)
                     .shadow(color: Color.black.opacity(0.3), radius: 3, x: 3, y: 3)
                     .shadow(color: Color.white.opacity(0.7), radius: 3, x: -3, y: -3)
-                
-                VStack{
+
+                VStack {
                     Text("パスワードをリセット")
                         .font(.largeTitle)
                         .bold()
                         .padding(.horizontal, 30)
-                    
+
                     Text("メールアドレスにパスワード再設定用メールを送信します")
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 40)
                 }
             }
-            
+
             TextField("メールアドレスを入力", text: $email)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal, 60)
                 .padding(.top, 60)
-            
+
             Text(errorMessage)
                 .foregroundColor(.red)
                 .padding(.bottom, 50)
-            
+
             Button {
                 Auth.auth().sendPasswordReset(withEmail: email) { error in
                     if let error = error {
@@ -56,7 +56,7 @@ struct PasswordResetView: View {
                         default:
                             errorMessage = "エラーが発生しました"
                         }
-                    }else{
+                    } else {
                         isSuccessSending = true
                     }
                 }

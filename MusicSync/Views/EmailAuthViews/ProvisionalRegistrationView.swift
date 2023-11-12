@@ -9,17 +9,17 @@ import SwiftUI
 
 struct ProvisionalRegistrationView: View {
     @Binding var path: [NavigationLinkItem]
-    
+
     var body: some View {
-        VStack{
+        VStack {
             Text("メールアドレスに確認メールを送信しました")
-            
+
             Button {
                 path.removeLast(path.count - 1)
             } label: {
                 ButtonView(text: "ログイン画面に戻る", buttonColor: .colorPrimary)
             }
-            
+
             Text("メールが届かない場合")
         }
     }

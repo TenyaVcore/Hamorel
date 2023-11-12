@@ -11,4 +11,3 @@ import MusicKit
 protocol LibraryGetting {
     func loadLibraryAsync(limit: Int) async throws -> MusicItemCollection<Song>
 }
-

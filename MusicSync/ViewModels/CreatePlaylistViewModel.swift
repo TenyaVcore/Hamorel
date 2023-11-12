@@ -11,11 +11,11 @@ import Firebase
 import FirebaseFirestoreSwift
 
 class CreatePlaylistViewModel: ObservableObject {
-    
+
     var storeModel = FirestoreModel()
     var musicModel = AppleMusicLibraryModel()
-    
-    func createsPlaylist(roomPin: Int, usersData: [UserData]){
+
+    func createsPlaylist(roomPin: Int, usersData: [UserData]) {
         var songs = MusicItemCollection<Song>()
         var downloadData = [MusicItemCollection<Song>]()
         storeModel.downloadData(roomPin: roomPin, usersData: usersData) { [self] result in
@@ -24,21 +24,19 @@ class CreatePlaylistViewModel: ObservableObject {
                 downloadData = userSongs
                 let count = downloadData.count
                 songs = downloadData[0]
-                
-                for i in 1..<count{
+
+                for i in 1..<count {
                     songs = musicModel.merge(item1: songs, item2: downloadData[i])
                 }
-                
-                
-                let completeSongs = songs
-                
-                Task{try await MusicLibrary.shared.createPlaylist(name: "Music Sync Playlist", items: completeSongs )}
 
-                
+                let completeSongs = songs
+
+                Task {try await MusicLibrary.shared.createPlaylist(name: "Music Sync Playlist", items: completeSongs )}
+
             case .failure(let error):
                 print("error: \(error)")
             }
         }
-        
+
     }
 }

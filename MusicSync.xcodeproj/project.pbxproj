@@ -34,6 +34,8 @@
 		BA6CF9192A1B0D180066B55E /* PasswordResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6CF9182A1B0D180066B55E /* PasswordResetView.swift */; };
 		BA785CA72AF368BD0012CF67 /* MemberListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA785CA62AF368BD0012CF67 /* MemberListCell.swift */; };
 		BA785CB02AF789760012CF67 /* EmailRegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA785CAF2AF789760012CF67 /* EmailRegisterViewModel.swift */; };
+		BA8542A32AFCB14B00434765 /* FirestoreModelAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8542A22AFCB14B00434765 /* FirestoreModelAsync.swift */; };
+		BA8542A52AFCB5A400434765 /* CreateRoomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8542A42AFCB5A400434765 /* CreateRoomError.swift */; };
 		BA85A15C2A1B0DE5009C1CDD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A15B2A1B0DE5009C1CDD /* LoginView.swift */; };
 		BA85A15F2A1B0EA7009C1CDD /* NameSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A15E2A1B0EA7009C1CDD /* NameSettingView.swift */; };
 		BA85A1632A1B0EF2009C1CDD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1622A1B0EF2009C1CDD /* HomeView.swift */; };
@@ -91,6 +93,9 @@
 		BA6CF9182A1B0D180066B55E /* PasswordResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetView.swift; sourceTree = "<group>"; };
 		BA785CA62AF368BD0012CF67 /* MemberListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListCell.swift; sourceTree = "<group>"; };
 		BA785CAF2AF789760012CF67 /* EmailRegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegisterViewModel.swift; sourceTree = "<group>"; };
+		BA8542A22AFCB14B00434765 /* FirestoreModelAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreModelAsync.swift; sourceTree = "<group>"; };
+		BA8542A42AFCB5A400434765 /* CreateRoomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomError.swift; sourceTree = "<group>"; };
+		BA8542AB2AFE1D2800434765 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		BA85A15B2A1B0DE5009C1CDD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BA85A15E2A1B0EA7009C1CDD /* NameSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameSettingView.swift; sourceTree = "<group>"; };
 		BA85A1622A1B0EF2009C1CDD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -153,6 +158,7 @@
 		BA6CF8BA2A1B0A480066B55E = {
 			isa = PBXGroup;
 			children = (
+				BA8542AB2AFE1D2800434765 /* .swiftlint.yml */,
 				BA6CF8C52A1B0A480066B55E /* MusicSync */,
 				BA6CF8D62A1B0A4A0066B55E /* MusicSyncTests */,
 				BA6CF8E02A1B0A4A0066B55E /* MusicSyncUITests */,
@@ -264,6 +270,7 @@
 				BA85A1782A1B10CD009C1CDD /* Protocols.swift */,
 				BA85A17A2A1B10F4009C1CDD /* FirebaseAuthModel.swift */,
 				BA85A17C2A1B111F009C1CDD /* FirestoreModel.swift */,
+				BA8542A22AFCB14B00434765 /* FirestoreModelAsync.swift */,
 				BA85A17E2A1B114B009C1CDD /* AppleMusicLibraryModel.swift */,
 			);
 			path = Models;
@@ -285,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				BAA05CE92AF2B70900A038A3 /* NavigationLinkItemNavigationItem.swift */,
+				BA8542A42AFCB5A400434765 /* CreateRoomError.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -299,6 +307,7 @@
 				BA6CF8BF2A1B0A480066B55E /* Sources */,
 				BA6CF8C02A1B0A480066B55E /* Frameworks */,
 				BA6CF8C12A1B0A480066B55E /* Resources */,
+				BA8542A82AFE011B00434765 /* Run SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -433,6 +442,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		BA8542A82AFE011B00434765 /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint autocorrect --format\n  swiftlint\nelse\n  echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BA6CF8BF2A1B0A480066B55E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -452,7 +483,9 @@
 				BA85A17D2A1B111F009C1CDD /* FirestoreModel.swift in Sources */,
 				BA85A15C2A1B0DE5009C1CDD /* LoginView.swift in Sources */,
 				BA85A16F2A1B0FB7009C1CDD /* ButtonView.swift in Sources */,
+				BA8542A32AFCB14B00434765 /* FirestoreModelAsync.swift in Sources */,
 				BA85A1692A1B0F61009C1CDD /* JoinGroupView.swift in Sources */,
+				BA8542A52AFCB5A400434765 /* CreateRoomError.swift in Sources */,
 				BA85A15F2A1B0EA7009C1CDD /* NameSettingView.swift in Sources */,
 				BA85A1742A1B1054009C1CDD /* JoinGroupViewModel.swift in Sources */,
 				BA85A1832A1B6B20009C1CDD /* GroupButtonView.swift in Sources */,
@@ -629,6 +662,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MusicSync/Preview Content\"";
 				DEVELOPMENT_TEAM = P4P28KTQQK;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MusicSync/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "ミュージックライブラリへのアクセス権限が必要です。";
@@ -658,6 +692,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MusicSync/Preview Content\"";
 				DEVELOPMENT_TEAM = P4P28KTQQK;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MusicSync/Info.plist;
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "ミュージックライブラリへのアクセス権限が必要です。";

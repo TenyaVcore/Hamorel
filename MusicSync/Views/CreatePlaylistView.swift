@@ -9,23 +9,22 @@ import SwiftUI
 
 struct CreatePlaylistView: View {
     @StateObject var viewModel = CreatePlaylistViewModel()
-    
+
     var roomPin: String
     var usersData: [UserData]
-    
+
     var body: some View {
-        VStack{
+        VStack {
             Text("プレイリストを作成しました！")
                 .padding(40)
-            
+
             Button {
             } label: {
                 ButtonView(text: "OK", buttonColor: .blue)
             }
 
-            
         }
-        .onAppear{
+        .onAppear {
             viewModel.createsPlaylist(roomPin: Int(roomPin)!, usersData: usersData)
         }
     }

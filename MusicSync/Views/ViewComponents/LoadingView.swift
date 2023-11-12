@@ -10,15 +10,15 @@ import SwiftUI
 struct LoadingView: View {
     @State private var isAnimating = false
     @State private var numberOfDots = 0
-        
+
     let maxDots = 4
     var message: String
-    
+
     var body: some View {
-        ZStack{
+        ZStack {
             Color("Color_primary")
                 .ignoresSafeArea()
-            VStack{
+            VStack {
                 Image("logo")
                     .resizable()
                     .scaledToFit()
@@ -27,13 +27,13 @@ struct LoadingView: View {
                         .linear(duration: 3).repeatForever(autoreverses: false),
                         value: isAnimating
                     )
-                
+
                 HStack(spacing: 0) {
                     Text(message)
                         .font(.title)
                         .fontWeight(.bold)
                         .foregroundStyle(.white)
-                    
+
                     ForEach(0 ..< numberOfDots, id: \.self) { _ in
                         Text(".")
                             .font(.title)
@@ -44,15 +44,15 @@ struct LoadingView: View {
                 .onAppear {
                     isAnimating = true
                     _ = withAnimation(Animation.easeInOut(duration: 3).repeatForever(autoreverses: true)) {
-                        Timer.scheduledTimer(withTimeInterval: 3 / Double(maxDots), repeats: true) { timer in
-                                    numberOfDots = (numberOfDots + 1) % (maxDots + 1)
-                                }
-                            }
+                        Timer.scheduledTimer(withTimeInterval: 3 / Double(maxDots), repeats: true) { _ in
+                            numberOfDots = (numberOfDots + 1) % (maxDots + 1)
+                        }
+                    }
                 }
             }
         }
     }
-        
+
 }
 
 struct loadingView_Previews: PreviewProvider {

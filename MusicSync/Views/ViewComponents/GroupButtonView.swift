@@ -14,9 +14,9 @@ struct GroupButtonView: View {
     var buttonWidth: CGFloat = 300
     var buttonHeight: CGFloat = 100
     var lineOffset: CGFloat = 10
-    
+
     var body: some View {
-        ZStack{
+        ZStack {
             Path { path in
                 path.move(to: CGPoint(x: edge, y: 0))
                 path.addLine(to: CGPoint(x: buttonWidth - edge, y: 0))
@@ -28,13 +28,13 @@ struct GroupButtonView: View {
                 path.addLine(to: CGPoint(x: 0, y: edge))
             }
             .fill(buttonColor)
-            
+
             Path { path in
                 path.move(to: CGPoint(x: edge + lineOffset, y: lineOffset))
                 path.addLine(to: CGPoint(x: buttonWidth - edge - lineOffset, y: lineOffset))
                 path.addLine(to: CGPoint(x: buttonWidth - lineOffset, y: edge + lineOffset))
                 path.addLine(to: CGPoint(x: buttonWidth - lineOffset, y: buttonHeight - edge - lineOffset))
-                path.addLine(to: CGPoint(x: buttonWidth - edge - lineOffset ,y: buttonHeight - lineOffset))
+                path.addLine(to: CGPoint(x: buttonWidth - edge - lineOffset, y: buttonHeight - lineOffset))
                 path.addLine(to: CGPoint(x: edge + lineOffset, y: buttonHeight - lineOffset))
                 path.addLine(to: CGPoint(x: lineOffset, y: buttonHeight - edge - lineOffset))
                 path.addLine(to: CGPoint(x: lineOffset, y: edge + lineOffset))
@@ -43,14 +43,14 @@ struct GroupButtonView: View {
             .stroke(lineWidth: 1.5)
             .foregroundColor(.white)
             .opacity(0.7)
-            
+
         }
         .overlay(Text(text)
-            .font(.title3)
-            .bold()
-            .foregroundColor(.white))
+                    .font(.title3)
+                    .bold()
+                    .foregroundColor(.white))
         .frame(width: 300, height: 100)
-        
+
     }
 }
 

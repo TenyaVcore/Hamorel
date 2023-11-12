@@ -10,21 +10,21 @@ import SwiftUI
 struct EnterRoomPinView: View {
     @State var roomPin = "000000"
     @Binding var path: [NavigationLinkItem]
-    
+
     var body: some View {
-        VStack{
-            ZStack{
+        VStack {
+            ZStack {
                 Rectangle()
                     .foregroundStyle(Color("Color_primary"))
                     .cornerRadius(20)
                     .frame(height: 200)
-                
-                VStack{
+
+                VStack {
                     Text("Room Pinを入力")
                         .font(.title)
                         .foregroundStyle(.white)
                         .bold()
-                    
+
                     Text(roomPin)
                         .foregroundStyle(Color.black.opacity(0.8))
                         .font(.largeTitle)
@@ -33,13 +33,11 @@ struct EnterRoomPinView: View {
                         .background(Color.white)
                 }
             }
-            
-            NavigationLink(value: NavigationLinkItem.playlist(roomPin)){
+
+            NavigationLink(value: NavigationLinkItem.playlist(roomPin)) {
                 ButtonView(text: "次へ", buttonColor: Color("Color_primary"))
             }
 
-            
-            
             Button(action: {
                 path.removeLast()
             }, label: {

@@ -9,37 +9,34 @@ import SwiftUI
 import MusicKit
 
 struct AppleMusicAuthView: View {
-    
+
     @Binding var appleAuthStatus: MusicAuthorization.Status
-    
-    
-    
+
     var body: some View {
-        ZStack{
+        ZStack {
             Color(.gray)
                 .opacity(0.6)
                 .ignoresSafeArea(.all)
-            VStack{
+            VStack {
                 Text("Apple Music Libraryへの\nアクセス権限が必要です。")
                     .font(.title)
                     .multilineTextAlignment(.center)
                     .padding()
-                
+
                 Divider()
-                    
-                
-                VStack{
+
+                VStack {
                     Text("現在のステータス:")
-                        .padding(.bottom ,10)
+                        .padding(.bottom, 10)
                         .font(.title3)
-                    
+
                     switch appleAuthStatus {
                     case .notDetermined:
                         Text("ステータスは定義されていません")
                     case .authorized:
                         Text("ライブラリへのアクセスが許可されています")
                     case .denied:
-                        VStack{
+                        VStack {
                             Text("ライブラリへのアクセスが拒否されました。")
                             Text("設定からメディアとAppleMusicへのアクセスを許可してください。")
                                 .padding(.horizontal, 20)
@@ -51,9 +48,9 @@ struct AppleMusicAuthView: View {
                         Text("不明なエラーが発生しました")
                     }
                 }.padding()
-                
+
                 Button {
-                    Task{
+                    Task {
                         await _ = MusicAuthorization.request()
                         self.appleAuthStatus = MusicAuthorization.currentStatus
                     }
@@ -61,7 +58,7 @@ struct AppleMusicAuthView: View {
                     ButtonView(text: "AppleMusicライブラリへの\nアクセスを許可", buttonColor: .blue)
                         .padding(25)
                 }
-                
+
             }
             .background(.background)
             .border(Color.blue, width: 3)
@@ -71,7 +68,7 @@ struct AppleMusicAuthView: View {
     }
 }
 
-struct appleMusicAuthView_Previews: PreviewProvider {
+struct AppleMusicAuthView_Previews: PreviewProvider {
     @State static var status = MusicAuthorization.Status.denied
     static var previews: some View {
         AppleMusicAuthView(appleAuthStatus: $status)

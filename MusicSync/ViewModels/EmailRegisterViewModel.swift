@@ -10,22 +10,22 @@ import Firebase
 
 class EmailRegisterViewModel: ObservableObject {
     let authModel = FirebaseAuthModel()
-    
+
     func validateForm(name: String, email: String, password: String) -> String? {
-        var errorMessage: String? = nil
-        //name
+        var errorMessage: String?
+        // name
         if name.count < 2 || name.count > 20 {
             errorMessage = "ユーザー名は2文字以上20文字以下で入力してください"
             return errorMessage
         }
-        
-        //email
+
+        // email
         if !email.contains("@") {
             errorMessage = "メールアドレスを正しく入力してください"
             return errorMessage
         }
-        
-        //password
+
+        // password
         if password.count < 8 || password.count > 20 {
             errorMessage = "パスワードは8文字以上20文字以下で入力してください"
             return errorMessage
@@ -40,15 +40,15 @@ class EmailRegisterViewModel: ObservableObject {
         }
         return errorMessage
     }
-    
-    func createUser(email: String, name: String, password: String, completion: @escaping (String?) -> Void){
+
+    func createUser(email: String, name: String, password: String, completion: @escaping (String?) -> Void) {
         let errorMessage = validateForm(name: name, email: email, password: password)
         if let errorMessage = errorMessage {
             completion(errorMessage)
             return
         }
-        
-        authModel.createUser(email: email, name: name, password: password){ error in
+
+        authModel.createUser(email: email, name: name, password: password) { error in
             if let error = error as NSError? {
                 var errorMessage = ""
                 if let errorCode = AuthErrorCode.Code(rawValue: error.code) {
@@ -68,7 +68,7 @@ class EmailRegisterViewModel: ObservableObject {
                     }
                 }
                 completion(errorMessage)
-            }else{
+            } else {
                 completion(nil)
             }
         }

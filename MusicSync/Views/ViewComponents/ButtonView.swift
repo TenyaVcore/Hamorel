@@ -11,9 +11,9 @@ struct ButtonView: View {
     var text: String
     var textColor: Color = .white
     var buttonColor: Color
-    
+
     var body: some View {
-        ZStack{
+        ZStack {
             Text(text)
                 .font(.title3)
                 .fontWeight(.bold)
@@ -22,7 +22,7 @@ struct ButtonView: View {
                 .background(buttonColor)
                 .cornerRadius(10)
         }
-        
+
     }
 }
 
