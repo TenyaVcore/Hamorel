@@ -66,11 +66,9 @@ struct CreateGroupView: View {
                 viewModel.isError = true
             }
         }
-        .alert(isPresented: $viewModel.isError) {
-            Alert(title: Text("エラー"),
-                  message: Text("ルーム作成中にエラーが発生しました。もう一度お試しください"),
-                  dismissButton: .default(Text("OK")))
-        }
+        .alert("ルーム作成中にエラーが発生しました。もう一度お試しください", isPresented: $viewModel.isError, actions: {
+            Button("OK") { path.removeLast() }
+        })
     }
 }
 
