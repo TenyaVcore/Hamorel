@@ -15,7 +15,7 @@ enum CreateRoomError: Error {
         switch self {
         case .canNotFindRoomPin10Times: return "room Pinの作成に10回失敗しました"
         case .otherError(let error): return "予期せぬエラーが発生しました。詳細: （\(error)）"
-
+            
         }
     }
 }

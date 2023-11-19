@@ -18,7 +18,7 @@ class EnterRoomPinViewModel: ObservableObject {
     }
     
     func deleteNum() {
-        if !roomPin.isEmpty{
+        if !roomPin.isEmpty {
             roomPin.removeLast()
         }
     }
