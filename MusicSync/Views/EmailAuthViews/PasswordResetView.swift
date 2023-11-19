@@ -18,7 +18,7 @@ struct PasswordResetView: View {
     var body: some View {
         VStack {
             ZStack {
-                Color("primary")
+                Color("color_primary")
                     .frame(height: 200)
                     .cornerRadius(30)
                     .padding(.horizontal, 20)
@@ -61,7 +61,7 @@ struct PasswordResetView: View {
                     }
                 }
             } label: {
-                ButtonView(text: "メールを送信", buttonColor: email == "" ? .gray : Color("primary"))
+                ButtonView(text: "メールを送信", buttonColor: email == "" ? .gray : Color("color_primary"))
             }
             .disabled(email == "")
         }

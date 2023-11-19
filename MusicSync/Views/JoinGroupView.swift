@@ -24,7 +24,7 @@ struct JoinGroupView: View {
             VStack {
                 ZStack {
                     Rectangle()
-                        .foregroundStyle(Color("primary"))
+                        .foregroundStyle(Color("color_primary"))
                         .frame(width: 340, height: 120)
                         .cornerRadius(20)
                     
@@ -54,7 +54,7 @@ struct JoinGroupView: View {
                 }, label: {
                     ButtonView(text: "roomを退出",
                                textColor: .black,
-                               buttonColor: Color("secondary")
+                               buttonColor: Color("color_secondary")
                     )
                 })
                 .padding(.bottom, 10)

@@ -20,7 +20,7 @@ struct EmailRegisterView: View {
     var body: some View {
         VStack {
             ZStack {
-                RoundedCorners(color: Color("primary"), tl: 10, tr: 10, bl: 10, br: 10)
+                RoundedCorners(color: Color("color_primary"), tl: 10, tr: 10, bl: 10, br: 10)
                     .frame(height: 100)
                     .padding()
 

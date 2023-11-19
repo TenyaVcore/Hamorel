@@ -18,7 +18,7 @@ struct CreateGroupView: View {
             VStack {
                 ZStack {
                     Rectangle()
-                        .foregroundStyle(Color("primary"))
+                        .foregroundStyle(Color("color_primary"))
                         .frame(width: 340, height: 120)
                         .cornerRadius(20)
 
@@ -48,7 +48,7 @@ struct CreateGroupView: View {
                     path.append(NavigationLinkItem.playlist(String(viewModel.roomPin)))
                 }, label: {
                     ButtonView(text: "次へ",
-                               buttonColor: viewModel.usersData.count <= 1 ? .gray : Color("primary")
+                               buttonColor: viewModel.usersData.count <= 1 ? .gray : Color("color_primary")
                     )
                 })
                 .padding(.bottom, 10)
@@ -60,7 +60,7 @@ struct CreateGroupView: View {
                 }, label: {
                     ButtonView(text: "roomを解散",
                                textColor: .black,
-                               buttonColor: Color("secondary")
+                               buttonColor: Color("color_secondary")
                     )
                 })
                 .padding(.bottom, 10)

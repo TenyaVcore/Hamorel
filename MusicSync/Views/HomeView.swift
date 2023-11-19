@@ -54,12 +54,12 @@ struct HomeView: View {
                                 .padding(.bottom, 30)
 
                             NavigationLink(value: NavigationLinkItem.create) {
-                                ButtonView(text: "ルームを作成する", textColor: .white, buttonColor: Color("primary"))
+                                ButtonView(text: "ルームを作成する", textColor: .white, buttonColor: Color("color_primary"))
                             }
                             .padding(.bottom, 20)
 
                             NavigationLink(value: NavigationLinkItem.enter) {
-                                ButtonView(text: "ルームに参加する", textColor: .black, buttonColor: Color("secondary"))
+                                ButtonView(text: "ルームに参加する", textColor: .black, buttonColor: Color("color_secondary"))
                             }
                             .padding(.bottom, 10)
 
@@ -71,7 +71,7 @@ struct HomeView: View {
                                     .fontWeight(.bold)
                                     .foregroundColor(.black)
                                     .frame(width: 300, height: 50)
-                                    .background(Color("secondary"))
+                                    .background(Color("color_secondary"))
                                     .cornerRadius(10)
                             }
                             .padding(.vertical, 10)
@@ -79,7 +79,7 @@ struct HomeView: View {
                     }
                 }
                 .background {
-                    Color("primary")
+                    Color("color_primary")
                         .ignoresSafeArea()
                 }
                 .toolbar {

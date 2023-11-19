@@ -15,7 +15,7 @@ struct EnterRoomPinView: View {
         VStack {
             ZStack {
                 Rectangle()
-                    .foregroundStyle(Color("primary"))
+                    .foregroundStyle(Color("color_primary"))
                     .cornerRadius(20)
                     .frame(height: 200)
 
@@ -69,14 +69,14 @@ struct EnterRoomPinView: View {
             }
 
             NavigationLink(value: NavigationLinkItem.join(viewModel.roomPin)) {
-                ButtonView(text: "ルームに参加する", buttonColor: Color("primary"))
+                ButtonView(text: "ルームに参加する", buttonColor: Color("color_primary"))
             }
             .padding(.top, 10)
 
             Button(action: {
                 path.removeLast()
             }, label: {
-                ButtonView(text: "戻る", textColor: .black, buttonColor: Color("secondary"))
+                ButtonView(text: "戻る", textColor: .black, buttonColor: Color("color_secondary"))
             })
             .padding(.horizontal, 8)
         }
