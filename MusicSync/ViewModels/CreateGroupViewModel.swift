@@ -13,25 +13,24 @@ import FirebaseFirestoreSwift
 
 @MainActor
 class CreateGroupViewModel: ObservableObject {
-
-    @Published var usersData: [UserData]
-    @Published var isLoading = true
-    @Published var isError = false
-    @Published var roomPin = 000000
-    @State var listener: ListenerRegistration?
-
-    var model = FirestoreModelAsync()
+    var storeModel = FirestoreModelAsync()
     var musicModel = AppleMusicLibraryModel()
     var authModel = FirebaseAuthModel()
     var db = Firestore.firestore()
 
     var songs = MusicItemCollection<Song>()
+    
+    @Published var usersData: [UserData]
+    @Published var isLoading = true
+    @Published var isError = false
+    @Published var roomPin = 000000
+    @State private var listener: ListenerRegistration?
 
     init(usersData: [UserData] = [UserData](),
          model: FirestoreModelAsync = FirestoreModelAsync(),
          musicModel: AppleMusicLibraryModel = AppleMusicLibraryModel()) {
         self.usersData = usersData
-        self.model = model
+        self.storeModel = model
         self.musicModel = musicModel
     }
 
@@ -65,20 +64,20 @@ class CreateGroupViewModel: ObservableObject {
                 }
                 songs = try await musicModel.loadLibraryAsync(limit: 0)
                 print("fetched songs")
-                roomPin = try await self.model.createRoom(host: userName)
+                roomPin = try await self.storeModel.createRoom(host: userName)
                 print("create room")
-                try self.model.uploadSongs(item: songs)
+                try self.storeModel.uploadSongs(item: songs)
                 self.addListener(roomPin: roomPin)
                 self.isLoading = false
             } catch {
-                print("error")
+                print("error:\(error.localizedDescription)")
                 self.isError = true
             }
         }
     }
 
     func exitGroup() {
-        model.exitRoom(roomPin: roomPin)
+        storeModel.exitRoom(roomPin: roomPin)
     }
 
 }
