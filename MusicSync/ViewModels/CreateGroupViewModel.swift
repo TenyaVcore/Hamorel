@@ -24,6 +24,7 @@ class CreateGroupViewModel: ObservableObject {
     @Published var isLoading = true
     @Published var isError = false
     @Published var roomPin = 000000
+    @Published var nextFlag = false
     @State private var listener: ListenerRegistration?
 
     init(usersData: [UserData] = [UserData](),
@@ -34,19 +35,17 @@ class CreateGroupViewModel: ObservableObject {
         self.musicModel = musicModel
     }
 
-    func addListener(roomPin: Int) {
-        listener = db.collection("Room").document(String(roomPin)).collection("Member")
+    func addListener(roomPin: String) {
+        listener = db.collection("Room").document(roomPin).collection("Member")
             .addSnapshotListener { (querySnapshot, error) in
                 guard let document = querySnapshot?.documents else {
                     print("Error fetching document: \(error!)")
                     return
                 }
-
                 self.usersData = document.map { (queryDocumentSnapshot) -> UserData in
                     let data = queryDocumentSnapshot.data()
                     let name = data["name"] as? String ?? ""
                     let id = data["id"] as? String ?? "000000"
-
                     return UserData(id: id, name: name)
                 }
             }
@@ -63,11 +62,9 @@ class CreateGroupViewModel: ObservableObject {
                     try await authModel.loginAsGuestAsync()
                 }
                 songs = try await musicModel.loadLibraryAsync(limit: 0)
-                print("fetched songs")
                 roomPin = try await self.storeModel.createRoom(host: userName)
-                print("create room")
                 try self.storeModel.uploadSongs(item: songs)
-                self.addListener(roomPin: roomPin)
+                self.addListener(roomPin: String(roomPin))
                 self.isLoading = false
             } catch {
                 print("error:\(error.localizedDescription)")
@@ -75,9 +72,20 @@ class CreateGroupViewModel: ObservableObject {
             }
         }
     }
+    
+    func pushNext() {
+        self.nextFlag = true
+        Task {
+            do {
+                try await storeModel.pushNext(roomPin: String(roomPin))
+            } catch {
+                self.isError = true
+            }
+        }
+    }
 
-    func exitGroup() {
-        storeModel.exitRoom(roomPin: roomPin)
+    func deleteGroup() {
+        storeModel.deleteRoom(roomPin: String(roomPin))
     }
 
 }

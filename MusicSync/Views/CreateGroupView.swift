@@ -43,15 +43,19 @@ struct CreateGroupView: View {
                 }
                 .listStyle(PlainListStyle())
 
-                NavigationLink(value: NavigationLinkItem.playlist(String(viewModel.roomPin))) {
+                Button(action: {
+                    viewModel.pushNext()
+                    path.append(NavigationLinkItem.playlist(String(viewModel.roomPin)))
+                }, label: {
                     ButtonView(text: "次へ",
-                               buttonColor: viewModel.usersData.count <= 1 ? Color("primary")  : .gray
+                               buttonColor: viewModel.usersData.count <= 1 ? .gray : Color("primary")
                     )
-                }
+                })
                 .padding(.bottom, 10)
-                //.disabled(viewModel.usersData.count <= 1)
+                .disabled(viewModel.usersData.count <= 1)
 
                 Button(action: {
+                    viewModel.deleteGroup()
                     path.removeLast()
                 }, label: {
                     ButtonView(text: "roomを解散",
@@ -68,8 +72,14 @@ struct CreateGroupView: View {
         }
         .onAppear {
             viewModel.createGroup(userName: userName)
+            viewModel.usersData = [UserData(name: userName)]
         }
-        .alert("ルーム作成中にエラーが発生しました。もう一度お試しください", isPresented: $viewModel.isError, actions: {
+        .onDisappear {
+            if !viewModel.nextFlag {
+                viewModel.deleteGroup()
+            }
+        }
+        .alert("エラーが発生しました。もう一度お試しください", isPresented: $viewModel.isError, actions: {
             Button("OK") { path.removeLast() }
         })
     }

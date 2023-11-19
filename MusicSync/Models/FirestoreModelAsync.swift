@@ -37,7 +37,8 @@ struct FirestoreModelAsync {
                 }
             }
         }
-        try await ref.document(String(roomPin)).setData(["nextFlag": false])
+        try await ref.document(String(roomPin))
+            .setData(["nextFlag": false, "isEnable": true])
         try ref.document(String(roomPin)).collection("Member").document(uniqueId).setData(from: userData)
 
         return roomPin
@@ -45,6 +46,7 @@ struct FirestoreModelAsync {
 
     // fire storeの1MB制限を超えないために楽曲情報を700曲ごとに分割してアップロード
     func uploadSongs(item: MusicItemCollection<Song>) throws {
+        let ref = db.collection("Songs").document(uniqueId).collection("Songs")
         let batch = db.batch()
         var count = 1
         var startIndex = 0
@@ -54,7 +56,7 @@ struct FirestoreModelAsync {
 
             let userSongs = UserSongs(songs: MusicItemCollection<Song>(subItem))
             try batch.setData(from: userSongs, 
-                              forDocument: db.collection("Songs").document(uniqueId).collection("Songs").document(String(count)))
+                              forDocument: ref.document(String(count)))
             count += 1
             startIndex += 700
         }
@@ -83,18 +85,38 @@ struct FirestoreModelAsync {
         }
         return songs
     }
-
-    func joinRoom(roomPin: String, userName: String) async throws {
+    
+    func joinRoom(roomPin: String, userName: String) async throws -> [UserData] {
         let roomRef = db.collection("Room").document(roomPin)
-        let userData = UserData(name: userName)
-        
-        do {
-            _ = try await roomRef.getDocument()
-        } catch {
+        var usersData = [UserData]()
+
+        guard let data = try await roomRef.getDocument().data(),
+              let isEnable = data["isEnable"] as? Bool, isEnable else {
             throw JoinRoomError.roomNotFound
         }
-        print("find roomPin")
+        
+        let roomData = try await roomRef.collection("Member").getDocuments()
+        if roomData.count > 4 {
+            throw JoinRoomError.roomIsFull
+        }
+
+        let userData = UserData(name: userName)
         try db.collection("Room").document(roomPin).collection("Member").document(uniqueId).setData(from: userData)
+         
+        usersData = roomData.documents.map { (queryDocumentSnapshot) -> UserData in
+            let data = queryDocumentSnapshot.data()
+            let name = data["name"] as? String ?? ""
+            let id = data["id"] as? String ?? "000000"
+            
+            return UserData(id: id, name: name)
+        }
+        usersData.append(userData)
+        
+        return usersData
+    }
+
+    func pushNext(roomPin: String) async throws {
+        try await db.collection("Room").document(roomPin).setData(["nextFlag": true])
     }
 
     func exitRoom(roomPin: Int) {
@@ -105,5 +127,9 @@ struct FirestoreModelAsync {
                 print("Document successfully removed from \(roomPin)!")
             }
         }
+    }
+
+    func deleteRoom(roomPin: String) {
+        db.collection("Room").document(roomPin).setData(["nextFlag": false, "isEnable": false])
     }
 }
