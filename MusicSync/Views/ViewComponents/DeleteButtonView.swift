@@ -1,5 +1,5 @@
 //
-//  NumberButtonView.swift
+//  DeleteButtonView.swift
 //  MusicSync
 //
 //  Created by 田川展也 on R 5/11/19.
@@ -7,11 +7,9 @@
 
 import SwiftUI
 
-struct NumberButtonView: View {
-    var text: String
-
+struct DeleteButtonView: View {
     var body: some View {
-       Text(text)
+       Image(systemName: "delete.backward")
             .padding(.horizontal, 1)
             .frame(width: 123, height: 56, alignment: .center)
             .background(Color(red: 0.85, green: 0.85, blue: 0.85))
@@ -21,5 +19,5 @@ struct NumberButtonView: View {
 }
 
 #Preview {
-    NumberButtonView(text: "1")
+    DeleteButtonView()
 }
