@@ -6,6 +6,7 @@
 //
 
 import Firebase
+import FirebaseFirestore
 import FirebaseFirestoreSwift
 import MusicKit
 import SwiftUI
@@ -83,6 +84,18 @@ struct FirestoreModelAsync {
         return songs
     }
 
+    func joinRoom(roomPin: String, userName: String) async throws {
+        let roomRef = db.collection("Room").document(roomPin)
+        let userData = UserData(name: userName)
+        
+        do {
+            _ = try await roomRef.getDocument()
+        } catch {
+            throw JoinRoomError.roomNotFound
+        }
+        print("find roomPin")
+        try db.collection("Room").document(roomPin).collection("Member").document(uniqueId).setData(from: userData)
+    }
 
     func exitRoom(roomPin: Int) {
         db.collection("Room").document(String(roomPin)).collection("Member").document(uniqueId).delete { error in

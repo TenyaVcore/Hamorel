@@ -125,10 +125,10 @@
             filePath = "MusicSync/Models/FirestoreModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "FirestoreModel"
-            landmarkType = "14">
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "unknown"
+            landmarkType = "0">
             <Locations>
                <Location
                   uuid = "7BA1BA1F-9199-4564-9475-7DB8B075CE1E - de154e81d6d8d0b4"
@@ -166,22 +166,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "26011C00-CED4-41CA-A415-1A729244C2BB"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MusicSync/Views/CreateGroupView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "5599359C-0720-4158-9AC7-C3B1E226A6C8"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -189,8 +173,8 @@
             filePath = "MusicSync/ViewModels/CreateGroupViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "createGroup(userName:)"
             landmarkType = "7">
             <Locations>
@@ -387,8 +371,8 @@
             filePath = "MusicSync/Models/FirestoreModelAsync.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
             landmarkName = "createRoom(host:)"
             landmarkType = "7">
             <Locations>
@@ -529,8 +513,8 @@
             filePath = "MusicSync/Models/FirestoreModelAsync.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
             landmarkName = "createRoom(host:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -539,14 +523,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "EE1CBD02-6213-4254-9539-DF9C52DE1DF4"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MusicSync/Models/FirestoreModelAsync.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "downloadRoomData(roomPin:)"
             landmarkType = "7">
             <Locations>
@@ -638,8 +622,8 @@
             filePath = "MusicSync/ViewModels/CreateGroupViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "createGroup(userName:)"
             landmarkType = "7">
             <Locations>
@@ -679,138 +663,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B8205BE7-D1A1-4504-AF49-EDA0732DC988"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MusicSync/ViewModels/CreatePlaylistViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "downloadSongs(roomPin:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B8205BE7-D1A1-4504-AF49-EDA0732DC988 - 12b533d3f29376f1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in MusicSync.CreatePlaylistViewModel.downloadSongs(roomPin: Swift.String) -&gt; ()"
-                  moduleName = "MusicSync"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tagawanobuya/Desktop/MusicSync/MusicSync/ViewModels/CreatePlaylistViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "36"
-                  endingLineNumber = "36"
-                  offsetFromSymbolStart = "300">
-               </Location>
-               <Location
-                  uuid = "B8205BE7-D1A1-4504-AF49-EDA0732DC988 - b0202cd1bfa014f2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for closure #1 @Sendable () async -&gt; () in MusicSync.CreatePlaylistViewModel.downloadSongs(roomPin: Swift.String) -&gt; ()"
-                  moduleName = "MusicSync"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tagawanobuya/Desktop/MusicSync/MusicSync/ViewModels/CreatePlaylistViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "36"
-                  endingLineNumber = "36"
-                  offsetFromSymbolStart = "172">
-               </Location>
-               <Location
-                  uuid = "B8205BE7-D1A1-4504-AF49-EDA0732DC988 - 12b533d3f2937716"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in MusicSync.CreatePlaylistViewModel.downloadSongs(roomPin: Swift.String) -&gt; ()"
-                  moduleName = "MusicSync"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tagawanobuya/Desktop/MusicSync/MusicSync/ViewModels/CreatePlaylistViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "300">
-               </Location>
-               <Location
-                  uuid = "B8205BE7-D1A1-4504-AF49-EDA0732DC988 - b0202cd1bfa01515"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for closure #1 @Sendable () async -&gt; () in MusicSync.CreatePlaylistViewModel.downloadSongs(roomPin: Swift.String) -&gt; ()"
-                  moduleName = "MusicSync"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tagawanobuya/Desktop/MusicSync/MusicSync/ViewModels/CreatePlaylistViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "740">
-               </Location>
-               <Location
-                  uuid = "B8205BE7-D1A1-4504-AF49-EDA0732DC988 - 57d305df694db356"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for closure #1 @Sendable () async -&gt; () in MusicSync.CreatePlaylistViewModel.downloadSongs(roomPin: Swift.String) -&gt; ()"
-                  moduleName = "MusicSync"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tagawanobuya/Desktop/MusicSync/MusicSync/ViewModels/CreatePlaylistViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "1116">
-               </Location>
-               <Location
-                  uuid = "B8205BE7-D1A1-4504-AF49-EDA0732DC988 - f54e7edcd2595149"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(6) suspend resume partial function for closure #1 @Sendable () async -&gt; () in MusicSync.CreatePlaylistViewModel.downloadSongs(roomPin: Swift.String) -&gt; ()"
-                  moduleName = "MusicSync"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tagawanobuya/Desktop/MusicSync/MusicSync/ViewModels/CreatePlaylistViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "788">
-               </Location>
-               <Location
-                  uuid = "B8205BE7-D1A1-4504-AF49-EDA0732DC988 - 94f957da9f66ff48"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(7) suspend resume partial function for closure #1 @Sendable () async -&gt; () in MusicSync.CreatePlaylistViewModel.downloadSongs(roomPin: Swift.String) -&gt; ()"
-                  moduleName = "MusicSync"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tagawanobuya/Desktop/MusicSync/MusicSync/ViewModels/CreatePlaylistViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "816">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "17643E0E-9437-469A-8F49-01A5CD180E19"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MusicSync/Models/FirestoreModelAsync.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "downloadRoomData(roomPin:)"
             landmarkType = "7">
             <Locations>

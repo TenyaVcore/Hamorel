@@ -52,6 +52,9 @@
 		BA85A17B2A1B10F4009C1CDD /* FirebaseAuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A17A2A1B10F4009C1CDD /* FirebaseAuthModel.swift */; };
 		BA85A17F2A1B114B009C1CDD /* AppleMusicLibraryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A17E2A1B114B009C1CDD /* AppleMusicLibraryModel.swift */; };
 		BA85A1832A1B6B20009C1CDD /* GroupButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1822A1B6B20009C1CDD /* GroupButtonView.swift */; };
+		BA967EED2B09D5C0008AB3CF /* NumberButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA967EEC2B09D5C0008AB3CF /* NumberButtonView.swift */; };
+		BA967EEF2B09DA55008AB3CF /* EnterRoomPinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA967EEE2B09DA55008AB3CF /* EnterRoomPinViewModel.swift */; };
+		BA967EF12B09E0A3008AB3CF /* DeleteButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA967EF02B09E0A3008AB3CF /* DeleteButtonView.swift */; };
 		BAA05CE82AF2B29C00A038A3 /* EnterRoomPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA05CE72AF2B29C00A038A3 /* EnterRoomPinView.swift */; };
 		BAA05CEA2AF2B70900A038A3 /* NavigationLinkItemNavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA05CE92AF2B70900A038A3 /* NavigationLinkItemNavigationItem.swift */; };
 		BAA05CED2AF35D8C00A038A3 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA05CEC2AF35D8C00A038A3 /* RoundedCorners.swift */; };
@@ -112,6 +115,9 @@
 		BA85A17A2A1B10F4009C1CDD /* FirebaseAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthModel.swift; sourceTree = "<group>"; };
 		BA85A17E2A1B114B009C1CDD /* AppleMusicLibraryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicLibraryModel.swift; sourceTree = "<group>"; };
 		BA85A1822A1B6B20009C1CDD /* GroupButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupButtonView.swift; sourceTree = "<group>"; };
+		BA967EEC2B09D5C0008AB3CF /* NumberButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberButtonView.swift; sourceTree = "<group>"; };
+		BA967EEE2B09DA55008AB3CF /* EnterRoomPinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomPinViewModel.swift; sourceTree = "<group>"; };
+		BA967EF02B09E0A3008AB3CF /* DeleteButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButtonView.swift; sourceTree = "<group>"; };
 		BAA05CE72AF2B29C00A038A3 /* EnterRoomPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomPinView.swift; sourceTree = "<group>"; };
 		BAA05CE92AF2B70900A038A3 /* NavigationLinkItemNavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLinkItemNavigationItem.swift; sourceTree = "<group>"; };
 		BAA05CEC2AF35D8C00A038A3 /* RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
@@ -260,6 +266,7 @@
 				BA785CAF2AF789760012CF67 /* EmailRegisterViewModel.swift */,
 				BA85A1732A1B1054009C1CDD /* JoinGroupViewModel.swift */,
 				BA85A1752A1B107F009C1CDD /* CreatePlaylistViewModel.swift */,
+				BA967EEE2B09DA55008AB3CF /* EnterRoomPinViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -280,6 +287,8 @@
 			isa = PBXGroup;
 			children = (
 				BA85A16E2A1B0FB7009C1CDD /* ButtonView.swift */,
+				BA967EEC2B09D5C0008AB3CF /* NumberButtonView.swift */,
+				BA967EF02B09E0A3008AB3CF /* DeleteButtonView.swift */,
 				BAA05CEC2AF35D8C00A038A3 /* RoundedCorners.swift */,
 				BA85A16A2A1B0F7F009C1CDD /* LoadingView.swift */,
 				BA85A1822A1B6B20009C1CDD /* GroupButtonView.swift */,
@@ -475,6 +484,7 @@
 				BA85A1652A1B0F1C009C1CDD /* CreateGroupView.swift in Sources */,
 				BA85A1792A1B10CD009C1CDD /* Protocols.swift in Sources */,
 				BA85A16D2A1B0F9F009C1CDD /* CreatePlaylistView.swift in Sources */,
+				BA967EEF2B09DA55008AB3CF /* EnterRoomPinViewModel.swift in Sources */,
 				BA8542AD2B010CB300434765 /* FirestoreModel.swift in Sources */,
 				BAA05CEA2AF2B70900A038A3 /* NavigationLinkItemNavigationItem.swift in Sources */,
 				BA6CF9122A1B0C530066B55E /* SettingView.swift in Sources */,
@@ -492,8 +502,10 @@
 				BAA05CE82AF2B29C00A038A3 /* EnterRoomPinView.swift in Sources */,
 				BA785CA72AF368BD0012CF67 /* MemberListCell.swift in Sources */,
 				BAA05CED2AF35D8C00A038A3 /* RoundedCorners.swift in Sources */,
+				BA967EED2B09D5C0008AB3CF /* NumberButtonView.swift in Sources */,
 				BA6CF9192A1B0D180066B55E /* PasswordResetView.swift in Sources */,
 				BA6CF8C72A1B0A480066B55E /* MusicSyncApp.swift in Sources */,
+				BA967EF12B09E0A3008AB3CF /* DeleteButtonView.swift in Sources */,
 				BA785CB02AF789760012CF67 /* EmailRegisterViewModel.swift in Sources */,
 				BA6CF9172A1B0CF90066B55E /* ProvisionalRegistrationView.swift in Sources */,
 				BA85A1632A1B0EF2009C1CDD /* HomeView.swift in Sources */,

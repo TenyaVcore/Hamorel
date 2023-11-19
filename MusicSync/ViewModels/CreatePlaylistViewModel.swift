@@ -12,7 +12,6 @@ import FirebaseFirestoreSwift
 
 @MainActor
 class CreatePlaylistViewModel: ObservableObject {
-
     var storeModel = FirestoreModelAsync()
     var musicModel = AppleMusicLibraryModel()
 

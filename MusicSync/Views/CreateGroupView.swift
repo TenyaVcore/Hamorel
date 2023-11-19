@@ -35,7 +35,7 @@ struct CreateGroupView: View {
                     }
                 }
 
-                Text("ルームに参加中のメンバー 1/5 ")
+                Text("ルームに参加中のメンバー \(viewModel.usersData.count)/5 ")
                     .font(.title2)
 
                 List(viewModel.usersData) { userData in

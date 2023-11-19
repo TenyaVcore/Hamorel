@@ -10,64 +10,70 @@ import Firebase
 import FirebaseFirestoreSwift
 
 struct JoinGroupView: View {
-
-    @State var listener: ListenerRegistration?
-    @StateObject var viewModel = CreateGroupViewModel()
+    @StateObject var viewModel = JoinGroupViewModel()
     @Binding var path: [NavigationLinkItem]
-
-    var name: String
-    var roomPin = "000000"
-
+    
+    var userName: String
+    var roomPin: String
+    
     var body: some View {
-        VStack {
-            ZStack {
-                Rectangle()
-                    .foregroundStyle(Color("Color_primary"))
-                    .frame(width: 340, height: 120)
-                    .cornerRadius(20)
-
-                VStack {
-                    Text("Room Pin")
-                        .font(.largeTitle)
-                        .foregroundStyle(.white)
-                        .bold()
-
-                    Text((roomPin))
-                        .font(.largeTitle)
-                        .foregroundStyle(.white)
-                        .bold()
+        ZStack {
+            VStack {
+                ZStack {
+                    Rectangle()
+                        .foregroundStyle(Color("primary"))
+                        .frame(width: 340, height: 120)
+                        .cornerRadius(20)
+                    
+                    VStack {
+                        Text("Room Pin")
+                            .font(.largeTitle)
+                            .foregroundStyle(.white)
+                            .bold()
+                        
+                        Text(String(viewModel.roomPin))
+                            .font(.largeTitle)
+                            .foregroundStyle(.white)
+                            .bold()
+                    }
                 }
+                
+                Text("ルームに参加中のメンバー \(viewModel.usersData.count)/5 ")
+                    .font(.title2)
+                
+                List(viewModel.usersData) { userData in
+                    MemberListCell(name: userData.name)
+                }
+                .listStyle(PlainListStyle())
+                
+                Button(action: {
+                    path.removeLast()
+                }, label: {
+                    ButtonView(text: "roomを解散",
+                               textColor: .black,
+                               buttonColor: Color("secondary")
+                    )
+                })
+                .padding(.bottom, 10)
             }
-
-            Text("ルームに参加中のメンバー 1/5 ")
-                .font(.title2)
-
-            List {
-                MemberListCell(name: "ユーザ1")
-                MemberListCell(name: "ユーザ2")
-                MemberListCell(name: "ユーザ3")
-                MemberListCell(name: "ユーザ4")
-                MemberListCell(name: "ユーザ5")
-            }
-            .listStyle(PlainListStyle())
-
-            Text("ホストの操作を待機しています...")
-
-            Button(action: {
-                path.removeLast()
-            }, label: {
-                ButtonView(text: "roomを退出する", textColor: .black, buttonColor: Color("Color_secondary"))
-            })
-            .padding(.bottom, 10)
+            
+            LoadingView(message: "ルームに参加中")
+                .opacity(viewModel.isLoading ? 1 : 0)
+                .animation(.easeInOut, value: viewModel.isLoading)
         }
+        .onAppear {
+            viewModel.joinGroup(roomPin: roomPin, userName: userName)
+        }
+        .alert(viewModel.errorMessage, isPresented: $viewModel.isError, actions: {
+            Button("OK") { path.removeLast() }
+        })
     }
 }
 
 struct JoinGroupView_Previews: PreviewProvider {
-    @State static var state = true
     @State static var path = [NavigationLinkItem]()
     static var previews: some View {
 
-        JoinGroupView(path: $path, name: "userName", roomPin: "333333")
+        JoinGroupView(path: $path, userName: "userName", roomPin: "333333")
     }
 }
