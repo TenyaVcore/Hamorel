@@ -56,7 +56,7 @@ class JoinGroupViewModel: ObservableObject {
                 return
             }
             self.nextFlag = data["nextFlag"] as? Bool ?? false
-            if data["isEnable"] as? Bool ?? false == false {
+            if data["isEnable"] as? Bool ?? true == false {
                 self.errorMessage = "ルームが解散されました"
                 self.isError = true
             }

@@ -91,7 +91,10 @@ struct FirestoreModelAsync {
         var usersData = [UserData]()
 
         guard let data = try await roomRef.getDocument().data(),
-              let isEnable = data["isEnable"] as? Bool, isEnable else {
+              let isEnable = data["isEnable"] as? Bool, 
+              let nextFlag = data["nextFlag"] as? Bool,
+                isEnable, !nextFlag
+            else {
             throw JoinRoomError.roomNotFound
         }
         
@@ -116,7 +119,7 @@ struct FirestoreModelAsync {
     }
 
     func pushNext(roomPin: String) async throws {
-        try await db.collection("Room").document(roomPin).setData(["nextFlag": true])
+        try await db.collection("Room").document(roomPin).setData(["nextFlag": true, "isEnable": true])
     }
 
     func exitRoom(roomPin: String) {

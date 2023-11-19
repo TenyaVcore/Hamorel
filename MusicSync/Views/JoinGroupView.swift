@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 import Firebase
 import FirebaseFirestoreSwift
 
@@ -16,6 +17,7 @@ struct JoinGroupView: View {
     // 前のviewからの引き継ぎ
     var userName: String
     var roomPin: String
+    @State var cancellable: AnyCancellable!
     
     var body: some View {
         ZStack {
@@ -50,7 +52,7 @@ struct JoinGroupView: View {
                 Button(action: {
                     path.removeLast()
                 }, label: {
-                    ButtonView(text: "roomを解散",
+                    ButtonView(text: "roomを退出",
                                textColor: .black,
                                buttonColor: Color("secondary")
                     )
@@ -65,11 +67,17 @@ struct JoinGroupView: View {
         .onAppear {
             viewModel.roomPin = roomPin
             viewModel.joinGroup(userName: userName)
+            self.cancellable = viewModel.$nextFlag.sink {
+                if $0 {
+                    path.append(NavigationLinkItem.playlist(viewModel.roomPin))
+                }
+            }
         }
         .onDisappear {
             if !viewModel.nextFlag {
                 viewModel.exitGroup()
             }
+            cancellable.cancel()
         }
         .alert(viewModel.errorMessage, isPresented: $viewModel.isError, actions: {
             Button("OK") { path.removeLast() }
