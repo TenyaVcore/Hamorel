@@ -64,6 +64,11 @@ struct JoinGroupView: View {
         .onAppear {
             viewModel.joinGroup(roomPin: roomPin, userName: userName)
         }
+        .onDisappear {
+            if !viewModel.nextFlag {
+                viewModel.exitGroup()
+            }
+        }
         .alert(viewModel.errorMessage, isPresented: $viewModel.isError, actions: {
             Button("OK") { path.removeLast() }
         })

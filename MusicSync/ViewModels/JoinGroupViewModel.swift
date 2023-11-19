@@ -21,6 +21,7 @@ class JoinGroupViewModel: ObservableObject {
     @Published var usersData: [UserData]
     @Published var isLoading = true
     @Published var isError = false
+    @Published var nextFlag = false
     @Published var errorMessage = "ルーム参加中にエラーが発生しました。もう一度お試しください"
     @Published var roomPin = 000000
     @State private var listener: ListenerRegistration?
@@ -70,8 +71,9 @@ class JoinGroupViewModel: ObservableObject {
         }
     }
 
-    func exitGroup(roomPin: Int) {
+    func exitGroup() {
         storeModel.exitRoom(roomPin: roomPin)
+        listener?.remove()
     }
 
 }

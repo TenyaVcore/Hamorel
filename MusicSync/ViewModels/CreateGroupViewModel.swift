@@ -75,6 +75,7 @@ class CreateGroupViewModel: ObservableObject {
     
     func pushNext() {
         self.nextFlag = true
+        self.listener?.remove()
         Task {
             do {
                 try await storeModel.pushNext(roomPin: String(roomPin))
@@ -85,6 +86,7 @@ class CreateGroupViewModel: ObservableObject {
     }
 
     func deleteGroup() {
+        self.listener?.remove()
         storeModel.deleteRoom(roomPin: String(roomPin))
     }
 
