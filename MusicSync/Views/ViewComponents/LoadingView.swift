@@ -16,7 +16,7 @@ struct LoadingView: View {
 
     var body: some View {
         ZStack {
-            Color("Color_primary")
+            Color("primary")
                 .ignoresSafeArea()
 
             VStack {
@@ -53,7 +53,6 @@ struct LoadingView: View {
             }
         }
     }
-
 }
 
 struct loadingView_Previews: PreviewProvider {

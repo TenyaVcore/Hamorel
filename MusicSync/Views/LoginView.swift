@@ -55,7 +55,7 @@ struct LogInView: View {
 
             Button {
                 model.loginAsGuest { error in
-                    if let error = error {
+                    if error != nil {
                         errorMessage = "エラーが発生しました"
                     } else {
                         isSuccessLogin = true

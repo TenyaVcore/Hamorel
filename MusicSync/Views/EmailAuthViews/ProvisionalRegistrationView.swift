@@ -17,7 +17,7 @@ struct ProvisionalRegistrationView: View {
             Button {
                 path.removeLast(path.count - 1)
             } label: {
-                ButtonView(text: "ログイン画面に戻る", buttonColor: .colorPrimary)
+                ButtonView(text: "ログイン画面に戻る", buttonColor: .primary)
             }
 
             Text("メールが届かない場合")

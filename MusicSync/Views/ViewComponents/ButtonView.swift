@@ -28,6 +28,6 @@ struct ButtonView: View {
 
 struct ButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        ButtonView(text: "ボタン", textColor: .white, buttonColor: Color("Color_primary"))
+        ButtonView(text: "ボタン", textColor: .white, buttonColor: Color("primary"))
     }
 }

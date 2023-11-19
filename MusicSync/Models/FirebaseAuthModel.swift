@@ -57,4 +57,8 @@ struct FirebaseAuthModel {
         }
     }
 
+    func loginAsGuestAsync() async throws {
+        try await Auth.auth().signInAnonymously()
+    }
+
 }

@@ -55,13 +55,13 @@ struct AppleMusicAuthView: View {
                         self.appleAuthStatus = MusicAuthorization.currentStatus
                     }
                 } label: {
-                    ButtonView(text: "AppleMusicライブラリへの\nアクセスを許可", buttonColor: Color("Color_primary"))
+                    ButtonView(text: "AppleMusicライブラリへの\nアクセスを許可", buttonColor: Color("primary"))
                         .padding(25)
                 }
 
             }
             .background(.white)
-            .border(Color("Color_primary"), width: 3)
+            .border(Color("primary"), width: 3)
             .shadow(radius: 5)
             .padding()
         }

@@ -44,6 +44,7 @@ struct FirestoreModelAsync {
 
     // fire storeの1MB制限を超えないために楽曲情報を700曲ごとに分割してアップロード
     func uploadSongs(item: MusicItemCollection<Song>) throws {
+        let batch = db.batch()
         var count = 1
         var startIndex = 0
         while startIndex < item.count {
@@ -51,11 +52,37 @@ struct FirestoreModelAsync {
             let subItem = item[startIndex..<endIndex]
 
             let userSongs = UserSongs(songs: MusicItemCollection<Song>(subItem))
-            try db.collection("Songs").document(uniqueId).collection(String(count)).addDocument(from: userSongs)
+            try batch.setData(from: userSongs, 
+                              forDocument: db.collection("Songs").document(uniqueId).collection("Songs").document(String(count)))
             count += 1
             startIndex += 700
         }
+        batch.commit()
     }
+
+    func downloadRoomData(roomPin: String) async throws -> [String] {
+        var users: [String] = []
+        let members =  try await db.collection("Room").document(roomPin).collection("Member").getDocuments()
+        members.documents.forEach { member in
+            users.append(member.documentID)
+        }
+        return users
+    }
+    
+    func downloadSongs(users: [String]) async throws -> [MusicItemCollection<Song>] {
+        var songs: [MusicItemCollection<Song>] = []
+        for user in users {
+            let userSongs = try await db.collection("Songs").document(user).collection("Songs").getDocuments()
+            userSongs.documents.forEach { userSong in
+                let userSongData = try? userSong.data(as: UserSongs.self)
+                if let userSongData = userSongData {
+                    songs.append(userSongData.songs)
+                }
+            }
+        }
+        return songs
+    }
+
 
     func exitRoom(roomPin: Int) {
         db.collection("Room").document(String(roomPin)).collection("Member").document(uniqueId).delete { error in

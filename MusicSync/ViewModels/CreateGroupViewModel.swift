@@ -22,6 +22,7 @@ class CreateGroupViewModel: ObservableObject {
 
     var model = FirestoreModelAsync()
     var musicModel = AppleMusicLibraryModel()
+    var authModel = FirebaseAuthModel()
     var db = Firestore.firestore()
 
     var songs = MusicItemCollection<Song>()
@@ -35,20 +36,21 @@ class CreateGroupViewModel: ObservableObject {
     }
 
     func addListener(roomPin: Int) {
-        listener = db.collection("Room").document(String(roomPin)).collection("Member").addSnapshotListener { (querySnapshot, error) in
-            guard let document = querySnapshot?.documents else {
-                print("Error fetching document: \(error!)")
-                return
-            }
+        listener = db.collection("Room").document(String(roomPin)).collection("Member")
+            .addSnapshotListener { (querySnapshot, error) in
+                guard let document = querySnapshot?.documents else {
+                    print("Error fetching document: \(error!)")
+                    return
+                }
 
-            self.usersData = document.map { (queryDocumentSnapshot) -> UserData in
-                let data = queryDocumentSnapshot.data()
-                let name = data["name"] as? String ?? ""
-                let id = data["id"] as? String ?? "000000"
+                self.usersData = document.map { (queryDocumentSnapshot) -> UserData in
+                    let data = queryDocumentSnapshot.data()
+                    let name = data["name"] as? String ?? ""
+                    let id = data["id"] as? String ?? "000000"
 
-                return UserData(id: id, name: name)
+                    return UserData(id: id, name: name)
+                }
             }
-        }
     }
 
     func removeListener() {
@@ -57,15 +59,25 @@ class CreateGroupViewModel: ObservableObject {
 
     func createGroup(userName: String) throws {
         Task {
-            songs = try await musicModel.loadLibraryAsync(limit: 0)
-            roomPin = try await self.model.createRoom(host: userName)
-            // try self.model.uploadSongs(item: songs)
-            self.addListener(roomPin: roomPin)
-            self.isLoading = false
+            do {
+                if Auth.auth().currentUser == nil {
+                    try await authModel.loginAsGuestAsync()
+                }
+                songs = try await musicModel.loadLibraryAsync(limit: 0)
+                print("fetched songs")
+                roomPin = try await self.model.createRoom(host: userName)
+                print("create room")
+                try self.model.uploadSongs(item: songs)
+                self.addListener(roomPin: roomPin)
+                self.isLoading = false
+            } catch {
+                print("error")
+                self.isError = true
+            }
         }
     }
 
-    func exitGroup(roomPin: Int) {
+    func exitGroup() {
         model.exitRoom(roomPin: roomPin)
     }
 

@@ -15,7 +15,7 @@ struct EnterRoomPinView: View {
         VStack {
             ZStack {
                 Rectangle()
-                    .foregroundStyle(Color("Color_primary"))
+                    .foregroundStyle(Color("primary"))
                     .cornerRadius(20)
                     .frame(height: 200)
 
@@ -35,13 +35,13 @@ struct EnterRoomPinView: View {
             }
 
             NavigationLink(value: NavigationLinkItem.playlist(roomPin)) {
-                ButtonView(text: "次へ", buttonColor: Color("Color_primary"))
+                ButtonView(text: "次へ", buttonColor: Color("primary"))
             }
 
             Button(action: {
                 path.removeLast()
             }, label: {
-                ButtonView(text: "roomを解散する", textColor: .black, buttonColor: Color("Color_secondary"))
+                ButtonView(text: "roomを解散する", textColor: .black, buttonColor: Color("secondary"))
             })
             .padding(.bottom, 10)
         }

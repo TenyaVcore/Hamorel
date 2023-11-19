@@ -54,12 +54,12 @@ struct HomeView: View {
                                 .padding(.bottom, 30)
 
                             NavigationLink(value: NavigationLinkItem.create) {
-                                ButtonView(text: "ルームを作成する", textColor: .white, buttonColor: Color("Color_primary"))
+                                ButtonView(text: "ルームを作成する", textColor: .white, buttonColor: Color("primary"))
                             }
                             .padding(.bottom, 20)
 
                             NavigationLink(value: NavigationLinkItem.enter) {
-                                ButtonView(text: "ルームに参加する", textColor: .black, buttonColor: Color("Color_secondary"))
+                                ButtonView(text: "ルームに参加する", textColor: .black, buttonColor: Color("secondary"))
                             }
                             .padding(.bottom, 10)
 
@@ -71,7 +71,7 @@ struct HomeView: View {
                                     .fontWeight(.bold)
                                     .foregroundColor(.black)
                                     .frame(width: 300, height: 50)
-                                    .background(Color("Color_secondary"))
+                                    .background(Color("secondary"))
                                     .cornerRadius(10)
                             }
                             .padding(.vertical, 10)
@@ -79,7 +79,7 @@ struct HomeView: View {
                     }
                 }
                 .background {
-                    Color("Color_primary")
+                    Color("primary")
                         .ignoresSafeArea()
                 }
                 .toolbar {
@@ -94,13 +94,13 @@ struct HomeView: View {
                 .navigationDestination(for: NavigationLinkItem.self) { item in
                     switch item {
                     case .create:
-                        CreateGroupView(path: $path, name: name)
+                        CreateGroupView(path: $path, userName: name)
                     case .enter:
                         EnterRoomPinView(path: $path)
                     case .join(let roomPin):
                         JoinGroupView(path: $path, name: name, roomPin: roomPin)
                     case .playlist(let roomPin):
-                        CreatePlaylistView(roomPin: roomPin, usersData: [])
+                        CreatePlaylistView(path: $path, roomPin: roomPin, usersData: [])
                     case .home:
                         HomeView()
                     case .setting:

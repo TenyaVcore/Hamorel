@@ -11,14 +11,14 @@ struct CreateGroupView: View {
     @StateObject var viewModel = CreateGroupViewModel()
     @Binding var path: [NavigationLinkItem]
 
-    var name: String
+    var userName: String
 
     var body: some View {
         ZStack {
             VStack {
                 ZStack {
                     Rectangle()
-                        .foregroundStyle(Color("Color_primary"))
+                        .foregroundStyle(Color("primary"))
                         .frame(width: 340, height: 120)
                         .cornerRadius(20)
 
@@ -44,24 +44,31 @@ struct CreateGroupView: View {
                 .listStyle(PlainListStyle())
 
                 NavigationLink(value: NavigationLinkItem.playlist(String(viewModel.roomPin))) {
-                    ButtonView(text: "次へ", buttonColor: Color("Color_primary"))
+                    ButtonView(text: "次へ",
+                               buttonColor: viewModel.usersData.count <= 1 ? Color("primary")  : .gray
+                    )
                 }
                 .padding(.bottom, 10)
+                //.disabled(viewModel.usersData.count <= 1)
 
                 Button(action: {
                     path.removeLast()
                 }, label: {
-                    ButtonView(text: "roomを解散", textColor: .black, buttonColor: Color("Color_secondary"))
+                    ButtonView(text: "roomを解散",
+                               textColor: .black,
+                               buttonColor: Color("secondary")
+                    )
                 })
                 .padding(.bottom, 10)
             }
+
             LoadingView(message: "ルームを作成中")
                 .opacity(viewModel.isLoading ? 1 : 0)
                 .animation(.easeInOut, value: viewModel.isLoading)
         }
         .onAppear {
             do {
-                try viewModel.createGroup(userName: name)
+                try viewModel.createGroup(userName: userName)
             } catch {
                 viewModel.isError = true
             }
@@ -76,6 +83,6 @@ struct createGroupView_Previews: PreviewProvider {
     @State static var state = true
     @State static var path = [NavigationLinkItem]()
     static var previews: some View {
-        CreateGroupView(path: $path, name: "preuser")
+        CreateGroupView(path: $path, userName: "preuser")
     }
 }

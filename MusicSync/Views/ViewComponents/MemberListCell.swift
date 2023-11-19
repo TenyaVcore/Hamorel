@@ -23,18 +23,7 @@ struct MemberListCell: View {
 
             Spacer()
 
-            Button {
-
-            } label: {
-                Text("削除")
-                    .foregroundStyle(Color.red)
-                    .padding(7)
-                    .border(Color.red, width: 2)
-                    .padding(.trailing, 15)
-
-            }
         }
-        // .border(Color.black, width: 2)
         .padding(.horizontal, 1)
     }
 }
