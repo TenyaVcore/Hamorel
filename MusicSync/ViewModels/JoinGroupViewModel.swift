@@ -25,6 +25,7 @@ class JoinGroupViewModel: ObservableObject {
     @Published var errorMessage = "ルーム参加中にエラーが発生しました。もう一度お試しください"
     @Published var roomPin = "000000"
     @State private var listener: ListenerRegistration?
+    @State private var roomListener: ListenerRegistration?
 
     init(usersData: [UserData] = [UserData](), 
          model: FirestoreModelAsync = FirestoreModelAsync(),
@@ -48,6 +49,18 @@ class JoinGroupViewModel: ObservableObject {
                     return UserData(id: id, name: name)
                 }
             }
+        
+        roomListener = db.collection("Room").document(roomPin).addSnapshotListener({ (querySnapshot, error) in
+            guard let data = querySnapshot?.data() else {
+                print("Error fetching document: \(error!)")
+                return
+            }
+            self.nextFlag = data["nextFlag"] as? Bool ?? false
+            if data["isEnable"] as? Bool ?? false == false {
+                self.errorMessage = "ルームが解散されました"
+                self.isError = true
+            }
+        })
     }
 
     func joinGroup(userName: String) {

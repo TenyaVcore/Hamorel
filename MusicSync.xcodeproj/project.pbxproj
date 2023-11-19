@@ -317,6 +317,7 @@
 				BA6CF8C02A1B0A480066B55E /* Frameworks */,
 				BA6CF8C12A1B0A480066B55E /* Resources */,
 				BA8542A82AFE011B00434765 /* Run SwiftLint */,
+				BA967EF22B0A2D9B008AB3CF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -470,6 +471,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint autocorrect --format\n  swiftlint\nelse\n  echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		BA967EF22B0A2D9B008AB3CF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
