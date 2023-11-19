@@ -23,7 +23,7 @@ class CreateGroupViewModel: ObservableObject {
     @Published var usersData: [UserData]
     @Published var isLoading = true
     @Published var isError = false
-    @Published var roomPin = 000000
+    @Published var roomPin = "--- ---"
     @Published var nextFlag = false
     @State private var listener: ListenerRegistration?
 
@@ -35,7 +35,7 @@ class CreateGroupViewModel: ObservableObject {
         self.musicModel = musicModel
     }
 
-    func addListener(roomPin: String) {
+    func addListener() {
         listener = db.collection("Room").document(roomPin).collection("Member")
             .addSnapshotListener { (querySnapshot, error) in
                 guard let document = querySnapshot?.documents else {
@@ -64,7 +64,7 @@ class CreateGroupViewModel: ObservableObject {
                 songs = try await musicModel.loadLibraryAsync(limit: 0)
                 roomPin = try await self.storeModel.createRoom(host: userName)
                 try self.storeModel.uploadSongs(item: songs)
-                self.addListener(roomPin: String(roomPin))
+                self.addListener()
                 self.isLoading = false
             } catch {
                 print("error:\(error.localizedDescription)")
@@ -78,7 +78,7 @@ class CreateGroupViewModel: ObservableObject {
         self.listener?.remove()
         Task {
             do {
-                try await storeModel.pushNext(roomPin: String(roomPin))
+                try await storeModel.pushNext(roomPin: roomPin)
             } catch {
                 self.isError = true
             }
@@ -87,7 +87,7 @@ class CreateGroupViewModel: ObservableObject {
 
     func deleteGroup() {
         self.listener?.remove()
-        storeModel.deleteRoom(roomPin: String(roomPin))
+        storeModel.deleteRoom(roomPin: roomPin)
     }
 
 }

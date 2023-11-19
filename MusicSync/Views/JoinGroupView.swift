@@ -13,6 +13,7 @@ struct JoinGroupView: View {
     @StateObject var viewModel = JoinGroupViewModel()
     @Binding var path: [NavigationLinkItem]
     
+    // 前のviewからの引き継ぎ
     var userName: String
     var roomPin: String
     
@@ -62,7 +63,8 @@ struct JoinGroupView: View {
                 .animation(.easeInOut, value: viewModel.isLoading)
         }
         .onAppear {
-            viewModel.joinGroup(roomPin: roomPin, userName: userName)
+            viewModel.roomPin = roomPin
+            viewModel.joinGroup(userName: userName)
         }
         .onDisappear {
             if !viewModel.nextFlag {

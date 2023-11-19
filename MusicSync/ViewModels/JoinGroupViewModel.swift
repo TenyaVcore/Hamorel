@@ -23,7 +23,7 @@ class JoinGroupViewModel: ObservableObject {
     @Published var isError = false
     @Published var nextFlag = false
     @Published var errorMessage = "ルーム参加中にエラーが発生しました。もう一度お試しください"
-    @Published var roomPin = 000000
+    @Published var roomPin = "000000"
     @State private var listener: ListenerRegistration?
 
     init(usersData: [UserData] = [UserData](), 
@@ -34,7 +34,7 @@ class JoinGroupViewModel: ObservableObject {
         self.musicModel = musicModel
     }
 
-    func addListener(roomPin: String) {
+    func addListener() {
         listener = db.collection("Room").document(roomPin).collection("Member")
             .addSnapshotListener { (querySnapshot, error) in
                 guard let document = querySnapshot?.documents else {
@@ -50,7 +50,7 @@ class JoinGroupViewModel: ObservableObject {
             }
     }
 
-    func joinGroup(roomPin: String, userName: String) {
+    func joinGroup(userName: String) {
         Task {
             do {
                 if Auth.auth().currentUser == nil {
@@ -60,7 +60,7 @@ class JoinGroupViewModel: ObservableObject {
                 print("fetch songs")
                 self.usersData = try await storeModel.joinRoom(roomPin: roomPin, userName: userName)
                 print("join room")
-                self.addListener(roomPin: roomPin)
+                self.addListener()
                 self.isLoading = false
             } catch JoinRoomError.roomNotFound {
                 self.errorMessage = "roomPinが見つかりません"

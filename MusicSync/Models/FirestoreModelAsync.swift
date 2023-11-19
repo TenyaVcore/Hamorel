@@ -16,7 +16,7 @@ struct FirestoreModelAsync {
     let db = Firestore.firestore()
     let uniqueId: String = UIDevice.current.identifierForVendor!.uuidString
 
-    func createRoom(host: String) async throws -> Int {
+    func createRoom(host: String) async throws -> String {
         let userData = UserData(name: host)
         var failCount: Int = 0
         var roomPin = Int.random(in: 100000...999999)
@@ -41,7 +41,7 @@ struct FirestoreModelAsync {
             .setData(["nextFlag": false, "isEnable": true])
         try ref.document(String(roomPin)).collection("Member").document(uniqueId).setData(from: userData)
 
-        return roomPin
+        return String(roomPin)
     }
 
     // fire storeの1MB制限を超えないために楽曲情報を700曲ごとに分割してアップロード
@@ -119,8 +119,8 @@ struct FirestoreModelAsync {
         try await db.collection("Room").document(roomPin).setData(["nextFlag": true])
     }
 
-    func exitRoom(roomPin: Int) {
-        db.collection("Room").document(String(roomPin)).collection("Member").document(uniqueId).delete { error in
+    func exitRoom(roomPin: String) {
+        db.collection("Room").document(roomPin).collection("Member").document(uniqueId).delete { error in
             if let error = error {
                 print("Error removing document: \(error)")
             } else {
