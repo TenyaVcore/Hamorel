@@ -56,7 +56,7 @@ class CreateGroupViewModel: ObservableObject {
         listener?.remove()
     }
 
-    func createGroup(userName: String) throws {
+    func createGroup(userName: String) {
         Task {
             do {
                 if Auth.auth().currentUser == nil {

@@ -67,11 +67,7 @@ struct CreateGroupView: View {
                 .animation(.easeInOut, value: viewModel.isLoading)
         }
         .onAppear {
-            do {
-                try viewModel.createGroup(userName: userName)
-            } catch {
-                viewModel.isError = true
-            }
+            viewModel.createGroup(userName: userName)
         }
         .alert("ルーム作成中にエラーが発生しました。もう一度お試しください", isPresented: $viewModel.isError, actions: {
             Button("OK") { path.removeLast() }
