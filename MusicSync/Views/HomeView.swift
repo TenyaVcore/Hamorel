@@ -114,6 +114,8 @@ struct HomeView: View {
                         EmailRegisterView(path: $path)
                     case .provision:
                         ProvisionalRegistrationView(path: $path)
+                    case .licence:
+                        LicenceView()
                     }
                 }
             }

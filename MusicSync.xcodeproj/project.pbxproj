@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA4660F72B0F9C6700CF7678 /* LicenseList in Frameworks */ = {isa = PBXBuildFile; productRef = BA4660F62B0F9C6700CF7678 /* LicenseList */; };
+		BA4660FC2B0F9CFB00CF7678 /* LicenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4660FB2B0F9CFB00CF7678 /* LicenceView.swift */; };
 		BA6195262A2598C100FD5ECF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA6195252A2598C100FD5ECF /* GoogleService-Info.plist */; };
 		BA6CF8C72A1B0A480066B55E /* MusicSyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6CF8C62A1B0A480066B55E /* MusicSyncApp.swift */; };
 		BA6CF8CB2A1B0A490066B55E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA6CF8CA2A1B0A490066B55E /* Assets.xcassets */; };
@@ -79,6 +81,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA4660FB2B0F9CFB00CF7678 /* LicenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenceView.swift; sourceTree = "<group>"; };
 		BA6195252A2598C100FD5ECF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BA68DF062A52F9F000DE546A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA6CF8C32A1B0A480066B55E /* MusicSync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA4660F72B0F9C6700CF7678 /* LicenseList in Frameworks */,
 				BA6CF8F62A1B0B090066B55E /* FirebaseAnalyticsSwift in Frameworks */,
 				BA6CF8F22A1B0B090066B55E /* FirebaseAnalytics in Frameworks */,
 				BA6CF90A2A1B0B090066B55E /* FirebaseInstallations in Frameworks */,
@@ -257,6 +261,7 @@
 			children = (
 				BA6CF9112A1B0C530066B55E /* SettingView.swift */,
 				BA85A15E2A1B0EA7009C1CDD /* NameSettingView.swift */,
+				BA4660FB2B0F9CFB00CF7678 /* LicenceView.swift */,
 			);
 			path = SettingViews;
 			sourceTree = "<group>";
@@ -325,6 +330,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				BA4660F92B0F9CD800CF7678 /* PBXTargetDependency */,
 			);
 			name = MusicSync;
 			packageProductDependencies = (
@@ -341,6 +347,7 @@
 				BA6CF9052A1B0B090066B55E /* FirebaseFirestoreCombine-Community */,
 				BA6CF9072A1B0B090066B55E /* FirebaseFirestoreSwift */,
 				BA6CF9092A1B0B090066B55E /* FirebaseInstallations */,
+				BA4660F62B0F9C6700CF7678 /* LicenseList */,
 			);
 			productName = MusicSync;
 			productReference = BA6CF8C32A1B0A480066B55E /* MusicSync.app */;
@@ -416,6 +423,7 @@
 			mainGroup = BA6CF8BA2A1B0A480066B55E;
 			packageReferences = (
 				BA6CF8F02A1B0B090066B55E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				BA4660F52B0F9C6700CF7678 /* XCRemoteSwiftPackageReference "LicenseList" */,
 			);
 			productRefGroup = BA6CF8C42A1B0A480066B55E /* Products */;
 			projectDirPath = "";
@@ -509,6 +517,7 @@
 				BA85A1652A1B0F1C009C1CDD /* CreateGroupView.swift in Sources */,
 				BA85A1792A1B10CD009C1CDD /* Protocols.swift in Sources */,
 				BA85A16D2A1B0F9F009C1CDD /* CreatePlaylistView.swift in Sources */,
+				BA4660FC2B0F9CFB00CF7678 /* LicenceView.swift in Sources */,
 				BA967EEF2B09DA55008AB3CF /* EnterRoomPinViewModel.swift in Sources */,
 				BAA05CEA2AF2B70900A038A3 /* NavigationLinkItemNavigationItem.swift in Sources */,
 				BA6CF9122A1B0C530066B55E /* SettingView.swift in Sources */,
@@ -559,6 +568,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		BA4660F92B0F9CD800CF7678 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = BA4660F82B0F9CD800CF7678 /* PrepareLicenseList */;
+		};
 		BA6CF8D52A1B0A4A0066B55E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BA6CF8C22A1B0A480066B55E /* MusicSync */;
@@ -873,6 +886,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		BA4660F52B0F9C6700CF7678 /* XCRemoteSwiftPackageReference "LicenseList" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/cybozu/LicenseList";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.0;
+			};
+		};
 		BA6CF8F02A1B0B090066B55E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -884,6 +905,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		BA4660F62B0F9C6700CF7678 /* LicenseList */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA4660F52B0F9C6700CF7678 /* XCRemoteSwiftPackageReference "LicenseList" */;
+			productName = LicenseList;
+		};
+		BA4660F82B0F9CD800CF7678 /* PrepareLicenseList */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA4660F52B0F9C6700CF7678 /* XCRemoteSwiftPackageReference "LicenseList" */;
+			productName = "plugin:PrepareLicenseList";
+		};
 		BA6CF8F12A1B0B090066B55E /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BA6CF8F02A1B0B090066B55E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
