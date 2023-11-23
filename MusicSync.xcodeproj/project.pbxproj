@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BA4660F72B0F9C6700CF7678 /* LicenseList in Frameworks */ = {isa = PBXBuildFile; productRef = BA4660F62B0F9C6700CF7678 /* LicenseList */; };
 		BA4660FC2B0F9CFB00CF7678 /* LicenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4660FB2B0F9CFB00CF7678 /* LicenceView.swift */; };
+		BA4660FE2B0F9F6700CF7678 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = BA4660FD2B0F9F6700CF7678 /* .gitignore */; };
 		BA6195262A2598C100FD5ECF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA6195252A2598C100FD5ECF /* GoogleService-Info.plist */; };
 		BA6CF8C72A1B0A480066B55E /* MusicSyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6CF8C62A1B0A480066B55E /* MusicSyncApp.swift */; };
 		BA6CF8CB2A1B0A490066B55E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA6CF8CA2A1B0A490066B55E /* Assets.xcassets */; };
@@ -82,6 +83,7 @@
 
 /* Begin PBXFileReference section */
 		BA4660FB2B0F9CFB00CF7678 /* LicenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenceView.swift; sourceTree = "<group>"; };
+		BA4660FD2B0F9F6700CF7678 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		BA6195252A2598C100FD5ECF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BA68DF062A52F9F000DE546A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA6CF8C32A1B0A480066B55E /* MusicSync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				BA8542AB2AFE1D2800434765 /* .swiftlint.yml */,
+				BA4660FD2B0F9F6700CF7678 /* .gitignore */,
 				BA6CF8C52A1B0A480066B55E /* MusicSync */,
 				BA6CF8D62A1B0A4A0066B55E /* MusicSyncTests */,
 				BA6CF8E02A1B0A4A0066B55E /* MusicSyncUITests */,
@@ -441,6 +444,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA4660FE2B0F9F6700CF7678 /* .gitignore in Resources */,
 				BA6CF8CE2A1B0A490066B55E /* Preview Assets.xcassets in Resources */,
 				BA6CF8CB2A1B0A490066B55E /* Assets.xcassets in Resources */,
 				BA6195262A2598C100FD5ECF /* GoogleService-Info.plist in Resources */,
