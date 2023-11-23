@@ -46,6 +46,7 @@ struct HomeView: View {
                             Text("ようこそ\(name)さん")
                                 .font(.title3)
                                 .fontWeight(.bold)
+                                .foregroundStyle(.black)
                                 .padding(.top, 10)
 
                             Text("友人家族と音楽で繋がろう")
