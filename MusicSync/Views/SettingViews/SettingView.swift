@@ -36,7 +36,7 @@ struct SettingView: View {
                     case false:
                         Text("メールアドレスでログイン")
                     default:
-                        Text("未定義")
+                        Text("未選択")
                     }
                 }
                 HStack {
@@ -44,7 +44,7 @@ struct SettingView: View {
 
                     switch appleAuthStatus {
                     case .notDetermined:
-                        Text("未定義")
+                        Text("未選択")
                     case .authorized:
                         Text("許可")
                     case .denied:
@@ -73,6 +73,14 @@ struct SettingView: View {
                 }
             }header: {
                 Text("ユーザ情報の変更")
+            }
+            
+            Section {
+                NavigationLink(value: NavigationLinkItem.licence) {
+                    Text("ライセンス")
+                }
+            }header: {
+                Text("規約")
             }
 
             if Auth.auth().currentUser?.isAnonymous != nil {
