@@ -198,7 +198,6 @@
 				BA85A15A2A1B0DCC009C1CDD /* Views */,
 				BA85A1702A1B0FCA009C1CDD /* ViewModels */,
 				BA85A1772A1B1092009C1CDD /* Models */,
->>>>>>> future
 				BA6CF8CC2A1B0A490066B55E /* Preview Content */,
 				BA6195252A2598C100FD5ECF /* GoogleService-Info.plist */,
 				BA68DF062A52F9F000DE546A /* Info.plist */,
