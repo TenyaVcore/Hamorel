@@ -36,17 +36,10 @@ struct AppleMusicLibraryModel: LibraryGetting {
 
         return MusicItemCollection(songs)
     }
-
-    func loadLibrary(completion: @escaping (Result<MusicItemCollection<Song>, Error>) -> Void) {
+    
+    func createPlaylist(from songs: MusicItemCollection<Song>, playlistName: String) throws {
         Task {
-            do {
-                let res: MusicItemCollection<Song>
-                try await res = loadLibraryAsync(limit: 0)
-                completion(.success(res))
-            } catch {
-                completion(.failure(error))
-            }
+            try await MusicLibrary.shared.createPlaylist(name: "Music Sync Playlist", items: songs)
         }
     }
-
 }

@@ -100,7 +100,7 @@ struct HomeView: View {
                     case .join(let roomPin):
                         JoinGroupView(path: $path, userName: name, roomPin: roomPin)
                     case .playlist(let roomPin):
-                        CreatePlaylistView(path: $path, roomPin: roomPin, usersData: [])
+                        CreatePlaylistView(path: $path, roomPin: roomPin, users: [])
                     case .home:
                         HomeView()
                     case .setting:

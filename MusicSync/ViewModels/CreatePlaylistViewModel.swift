@@ -14,27 +14,41 @@ import FirebaseFirestoreSwift
 class CreatePlaylistViewModel: ObservableObject {
     var storeModel = FirestoreModelAsync()
     var musicModel = AppleMusicLibraryModel()
+    var songs: MusicItemCollection<Song> = []
+    var users: [String] = []
 
-    @State var isLoading = true
+    @Published var isLoading = false //true
+    @Published var isReturnHome = false
+    @Published var isCreateError = false
+    @Published var isDownloadError = false
+    @Published var isSuccessCreate = false
+    @Published var playlistName = "MusicSyncPlaylist"
 
     func downloadSongs(roomPin: String) {
-    var songs: MusicItemCollection<Song> = []
         Task {
             do {
-                let users = try await storeModel.downloadRoomData(roomPin: roomPin)
+                users = try await storeModel.downloadRoomData(roomPin: roomPin)
                 print(users)
                 let downloadData = try await storeModel.downloadSongs(users: users)
                 let songCount = downloadData.count
                 songs = downloadData[0]
-                
                 for i in 1..<songCount {
                     songs = musicModel.merge(item1: songs, item2: downloadData[i])
                 }
-                print(songs)
+                isLoading = false
             } catch {
-                print("error: \(error.localizedDescription)")
-            
+                print("download error: \(error.localizedDescription)")
+                isDownloadError = true
             }
+        }
+    }
+    
+    func createPlaylist() {
+        do {
+            try musicModel.createPlaylist(from: songs, playlistName: playlistName)
+        } catch {
+            print("create error: \(error.localizedDescription)")
+            isCreateError = true
         }
     }
 }
