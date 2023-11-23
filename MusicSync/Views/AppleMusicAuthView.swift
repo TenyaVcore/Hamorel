@@ -32,7 +32,7 @@ struct AppleMusicAuthView: View {
 
                     switch appleAuthStatus {
                     case .notDetermined:
-                        Text("状態は定義されていません")
+                        Text("選択されていません")
                     case .authorized:
                         Text("ライブラリへのアクセスが許可されています")
                     case .denied:
