@@ -12,26 +12,24 @@ struct NameSettingView: View {
     @AppStorage("name") var name = "ゲストユーザー"
     @State var updateName: String = ""
     @Environment(\.dismiss) private var dismiss
-    
+
     let model = FirebaseAuthModel()
-    
+
     var body: some View {
-        VStack{
-            
+        VStack {
+
             Text("新しい名前を入力")
                 .font(.title)
                 .bold()
-            
+
             TextField("ユーザー名を入力してください", text: $updateName)
-                .onAppear(){
+                .onAppear {
                     updateName = name
                 }
                 .textFieldStyle(.roundedBorder)
                 .autocapitalization(.none)
                 .padding(60)
-            
-            
-            
+
             Button {
                 name = updateName
                 model.changeUserName(newName: updateName)
@@ -40,8 +38,8 @@ struct NameSettingView: View {
                 ButtonView(text: "OK", buttonColor: .blue)
             }
             .padding(20)
-            
-            Button{
+
+            Button {
                 dismiss()
             } label: {
                 ButtonView(text: "キャンセル", buttonColor: .gray)

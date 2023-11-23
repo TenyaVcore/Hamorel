@@ -6,67 +6,94 @@
 //
 
 import SwiftUI
+import Combine
 import Firebase
 import FirebaseFirestoreSwift
 
 struct JoinGroupView: View {
     @StateObject var viewModel = JoinGroupViewModel()
-    @State private var isLoading = true
-    @State private var listener: ListenerRegistration?
-    @State private var isActive = false
-    @Binding var isLoginViewActive: Bool
+    @Binding var path: [NavigationLinkItem]
     
-    
-    var name: String
+    // 前のviewからの引き継ぎ
+    var userName: String
     var roomPin: String
+    @State var cancellable: AnyCancellable!
     
     var body: some View {
-        ZStack{
-            VStack{
-                ProgressView("ユーザーを待機中")
+        ZStack {
+            VStack {
+                ZStack {
+                    Rectangle()
+                        .foregroundStyle(Color("color_primary"))
+                        .frame(width: 340, height: 120)
+                        .cornerRadius(20)
+                    
+                    VStack {
+                        Text("Room Pin")
+                            .font(.largeTitle)
+                            .foregroundStyle(.white)
+                            .bold()
+                        
+                        Text(String(viewModel.roomPin))
+                            .font(.largeTitle)
+                            .foregroundStyle(.white)
+                            .bold()
+                    }
+                }
+                
+                Text("ルームに参加中のメンバー \(viewModel.usersData.count)/5 ")
                     .font(.title2)
-                    .padding(.top, 50)
                 
-                List(viewModel.usersData){ userdata in
-                    Text(userdata.name)
+                List(viewModel.usersData) { userData in
+                    MemberListCell(name: userData.name)
                 }
-                .onAppear{
-                    listener = viewModel.joinGroup(roomPin: Int(roomPin) ?? 0, user: name)
-                    isLoading = false
-                }
+                .listStyle(PlainListStyle())
                 
-                
-                NavigationLink(destination: CreatePlaylistView(isLoginViewActive: $isLoginViewActive, roomPin: Int(roomPin) ?? 0, usersData: viewModel.usersData),
-                               isActive: $isActive){
-                    Button {
-                        self.isActive = true
-                    } label: {
-                        ButtonView(text: "プレイリストを作成する", buttonColor: .blue)
-                    }
-                    .alert("エラー：\(viewModel.errorMessage)", isPresented: $viewModel.isShowingAlert){
-                        Button("OK"){
-                            isLoginViewActive = false
-                        }
-                    }
-                }
-                
+                Button(action: {
+                    path.removeLast()
+                }, label: {
+                    ButtonView(text: "roomを退出",
+                               textColor: .black,
+                               buttonColor: Color("color_secondary")
+                    )
+                })
+                .padding(.bottom, 10)
             }
+<<<<<<< HEAD:MusicSync/View/JoinGroupView.swift
             if isLoading {
                 LoadingView(text: "Now loading")
+=======
+            
+            LoadingView(message: "ルームに参加中")
+                .opacity(viewModel.isLoading ? 1 : 0)
+                .animation(.easeInOut, value: viewModel.isLoading)
+        }
+        .onAppear {
+            viewModel.roomPin = roomPin
+            viewModel.joinGroup(userName: userName)
+            self.cancellable = viewModel.$nextFlag.sink {
+                if $0 {
+                    path.append(NavigationLinkItem.playlist(viewModel.roomPin))
+                }
+>>>>>>> future:MusicSync/Views/JoinGroupView.swift
             }
         }
         .onDisappear {
-            if let listener = listener {
-                listener.remove()
+            if !viewModel.nextFlag {
+                viewModel.exitGroup()
             }
-            //viewModel.exitGroup(roomPin: Int(roomPin) ?? 0)
+            cancellable.cancel()
         }
+        .alert(viewModel.errorMessage, isPresented: $viewModel.isError, actions: {
+            Button("OK") { path.removeLast() }
+        })
     }
 }
 
 struct JoinGroupView_Previews: PreviewProvider {
-    @State static var state = true
+    @State static var path = [NavigationLinkItem]()
     static var previews: some View {
-        JoinGroupView(isLoginViewActive: $state, name: "userName", roomPin: "333333")
+
+        JoinGroupView(path: $path, userName: "userName", roomPin: "333333")
     }
 }

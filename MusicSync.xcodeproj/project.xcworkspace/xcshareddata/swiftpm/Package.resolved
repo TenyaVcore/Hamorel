@@ -82,6 +82,7 @@
       }
     },
     {
+<<<<<<< HEAD
       "identity" : "licenselist",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/cybozu/LicenseList",
@@ -91,6 +92,8 @@
       }
     },
     {
+=======
+>>>>>>> future
       "identity" : "nanopb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/nanopb.git",

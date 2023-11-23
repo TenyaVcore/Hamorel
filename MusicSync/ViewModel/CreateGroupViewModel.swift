@@ -11,73 +11,83 @@ import MusicKit
 import Firebase
 import FirebaseFirestoreSwift
 
-
+@MainActor
 class CreateGroupViewModel: ObservableObject {
-    
-    @Published var usersData :[UserData]
-    @Published var errorMessage = ""
-    @Published var pubRoomPin = 0
-    
-    var model = FirestoreModel()
+    var storeModel = FirestoreModelAsync()
     var musicModel = AppleMusicLibraryModel()
+    var authModel = FirebaseAuthModel()
+    var db = Firestore.firestore()
+
+    var songs = MusicItemCollection<Song>()
     
-    init(usersData: [UserData] = [UserData](), model: FirestoreModel = FirestoreModel(), musicModel:AppleMusicLibraryModel = AppleMusicLibraryModel()) {
+    @Published var usersData: [UserData]
+    @Published var isLoading = true
+    @Published var isError = false
+    @Published var roomPin = "--- ---"
+    @Published var nextFlag = false
+    @State private var listener: ListenerRegistration?
+
+    init(usersData: [UserData] = [UserData](),
+         model: FirestoreModelAsync = FirestoreModelAsync(),
+         musicModel: AppleMusicLibraryModel = AppleMusicLibraryModel()) {
         self.usersData = usersData
-        self.model = model
+        self.storeModel = model
         self.musicModel = musicModel
     }
-    
-    func addListener(roomPin: Int) -> ListenerRegistration {
-        
-        let listener = Firestore.firestore().collection("room").document(String(roomPin)).collection("insideRoom").addSnapshotListener { (querySnapshot, error) in
-            guard let document = querySnapshot?.documents else {
-                print("Error fetching document: \(error!)")
-                return
+
+    func addListener() {
+        listener = db.collection("Room").document(roomPin).collection("Member")
+            .addSnapshotListener { (querySnapshot, error) in
+                guard let document = querySnapshot?.documents else {
+                    print("Error fetching document: \(error!)")
+                    return
+                }
+                self.usersData = document.map { (queryDocumentSnapshot) -> UserData in
+                    let data = queryDocumentSnapshot.data()
+                    let name = data["name"] as? String ?? ""
+                    let id = data["id"] as? String ?? "000000"
+                    return UserData(id: id, name: name)
+                }
             }
-            
-            self.usersData = document.map { (queryDocumentSnapshot) -> UserData in
-                let data = queryDocumentSnapshot.data()
-                let name = data["name"] as? String ?? ""
-                let id = data["id"] as? String ?? "000000"
-                
-                return UserData(id: id, name: name)
-            }
-        }
-        return listener
     }
-    
-    
-    func createGroup(userName: String, completion: @escaping (ListenerRegistration?, Int) -> Void) {
-        var listener: ListenerRegistration?
-        var roomPin: Int = 0
-        
-        musicModel.loadLibrary { [weak self] result  in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let songs):
-                roomPin = self.model.createRoom(createMiss: 0, user: userName)
-                self.model.separate(item: songs, roomPin: roomPin)
-                listener = self.addListener(roomPin: roomPin)
-                LoadingControl.shared.hideLoading()
-                DispatchQueue.main.async {
-                    self.pubRoomPin = roomPin
-                    completion(listener, roomPin)
+
+    func removeListener() {
+        listener?.remove()
+    }
+
+    func createGroup(userName: String) {
+        Task {
+            do {
+                if Auth.auth().currentUser == nil {
+                    try await authModel.loginAsGuestAsync()
                 }
-                
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    self.errorMessage = error.localizedDescription
-                    completion(nil, roomPin)
-                }
+                songs = try await musicModel.loadLibraryAsync(limit: 0)
+                roomPin = try await self.storeModel.createRoom(host: userName)
+                try self.storeModel.uploadSongs(item: songs)
+                self.addListener()
+                self.isLoading = false
+            } catch {
+                print("error:\(error.localizedDescription)")
+                self.isError = true
             }
         }
     }
     
-    func exitGroup(roomPin: Int){
-        model.exitRoom(roomPin: roomPin)
+    func pushNext() {
+        self.nextFlag = true
+        self.listener?.remove()
+        Task {
+            do {
+                try await storeModel.pushNext(roomPin: roomPin)
+            } catch {
+                self.isError = true
+            }
+        }
     }
-    
-    
-    
+
+    func deleteGroup() {
+        self.listener?.remove()
+        storeModel.deleteRoom(roomPin: roomPin)
+    }
+
 }

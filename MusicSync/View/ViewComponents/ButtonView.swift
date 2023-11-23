@@ -9,26 +9,25 @@ import SwiftUI
 
 struct ButtonView: View {
     var text: String
+    var textColor: Color = .white
     var buttonColor: Color
-    
+
     var body: some View {
-        ZStack{
-            
-            Capsule()
-                .fill(buttonColor)
-            
+        ZStack {
             Text(text)
                 .font(.title3)
-                .bold()
-                .foregroundColor(.white)
+                .fontWeight(.bold)
+                .foregroundColor(textColor)
+                .frame(width: 300, height: 50)
+                .background(buttonColor)
+                .cornerRadius(10)
         }
-        .frame(maxWidth: 300, maxHeight: 60)
-        
+
     }
 }
 
 struct ButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        ButtonView(text: "ボタン", buttonColor: .blue)
+        ButtonView(text: "ボタン", textColor: .white, buttonColor: Color("color_primary"))
     }
 }

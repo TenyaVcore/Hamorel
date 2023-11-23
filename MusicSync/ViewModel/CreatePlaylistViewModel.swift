@@ -10,38 +10,45 @@ import MusicKit
 import Firebase
 import FirebaseFirestoreSwift
 
+@MainActor
 class CreatePlaylistViewModel: ObservableObject {
-    
-    var storeModel = FirestoreModel()
+    var storeModel = FirestoreModelAsync()
     var musicModel = AppleMusicLibraryModel()
-    @Published var errorMessage = ""
-    
-    func createsPlaylist(roomPin: Int, usersData: [UserData],completion: @escaping (Result<String,Error>) -> Void){
-        var songs = MusicItemCollection<Song>()
-        var downloadData = [MusicItemCollection<Song>]()
-        storeModel.downloadData(roomPin: roomPin, usersData: usersData) { [self] result in
-            switch result {
-            case .success(let userSongs):
-                downloadData = userSongs
-                let count = downloadData.count
+    var songs: MusicItemCollection<Song> = []
+    var users: [String] = []
+
+    @Published var isLoading = true
+    @Published var isReturnHome = false
+    @Published var isCreateError = false
+    @Published var isDownloadError = false
+    @Published var isSuccessCreate = false
+    @Published var playlistName = "MusicSyncPlaylist"
+
+    func downloadSongs(roomPin: String) {
+        Task {
+            do {
+                users = try await storeModel.downloadRoomData(roomPin: roomPin)
+                print(users)
+                let downloadData = try await storeModel.downloadSongs(users: users)
+                let songCount = downloadData.count
                 songs = downloadData[0]
-                
-                for i in 1..<count{
+                for i in 1..<songCount {
                     songs = musicModel.merge(item1: songs, item2: downloadData[i])
                 }
-                
-                
-                let mergedSongs = songs
-                
-                Task{try await MusicLibrary.shared.createPlaylist(name: "Music Sync Playlist", items: mergedSongs )}
-                completion(.success("name"))
-                
-            case .failure(let error):
-                print("error: \(error)")
-                errorMessage = error.localizedDescription
-                completion(.failure(error))
+                isLoading = false
+            } catch {
+                print("download error: \(error.localizedDescription)")
+                isDownloadError = true
             }
         }
-        
+    }
+    
+    func createPlaylist() {
+        do {
+            try musicModel.createPlaylist(from: songs, playlistName: playlistName)
+        } catch {
+            print("create error: \(error.localizedDescription)")
+            isCreateError = true
+        }
     }
 }

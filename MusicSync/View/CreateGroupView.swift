@@ -6,80 +6,99 @@
 //
 
 import SwiftUI
-import Firebase
-import FirebaseFirestoreSwift
-import MusicKit
 
 struct CreateGroupView: View {
-    
     @StateObject var viewModel = CreateGroupViewModel()
-    @State var listener: ListenerRegistration?
-    @State private var isActive = false
-    @Binding var isLoginViewActive: Bool
-    
-    var name: String
-    
+    @Binding var path: [NavigationLinkItem]
+
+    var userName: String
+
     var body: some View {
-        
-        ZStack{
-            VStack{
-                ProgressView("ユーザーを待機中")
+        ZStack {
+            VStack {
+                ZStack {
+                    Rectangle()
+                        .foregroundStyle(Color("color_primary"))
+                        .frame(width: 340, height: 120)
+                        .cornerRadius(20)
+
+                    VStack {
+                        Text("Room Pin")
+                            .font(.largeTitle)
+                            .foregroundStyle(.white)
+                            .bold()
+
+                        Text(String(viewModel.roomPin))
+                            .font(.largeTitle)
+                            .foregroundStyle(.white)
+                            .bold()
+                    }
+                }
+
+                Text("ルームに参加中のメンバー \(viewModel.usersData.count)/5 ")
                     .font(.title2)
-                    .padding(.top, 50)
-                
-                
-                List(viewModel.usersData){ userdata in
-                    Text(userdata.name)
+
+                List(viewModel.usersData) { userData in
+                    MemberListCell(name: userData.name)
                 }
-                .onAppear {
-                    LoadingControl.shared.showLoading()
-                    viewModel.createGroup(userName: name) { Listener, roomPin  in
-                        listener = Listener
-                        viewModel.pubRoomPin = roomPin
-                    }
-                }
-                
-                Text("room Pin:\(viewModel.pubRoomPin)")
-                    .font(.title)
-                    .padding(30)
-                
-                
-                
-                NavigationLink(destination: CreatePlaylistView(isLoginViewActive: $isLoginViewActive, roomPin: viewModel.pubRoomPin, usersData: viewModel.usersData),
-                               isActive: $isActive){
-                    Button {
-                        self.isActive = true
-                    } label: {
-                        ButtonView(text: "プレイリストを作成する", buttonColor: .blue)
-                    }
-                }
-                .isDetailLink(false)
+                .listStyle(PlainListStyle())
+
+                Button(action: {
+                    viewModel.pushNext()
+                    path.append(NavigationLinkItem.playlist(String(viewModel.roomPin)))
+                }, label: {
+                    ButtonView(text: "次へ",
+                               buttonColor: viewModel.usersData.count <= 1 ? .gray : Color("color_primary")
+                    )
+                })
+                .padding(.bottom, 10)
                 .disabled(viewModel.usersData.count <= 1)
-                .padding()
-                
-                
-                
-                
-                Spacer()
+
+                Button(action: {
+                    viewModel.deleteGroup()
+                    path.removeLast()
+                }, label: {
+                    ButtonView(text: "roomを解散",
+                               textColor: .black,
+                               buttonColor: Color("color_secondary")
+                    )
+                })
+                .padding(.bottom, 10)
             }
+<<<<<<< HEAD:MusicSync/View/CreateGroupView.swift
             
             //if LoadingControl.shared.isLoading { LoadingView(text: "Now loading...") }
             
+=======
+
+            LoadingView(message: "ルームを作成中")
+                .opacity(viewModel.isLoading ? 1 : 0)
+                .animation(.easeInOut, value: viewModel.isLoading)
         }
-       
+        .onAppear {
+            viewModel.createGroup(userName: userName)
+            viewModel.usersData = [UserData(name: userName)]
+>>>>>>> future:MusicSync/Views/CreateGroupView.swift
+        }
         .onDisappear {
-            if let listener = listener {
-                listener.remove()
+            if !viewModel.nextFlag {
+                viewModel.deleteGroup()
             }
-            
-            viewModel.exitGroup(roomPin: viewModel.pubRoomPin)
         }
+        .alert("エラーが発生しました。もう一度お試しください", isPresented: $viewModel.isError, actions: {
+            Button("OK") { path.removeLast() }
+        })
     }
 }
 
 struct createGroupView_Previews: PreviewProvider {
+<<<<<<< HEAD:MusicSync/View/CreateGroupView.swift
     @State static var state = false
+=======
+    @State static var state = true
+    @State static var path = [NavigationLinkItem]()
+>>>>>>> future:MusicSync/Views/CreateGroupView.swift
     static var previews: some View {
-        CreateGroupView(isLoginViewActive: $state , name: "preuser")
+        CreateGroupView(path: $path, userName: "preuser")
     }
 }

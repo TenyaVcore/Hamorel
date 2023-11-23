@@ -2,10 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>AppleMusicライブラリ取得のために必要です</string>
+	<key>CFBundleIdentifier</key>
+	<string></string>
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIColorName</key>
-		<string>BackGroundColor</string>
+		<string>color_primary</string>
 		<key>UIImageName</key>
 		<string>MusicSync_logo</string>
 	</dict>

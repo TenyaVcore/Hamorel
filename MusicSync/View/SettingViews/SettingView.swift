@@ -7,38 +7,30 @@
 
 import SwiftUI
 
-import SwiftUI
 import MusicKit
 import Firebase
 import FirebaseFirestoreSwift
 
-struct SettingModel: Identifiable {
-    var id: Int
-    var title: String
-    var destination: any View
-}
-
 struct SettingView: View {
-    
-    @AppStorage("name") var name = "ゲストユーザー"
-    @AppStorage("isLogined") var isLogined: Bool = false
-    
+
     @State private var appleAuthStatus: MusicAuthorization.Status
-    @State private var logOutAlert: Bool = false
+    @State private var logOutAlert = false
     @State private var isSettingName = false
-    
+
+    var name: String
+
     init() {
         _appleAuthStatus = .init(initialValue: MusicAuthorization.currentStatus)
+        name = Auth.auth().currentUser?.displayName ?? "ゲストユーザ"
     }
-    
-    
+
     var body: some View {
-        List{
-            Section{
-                HStack{
+        List {
+            Section {
+                HStack {
                     Text("現在のログインステータス：")
-                    
-                    switch Auth.auth().currentUser?.isAnonymous{
+
+                    switch Auth.auth().currentUser?.isAnonymous {
                     case true:
                         Text("ゲストとしてログイン")
                     case false:
@@ -47,9 +39,9 @@ struct SettingView: View {
                         Text("未定義")
                     }
                 }
-                HStack{
+                HStack {
                     Text("現在のApple Music ステータス:")
-                    
+
                     switch appleAuthStatus {
                     case .notDetermined:
                         Text("未定義")
@@ -66,8 +58,7 @@ struct SettingView: View {
             } header: {
                 Text("ユーザーステータス")
             }
-            
-            Section{
+            Section {
                 Button {
                     isSettingName.toggle()
                 } label: {
@@ -76,40 +67,37 @@ struct SettingView: View {
                 .fullScreenCover(isPresented: $isSettingName) {
                     NameSettingView()
                 }
-                
-                NavigationLink(destination: PasswordResetView(), label: {Text("パスワードの変更")})
-            } header: {
+
+                NavigationLink(value: NavigationLinkItem.passwordReset) {
+                    Text("パスワードの変更")
+                }
+            }header: {
                 Text("ユーザ情報の変更")
             }
-            
-            Section{
-                NavigationLink(destination: LicenceView(), label: {Text("ライセンス情報")})
-                
-                
-            } header: {
-                Text("アプリ情報")
-            }
-            
-            Button(action: {
-                self.logOutAlert = true
-            }, label: {
-                Text("ログアウト")
-                    .foregroundColor(.red)
-                    .bold()
-            })
-            .alert("本当にログアウトしますか？", isPresented: $logOutAlert) {
-                Button("キャンセル"){}
 
-                Button("OK"){
-                    do {
-                        try Auth.auth().signOut()
-                        isLogined = false
-                    }
-                    catch let error as NSError {
-                        print(error)
+            if Auth.auth().currentUser?.isAnonymous != nil {
+                Button(action: {
+                    self.logOutAlert = true
+                }, label: {
+                    Text("ログアウト")
+                        .foregroundColor(.red)
+                        .bold()
+                })
+                .alert("本当にログアウトしますか？", isPresented: $logOutAlert) {
+                    Button("キャンセル") {}
+
+                    Button("OK") {
+                        do {
+                            try Auth.auth().signOut()
+                        } catch let error as NSError {
+                            print(error)
+                        }
                     }
                 }
-                
+            } else {
+                NavigationLink(value: NavigationLinkItem.login) {
+                    Text("ログイン")
+                }
             }
         }
     }
