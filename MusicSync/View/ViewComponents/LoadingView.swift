@@ -8,42 +8,6 @@
 import SwiftUI
 
 struct LoadingView: View {
-<<<<<<< HEAD:MusicSync/View/ViewComponents/LoadingView.swift
-    @State var isAnimating = false
-    var text: String
-    
-    var body: some View {
-        ZStack{
-            Color("BackGroundColor")
-                .edgesIgnoringSafeArea(.all)
-                .disabled(true)
-            
-            VStack{
-                
-                Image("logo")
-                    .resizable()
-                    .scaledToFit()
-                    .rotationEffect(.degrees(isAnimating ? 360 : 0))
-                    .animation(
-                        .linear(duration: 2).repeatForever(autoreverses: false),
-                        value: isAnimating)
-                    .onAppear{
-                        isAnimating = true
-                    }
-                
-                Text(text)
-                    .font(.largeTitle)
-                    .bold()
-                    .foregroundColor(.white)
-                    .padding()
-            }
-            .padding(50)
-            
-            
-        }
-    }
-}
-=======
     @State private var isAnimating = false
     @State private var numberOfDots = 0
 
@@ -54,7 +18,6 @@ struct LoadingView: View {
         ZStack {
             Color("color_primary")
                 .ignoresSafeArea()
->>>>>>> future:MusicSync/Views/ViewComponents/LoadingView.swift
 
             VStack {
                 Image("logo")
@@ -94,10 +57,6 @@ struct LoadingView: View {
 
 struct loadingView_Previews: PreviewProvider {
     static var previews: some View {
-<<<<<<< HEAD:MusicSync/View/ViewComponents/LoadingView.swift
-        LoadingView(text: "Now loading...")
-=======
         LoadingView(message: "ローディング中")
->>>>>>> future:MusicSync/Views/ViewComponents/LoadingView.swift
     }
 }

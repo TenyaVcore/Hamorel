@@ -9,57 +9,6 @@ import SwiftUI
 
 struct CreatePlaylistView: View {
     @StateObject var viewModel = CreatePlaylistViewModel()
-<<<<<<< HEAD:MusicSync/View/CreatePlaylistView.swift
-    
-    @Binding var isLoginViewActive: Bool
-    @State var isShowingAlert = false
-    @State var isLoading = true
-    
-    var roomPin: Int
-    var usersData: [UserData]
-    
-    var body: some View {
-        ZStack{
-            VStack{
-                Image("playlist image")
-                    .resizable()
-                    .scaledToFit()
-                    .border(Color.blue, width: 3)
-                    .padding(40)
-                Text("プレイリストを作成しました！\nAppleMusicを確認してみよう！")
-                    .font(.title2)
-                    
-                
-                Button {
-                    self.isLoginViewActive = false
-                } label: {
-                    ButtonView(text: "OK", buttonColor: .blue)
-                }
-                .padding(40)
-                .alert("エラー：\(viewModel.errorMessage)", isPresented: $isShowingAlert){
-                    Button("OK"){
-                        isLoginViewActive = false
-                    }
-                }
-            }
-            
-            if isLoading{ LoadingView(text: "Now loading")}
-            
-        }
-        .onAppear{
-            print("create playlist")
-            viewModel.createsPlaylist(roomPin: roomPin, usersData: usersData){ result in
-                switch result{
-                case .success(let name):
-                    self.isLoading = false
-                    
-                case .failure(let error):
-                    isShowingAlert = true
-                    
-                }
-            }
-            
-=======
     @Binding var path: [NavigationLinkItem]
 
     var roomPin: String
@@ -146,7 +95,6 @@ struct CreatePlaylistView: View {
             Button("OK") {
                 viewModel.isSuccessCreate = false
             }
->>>>>>> future:MusicSync/Views/CreatePlaylistView.swift
         }
     }
 }
@@ -156,11 +104,7 @@ struct createPlaylistView_Previews: PreviewProvider {
     @State static var state = true
     @State static var path = [NavigationLinkItem]()
     static var previews: some View {
-<<<<<<< HEAD:MusicSync/View/CreatePlaylistView.swift
-        CreatePlaylistView(isLoginViewActive: $state, isLoading: false, roomPin: 0, usersData: [UserData(name: "aa")])
-=======
         let mock = ["aa", "bb", "cc", "dd", "ee"]
         CreatePlaylistView(path: $path, roomPin: "0", users: mock)
->>>>>>> future:MusicSync/Views/CreatePlaylistView.swift
     }
 }

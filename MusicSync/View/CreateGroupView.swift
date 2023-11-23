@@ -65,11 +65,6 @@ struct CreateGroupView: View {
                 })
                 .padding(.bottom, 10)
             }
-<<<<<<< HEAD:MusicSync/View/CreateGroupView.swift
-            
-            //if LoadingControl.shared.isLoading { LoadingView(text: "Now loading...") }
-            
-=======
 
             LoadingView(message: "ルームを作成中")
                 .opacity(viewModel.isLoading ? 1 : 0)
@@ -78,7 +73,6 @@ struct CreateGroupView: View {
         .onAppear {
             viewModel.createGroup(userName: userName)
             viewModel.usersData = [UserData(name: userName)]
->>>>>>> future:MusicSync/Views/CreateGroupView.swift
         }
         .onDisappear {
             if !viewModel.nextFlag {
@@ -92,12 +86,8 @@ struct CreateGroupView: View {
 }
 
 struct createGroupView_Previews: PreviewProvider {
-<<<<<<< HEAD:MusicSync/View/CreateGroupView.swift
-    @State static var state = false
-=======
     @State static var state = true
     @State static var path = [NavigationLinkItem]()
->>>>>>> future:MusicSync/Views/CreateGroupView.swift
     static var previews: some View {
         CreateGroupView(path: $path, userName: "preuser")
     }

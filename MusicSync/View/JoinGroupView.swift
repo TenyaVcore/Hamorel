@@ -59,10 +59,6 @@ struct JoinGroupView: View {
                 })
                 .padding(.bottom, 10)
             }
-<<<<<<< HEAD:MusicSync/View/JoinGroupView.swift
-            if isLoading {
-                LoadingView(text: "Now loading")
-=======
             
             LoadingView(message: "ルームに参加中")
                 .opacity(viewModel.isLoading ? 1 : 0)
@@ -75,7 +71,6 @@ struct JoinGroupView: View {
                 if $0 {
                     path.append(NavigationLinkItem.playlist(viewModel.roomPin))
                 }
->>>>>>> future:MusicSync/Views/JoinGroupView.swift
             }
         }
         .onDisappear {

@@ -12,79 +12,17 @@ import FirebaseFirestoreSwift
 struct HomeView: View {
 
     @AppStorage("name") var name = "ゲストユーザー"
-<<<<<<< HEAD:MusicSync/View/HomeView.swift
-    
-    @EnvironmentObject var transData: EnvironmentData
-    
-    @State var appleAuthStatus: MusicAuthorization.Status
-    @State private var isCreateActive = false
-    @State private var isJoinActive = false
-    @State private var roomPin:String = ""
-    @State private var isActive = false
-    
-    let libraryModel = AppleMusicLibraryModel()
-    let firestoreModel = FirestoreModel()
-    let model = JoinGroupViewModel()
-    
-=======
 
     @State private var appleAuthStatus: MusicAuthorization.Status
     @State private var path: [NavigationLinkItem] = []
 
     let libraryModel = AppleMusicLibraryModel()
 
->>>>>>> future:MusicSync/Views/HomeView.swift
     init() {
         _appleAuthStatus = .init(initialValue: MusicAuthorization.currentStatus)
     }
 
     var body: some View {
-<<<<<<< HEAD:MusicSync/View/HomeView.swift
-        NavigationStack{
-            ZStack{
-                VStack{
-                    
-                    Text("Name: \(name)")
-                        .font(.system(size: 25, weight: .bold, design: .default))
-                        .padding(.bottom, 10)
-                    
-                    
-                    NavigationLink(destination: CreateGroupView(isLoginViewActive: $isActive, name: name),
-                                   isActive: $isCreateActive){
-                        Button {
-                            self.isCreateActive = true
-                        } label: {
-                            GroupButtonView(text: "グループを作成", buttonColor: .blue)
-                        }
-                    }
-                                   .isDetailLink(false)
-                                   .padding(40)
-                    
-                    
-                    Divider()
-                    
-                    
-                    TextField("roomPin(6桁)を入力", text: $roomPin)
-                        .multilineTextAlignment(.center)
-                        .keyboardType(.numberPad)
-                        .autocapitalization(.none)
-                        .font(.system(size: 25))
-                        .padding()
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 2)
-                                .stroke(.red,lineWidth: 3)
-                        )
-                        .padding(40)
-                        .frame(maxWidth: 350)
-                    
-                    
-                    NavigationLink(destination: JoinGroupView(isLoginViewActive: $isActive, name: name, roomPin: roomPin),
-                                   isActive: $isJoinActive){
-                        Button {
-                            self.isJoinActive = true
-                        } label: {
-                            GroupButtonView(text: "グループに参加", buttonColor: roomPin.count != 6 ? .red.opacity(0.4) : .red)
-=======
         let bounds = UIScreen.main.bounds
         let screenHeight = Int(bounds.height)
 
@@ -137,7 +75,6 @@ struct HomeView: View {
                                     .cornerRadius(10)
                             }
                             .padding(.vertical, 10)
->>>>>>> future:MusicSync/Views/HomeView.swift
                         }
                     }
                 }
@@ -178,27 +115,15 @@ struct HomeView: View {
                         ProvisionalRegistrationView(path: $path)
                     }
                 }
-<<<<<<< HEAD:MusicSync/View/HomeView.swift
-=======
             }
 
             if appleAuthStatus != .authorized {
                 AppleMusicAuthView(appleAuthStatus: $appleAuthStatus)
->>>>>>> future:MusicSync/Views/HomeView.swift
             }
         }
     }
 }
 
-<<<<<<< HEAD:MusicSync/View/HomeView.swift
-
-class EnvironmentData: ObservableObject {
-    @Published var isNavigationActive: Binding<Bool> = Binding<Bool>.constant(false)
-}
-
-
-=======
->>>>>>> future:MusicSync/Views/HomeView.swift
 struct homeView_Previews: PreviewProvider {
     @State static var active = true
     static var previews: some View {
