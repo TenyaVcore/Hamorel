@@ -26,20 +26,19 @@ struct AppleMusicAuthView: View {
                 Divider()
 
                 VStack {
-                    Text("現在のステータス:")
+                    Text("現在の状態:")
                         .padding(.bottom, 10)
                         .font(.title3)
 
                     switch appleAuthStatus {
                     case .notDetermined:
-                        Text("ステータスは定義されていません")
+                        Text("状態は定義されていません")
                     case .authorized:
                         Text("ライブラリへのアクセスが許可されています")
                     case .denied:
                         VStack {
                             Text("ライブラリへのアクセスが拒否されました。")
                             Text("設定からメディアとAppleMusicへのアクセスを許可してください。")
-                                .padding(.horizontal, 20)
                                 .multilineTextAlignment(.center)
                         }
                     case .restricted:

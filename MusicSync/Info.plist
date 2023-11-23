@@ -9,7 +9,7 @@
 	<key>UILaunchScreen</key>
 	<dict>
 		<key>UIColorName</key>
-		<string>Color_primary</string>
+		<string>color_primary</string>
 		<key>UIImageName</key>
 		<string>MusicSync_logo</string>
 	</dict>

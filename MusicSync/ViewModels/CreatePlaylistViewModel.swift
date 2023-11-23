@@ -17,7 +17,7 @@ class CreatePlaylistViewModel: ObservableObject {
     var songs: MusicItemCollection<Song> = []
     var users: [String] = []
 
-    @Published var isLoading = false //true
+    @Published var isLoading = true
     @Published var isReturnHome = false
     @Published var isCreateError = false
     @Published var isDownloadError = false

@@ -458,6 +458,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		BA8542A82AFE011B00434765 /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 12;
 			files = (
 			);
@@ -476,6 +477,7 @@
 		};
 		BA967EF72B0A4186008AB3CF /* Run Clashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -711,6 +713,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				"OTHER_LDFLAGS[arch=*]" = (
+					"-Xlinker",
+					"-no_warn_duplicate_libraries",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tenya.MusicSync;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

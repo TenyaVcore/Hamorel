@@ -15,9 +15,6 @@ struct CreatePlaylistView: View {
     var users: [String]
 
     var body: some View {
-        let bounds = UIScreen.main.bounds
-        let screenHeight = bounds.height
-        let screenWidth = bounds.width
         ZStack {
             VStack {
                 ZStack {
@@ -74,7 +71,7 @@ struct CreatePlaylistView: View {
             }
         }
         .onAppear {
-            //viewModel.downloadSongs(roomPin: roomPin)
+            viewModel.downloadSongs(roomPin: roomPin)
         }
         .alert("ホームに戻りますか", isPresented: $viewModel.isReturnHome) {
             Button("ホームに戻る", role: .destructive) {
