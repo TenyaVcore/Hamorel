@@ -75,13 +75,15 @@ struct FirestoreModelAsync {
     func downloadSongs(users: [String]) async throws -> [MusicItemCollection<Song>] {
         var songs: [MusicItemCollection<Song>] = []
         for user in users {
-            let userSongs = try await db.collection("Songs").document(user).collection("Songs").getDocuments()
-            userSongs.documents.forEach { userSong in
+            var userSongs = MusicItemCollection<Song>()
+            let userSongsSnapshot = try await db.collection("Songs").document(user).collection("Songs").getDocuments()
+            userSongsSnapshot.documents.forEach { userSong in
                 let userSongData = try? userSong.data(as: UserSongs.self)
                 if let userSongData = userSongData {
-                    songs.append(userSongData.songs)
+                    userSongs += userSongData.songs
                 }
             }
+            songs.append(userSongs)
         }
         return songs
     }
