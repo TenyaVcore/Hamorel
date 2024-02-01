@@ -63,20 +63,27 @@ struct FirestoreModelAsync {
         batch.commit()
     }
 
-    func downloadRoomData(roomPin: String) async throws -> [String] {
-        var users: [String] = []
+    func downloadRoomData(roomPin: String) async throws -> [UserData] {
+        var users: [UserData] = []
         let members =  try await db.collection("Room").document(roomPin).collection("Member").getDocuments()
         members.documents.forEach { member in
-            users.append(member.documentID)
+            do {
+                let data = try member.data(as: UserData.self)
+                users.append(data)
+            } catch {
+                print(error)
+            }
+        
         }
         return users
     }
     
-    func downloadSongs(users: [String]) async throws -> [MusicItemCollection<Song>] {
+    func downloadSongs(users: [UserData]) async throws -> [MusicItemCollection<Song>] {
         var songs: [MusicItemCollection<Song>] = []
         for user in users {
             var userSongs = MusicItemCollection<Song>()
-            let userSongsSnapshot = try await db.collection("Songs").document(user).collection("Songs").getDocuments()
+            let userSongsSnapshot = try await db.collection("Songs").document(user.id)
+                                                .collection("Songs").getDocuments()
             userSongsSnapshot.documents.forEach { userSong in
                 let userSongData = try? userSong.data(as: UserSongs.self)
                 if let userSongData = userSongData {

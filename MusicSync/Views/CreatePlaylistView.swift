@@ -12,7 +12,6 @@ struct CreatePlaylistView: View {
     @Binding var path: [NavigationLinkItem]
 
     var roomPin: String
-    var users: [String]
 
     var body: some View {
         ZStack {
@@ -30,8 +29,8 @@ struct CreatePlaylistView: View {
                             .foregroundColor(.white)
                             .padding(.top, 15)
                         
-                        List(users, id: \.self) { user in
-                            MemberListCell(name: user)
+                        List(viewModel.users, id: \.self) { user in
+                            MemberListCell(name: user.name)
                         }
                         .listStyle(PlainListStyle())
                         .frame(maxHeight: 360)
@@ -104,7 +103,6 @@ struct createPlaylistView_Previews: PreviewProvider {
     @State static var state = true
     @State static var path = [NavigationLinkItem]()
     static var previews: some View {
-        let mock = ["aa", "bb", "cc", "dd", "ee"]
-        CreatePlaylistView(path: $path, roomPin: "0", users: mock)
+        CreatePlaylistView(path: $path, roomPin: "0")
     }
 }

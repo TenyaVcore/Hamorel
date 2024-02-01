@@ -9,7 +9,7 @@ import UIKit
 import MusicKit
 
 // firestoreに保存するデータモデル
-struct UserData: Identifiable, Codable {
+struct UserData: Identifiable, Codable, Hashable {
     var id: String = UIDevice.current.identifierForVendor!.uuidString
     var name: String
 }

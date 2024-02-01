@@ -15,8 +15,8 @@ class CreatePlaylistViewModel: ObservableObject {
     var storeModel = FirestoreModelAsync()
     var musicModel = AppleMusicLibraryModel()
     var songs: MusicItemCollection<Song> = []
-    var users: [String] = []
-
+    
+    @Published var users: [UserData] = []
     @Published var isLoading = true
     @Published var isReturnHome = false
     @Published var isCreateError = false
@@ -28,7 +28,6 @@ class CreatePlaylistViewModel: ObservableObject {
         Task {
             do {
                 users = try await storeModel.downloadRoomData(roomPin: roomPin)
-                print(users)
                 let downloadData = try await storeModel.downloadSongs(users: users)
                 let songCount = downloadData.count
                 songs = downloadData[0]

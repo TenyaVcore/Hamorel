@@ -86,7 +86,7 @@ struct HomeView: View {
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         NavigationLink(value: NavigationLinkItem.setting) {
-                            Image(systemName: "gearshape.fill")
+                            Image(systemName: "gearshape.fill")       
                                 .foregroundColor(.white)
                                 .font(.title)
                         }
@@ -101,7 +101,7 @@ struct HomeView: View {
                     case .join(let roomPin):
                         JoinGroupView(path: $path, userName: name, roomPin: roomPin)
                     case .playlist(let roomPin):
-                        CreatePlaylistView(path: $path, roomPin: roomPin, users: [])
+                        CreatePlaylistView(path: $path, roomPin: roomPin)
                     case .home:
                         HomeView()
                     case .setting:
