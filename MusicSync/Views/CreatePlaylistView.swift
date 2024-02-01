@@ -51,9 +51,11 @@ struct CreatePlaylistView: View {
                 Button {
                     viewModel.createPlaylist()
                 } label: {
-                    ButtonView(text: "AppleMusicに追加する", buttonColor: Color("color_primary"))
+                    ButtonView(text: "AppleMusicに追加する", 
+                               buttonColor: $viewModel.playlistName.wrappedValue.isEmpty  ? Color.gray : Color("color_primary"))
                 }
                 .padding(.top, 15)
+                .disabled($viewModel.playlistName.wrappedValue.isEmpty)
                 
                 Button {
                     viewModel.isReturnHome = true
@@ -72,6 +74,7 @@ struct CreatePlaylistView: View {
         .onAppear {
             viewModel.downloadSongs(roomPin: roomPin)
         }
+        .navigationBarBackButtonHidden(true)
         .alert("ホームに戻りますか", isPresented: $viewModel.isReturnHome) {
             Button("ホームに戻る", role: .destructive) {
                 path.removeAll()
