@@ -3,7 +3,7 @@
 
 ## User settings
 ## ファイル内のカーソル位置などの情報ファイルが格納されているディレクトリ
-*.xcuserdata/
+xcuserdata/
 
 ## ソースコード管理(SCM)に関する設定ファイル
 *.xcscmblueprint
@@ -32,6 +32,7 @@ DerivedData/
 !default.mode1v3
 *.mode2v3
 !default.mode2v3
+
 ## ビルドパースペクティブ
 *.perspectivev3
 !default.perspectivev3
@@ -49,7 +50,6 @@ DerivedData/
 ## Playgrounds
 timeline.xctimeline
 playground.xcworkspace
-
 
 ## ライブラリ
 
