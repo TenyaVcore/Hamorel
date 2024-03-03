@@ -5,7 +5,6 @@
 ## ファイル内のカーソル位置などの情報ファイルが格納されているディレクトリ
 *.xcuserdata/
 
-## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 ## ソースコード管理(SCM)に関する設定ファイル
 *.xcscmblueprint
 ## Xcode8以前のファイル　Xcode9以降はxcscmblueprintに含まれている
@@ -14,15 +13,20 @@
 ## compatibility with Xcode 3 and earlier (ignoring not required starting Xcode 4)
 ## ビルド時に生成されるバイナリやリソース
 build/
+
 ## ビルド時に生成されるログやキャッシュなど
 DerivedData/
+
 ## ビルドプロセス中のバックアップなどに使用
 *.moved-aside
+
 ## ユーザー固有の設定情報
 *.pbxuser
 *.xcbkptlist
+
 ## 新規ユーザー用の初期設定ファイル
 !default.pbxuser
+
 ## モード設定
 *.mode1v3
 !default.mode1v3
@@ -36,6 +40,7 @@ DerivedData/
 ## Objective-Cのヘッダーマップ
 *.hmap
 
+
 ## アプリのアーカイブ
 *.ipa
 *.dSYM.zip
@@ -45,7 +50,8 @@ DerivedData/
 timeline.xctimeline
 playground.xcworkspace
 
-## 以下ライブラリなど
+
+## ライブラリ
 
 # Swift Package Manager
 .build/
@@ -53,9 +59,6 @@ playground.xcworkspace
 # CocoaPods
 # Pods/
 # *.xcworkspace
-
-# Firebase
-GoogleService-Info.plist
 
 # Carthage
 Carthage/Build/
