@@ -35,6 +35,8 @@
 		BA6CF9152A1B0CB00066B55E /* EmailRegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6CF9142A1B0CB00066B55E /* EmailRegisterView.swift */; };
 		BA6CF9172A1B0CF90066B55E /* ProvisionalRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6CF9162A1B0CF90066B55E /* ProvisionalRegistrationView.swift */; };
 		BA6CF9192A1B0D180066B55E /* PasswordResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6CF9182A1B0D180066B55E /* PasswordResetView.swift */; };
+		BA70AB9A2B944B7D0041B369 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = BA70AB992B944B7D0041B369 /* GoogleMobileAds */; };
+		BA70AB9D2B944CD90041B369 /* AdCoodinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA70AB9C2B944CD90041B369 /* AdCoodinator.swift */; };
 		BA785CA72AF368BD0012CF67 /* MemberListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA785CA62AF368BD0012CF67 /* MemberListCell.swift */; };
 		BA785CB02AF789760012CF67 /* EmailRegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA785CAF2AF789760012CF67 /* EmailRegisterViewModel.swift */; };
 		BA8542A32AFCB14B00434765 /* FirestoreModelAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8542A22AFCB14B00434765 /* FirestoreModelAsync.swift */; };
@@ -100,6 +102,7 @@
 		BA6CF9142A1B0CB00066B55E /* EmailRegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegisterView.swift; sourceTree = "<group>"; };
 		BA6CF9162A1B0CF90066B55E /* ProvisionalRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvisionalRegistrationView.swift; sourceTree = "<group>"; };
 		BA6CF9182A1B0D180066B55E /* PasswordResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetView.swift; sourceTree = "<group>"; };
+		BA70AB9C2B944CD90041B369 /* AdCoodinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdCoodinator.swift; sourceTree = "<group>"; };
 		BA785CA62AF368BD0012CF67 /* MemberListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListCell.swift; sourceTree = "<group>"; };
 		BA785CAF2AF789760012CF67 /* EmailRegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegisterViewModel.swift; sourceTree = "<group>"; };
 		BA8542A22AFCB14B00434765 /* FirestoreModelAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreModelAsync.swift; sourceTree = "<group>"; };
@@ -147,6 +150,7 @@
 				BA6CF8FE2A1B0B090066B55E /* FirebaseAuth in Frameworks */,
 				BA6CF9022A1B0B090066B55E /* FirebaseCrashlytics in Frameworks */,
 				BA6CF8FC2A1B0B090066B55E /* FirebaseAppDistribution-Beta in Frameworks */,
+				BA70AB9A2B944B7D0041B369 /* GoogleMobileAds in Frameworks */,
 				BA6CF9002A1B0B090066B55E /* FirebaseAuthCombine-Community in Frameworks */,
 				BA6CF9082A1B0B090066B55E /* FirebaseFirestoreSwift in Frameworks */,
 			);
@@ -289,6 +293,7 @@
 				BA85A17A2A1B10F4009C1CDD /* FirebaseAuthModel.swift */,
 				BA8542A22AFCB14B00434765 /* FirestoreModelAsync.swift */,
 				BA85A17E2A1B114B009C1CDD /* AppleMusicLibraryModel.swift */,
+				BA70AB9C2B944CD90041B369 /* AdCoodinator.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -351,6 +356,7 @@
 				BA6CF9072A1B0B090066B55E /* FirebaseFirestoreSwift */,
 				BA6CF9092A1B0B090066B55E /* FirebaseInstallations */,
 				BA4660F62B0F9C6700CF7678 /* LicenseList */,
+				BA70AB992B944B7D0041B369 /* GoogleMobileAds */,
 			);
 			productName = MusicSync;
 			productReference = BA6CF8C32A1B0A480066B55E /* MusicSync.app */;
@@ -427,6 +433,7 @@
 			packageReferences = (
 				BA6CF8F02A1B0B090066B55E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				BA4660F52B0F9C6700CF7678 /* XCRemoteSwiftPackageReference "LicenseList" */,
+				BA70AB982B944B7D0041B369 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = BA6CF8C42A1B0A480066B55E /* Products */;
 			projectDirPath = "";
@@ -541,6 +548,7 @@
 				BAA05CED2AF35D8C00A038A3 /* RoundedCorners.swift in Sources */,
 				BA967EED2B09D5C0008AB3CF /* NumberButtonView.swift in Sources */,
 				BA6CF9192A1B0D180066B55E /* PasswordResetView.swift in Sources */,
+				BA70AB9D2B944CD90041B369 /* AdCoodinator.swift in Sources */,
 				BA6CF8C72A1B0A480066B55E /* MusicSyncApp.swift in Sources */,
 				BA967EF42B0A3D67008AB3CF /* UserData.swift in Sources */,
 				BA967EF12B09E0A3008AB3CF /* DeleteButtonView.swift in Sources */,
@@ -912,6 +920,14 @@
 				minimumVersion = 10.0.0;
 			};
 		};
+		BA70AB982B944B7D0041B369 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -989,6 +1005,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BA6CF8F02A1B0B090066B55E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseInstallations;
+		};
+		BA70AB992B944B7D0041B369 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA70AB982B944B7D0041B369 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

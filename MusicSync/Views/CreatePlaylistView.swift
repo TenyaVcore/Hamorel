@@ -11,6 +11,7 @@ struct CreatePlaylistView: View {
     @StateObject var viewModel = CreatePlaylistViewModel()
     @Binding var path: [NavigationLinkItem]
 
+    var adMob = AdCoordinator()
     var roomPin: String
 
     var body: some View {
@@ -50,9 +51,11 @@ struct CreatePlaylistView: View {
 
                 Button {
                     viewModel.createPlaylist()
+                    adMob.presentAd()
                 } label: {
-                    ButtonView(text: "AppleMusicに追加する", 
-                               buttonColor: $viewModel.playlistName.wrappedValue.isEmpty  ? Color.gray : Color("color_primary"))
+                    ButtonView(text: "AppleMusicに追加する",
+                               buttonColor: $viewModel.playlistName
+                                                      .wrappedValue.isEmpty  ? Color.gray : Color("color_primary"))
                 }
                 .padding(.top, 15)
                 .disabled($viewModel.playlistName.wrappedValue.isEmpty)
@@ -72,6 +75,7 @@ struct CreatePlaylistView: View {
             }
         }
         .onAppear {
+            adMob.loadAd()
             viewModel.downloadSongs(roomPin: roomPin)
         }
         .navigationBarBackButtonHidden(true)

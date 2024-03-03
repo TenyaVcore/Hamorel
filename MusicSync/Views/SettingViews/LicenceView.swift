@@ -10,8 +10,8 @@ import LicenseList
 
 struct LicenceView: View {
     var body: some View {
-        List(Library.libraries, id: \.name) { library in
-            Text(library.name)
+        NavigationView {
+            LicenseListView()
         }
         .navigationTitle("ライセンス一覧")
     }
