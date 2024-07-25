@@ -55,7 +55,7 @@ struct SettingView: View {
                         Text("不明なエラー")
                     }
                 }
-            }header: {
+            } header: {
                 Text("ユーザーステータス")
             }
             Section {

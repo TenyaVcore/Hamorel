@@ -2,13 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UILaunchScreen</key>
-	<dict>
-		<key>UIColorName</key>
-		<string>color_primary</string>
-		<key>UIImageName</key>
-		<string>MusicSync_logo</string>
-	</dict>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-5449942175714797~3077284936</string>
 	<key>SKAdNetworkItems</key>
@@ -210,5 +203,12 @@
 			<string>3qcr597p9d.skadnetwork</string>
 		</dict>
 	</array>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>color_primary</string>
+		<key>UIImageName</key>
+		<string>MusicSync_logo</string>
+	</dict>
 </dict>
 </plist>

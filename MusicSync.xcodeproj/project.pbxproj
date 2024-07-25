@@ -173,6 +173,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA2A50D72BA9A05E00FE6113 /* GoogleService-info */ = {
+			isa = PBXGroup;
+			children = (
+				BA2A50D92BA9A0AC00FE6113 /* release */,
+				BA2A50D82BA9A09700FE6113 /* dev */,
+			);
+			path = "GoogleService-info";
+			sourceTree = "<group>";
+		};
+		BA2A50D82BA9A09700FE6113 /* dev */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = dev;
+			sourceTree = "<group>";
+		};
+		BA2A50D92BA9A0AC00FE6113 /* release */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = release;
+			sourceTree = "<group>";
+		};
 		BA6CF8BA2A1B0A480066B55E = {
 			isa = PBXGroup;
 			children = (
@@ -204,9 +227,10 @@
 				BA85A1702A1B0FCA009C1CDD /* ViewModels */,
 				BA85A1772A1B1092009C1CDD /* Models */,
 				BA6CF8CC2A1B0A490066B55E /* Preview Content */,
-				BA6195252A2598C100FD5ECF /* GoogleService-Info.plist */,
 				BA68DF062A52F9F000DE546A /* Info.plist */,
 				BA6CF8CA2A1B0A490066B55E /* Assets.xcassets */,
+				BA6195252A2598C100FD5ECF /* GoogleService-Info.plist */,
+				BA2A50D72BA9A05E00FE6113 /* GoogleService-info */,
 			);
 			path = MusicSync;
 			sourceTree = "<group>";
@@ -423,11 +447,11 @@
 			};
 			buildConfigurationList = BA6CF8BE2A1B0A480066B55E /* Build configuration list for PBXProject "MusicSync" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ja;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				ja,
 			);
 			mainGroup = BA6CF8BA2A1B0A480066B55E;
 			packageReferences = (
