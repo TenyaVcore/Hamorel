@@ -8,7 +8,7 @@
 import Foundation
 import MusicKit
 
-struct AppleMusicLibraryModel: LibraryGetting {
+struct AppleMusicLibraryModel {
 
     func merge(item1: MusicItemCollection<Song>, item2: MusicItemCollection<Song>) -> MusicItemCollection<Song> {
         var mergedItem: MusicItemCollection<Song> = MusicItemCollection<Song>()

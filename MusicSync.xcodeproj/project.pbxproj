@@ -53,7 +53,6 @@
 		BA85A1722A1B0FF7009C1CDD /* CreateGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1712A1B0FF7009C1CDD /* CreateGroupViewModel.swift */; };
 		BA85A1742A1B1054009C1CDD /* JoinGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1732A1B1054009C1CDD /* JoinGroupViewModel.swift */; };
 		BA85A1762A1B107F009C1CDD /* CreatePlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1752A1B107F009C1CDD /* CreatePlaylistViewModel.swift */; };
-		BA85A1792A1B10CD009C1CDD /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1782A1B10CD009C1CDD /* Protocols.swift */; };
 		BA85A17B2A1B10F4009C1CDD /* FirebaseAuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A17A2A1B10F4009C1CDD /* FirebaseAuthModel.swift */; };
 		BA85A17F2A1B114B009C1CDD /* AppleMusicLibraryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A17E2A1B114B009C1CDD /* AppleMusicLibraryModel.swift */; };
 		BA85A1832A1B6B20009C1CDD /* GroupButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1822A1B6B20009C1CDD /* GroupButtonView.swift */; };
@@ -121,7 +120,6 @@
 		BA85A1712A1B0FF7009C1CDD /* CreateGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupViewModel.swift; sourceTree = "<group>"; };
 		BA85A1732A1B1054009C1CDD /* JoinGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGroupViewModel.swift; sourceTree = "<group>"; };
 		BA85A1752A1B107F009C1CDD /* CreatePlaylistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaylistViewModel.swift; sourceTree = "<group>"; };
-		BA85A1782A1B10CD009C1CDD /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		BA85A17A2A1B10F4009C1CDD /* FirebaseAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthModel.swift; sourceTree = "<group>"; };
 		BA85A17E2A1B114B009C1CDD /* AppleMusicLibraryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicLibraryModel.swift; sourceTree = "<group>"; };
 		BA85A1822A1B6B20009C1CDD /* GroupButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupButtonView.swift; sourceTree = "<group>"; };
@@ -315,7 +313,6 @@
 		BA85A1772A1B1092009C1CDD /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				BA85A1782A1B10CD009C1CDD /* Protocols.swift */,
 				BA967EF32B0A3D67008AB3CF /* UserData.swift */,
 				BA85A17A2A1B10F4009C1CDD /* FirebaseAuthModel.swift */,
 				BA8542A22AFCB14B00434765 /* FirestoreModel.swift */,
@@ -553,7 +550,6 @@
 				BA85A17B2A1B10F4009C1CDD /* FirebaseAuthModel.swift in Sources */,
 				BA85A17F2A1B114B009C1CDD /* AppleMusicLibraryModel.swift in Sources */,
 				BA85A1652A1B0F1C009C1CDD /* CreateGroupView.swift in Sources */,
-				BA85A1792A1B10CD009C1CDD /* Protocols.swift in Sources */,
 				BA85A16D2A1B0F9F009C1CDD /* CreatePlaylistView.swift in Sources */,
 				BA4660FC2B0F9CFB00CF7678 /* LicenceView.swift in Sources */,
 				BA967EEF2B09DA55008AB3CF /* EnterRoomPinViewModel.swift in Sources */,
