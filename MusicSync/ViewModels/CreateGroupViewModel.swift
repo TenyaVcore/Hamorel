@@ -13,7 +13,7 @@ import FirebaseFirestoreSwift
 
 @MainActor
 class CreateGroupViewModel: ObservableObject {
-    var storeModel = FirestoreModelAsync()
+    var storeModel = FirestoreModel()
     var musicModel = AppleMusicLibraryModel()
     var authModel = FirebaseAuthModel()
     var db = Firestore.firestore()
@@ -28,7 +28,7 @@ class CreateGroupViewModel: ObservableObject {
     @State private var listener: ListenerRegistration?
 
     init(usersData: [UserData] = [UserData](),
-         model: FirestoreModelAsync = FirestoreModelAsync(),
+         model: FirestoreModel = FirestoreModel(),
          musicModel: AppleMusicLibraryModel = AppleMusicLibraryModel()) {
         self.usersData = usersData
         self.storeModel = model

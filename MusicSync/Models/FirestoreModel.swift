@@ -12,7 +12,7 @@ import MusicKit
 import SwiftUI
 import UIKit
 
-struct FirestoreModelAsync {
+struct FirestoreModel {
     let db = Firestore.firestore()
     let uniqueId: String = UIDevice.current.identifierForVendor!.uuidString
 
