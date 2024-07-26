@@ -5,28 +5,17 @@
 //  Created by 田川展也 on R 5/05/22.
 //
 import SwiftUI
-import MusicKit
 import Firebase
 import FirebaseFirestoreSwift
 
 struct HomeView: View {
-
-    @AppStorage("name") var name = "ゲストユーザー"
-
-    @State private var appleAuthStatus: MusicAuthorization.Status
+    @StateObject var viewModel: HomeViewModel = HomeViewModel.init()
     @State private var path: [NavigationLinkItem] = []
-
-    let libraryModel = AppleMusicLibraryModel()
-
-    init() {
-        _appleAuthStatus = .init(initialValue: MusicAuthorization.currentStatus)
-    }
 
     var body: some View {
         let bounds = UIScreen.main.bounds
         let screenHeight = Int(bounds.height)
 
-        ZStack {
             NavigationStack(path: $path) {
                 VStack {
                     Spacer()
@@ -43,7 +32,7 @@ struct HomeView: View {
                             .frame(height: (CGFloat(screenHeight) / 1.8))
 
                         VStack {
-                            Text("ようこそ\(name)さん")
+                            Text("ようこそ\(viewModel.name)さん")
                                 .font(.title3)
                                 .fontWeight(.bold)
                                 .foregroundStyle(.black)
@@ -92,14 +81,17 @@ struct HomeView: View {
                         }
                     }
                 }
+                .sheet(isPresented: $viewModel.isPresentAppleMusicAuthView) {
+                    AppleMusicAuthView(appleAuthStatus: $viewModel.appleMusicAuthStatus)
+                }
                 .navigationDestination(for: NavigationLinkItem.self) { item in
                     switch item {
                     case .create:
-                        CreateGroupView(path: $path, userName: name)
+                        CreateGroupView(path: $path, userName: viewModel.name)
                     case .enter:
                         EnterRoomPinView(path: $path)
                     case .join(let roomPin):
-                        JoinGroupView(path: $path, userName: name, roomPin: roomPin)
+                        JoinGroupView(path: $path, userName: viewModel.name, roomPin: roomPin)
                     case .playlist(let roomPin):
                         CreatePlaylistView(path: $path, roomPin: roomPin)
                     case .home:
@@ -119,11 +111,6 @@ struct HomeView: View {
                     }
                 }
             }
-
-            if appleAuthStatus != .authorized {
-                AppleMusicAuthView(appleAuthStatus: $appleAuthStatus)
-            }
-        }
     }
 }
 
