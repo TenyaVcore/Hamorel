@@ -9,7 +9,6 @@ import Foundation
 import MusicKit
 
 struct AppleMusicLibraryModel {
-
     func merge(item1: MusicItemCollection<Song>, item2: MusicItemCollection<Song>) -> MusicItemCollection<Song> {
         var mergedItem: MusicItemCollection<Song> = MusicItemCollection<Song>()
 
@@ -42,4 +41,35 @@ struct AppleMusicLibraryModel {
             try await MusicLibrary.shared.createPlaylist(name: "Music Sync Playlist", items: songs)
         }
     }
+
+    func getCatalogID(from song: Song) throws {
+        // 一度JSONにパースしてから、CatalogIDを取得する
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+                let jsonData = try encoder.encode(song)
+                let musicMetaData = try JSONDecoder().decode(MusicMetaData.self, from: jsonData)
+                let catalogID = musicMetaData.meta.musicKit_identifierSet.catalogID
+
+                // "catalogID"の値を出力
+                print("kind: \(catalogID.kind)")
+                print("value: \(catalogID.value)")
+    }
+}
+
+// Songのメタデータをパースするモデル
+private struct MusicMetaData: Codable {
+    let meta: Meta
+}
+
+private struct Meta: Codable {
+    let musicKit_identifierSet: MusicKitIdentifierSet
+}
+
+private struct MusicKitIdentifierSet: Codable {
+    let catalogID: CatalogID
+}
+
+private struct CatalogID: Codable {
+    let kind: String
+    let value: String
 }
