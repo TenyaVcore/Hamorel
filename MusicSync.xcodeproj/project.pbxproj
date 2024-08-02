@@ -62,7 +62,7 @@
 		BA967EF12B09E0A3008AB3CF /* DeleteButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA967EF02B09E0A3008AB3CF /* DeleteButtonView.swift */; };
 		BA967EF62B0A3DDC008AB3CF /* JoinRoomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA967EF52B0A3DDC008AB3CF /* JoinRoomError.swift */; };
 		BAA05CE82AF2B29C00A038A3 /* EnterRoomPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA05CE72AF2B29C00A038A3 /* EnterRoomPinView.swift */; };
-		BAA05CEA2AF2B70900A038A3 /* NavigationLinkItemNavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA05CE92AF2B70900A038A3 /* NavigationLinkItemNavigationItem.swift */; };
+		BAA05CEA2AF2B70900A038A3 /* NavigationLinkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA05CE92AF2B70900A038A3 /* NavigationLinkItem.swift */; };
 		BAA05CED2AF35D8C00A038A3 /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA05CEC2AF35D8C00A038A3 /* RoundedCorners.swift */; };
 /* End PBXBuildFile section */
 
@@ -129,7 +129,7 @@
 		BA967EF02B09E0A3008AB3CF /* DeleteButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButtonView.swift; sourceTree = "<group>"; };
 		BA967EF52B0A3DDC008AB3CF /* JoinRoomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomError.swift; sourceTree = "<group>"; };
 		BAA05CE72AF2B29C00A038A3 /* EnterRoomPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterRoomPinView.swift; sourceTree = "<group>"; };
-		BAA05CE92AF2B70900A038A3 /* NavigationLinkItemNavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLinkItemNavigationItem.swift; sourceTree = "<group>"; };
+		BAA05CE92AF2B70900A038A3 /* NavigationLinkItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLinkItem.swift; sourceTree = "<group>"; };
 		BAA05CEC2AF35D8C00A038A3 /* RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -339,7 +339,7 @@
 		BAA05CEB2AF2B7B300A038A3 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				BAA05CE92AF2B70900A038A3 /* NavigationLinkItemNavigationItem.swift */,
+				BAA05CE92AF2B70900A038A3 /* NavigationLinkItem.swift */,
 				BA967EF52B0A3DDC008AB3CF /* JoinRoomError.swift */,
 				BA8542A42AFCB5A400434765 /* CreateRoomError.swift */,
 			);
@@ -553,7 +553,7 @@
 				BA85A16D2A1B0F9F009C1CDD /* CreatePlaylistView.swift in Sources */,
 				BA4660FC2B0F9CFB00CF7678 /* LicenceView.swift in Sources */,
 				BA967EEF2B09DA55008AB3CF /* EnterRoomPinViewModel.swift in Sources */,
-				BAA05CEA2AF2B70900A038A3 /* NavigationLinkItemNavigationItem.swift in Sources */,
+				BAA05CEA2AF2B70900A038A3 /* NavigationLinkItem.swift in Sources */,
 				BA6CF9122A1B0C530066B55E /* SettingView.swift in Sources */,
 				BA85A1762A1B107F009C1CDD /* CreatePlaylistViewModel.swift in Sources */,
 				BA85A16B2A1B0F7F009C1CDD /* LoadingView.swift in Sources */,
