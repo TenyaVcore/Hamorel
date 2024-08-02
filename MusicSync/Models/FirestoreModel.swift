@@ -145,3 +145,14 @@ struct FirestoreModel {
         db.collection("Room").document(roomPin).setData(["nextFlag": false, "isEnable": false])
     }
 }
+
+// firestoreに保存するデータモデル
+struct UserData: Identifiable, Codable, Hashable {
+    var id: String = UIDevice.current.identifierForVendor!.uuidString
+    var name: String
+}
+
+// 楽曲情報用のモデル
+struct UserSongs: Codable {
+    var songs: MusicItemCollection<Song>
+}
