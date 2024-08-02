@@ -55,10 +55,28 @@ struct FirestoreModel {
             let subItem = item[startIndex..<endIndex]
 
             let userSongs = UserSongs(songs: MusicItemCollection<Song>(subItem))
-            try batch.setData(from: userSongs, 
+            try batch.setData(from: userSongs,
                               forDocument: ref.document(String(count)))
             count += 1
             startIndex += 700
+        }
+        batch.commit()
+    }
+
+    func uploadSongs(item: [MusicSyncDataModel]) throws {
+        let batchSize = 3000
+        let ref = db.collection("Songs").document(uniqueId).collection("Songs")
+        let batch = db.batch()
+        var count = 1
+        var startIndex = 0
+        while startIndex < item.count {
+            let endIndex = min(startIndex + batchSize, item.count)
+            let separatedItem: [MusicSyncDataModel] = Array(item[startIndex..<endIndex])
+
+            try batch.setData(from: separatedItem,
+                              forDocument: ref.document(String(count)))
+            count += 1
+            startIndex += batchSize
         }
         batch.commit()
     }
@@ -94,7 +112,24 @@ struct FirestoreModel {
         }
         return songs
     }
-    
+
+    func downloadSongs(users: [UserData]) async throws -> [MusicSyncDataModel] {
+        var songs: [MusicSyncDataModel] = []
+        for user in users {
+            var userSongs = [MusicSyncDataModel]()
+            let userSongsSnapshot = try await db.collection("Songs").document(user.id)
+                                                .collection("Songs").getDocuments()
+            userSongsSnapshot.documents.forEach { userSong in
+                let userSongData = try? userSong.data(as: [MusicSyncDataModel].self)
+                if let userSongData = userSongData {
+                    userSongs += userSongData
+                }
+            }
+            songs.append(contentsOf: userSongs)
+        }
+        return songs
+    }
+
     func joinRoom(roomPin: String, userName: String) async throws -> [UserData] {
         let roomRef = db.collection("Room").document(roomPin)
         var usersData = [UserData]()
