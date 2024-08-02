@@ -1,5 +1,5 @@
 //
-//  FirestoreModelAsync.swift
+//  FirestoreRepository.swift
 //  MusicSync
 //
 //  Created by 田川展也 on R 5/11/09.
@@ -12,7 +12,7 @@ import MusicKit
 import SwiftUI
 import UIKit
 
-struct FirestoreModel {
+struct FirestoreRepository {
     let db = Firestore.firestore()
     let uniqueId: String = UIDevice.current.identifierForVendor!.uuidString
 
