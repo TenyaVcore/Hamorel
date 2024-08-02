@@ -69,7 +69,7 @@ class JoinGroupViewModel: ObservableObject {
                 if Auth.auth().currentUser == nil {
                     try await authModel.loginAsGuestAsync()
                 }
-                songs = try await musicModel.loadLibraryAsync(limit: 0)
+                songs = try await musicModel.loadLibrary(limit: 0)
                 print("fetch songs")
                 self.usersData = try await storeModel.joinRoom(roomPin: roomPin, userName: userName)
                 print("join room")

@@ -26,7 +26,7 @@ struct AppleMusicLibraryModel {
         return mergedItem
     }
 
-    func loadLibraryAsync(limit: Int) async throws -> MusicItemCollection<Song> {
+    func loadLibrary(limit: Int) async throws -> MusicItemCollection<Song> {
         var request = MusicLibraryRequest<Song>()
         request.limit = limit
         let response = try await request.response()

@@ -61,7 +61,7 @@ class CreateGroupViewModel: ObservableObject {
                 if Auth.auth().currentUser == nil {
                     try await authModel.loginAsGuestAsync()
                 }
-                songs = try await musicModel.loadLibraryAsync(limit: 0)
+                songs = try await musicModel.loadLibrary(limit: 0)
                 roomPin = try await self.storeModel.createRoom(host: userName)
                 try self.storeModel.uploadSongs(item: songs)
                 self.addListener()
