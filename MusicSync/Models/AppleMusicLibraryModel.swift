@@ -36,9 +36,9 @@ struct AppleMusicLibraryModel {
         return MusicItemCollection(songs)
     }
     
-    func createPlaylist(from songs: MusicItemCollection<Song>, playlistName: String) throws {
+    func createPlaylist(from songs: MusicItemCollection<Song>, playlistName: String = "Music Sync Playlist") throws {
         Task {
-            try await MusicLibrary.shared.createPlaylist(name: "Music Sync Playlist", items: songs)
+            try await MusicLibrary.shared.createPlaylist(name: playlistName, items: songs)
         }
     }
 
