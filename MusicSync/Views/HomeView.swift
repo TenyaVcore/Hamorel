@@ -87,11 +87,11 @@ struct HomeView: View {
                 .navigationDestination(for: NavigationLinkItem.self) { item in
                     switch item {
                     case .create:
-                        CreateGroupView(path: $path, userName: viewModel.name)
+                        CreateRoomView(path: $path, userName: viewModel.name)
                     case .enter:
                         EnterRoomPinView(path: $path)
                     case .join(let roomPin):
-                        JoinGroupView(path: $path, userName: viewModel.name, roomPin: roomPin)
+                        JoinRoomView(path: $path, userName: viewModel.name, roomPin: roomPin)
                     case .playlist(let roomPin):
                         CreatePlaylistView(path: $path, roomPin: roomPin)
                     case .home:

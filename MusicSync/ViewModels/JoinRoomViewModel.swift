@@ -1,33 +1,33 @@
 //
-//  CreateGroupViewModel.swift
+//  JoinGroupViewModel.swift
 //  MusicSync
 //
 //  Created by 田川展也 on R 5/05/22.
 //
 
 import SwiftUI
-import Combine
 import MusicKit
 import Firebase
 import FirebaseFirestoreSwift
 
 @MainActor
-class CreateGroupViewModel: ObservableObject {
+class JoinRoomViewModel: ObservableObject {
     var storeModel = FirestoreRepository()
     var musicModel = AppleMusicLibraryModel()
     var authModel = FirebaseAuthModel()
     var db = Firestore.firestore()
-
     var songs = MusicItemCollection<Song>()
     
     @Published var usersData: [UserData]
     @Published var isLoading = true
     @Published var isError = false
-    @Published var roomPin = "--- ---"
     @Published var nextFlag = false
+    @Published var errorMessage = "ルーム参加中にエラーが発生しました。もう一度お試しください"
+    @Published var roomPin = "000000"
     @State private var listener: ListenerRegistration?
+    @State private var roomListener: ListenerRegistration?
 
-    init(usersData: [UserData] = [UserData](),
+    init(usersData: [UserData] = [UserData](), 
          model: FirestoreRepository = FirestoreRepository(),
          musicModel: AppleMusicLibraryModel = AppleMusicLibraryModel()) {
         self.usersData = usersData
@@ -49,45 +49,44 @@ class CreateGroupViewModel: ObservableObject {
                     return UserData(id: id, name: name)
                 }
             }
+        
+        roomListener = db.collection("Room").document(roomPin).addSnapshotListener({ (querySnapshot, error) in
+            guard let data = querySnapshot?.data() else {
+                print("Error fetching document: \(error!)")
+                return
+            }
+            self.nextFlag = data["nextFlag"] as? Bool ?? false
+            if data["isEnable"] as? Bool ?? true == false {
+                self.errorMessage = "ルームが解散されました"
+                self.isError = true
+            }
+        })
     }
 
-    func removeListener() {
-        listener?.remove()
-    }
-
-    func createGroup(userName: String) {
+    func joinGroup(userName: String) {
         Task {
             do {
                 if Auth.auth().currentUser == nil {
                     try await authModel.loginAsGuestAsync()
                 }
                 songs = try await musicModel.loadLibrary(limit: 0)
-                roomPin = try await self.storeModel.createRoom(host: userName)
-                try self.storeModel.uploadSongs(item: songs)
+                print("fetch songs")
+                self.usersData = try await storeModel.joinRoom(roomPin: roomPin, userName: userName)
+                print("join room")
                 self.addListener()
                 self.isLoading = false
-            } catch {
-                print("error:\(error.localizedDescription)")
+            } catch JoinRoomError.roomNotFound {
+                self.errorMessage = "roomPinが見つかりません"
                 self.isError = true
-            }
-        }
-    }
-    
-    func pushNext() {
-        self.nextFlag = true
-        self.listener?.remove()
-        Task {
-            do {
-                try await storeModel.pushNext(roomPin: roomPin)
             } catch {
                 self.isError = true
             }
         }
     }
 
-    func deleteGroup() {
-        self.listener?.remove()
-        storeModel.deleteRoom(roomPin: roomPin)
+    func exitGroup() {
+        storeModel.exitRoom(roomPin: roomPin)
+        listener?.remove()
     }
 
 }

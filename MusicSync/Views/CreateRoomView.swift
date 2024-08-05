@@ -1,5 +1,5 @@
 //
-//  CreateGroupView.swift
+//  CreateRoomView.swift
 //  MusicSync
 //
 //  Created by 田川展也 on R 5/05/22.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct CreateGroupView: View {
-    @StateObject var viewModel = CreateGroupViewModel()
+struct CreateRoomView: View {
+    @StateObject var viewModel = CreateRoomViewModel()
     @Binding var path: [NavigationLinkItem]
 
     var userName: String
@@ -89,6 +89,6 @@ struct createGroupView_Previews: PreviewProvider {
     @State static var state = true
     @State static var path = [NavigationLinkItem]()
     static var previews: some View {
-        CreateGroupView(path: $path, userName: "preuser")
+        CreateRoomView(path: $path, userName: "preuser")
     }
 }

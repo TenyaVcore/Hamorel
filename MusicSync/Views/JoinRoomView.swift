@@ -1,5 +1,5 @@
 //
-//  JoinGroupView.swift
+//  JoinRoomView.swift
 //  MusicSync
 //
 //  Created by 田川展也 on R 5/05/22.
@@ -10,8 +10,8 @@ import Combine
 import Firebase
 import FirebaseFirestoreSwift
 
-struct JoinGroupView: View {
-    @StateObject var viewModel = JoinGroupViewModel()
+struct JoinRoomView: View {
+    @StateObject var viewModel = JoinRoomViewModel()
     @Binding var path: [NavigationLinkItem]
     
     // 前のviewからの引き継ぎ
@@ -89,6 +89,6 @@ struct JoinGroupView_Previews: PreviewProvider {
     @State static var path = [NavigationLinkItem]()
     static var previews: some View {
 
-        JoinGroupView(path: $path, userName: "userName", roomPin: "333333")
+        JoinRoomView(path: $path, userName: "userName", roomPin: "333333")
     }
 }

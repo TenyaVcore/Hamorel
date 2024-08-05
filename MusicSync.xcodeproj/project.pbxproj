@@ -46,13 +46,13 @@
 		BA85A15C2A1B0DE5009C1CDD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A15B2A1B0DE5009C1CDD /* LoginView.swift */; };
 		BA85A15F2A1B0EA7009C1CDD /* NameSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A15E2A1B0EA7009C1CDD /* NameSettingView.swift */; };
 		BA85A1632A1B0EF2009C1CDD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1622A1B0EF2009C1CDD /* HomeView.swift */; };
-		BA85A1652A1B0F1C009C1CDD /* CreateGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1642A1B0F1C009C1CDD /* CreateGroupView.swift */; };
-		BA85A1692A1B0F61009C1CDD /* JoinGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1682A1B0F61009C1CDD /* JoinGroupView.swift */; };
+		BA85A1652A1B0F1C009C1CDD /* CreateRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1642A1B0F1C009C1CDD /* CreateRoomView.swift */; };
+		BA85A1692A1B0F61009C1CDD /* JoinRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1682A1B0F61009C1CDD /* JoinRoomView.swift */; };
 		BA85A16B2A1B0F7F009C1CDD /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A16A2A1B0F7F009C1CDD /* LoadingView.swift */; };
 		BA85A16D2A1B0F9F009C1CDD /* CreatePlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A16C2A1B0F9F009C1CDD /* CreatePlaylistView.swift */; };
 		BA85A16F2A1B0FB7009C1CDD /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A16E2A1B0FB7009C1CDD /* ButtonView.swift */; };
-		BA85A1722A1B0FF7009C1CDD /* CreateGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1712A1B0FF7009C1CDD /* CreateGroupViewModel.swift */; };
-		BA85A1742A1B1054009C1CDD /* JoinGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1732A1B1054009C1CDD /* JoinGroupViewModel.swift */; };
+		BA85A1722A1B0FF7009C1CDD /* CreateRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1712A1B0FF7009C1CDD /* CreateRoomViewModel.swift */; };
+		BA85A1742A1B1054009C1CDD /* JoinRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1732A1B1054009C1CDD /* JoinRoomViewModel.swift */; };
 		BA85A1762A1B107F009C1CDD /* CreatePlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A1752A1B107F009C1CDD /* CreatePlaylistViewModel.swift */; };
 		BA85A17B2A1B10F4009C1CDD /* FirebaseAuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A17A2A1B10F4009C1CDD /* FirebaseAuthModel.swift */; };
 		BA85A17F2A1B114B009C1CDD /* AppleMusicLibraryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A17E2A1B114B009C1CDD /* AppleMusicLibraryModel.swift */; };
@@ -113,13 +113,13 @@
 		BA85A15B2A1B0DE5009C1CDD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BA85A15E2A1B0EA7009C1CDD /* NameSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameSettingView.swift; sourceTree = "<group>"; };
 		BA85A1622A1B0EF2009C1CDD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		BA85A1642A1B0F1C009C1CDD /* CreateGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupView.swift; sourceTree = "<group>"; };
-		BA85A1682A1B0F61009C1CDD /* JoinGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGroupView.swift; sourceTree = "<group>"; };
+		BA85A1642A1B0F1C009C1CDD /* CreateRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomView.swift; sourceTree = "<group>"; };
+		BA85A1682A1B0F61009C1CDD /* JoinRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomView.swift; sourceTree = "<group>"; };
 		BA85A16A2A1B0F7F009C1CDD /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		BA85A16C2A1B0F9F009C1CDD /* CreatePlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaylistView.swift; sourceTree = "<group>"; };
 		BA85A16E2A1B0FB7009C1CDD /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
-		BA85A1712A1B0FF7009C1CDD /* CreateGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupViewModel.swift; sourceTree = "<group>"; };
-		BA85A1732A1B1054009C1CDD /* JoinGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinGroupViewModel.swift; sourceTree = "<group>"; };
+		BA85A1712A1B0FF7009C1CDD /* CreateRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomViewModel.swift; sourceTree = "<group>"; };
+		BA85A1732A1B1054009C1CDD /* JoinRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomViewModel.swift; sourceTree = "<group>"; };
 		BA85A1752A1B107F009C1CDD /* CreatePlaylistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaylistViewModel.swift; sourceTree = "<group>"; };
 		BA85A17A2A1B10F4009C1CDD /* FirebaseAuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthModel.swift; sourceTree = "<group>"; };
 		BA85A17E2A1B114B009C1CDD /* AppleMusicLibraryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicLibraryModel.swift; sourceTree = "<group>"; };
@@ -287,8 +287,8 @@
 				BA6CF90F2A1B0C280066B55E /* AppleMusicAuthView.swift */,
 				BA85A15B2A1B0DE5009C1CDD /* LoginView.swift */,
 				BA85A1622A1B0EF2009C1CDD /* HomeView.swift */,
-				BA85A1642A1B0F1C009C1CDD /* CreateGroupView.swift */,
-				BA85A1682A1B0F61009C1CDD /* JoinGroupView.swift */,
+				BA85A1642A1B0F1C009C1CDD /* CreateRoomView.swift */,
+				BA85A1682A1B0F61009C1CDD /* JoinRoomView.swift */,
 				BA85A16C2A1B0F9F009C1CDD /* CreatePlaylistView.swift */,
 				BAA05CE72AF2B29C00A038A3 /* EnterRoomPinView.swift */,
 				BA85A1842A21B90C009C1CDD /* ViewComponents */,
@@ -309,10 +309,10 @@
 		BA85A1702A1B0FCA009C1CDD /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				BA85A1712A1B0FF7009C1CDD /* CreateGroupViewModel.swift */,
+				BA85A1712A1B0FF7009C1CDD /* CreateRoomViewModel.swift */,
 				BA52AA582C53F4D200D10C56 /* HomeViewModel.swift */,
 				BA785CAF2AF789760012CF67 /* EmailRegisterViewModel.swift */,
-				BA85A1732A1B1054009C1CDD /* JoinGroupViewModel.swift */,
+				BA85A1732A1B1054009C1CDD /* JoinRoomViewModel.swift */,
 				BA85A1752A1B107F009C1CDD /* CreatePlaylistViewModel.swift */,
 				BA967EEE2B09DA55008AB3CF /* EnterRoomPinViewModel.swift */,
 			);
@@ -557,7 +557,7 @@
 				BA6CF9152A1B0CB00066B55E /* EmailRegisterView.swift in Sources */,
 				BA85A17B2A1B10F4009C1CDD /* FirebaseAuthModel.swift in Sources */,
 				BA85A17F2A1B114B009C1CDD /* AppleMusicLibraryModel.swift in Sources */,
-				BA85A1652A1B0F1C009C1CDD /* CreateGroupView.swift in Sources */,
+				BA85A1652A1B0F1C009C1CDD /* CreateRoomView.swift in Sources */,
 				BA85A16D2A1B0F9F009C1CDD /* CreatePlaylistView.swift in Sources */,
 				BA4660FC2B0F9CFB00CF7678 /* LicenceView.swift in Sources */,
 				BA967EEF2B09DA55008AB3CF /* EnterRoomPinViewModel.swift in Sources */,
@@ -565,15 +565,15 @@
 				BA6CF9122A1B0C530066B55E /* SettingView.swift in Sources */,
 				BA85A1762A1B107F009C1CDD /* CreatePlaylistViewModel.swift in Sources */,
 				BA85A16B2A1B0F7F009C1CDD /* LoadingView.swift in Sources */,
-				BA85A1722A1B0FF7009C1CDD /* CreateGroupViewModel.swift in Sources */,
+				BA85A1722A1B0FF7009C1CDD /* CreateRoomViewModel.swift in Sources */,
 				BA85A15C2A1B0DE5009C1CDD /* LoginView.swift in Sources */,
 				BA85A16F2A1B0FB7009C1CDD /* ButtonView.swift in Sources */,
 				BA8542A32AFCB14B00434765 /* FirestoreRepository.swift in Sources */,
-				BA85A1692A1B0F61009C1CDD /* JoinGroupView.swift in Sources */,
+				BA85A1692A1B0F61009C1CDD /* JoinRoomView.swift in Sources */,
 				BA8542A52AFCB5A400434765 /* CreateRoomError.swift in Sources */,
 				BA85A15F2A1B0EA7009C1CDD /* NameSettingView.swift in Sources */,
 				BA52AA592C53F4D200D10C56 /* HomeViewModel.swift in Sources */,
-				BA85A1742A1B1054009C1CDD /* JoinGroupViewModel.swift in Sources */,
+				BA85A1742A1B1054009C1CDD /* JoinRoomViewModel.swift in Sources */,
 				BA85A1832A1B6B20009C1CDD /* GroupButtonView.swift in Sources */,
 				BAA05CE82AF2B29C00A038A3 /* EnterRoomPinView.swift in Sources */,
 				BA4B85742C5CA0AC0000E24F /* MusicSyncSongModel.swift in Sources */,
