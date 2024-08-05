@@ -28,7 +28,7 @@ class CreatePlaylistViewModel: ObservableObject {
         Task {
             do {
                 users = try await storeModel.downloadRoomData(roomPin: roomPin)
-                let downloadData = try await storeModel.downloadSongs(users: users)
+                let downloadData: [MusicItemCollection<Song>]  = try await storeModel.downloadSongs(users: users)
                 let songCount = downloadData.count
                 songs = downloadData[0]
                 for i in 1..<songCount {

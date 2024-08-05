@@ -10,7 +10,7 @@
 		BA4660F72B0F9C6700CF7678 /* LicenseList in Frameworks */ = {isa = PBXBuildFile; productRef = BA4660F62B0F9C6700CF7678 /* LicenseList */; };
 		BA4660FC2B0F9CFB00CF7678 /* LicenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4660FB2B0F9CFB00CF7678 /* LicenceView.swift */; };
 		BA4660FE2B0F9F6700CF7678 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = BA4660FD2B0F9F6700CF7678 /* .gitignore */; };
-		BA4B85742C5CA0AC0000E24F /* MusicSyncDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4B85732C5CA0AC0000E24F /* MusicSyncDataModel.swift */; };
+		BA4B85742C5CA0AC0000E24F /* MusicSyncSongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4B85732C5CA0AC0000E24F /* MusicSyncSongModel.swift */; };
 		BA52AA592C53F4D200D10C56 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA52AA582C53F4D200D10C56 /* HomeViewModel.swift */; };
 		BA6195262A2598C100FD5ECF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA6195252A2598C100FD5ECF /* GoogleService-Info.plist */; };
 		BA6CF8C72A1B0A480066B55E /* MusicSyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6CF8C62A1B0A480066B55E /* MusicSyncApp.swift */; };
@@ -86,7 +86,7 @@
 /* Begin PBXFileReference section */
 		BA4660FB2B0F9CFB00CF7678 /* LicenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenceView.swift; sourceTree = "<group>"; };
 		BA4660FD2B0F9F6700CF7678 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		BA4B85732C5CA0AC0000E24F /* MusicSyncDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSyncDataModel.swift; sourceTree = "<group>"; };
+		BA4B85732C5CA0AC0000E24F /* MusicSyncSongModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSyncSongModel.swift; sourceTree = "<group>"; };
 		BA52AA582C53F4D200D10C56 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		BA6195252A2598C100FD5ECF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BA68DF062A52F9F000DE546A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -324,7 +324,7 @@
 			children = (
 				BA85A17A2A1B10F4009C1CDD /* FirebaseAuthModel.swift */,
 				BA85A17E2A1B114B009C1CDD /* AppleMusicLibraryModel.swift */,
-				BA4B85732C5CA0AC0000E24F /* MusicSyncDataModel.swift */,
+				BA4B85732C5CA0AC0000E24F /* MusicSyncSongModel.swift */,
 				BA70AB9C2B944CD90041B369 /* AdCoodinator.swift */,
 			);
 			path = Models;
@@ -576,7 +576,7 @@
 				BA85A1742A1B1054009C1CDD /* JoinGroupViewModel.swift in Sources */,
 				BA85A1832A1B6B20009C1CDD /* GroupButtonView.swift in Sources */,
 				BAA05CE82AF2B29C00A038A3 /* EnterRoomPinView.swift in Sources */,
-				BA4B85742C5CA0AC0000E24F /* MusicSyncDataModel.swift in Sources */,
+				BA4B85742C5CA0AC0000E24F /* MusicSyncSongModel.swift in Sources */,
 				BA785CA72AF368BD0012CF67 /* MemberListCell.swift in Sources */,
 				BAA05CED2AF35D8C00A038A3 /* RoundedCorners.swift in Sources */,
 				BA967EED2B09D5C0008AB3CF /* NumberButtonView.swift in Sources */,

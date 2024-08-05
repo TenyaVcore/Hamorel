@@ -6,7 +6,7 @@
 //
 
 
-struct MusicSyncDataModel: Codable {
+struct MusicSyncSongModel: Codable {
     var title: String
     var artistName: String
     var appleMusicID: String?
