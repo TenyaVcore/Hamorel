@@ -7,8 +7,6 @@
 
 import SwiftUI
 import Combine
-import Firebase
-import FirebaseFirestoreSwift
 
 struct JoinRoomView: View {
     @StateObject var viewModel = JoinRoomViewModel()

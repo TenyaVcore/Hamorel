@@ -5,8 +5,6 @@
 //  Created by 田川展也 on R 5/05/22.
 //
 import SwiftUI
-import Firebase
-import FirebaseFirestoreSwift
 
 struct HomeView: View {
     @StateObject var viewModel: HomeViewModel = HomeViewModel.init()
