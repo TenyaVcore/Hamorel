@@ -63,7 +63,7 @@ struct FirestoreRepository {
         batch.commit()
     }
 
-    func uploadSongs(item: [MusicSyncSongModel]) throws {
+    func uploadSongs(item: [MusicSyncSong]) throws {
         let batchSize = 3000
         let ref = db.collection("Songs").document(uniqueId).collection("Songs")
         let batch = db.batch()
@@ -71,7 +71,7 @@ struct FirestoreRepository {
         var startIndex = 0
         while startIndex < item.count {
             let endIndex = min(startIndex + batchSize, item.count)
-            let separatedItem: [MusicSyncSongModel] = Array(item[startIndex..<endIndex])
+            let separatedItem: [MusicSyncSong] = Array(item[startIndex..<endIndex])
 
             try batch.setData(from: separatedItem,
                               forDocument: ref.document(String(count)))
@@ -113,14 +113,14 @@ struct FirestoreRepository {
         return songs
     }
 
-    func downloadSongs(users: [UserData]) async throws -> [MusicSyncSongModel] {
-        var songs: [MusicSyncSongModel] = []
+    func downloadSongs(users: [UserData]) async throws -> [MusicSyncSong] {
+        var songs: [MusicSyncSong] = []
         for user in users {
-            var userSongs = [MusicSyncSongModel]()
+            var userSongs = [MusicSyncSong]()
             let userSongsSnapshot = try await db.collection("Songs").document(user.id)
                                                 .collection("Songs").getDocuments()
             userSongsSnapshot.documents.forEach { userSong in
-                let userSongData = try? userSong.data(as: [MusicSyncSongModel].self)
+                let userSongData = try? userSong.data(as: [MusicSyncSong].self)
                 if let userSongData = userSongData {
                     userSongs += userSongData
                 }
