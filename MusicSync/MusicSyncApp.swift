@@ -25,7 +25,7 @@ struct MusicSyncApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            HomeView(viewModel: HomeViewModel())
         }
     }
 }

@@ -7,7 +7,11 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject var viewModel: HomeViewModel = HomeViewModel.init()
+    init(viewModel: HomeViewModel) {
+        self._viewModel = StateObject(wrappedValue: viewModel)
+    }
+
+    @StateObject var viewModel: HomeViewModel = HomeViewModel()
     @State private var path: [NavigationLinkItem] = []
 
     var body: some View {
@@ -79,8 +83,11 @@ struct HomeView: View {
                         }
                     }
                 }
+                .onAppear {
+                    viewModel.onAppear()
+                }
                 .sheet(isPresented: $viewModel.isPresentAppleMusicAuthView) {
-                    AppleMusicAuthView(appleAuthStatus: $viewModel.appleMusicAuthStatus)
+                    AppleMusicAuthView()
                 }
                 .navigationDestination(for: NavigationLinkItem.self) { item in
                     switch item {
@@ -93,7 +100,7 @@ struct HomeView: View {
                     case .playlist(let roomPin):
                         CreatePlaylistView(path: $path, roomPin: roomPin)
                     case .home:
-                        HomeView()
+                        HomeView(viewModel: HomeViewModel())
                     case .setting:
                         SettingView()
                     case .login:
@@ -113,8 +120,7 @@ struct HomeView: View {
 }
 
 struct homeView_Previews: PreviewProvider {
-    @State static var active = true
     static var previews: some View {
-        HomeView()
+        HomeView(viewModel: HomeViewModel(appleMusicAuthStatus: .authorized))
     }
 }
