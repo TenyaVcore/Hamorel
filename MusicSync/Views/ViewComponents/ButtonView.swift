@@ -31,6 +31,7 @@ struct ButtonView_Previews: PreviewProvider {
     static var previews: some View {
         ButtonView(text: "ボタン", textColor: .white, buttonColor: Color("color_primary"))
 
+        // swiftlint:disable:next line_length
         ButtonView(text: "長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト",
                    textColor: .white, buttonColor: Color("color_primary"))
     }
