@@ -42,17 +42,14 @@ struct AppleMusicLibraryModel {
         }
     }
 
-    func getCatalogID(from song: Song) throws {
+    func getCatalogID(from song: Song) throws -> String {
         // 一度JSONにパースしてから、CatalogIDを取得する
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
                 let jsonData = try encoder.encode(song)
                 let musicMetaData = try JSONDecoder().decode(MusicMetaData.self, from: jsonData)
                 let catalogID = musicMetaData.meta.musicKit_identifierSet.catalogID
-
-                // "catalogID"の値を出力
-                print("kind: \(catalogID.kind)")
-                print("value: \(catalogID.value)")
+                return catalogID.value
     }
 }
 
