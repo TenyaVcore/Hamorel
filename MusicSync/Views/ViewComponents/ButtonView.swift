@@ -18,7 +18,8 @@ struct ButtonView: View {
                 .font(.title3)
                 .fontWeight(.bold)
                 .foregroundColor(textColor)
-                .frame(width: 300, height: 50)
+                .padding(5)
+                .frame(minWidth: 300, minHeight: 50)
                 .background(buttonColor)
                 .cornerRadius(10)
         }
@@ -29,5 +30,8 @@ struct ButtonView: View {
 struct ButtonView_Previews: PreviewProvider {
     static var previews: some View {
         ButtonView(text: "ボタン", textColor: .white, buttonColor: Color("color_primary"))
+
+        ButtonView(text: "長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト長いテキスト",
+                   textColor: .white, buttonColor: Color("color_primary"))
     }
 }
