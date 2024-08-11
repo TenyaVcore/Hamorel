@@ -10,7 +10,7 @@ struct MusicSyncSong: Codable, Equatable {
     var artistName: String
     var appleMusicID: String?
 
-    static func == (lhs: MusicSyncSong, rhs: MusicSyncSong) -> Bool{
+    static func == (lhs: MusicSyncSong, rhs: MusicSyncSong) -> Bool {
         lhs.title == rhs.title && lhs.artistName == rhs.artistName
     }
 }
@@ -18,16 +18,12 @@ struct MusicSyncSong: Codable, Equatable {
 struct MusicSyncSongModel {
     func merge(item1: [MusicSyncSong], item2: [MusicSyncSong]) -> [MusicSyncSong] {
         var mergedItem: [MusicSyncSong] = []
-
-        let longerItem: [MusicSyncSong] = item1.count > item2.count ? item1 : item2
-        let smallerItem: [MusicSyncSong] = item1.count <= item2.count ? item1 : item2
+        let (longerItem, smallerItem) = item1.count > item2.count ? (item1, item2) : (item2, item1)
 
         for i in 0 ..< smallerItem.count {
-            for j in 0 ..< longerItem.count {
-                if longerItem[j].title == smallerItem[i].title && longerItem[j].artistName == smallerItem[i].artistName {
-                    mergedItem.append(smallerItem[i])
-                    break
-                }
+            for j in 0 ..< longerItem.count where longerItem[j] == smallerItem[i] {
+                mergedItem.append(smallerItem[i])
+                break
             }
         }
         return mergedItem
