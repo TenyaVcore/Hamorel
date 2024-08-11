@@ -10,47 +10,40 @@ import MusicKit
 
 struct AppleMusicAuthView: View {
 
-    @Binding var appleAuthStatus: MusicAuthorization.Status
-
     var body: some View {
         VStack {
-            Text("Apple Music Libraryへの\nアクセス権限が必要です。")
-                .font(.title)
-                .multilineTextAlignment(.center)
-                .padding()
+            HStack {
+                Image(systemName: "exclamationmark.circle")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50, height: 50)
+
+                Text("Apple Music Libraryへの\nアクセス権限が必要です。")
+                    .font(.title)
+                    .multilineTextAlignment(.center)
+                    .padding()
+            }
 
             Divider()
 
             VStack {
-                Text("現在の状態:")
-                    .padding(.bottom, 10)
-                    .font(.title3)
-
-                switch appleAuthStatus {
-                case .notDetermined:
-                    Text("選択されていません")
-                case .authorized:
-                    Text("ライブラリへのアクセスが許可されています")
-                case .denied:
                     VStack {
-                        Text("ライブラリへのアクセスが拒否されました。")
-                        Text("設定からメディアとAppleMusicへのアクセスを許可してください。")
-                            .multilineTextAlignment(.center)
+                        Text("アプリでAppleMusicのライブラリ情報を取得するため、設定からメディアとAppleMusicへのアクセスを許可してください。")
                     }
-                case .restricted:
-                    Text("設定にアクセスできません")
-                @unknown default:
-                    Text("不明なエラーが発生しました")
-                }
             }.padding()
 
+            Image("apple_music_auth")
+                .resizable()
+                .scaledToFit()
+                .padding(25)
+
             Button {
-                Task {
-                    await _ = MusicAuthorization.request()
-                    self.appleAuthStatus = MusicAuthorization.currentStatus
+                if let settingsUrl = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(settingsUrl)
                 }
             } label: {
-                ButtonView(text: "AppleMusicライブラリへの\nアクセスを許可", buttonColor: Color("color_primary"))
+                ButtonView(text: "設定を開く",
+                           buttonColor: Color("color_primary"))
                     .padding(25)
             }
         }
@@ -59,9 +52,8 @@ struct AppleMusicAuthView: View {
 }
 
 struct AppleMusicAuthView_Previews: PreviewProvider {
-    @State static var status = MusicAuthorization.Status.denied
     static var previews: some View {
-        AppleMusicAuthView(appleAuthStatus: $status)
+        AppleMusicAuthView()
             .previewLayout(.sizeThatFits)
     }
 }
