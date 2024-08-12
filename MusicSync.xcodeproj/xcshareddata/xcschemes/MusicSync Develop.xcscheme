@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BA6CF8C22A1B0A480066B55E"
-               BuildableName = "MusicSync.app"
-               BlueprintName = "MusicSync"
+               BlueprintIdentifier = "BA7AC8512C6A67C5009B252B"
+               BuildableName = "MusicSync-Develop.app"
+               BlueprintName = "MusicSync-Develop"
                ReferencedContainer = "container:MusicSync.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -67,9 +67,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BA6CF8C22A1B0A480066B55E"
-            BuildableName = "MusicSync.app"
-            BlueprintName = "MusicSync"
+            BlueprintIdentifier = "BA7AC8512C6A67C5009B252B"
+            BuildableName = "MusicSync-Develop.app"
+            BlueprintName = "MusicSync-Develop"
             ReferencedContainer = "container:MusicSync.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -87,16 +87,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BA6CF8C22A1B0A480066B55E"
-            BuildableName = "MusicSync.app"
-            BlueprintName = "MusicSync"
-            ReferencedContainer = "container:MusicSync.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
