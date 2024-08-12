@@ -70,6 +70,7 @@ struct CreateRoomView: View {
                 .opacity(viewModel.isLoading ? 1 : 0)
                 .animation(.easeInOut, value: viewModel.isLoading)
         }
+        .navigationBarBackButtonHidden(true)
         .onAppear {
             viewModel.createGroup(userName: userName)
             viewModel.usersData = [UserData(name: userName)]
