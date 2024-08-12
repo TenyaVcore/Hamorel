@@ -16,7 +16,6 @@
 		BA6CF8C72A1B0A480066B55E /* MusicSyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6CF8C62A1B0A480066B55E /* MusicSyncApp.swift */; };
 		BA6CF8CB2A1B0A490066B55E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA6CF8CA2A1B0A490066B55E /* Assets.xcassets */; };
 		BA6CF8CE2A1B0A490066B55E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA6CF8CD2A1B0A490066B55E /* Preview Assets.xcassets */; };
-		BA6CF8D82A1B0A4A0066B55E /* MusicSyncTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6CF8D72A1B0A4A0066B55E /* MusicSyncTests.swift */; };
 		BA6CF8E22A1B0A4A0066B55E /* MusicSyncUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6CF8E12A1B0A4A0066B55E /* MusicSyncUITests.swift */; };
 		BA6CF8E42A1B0A4A0066B55E /* MusicSyncUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6CF8E32A1B0A4A0066B55E /* MusicSyncUITestsLaunchTests.swift */; };
 		BA6CF8F22A1B0B090066B55E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BA6CF8F12A1B0B090066B55E /* FirebaseAnalytics */; };
@@ -41,6 +40,7 @@
 		BA70AB9D2B944CD90041B369 /* AdCoodinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA70AB9C2B944CD90041B369 /* AdCoodinator.swift */; };
 		BA785CA72AF368BD0012CF67 /* MemberListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA785CA62AF368BD0012CF67 /* MemberListCell.swift */; };
 		BA785CB02AF789760012CF67 /* EmailRegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA785CAF2AF789760012CF67 /* EmailRegisterViewModel.swift */; };
+		BA7AC84F2C6A2445009B252B /* MusicSyncSongModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7AC84E2C6A2445009B252B /* MusicSyncSongModelTest.swift */; };
 		BA8542A32AFCB14B00434765 /* FirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8542A22AFCB14B00434765 /* FirestoreRepository.swift */; };
 		BA8542A52AFCB5A400434765 /* CreateRoomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8542A42AFCB5A400434765 /* CreateRoomError.swift */; };
 		BA85A15C2A1B0DE5009C1CDD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA85A15B2A1B0DE5009C1CDD /* LoginView.swift */; };
@@ -95,7 +95,6 @@
 		BA6CF8CA2A1B0A490066B55E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA6CF8CD2A1B0A490066B55E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BA6CF8D32A1B0A4A0066B55E /* MusicSyncTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicSyncTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA6CF8D72A1B0A4A0066B55E /* MusicSyncTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSyncTests.swift; sourceTree = "<group>"; };
 		BA6CF8DD2A1B0A4A0066B55E /* MusicSyncUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicSyncUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6CF8E12A1B0A4A0066B55E /* MusicSyncUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSyncUITests.swift; sourceTree = "<group>"; };
 		BA6CF8E32A1B0A4A0066B55E /* MusicSyncUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSyncUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -107,6 +106,7 @@
 		BA70AB9C2B944CD90041B369 /* AdCoodinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdCoodinator.swift; sourceTree = "<group>"; };
 		BA785CA62AF368BD0012CF67 /* MemberListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListCell.swift; sourceTree = "<group>"; };
 		BA785CAF2AF789760012CF67 /* EmailRegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegisterViewModel.swift; sourceTree = "<group>"; };
+		BA7AC84E2C6A2445009B252B /* MusicSyncSongModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSyncSongModelTest.swift; sourceTree = "<group>"; };
 		BA8542A22AFCB14B00434765 /* FirestoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreRepository.swift; sourceTree = "<group>"; };
 		BA8542A42AFCB5A400434765 /* CreateRoomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoomError.swift; sourceTree = "<group>"; };
 		BA8542AB2AFE1D2800434765 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -255,7 +255,7 @@
 		BA6CF8D62A1B0A4A0066B55E /* MusicSyncTests */ = {
 			isa = PBXGroup;
 			children = (
-				BA6CF8D72A1B0A4A0066B55E /* MusicSyncTests.swift */,
+				BA7AC84E2C6A2445009B252B /* MusicSyncSongModelTest.swift */,
 			);
 			path = MusicSyncTests;
 			sourceTree = "<group>";
@@ -445,6 +445,7 @@
 					};
 					BA6CF8D22A1B0A4A0066B55E = {
 						CreatedOnToolsVersion = 14.3;
+						LastSwiftMigration = 1540;
 						TestTargetID = BA6CF8C22A1B0A480066B55E;
 					};
 					BA6CF8DC2A1B0A4A0066B55E = {
@@ -596,7 +597,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA6CF8D82A1B0A4A0066B55E /* MusicSyncTests.swift in Sources */,
+				BA7AC84F2C6A2445009B252B /* MusicSyncSongModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -823,6 +824,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P4P28KTQQK;
@@ -832,6 +834,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tenya.MusicSyncTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MusicSync.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MusicSync";
@@ -843,6 +846,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P4P28KTQQK;
