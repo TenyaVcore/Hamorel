@@ -83,9 +83,6 @@ struct HomeView: View {
                         }
                     }
                 }
-                .onAppear {
-                    viewModel.onAppear()
-                }
                 .sheet(isPresented: $viewModel.isPresentAppleMusicAuthView) {
                     AppleMusicAuthView()
                 }

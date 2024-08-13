@@ -17,5 +17,4 @@ class HomeViewModel: ObservableObject {
     @AppStorage("name") var name = "ゲストユーザー"
     @Published var isPresentAppleMusicAuthView = false
 
-    }
 }
