@@ -274,6 +274,14 @@
 			path = release;
 			sourceTree = "<group>";
 		};
+		BA325FD32C6BB10700AC41A0 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				BAA05CE92AF2B70900A038A3 /* NavigationLinkItem.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
 		BA4B85752C5CAB680000E24F /* Repository */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,7 +317,6 @@
 			isa = PBXGroup;
 			children = (
 				BA6CF8C62A1B0A480066B55E /* MusicSyncApp.swift */,
-				BAA05CEB2AF2B7B300A038A3 /* Enums */,
 				BA85A15A2A1B0DCC009C1CDD /* Views */,
 				BA85A1702A1B0FCA009C1CDD /* ViewModels */,
 				BA85A1772A1B1092009C1CDD /* Models */,
@@ -371,6 +378,7 @@
 				BA85A16C2A1B0F9F009C1CDD /* CreatePlaylistView.swift */,
 				BAA05CE72AF2B29C00A038A3 /* EnterRoomPinView.swift */,
 				BA85A1842A21B90C009C1CDD /* ViewComponents */,
+				BA325FD32C6BB10700AC41A0 /* Navigation */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -394,6 +402,7 @@
 				BA85A1732A1B1054009C1CDD /* JoinRoomViewModel.swift */,
 				BA85A1752A1B107F009C1CDD /* CreatePlaylistViewModel.swift */,
 				BA967EEE2B09DA55008AB3CF /* EnterRoomPinViewModel.swift */,
+				BAA05CEB2AF2B7B300A038A3 /* Errors */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -423,14 +432,13 @@
 			path = ViewComponents;
 			sourceTree = "<group>";
 		};
-		BAA05CEB2AF2B7B300A038A3 /* Enums */ = {
+		BAA05CEB2AF2B7B300A038A3 /* Errors */ = {
 			isa = PBXGroup;
 			children = (
-				BAA05CE92AF2B70900A038A3 /* NavigationLinkItem.swift */,
 				BA967EF52B0A3DDC008AB3CF /* JoinRoomError.swift */,
 				BA8542A42AFCB5A400434765 /* CreateRoomError.swift */,
 			);
-			path = Enums;
+			path = Errors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
