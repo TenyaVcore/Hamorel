@@ -11,8 +11,13 @@ class AdCoordinator: NSObject {
   private var ad: GADInterstitialAd?
 
   func loadAd() {
+#if DEBUG
+      let adUnitID = "ca-app-pub-3940256099942544/4411468910"
+#else
+      let adUnitID = "ca-app-pub-5449942175714797/6669029673"
+#endif
     GADInterstitialAd.load(
-      withAdUnitID: "ca-app-pub-3940256099942544/4411468910", request: GADRequest()
+      withAdUnitID: adUnitID, request: GADRequest()
     ) { ad, error in
       if let error = error {
         return print("Failed to load ad with error: \(error.localizedDescription)")
