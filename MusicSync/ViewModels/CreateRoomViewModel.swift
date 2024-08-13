@@ -28,10 +28,10 @@ class CreateRoomViewModel: ObservableObject {
     @State private var listener: ListenerRegistration?
 
     init(usersData: [UserData] = [UserData](),
-         model: FirestoreRepository = FirestoreRepository(),
+         storeModel: FirestoreRepository = FirestoreRepository(),
          musicModel: AppleMusicLibraryModel = AppleMusicLibraryModel()) {
         self.usersData = usersData
-        self.storeModel = model
+        self.storeModel = storeModel
         self.musicModel = musicModel
     }
 
