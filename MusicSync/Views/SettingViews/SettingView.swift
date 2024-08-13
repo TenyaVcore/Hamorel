@@ -76,7 +76,7 @@ struct SettingView: View {
             }
             
             Section {
-                NavigationLink(value: NavigationLinkItem.licence) {
+                NavigationLink(value: NavigationLinkItem.license) {
                     Text("ライセンス")
                 }
             }header: {

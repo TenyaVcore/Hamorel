@@ -17,5 +17,5 @@ enum NavigationLinkItem: Hashable {
     case passwordReset
     case register
     case provision
-    case licence
+    case license
 }

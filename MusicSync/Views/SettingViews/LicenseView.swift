@@ -8,7 +8,7 @@
 import SwiftUI
 import LicenseList
 
-struct LicenceView: View {
+struct LicenseView: View {
     var body: some View {
         NavigationView {
             LicenseListView()
@@ -18,5 +18,5 @@ struct LicenceView: View {
 }
 
 #Preview {
-    LicenceView()
+    LicenseView()
 }
