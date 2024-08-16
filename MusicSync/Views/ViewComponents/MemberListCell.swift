@@ -12,14 +12,15 @@ struct MemberListCell: View {
 
     var body: some View {
         HStack {
-            Circle()
-                .foregroundStyle(Color.gray)
-                .frame(width: 35)
-                .padding(.horizontal, 15)
-                .padding(.vertical, 4)
+//            Circle()
+//                .foregroundStyle(Color.gray)
+//                .frame(width: 35)
+//                .padding(.horizontal, 15)
+//                .padding(.vertical, 4)
 
             Text(name)
                 .bold()
+                .padding()
 
             Spacer()
 
