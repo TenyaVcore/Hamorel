@@ -11,7 +11,6 @@ import SwiftUI
 @MainActor
 class HomeViewModel: ObservableObject {
     @AppStorage("name") var name = "ゲストユーザー"
-    @AppStorage("isFirstLaunch") var isFirstLaunch = true
     @Published var isPresentAppleMusicAuthView = false
 
     init() {
