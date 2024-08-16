@@ -17,11 +17,12 @@ struct AppleMusicAuthView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 50, height: 50)
+                    .padding(.leading, 5)
 
                 Text("Apple Music Libraryへの\nアクセス権限が必要です。")
                     .font(.title)
                     .multilineTextAlignment(.center)
-                    .padding()
+                    .padding(5)
             }
 
             Divider()
