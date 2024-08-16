@@ -25,7 +25,6 @@ class HomeViewModel: ObservableObject {
     }
 
     private func checkAppleMusicAuthStatus() async {
-        print("checkAppleMusicAuthStatus")
         let status = MusicAuthorization.currentStatus
         isPresentAppleMusicAuthView = status != .authorized
     }
