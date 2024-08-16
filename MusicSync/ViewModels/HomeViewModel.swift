@@ -10,11 +10,24 @@ import SwiftUI
 
 @MainActor
 class HomeViewModel: ObservableObject {
-    init(appleMusicAuthStatus: MusicAuthorization.Status = MusicAuthorization.currentStatus) {
-        _isPresentAppleMusicAuthView = .init(initialValue: appleMusicAuthStatus != .authorized)
-    }
-
     @AppStorage("name") var name = "ゲストユーザー"
+    @AppStorage("isFirstLaunch") var isFirstLaunch = true
     @Published var isPresentAppleMusicAuthView = false
 
+    init() {
+        Task {
+            await _ = MusicAuthorization.request()
+            await checkAppleMusicAuthStatus()
+        }
+    }
+
+    func onAppear() async {
+        await checkAppleMusicAuthStatus()
+    }
+
+    private func checkAppleMusicAuthStatus() async {
+        print("checkAppleMusicAuthStatus")
+        let status = MusicAuthorization.currentStatus
+        isPresentAppleMusicAuthView = status != .authorized
+    }
 }

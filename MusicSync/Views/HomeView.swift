@@ -86,6 +86,9 @@ struct HomeView: View {
                 .sheet(isPresented: $viewModel.isPresentAppleMusicAuthView) {
                     AppleMusicAuthView()
                 }
+                .task {
+                    await viewModel.onAppear()
+                }
                 .navigationDestination(for: NavigationLinkItem.self) { item in
                     switch item {
                     case .create:
@@ -118,6 +121,6 @@ struct HomeView: View {
 
 struct homeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(viewModel: HomeViewModel(appleMusicAuthStatus: .authorized))
+        HomeView(viewModel: HomeViewModel())
     }
 }
