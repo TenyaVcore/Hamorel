@@ -84,6 +84,6 @@ struct EnterRoomPinView: View {
 }
 
 #Preview {
-    @State var path = [NavigationLinkItem]()
+    @Previewable @State var path = [NavigationLinkItem]()
     return EnterRoomPinView(path: $path)
 }
