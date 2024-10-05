@@ -43,7 +43,7 @@ struct AppleMusicAuthView: View {
                     UIApplication.shared.open(settingsUrl)
                 }
             } label: {
-                ButtonView(text: "設定を開く",
+                ButtonView(text: "次へ",
                            buttonColor: Color("color_primary"))
                     .padding(25)
             }
