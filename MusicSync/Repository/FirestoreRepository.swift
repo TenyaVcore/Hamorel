@@ -44,25 +44,6 @@ struct FirestoreRepository {
         return String(roomPin)
     }
 
-    // fire storeの1MB制限を超えないために楽曲情報を700曲ごとに分割してアップロード
-    func uploadSongs(item: MusicItemCollection<Song>) throws {
-        let ref = db.collection("Songs").document(uniqueId).collection("Songs")
-        let batch = db.batch()
-        var count = 1
-        var startIndex = 0
-        while startIndex < item.count {
-            let endIndex = min(startIndex + 700, item.count)
-            let subItem = item[startIndex..<endIndex]
-
-            let userSongs = UserSongs(songs: MusicItemCollection<Song>(subItem))
-            try batch.setData(from: userSongs,
-                              forDocument: ref.document(String(count)))
-            count += 1
-            startIndex += 700
-        }
-        batch.commit()
-    }
-
     func uploadSongs(item: [MusicSyncSong]) throws {
         let batchSize = 3000
         let ref = db.collection("Songs").document(uniqueId).collection("Songs")
@@ -91,26 +72,9 @@ struct FirestoreRepository {
             } catch {
                 print(error)
             }
-        
+
         }
         return users
-    }
-    
-    func downloadSongs(users: [UserData]) async throws -> [MusicItemCollection<Song>] {
-        var songs: [MusicItemCollection<Song>] = []
-        for user in users {
-            var userSongs = MusicItemCollection<Song>()
-            let userSongsSnapshot = try await db.collection("Songs").document(user.id)
-                                                .collection("Songs").getDocuments()
-            userSongsSnapshot.documents.forEach { userSong in
-                let userSongData = try? userSong.data(as: UserSongs.self)
-                if let userSongData = userSongData {
-                    userSongs += userSongData.songs
-                }
-            }
-            songs.append(userSongs)
-        }
-        return songs
     }
 
     func downloadSongs(users: [UserData]) async throws -> [MusicSyncSong] {
@@ -120,8 +84,7 @@ struct FirestoreRepository {
             let userSongsSnapshot = try await db.collection("Songs").document(user.id)
                                                 .collection("Songs").getDocuments()
             userSongsSnapshot.documents.forEach { userSong in
-                let userSongData = try? userSong.data(as: [MusicSyncSong].self)
-                if let userSongData = userSongData {
+                if let userSongData = try? userSong.data(as: [MusicSyncSong].self) {
                     userSongs += userSongData
                 }
             }
@@ -135,13 +98,13 @@ struct FirestoreRepository {
         var usersData = [UserData]()
 
         guard let data = try await roomRef.getDocument().data(),
-              let isEnable = data["isEnable"] as? Bool, 
+              let isEnable = data["isEnable"] as? Bool,
               let nextFlag = data["nextFlag"] as? Bool,
                 isEnable, !nextFlag
             else {
             throw JoinRoomError.roomNotFound
         }
-        
+
         let roomData = try await roomRef.collection("Member").getDocuments()
         if roomData.count > 4 {
             throw JoinRoomError.roomIsFull
@@ -149,16 +112,16 @@ struct FirestoreRepository {
 
         let userData = UserData(name: userName)
         try db.collection("Room").document(roomPin).collection("Member").document(uniqueId).setData(from: userData)
-         
+
         usersData = roomData.documents.map { (queryDocumentSnapshot) -> UserData in
             let data = queryDocumentSnapshot.data()
             let name = data["name"] as? String ?? ""
             let id = data["id"] as? String ?? "000000"
-            
+
             return UserData(id: id, name: name)
         }
         usersData.append(userData)
-        
+
         return usersData
     }
 
@@ -185,9 +148,4 @@ struct FirestoreRepository {
 struct UserData: Identifiable, Codable, Hashable {
     var id: String = UIDevice.current.identifierForVendor!.uuidString
     var name: String
-}
-
-// 楽曲情報用のモデル
-struct UserSongs: Codable {
-    var songs: MusicItemCollection<Song>
 }
