@@ -18,8 +18,6 @@ class CreateRoomViewModel: ObservableObject {
     var authModel = FirebaseAuthModel()
     var db = Firestore.firestore()
 
-    var songs = MusicItemCollection<Song>()
-    
     @Published var usersData: [UserData]
     @Published var isLoading = true
     @Published var isError = false
@@ -61,9 +59,11 @@ class CreateRoomViewModel: ObservableObject {
                 if Auth.auth().currentUser == nil {
                     try await authModel.loginAsGuestAsync()
                 }
-                songs = try await musicModel.loadLibrary(limit: 0)
+                let songs = try await musicModel.loadLibrary(limit: 0)
+                let musicSyncSongs = songs.toMusicSyncSongCollection()
+
                 roomPin = try await self.storeModel.createRoom(host: userName)
-                try self.storeModel.uploadSongs(item: songs)
+                try self.storeModel.uploadSongs(item: musicSyncSongs)
                 self.addListener()
                 self.isLoading = false
             } catch {

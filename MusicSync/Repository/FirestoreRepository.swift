@@ -77,8 +77,8 @@ struct FirestoreRepository {
         return users
     }
 
-    func downloadSongs(users: [UserData]) async throws -> [MusicSyncSong] {
-        var songs: [MusicSyncSong] = []
+    func downloadSongs(users: [UserData]) async throws -> [[MusicSyncSong]] {
+        var songs: [[MusicSyncSong]] = []
         for user in users {
             var userSongs = [MusicSyncSong]()
             let userSongsSnapshot = try await db.collection("Songs").document(user.id)
@@ -88,7 +88,7 @@ struct FirestoreRepository {
                     userSongs += userSongData
                 }
             }
-            songs.append(contentsOf: userSongs)
+            songs.append(userSongs)
         }
         return songs
     }
