@@ -7,11 +7,11 @@
 
 struct MusicSyncSong: Codable, Equatable {
     var title: String
-    var artistName: String
+    var artist: String
     var appleMusicID: String?
 
     static func == (lhs: MusicSyncSong, rhs: MusicSyncSong) -> Bool {
-        lhs.title == rhs.title && lhs.artistName == rhs.artistName
+        lhs.title == rhs.title && lhs.artist == rhs.artist
     }
 }
 
@@ -28,5 +28,4 @@ struct MusicSyncSongModel {
         }
         return mergedItem
     }
-
 }
