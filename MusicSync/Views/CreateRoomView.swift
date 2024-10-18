@@ -71,9 +71,8 @@ struct CreateRoomView: View {
                 .animation(.easeInOut, value: viewModel.isLoading)
         }
         .navigationBarBackButtonHidden(true)
-        .onAppear {
-            viewModel.createGroup(userName: userName)
-            viewModel.usersData = [UserData(name: userName)]
+        .task {
+            await viewModel.onAppear(userName: userName)
         }
         .onDisappear {
             if !viewModel.nextFlag {

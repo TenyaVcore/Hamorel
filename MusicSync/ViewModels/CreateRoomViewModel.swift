@@ -13,10 +13,9 @@ import FirebaseFirestoreSwift
 
 @MainActor
 class CreateRoomViewModel: ObservableObject {
-    var storeModel = FirestoreRepository()
-    var musicModel = AppleMusicLibraryModel()
-    var authModel = FirebaseAuthModel()
-    var db = Firestore.firestore()
+    let musicModel = AppleMusicLibraryModel()
+    let authModel = FirebaseAuthModel()
+    let db = Firestore.firestore()
 
     @Published var usersData: [UserData]
     @Published var isLoading = true
@@ -25,12 +24,8 @@ class CreateRoomViewModel: ObservableObject {
     @Published var nextFlag = false
     @State private var listener: ListenerRegistration?
 
-    init(usersData: [UserData] = [UserData](),
-         storeModel: FirestoreRepository = FirestoreRepository(),
-         musicModel: AppleMusicLibraryModel = AppleMusicLibraryModel()) {
+    init(usersData: [UserData] = [UserData]()) {
         self.usersData = usersData
-        self.storeModel = storeModel
-        self.musicModel = musicModel
     }
 
     func addListener() {
@@ -53,27 +48,29 @@ class CreateRoomViewModel: ObservableObject {
         listener?.remove()
     }
 
-    func createGroup(userName: String) {
-        Task {
-            do {
-                if Auth.auth().currentUser == nil {
-                    try await authModel.loginAsGuestAsync()
-                }
-                let songs = try await musicModel.loadLibrary(limit: 0)
-                let musicSyncSongs = songs.toMusicSyncSongCollection()
-
-                roomPin = try await self.storeModel.createRoom(host: userName)
-                try self.storeModel.uploadSongs(item: musicSyncSongs)
-                self.addListener()
-                self.isLoading = false
-            } catch {
-                print("error:\(error.localizedDescription)")
-                self.isError = true
+    func createGroup(userName: String) async {
+        let storeModel = FirestoreRepository()
+        do {
+            if Auth.auth().currentUser == nil {
+                try await authModel.loginAsGuestAsync()
             }
+            let songs = try await musicModel.loadLibrary(limit: 0)
+            let musicSyncSongs = songs.toMusicSyncSongCollection()
+
+            roomPin = try await storeModel.createRoom(host: userName)
+            Task {
+                try await storeModel.uploadSongs(item: musicSyncSongs)
+            }
+            self.addListener()
+            self.isLoading = false
+        } catch {
+            print("error:\(error.localizedDescription)")
+            self.isError = true
         }
     }
     
     func pushNext() {
+        let storeModel = FirestoreRepository()
         self.nextFlag = true
         self.listener?.remove()
         Task {
@@ -86,8 +83,15 @@ class CreateRoomViewModel: ObservableObject {
     }
 
     func deleteGroup() {
+        let storeModel = FirestoreRepository()
         self.listener?.remove()
         storeModel.deleteRoom(roomPin: roomPin)
+    }
+
+    func onAppear(userName: String) async {
+        let uniqueId: String = UIDevice.current.identifierForVendor!.uuidString
+        await createGroup(userName: userName)
+        usersData = [UserData(id: uniqueId, name: userName)]
     }
 
 }

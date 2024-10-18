@@ -44,11 +44,6 @@ struct LoadingView: View {
                 }
                 .onAppear {
                     isAnimating = true
-                    _ = withAnimation(Animation.easeInOut(duration: 3).repeatForever(autoreverses: true)) {
-                        Timer.scheduledTimer(withTimeInterval: 3 / Double(maxDots), repeats: true) { _ in
-                            numberOfDots = (numberOfDots + 1) % (maxDots + 1)
-                        }
-                    }
                 }
             }
         }

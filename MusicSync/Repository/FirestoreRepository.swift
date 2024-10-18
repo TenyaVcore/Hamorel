@@ -12,12 +12,12 @@ import MusicKit
 import SwiftUI
 import UIKit
 
-struct FirestoreRepository {
+struct FirestoreRepository: @unchecked Sendable {
     let db = Firestore.firestore()
-    let uniqueId: String = UIDevice.current.identifierForVendor!.uuidString
 
     func createRoom(host: String) async throws -> String {
-        let userData = UserData(name: host)
+        let uniqueId: String = await UIDevice.current.identifierForVendor!.uuidString
+        let userData = UserData(id: uniqueId, name: host)
         var failCount: Int = 0
         var roomPin = Int.random(in: 100000...999999)
         let ref = db.collection("Room")
@@ -44,12 +44,14 @@ struct FirestoreRepository {
         return String(roomPin)
     }
 
-    func uploadSongs(item: [MusicSyncSong]) throws {
+    func uploadSongs(item: [MusicSyncSong]) async throws {
         let batchSize = 3000
+        let uniqueId: String = await UIDevice.current.identifierForVendor!.uuidString
         let ref = db.collection("Songs").document(uniqueId).collection("Songs")
         let batch = db.batch()
         var count = 1
         var startIndex = 0
+
         while startIndex < item.count {
             let endIndex = min(startIndex + batchSize, item.count)
             let separatedItem: [MusicSyncSong] = Array(item[startIndex..<endIndex])
@@ -59,7 +61,7 @@ struct FirestoreRepository {
             count += 1
             startIndex += batchSize
         }
-        batch.commit()
+        try await batch.commit()
     }
 
     func downloadRoomData(roomPin: String) async throws -> [UserData] {
@@ -94,6 +96,7 @@ struct FirestoreRepository {
     }
 
     func joinRoom(roomPin: String, userName: String) async throws -> [UserData] {
+        let uniqueId: String = await UIDevice.current.identifierForVendor!.uuidString
         let roomRef = db.collection("Room").document(roomPin)
         var usersData = [UserData]()
 
@@ -110,7 +113,7 @@ struct FirestoreRepository {
             throw JoinRoomError.roomIsFull
         }
 
-        let userData = UserData(name: userName)
+        let userData = UserData(id: uniqueId, name: userName)
         try db.collection("Room").document(roomPin).collection("Member").document(uniqueId).setData(from: userData)
 
         usersData = roomData.documents.map { (queryDocumentSnapshot) -> UserData in
@@ -129,13 +132,20 @@ struct FirestoreRepository {
         try await db.collection("Room").document(roomPin).setData(["nextFlag": true, "isEnable": true])
     }
 
-    func exitRoom(roomPin: String) {
-        db.collection("Room").document(roomPin).collection("Member").document(uniqueId).delete { error in
-            if let error = error {
-                print("Error removing document: \(error)")
-            } else {
-                print("Document successfully removed from \(roomPin)!")
-            }
+    func exitRoom(roomPin: String) async throws {
+        let uniqueId: String = await UIDevice.current.identifierForVendor!.uuidString
+
+        do {
+
+            try await db.collection("Room")
+                .document(roomPin)
+                .collection("Member")
+                .document(uniqueId)
+                .delete()
+            print("Document successfully removed from \(roomPin)!")
+        } catch let error {
+            print("Error removing document: \(error)")
+            throw error
         }
     }
 
@@ -146,6 +156,6 @@ struct FirestoreRepository {
 
 // firestoreに保存するデータモデル
 struct UserData: Identifiable, Codable, Hashable {
-    var id: String = UIDevice.current.identifierForVendor!.uuidString
+    var id: String
     var name: String
 }

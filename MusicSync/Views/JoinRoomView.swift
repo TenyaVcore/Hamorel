@@ -71,11 +71,15 @@ struct JoinRoomView: View {
                 }
             }
         }
-        .onDisappear {
-            if !viewModel.nextFlag {
-                viewModel.exitGroup()
+        .task {
+            do {
+                if !viewModel.nextFlag {
+                    try await viewModel.exitGroup()
+                }
+                cancellable.cancel()
+            } catch {
+                print(error)
             }
-            cancellable.cancel()
         }
         .alert(viewModel.errorMessage, isPresented: $viewModel.isError, actions: {
             Button("OK") { path.removeLast() }

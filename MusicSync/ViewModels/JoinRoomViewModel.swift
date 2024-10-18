@@ -84,9 +84,8 @@ class JoinRoomViewModel: ObservableObject {
         }
     }
 
-    func exitGroup() {
-        storeModel.exitRoom(roomPin: roomPin)
+    func exitGroup() async throws {
+        try await storeModel.exitRoom(roomPin: roomPin)
         listener?.remove()
     }
-
 }
