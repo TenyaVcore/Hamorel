@@ -71,7 +71,7 @@ struct SettingView: View {
                 NavigationLink(value: NavigationLinkItem.passwordReset) {
                     Text("パスワードの変更")
                 }
-            }header: {
+            } header: {
                 Text("ユーザ情報の変更")
             }
             
@@ -79,9 +79,17 @@ struct SettingView: View {
                 NavigationLink(value: NavigationLinkItem.license) {
                     Text("ライセンス")
                 }
-            }header: {
+            } header: {
                 Text("規約")
             }
+
+#if DEBUG
+            Section {
+                TestView()
+            } header: {
+                Text("デバッグ")
+            }
+#endif
 
             if Auth.auth().currentUser?.isAnonymous != nil {
                 Button(action: {
