@@ -59,7 +59,7 @@ struct AppleMusicLibraryModel {
         return response.items[0]
     }
 
-    func getSong(from artist: String, title: String) async throws -> Song {
+    func getSong(artist: String, title: String) async throws -> Song {
         var request = MusicCatalogSearchRequest(term: "\(artist) \(title)", types: [Song.self])
         request.limit = 1
         let response = try await request.response()
@@ -81,44 +81,6 @@ struct AppleMusicLibraryModel {
 enum FetchError: Error {
     case songNotFound
     case songMismatch
-}
-
-extension Array where Element == MusicSyncSong {
-    func toMusicItemCollection() -> MusicItemCollection<Song> {
-        let appleMusicLibraryModel = AppleMusicLibraryModel()
-        var songs: [Song] = []
-
-        Task {
-            try await withThrowingTaskGroup(of: Song.self) { group in
-                for song in self {
-                    group.addTask {
-                        if let catalogID = song.appleMusicID {
-                            return try await appleMusicLibraryModel.getSong(from: catalogID)
-                        } else {
-                            return try await appleMusicLibraryModel.getSong(from: song.artist, title: song.title)
-                        }
-                    }
-                }
-                for try await song in group {
-                    songs.append(song)
-                }
-            }
-        }
-        return MusicItemCollection(songs)
-    }
-}
-
-extension MusicItemCollection<Song> {
-    func toMusicSyncSongCollection() -> [MusicSyncSong] {
-        let appleMusicModel = AppleMusicLibraryModel()
-        var result: [MusicSyncSong] = []
-        self.forEach { song in
-            let id = try? appleMusicModel.getCatalogID(from: song)
-            let musicSyncSong = MusicSyncSong(title: song.title, artist: song.artistName, appleMusicID: id)
-            result.append(musicSyncSong)
-        }
-        return result
-    }
 }
 
 // Songのメタデータをパースするモデル
