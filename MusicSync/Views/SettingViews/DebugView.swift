@@ -10,13 +10,32 @@ import MusicKit
 
 struct DebugView: View {
     @State var song: Song?
+    @State var artistText: String = ""
+    @State var titleText: String = ""
+    let model = AppleMusicLibraryModel()
 
     var body: some View {
-        Text("title: " + (song?.title ?? ""))
-        Text("artist: " + (song?.artistName ?? ""))
-
         List {
-            
+            Text("title: " + (song?.title ?? ""))
+            Text("artist: " + (song?.artistName ?? ""))
+            TextField("artist", text: $artistText)
+            TextField("title", text: $titleText)
+            Button("曲を検索") {
+                Task {
+                    do {
+                        song = try await model.getSong(artist: artistText, title: titleText)
+                    } catch {
+                        print(error)
+                    }
+                }
+            }
+            Button("プレイリスト作成") {
+                do {
+                    try model.createPlaylist(from: MusicItemCollection(arrayLiteral: song!))
+                } catch {
+                    print(error)
+                }
+            }
         }
     }
 }
