@@ -11,8 +11,8 @@
 		BA4660FC2B0F9CFB00CF7678 /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4660FB2B0F9CFB00CF7678 /* LicenseView.swift */; };
 		BA4B85742C5CA0AC0000E24F /* MusicSyncSongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4B85732C5CA0AC0000E24F /* MusicSyncSongModel.swift */; };
 		BA52AA592C53F4D200D10C56 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA52AA582C53F4D200D10C56 /* HomeViewModel.swift */; };
-		BA5580032CB1362000DB20BD /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5580022CB1362000DB20BD /* TestView.swift */; };
-		BA5580042CB1362000DB20BD /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5580022CB1362000DB20BD /* TestView.swift */; };
+		BA5580032CB1362000DB20BD /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5580022CB1362000DB20BD /* DebugView.swift */; };
+		BA5580042CB1362000DB20BD /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5580022CB1362000DB20BD /* DebugView.swift */; };
 		BA6CF8C72A1B0A480066B55E /* MusicSyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6CF8C62A1B0A480066B55E /* MusicSyncApp.swift */; };
 		BA6CF8CB2A1B0A490066B55E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA6CF8CA2A1B0A490066B55E /* Assets.xcassets */; };
 		BA6CF8E22A1B0A4A0066B55E /* MusicSyncUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6CF8E12A1B0A4A0066B55E /* MusicSyncUITests.swift */; };
@@ -142,7 +142,7 @@
 		BA4660FD2B0F9F6700CF7678 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		BA4B85732C5CA0AC0000E24F /* MusicSyncSongModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSyncSongModel.swift; sourceTree = "<group>"; };
 		BA52AA582C53F4D200D10C56 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		BA5580022CB1362000DB20BD /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		BA5580022CB1362000DB20BD /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		BA68DF062A52F9F000DE546A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA6CF8C32A1B0A480066B55E /* MusicSync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6CF8C62A1B0A480066B55E /* MusicSyncApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSyncApp.swift; sourceTree = "<group>"; };
@@ -392,7 +392,7 @@
 				BA6CF9112A1B0C530066B55E /* SettingView.swift */,
 				BA85A15E2A1B0EA7009C1CDD /* NameSettingView.swift */,
 				BA4660FB2B0F9CFB00CF7678 /* LicenseView.swift */,
-				BA5580022CB1362000DB20BD /* TestView.swift */,
+				BA5580022CB1362000DB20BD /* DebugView.swift */,
 			);
 			path = SettingViews;
 			sourceTree = "<group>";
@@ -764,7 +764,7 @@
 				BA967EF12B09E0A3008AB3CF /* DeleteButtonView.swift in Sources */,
 				BA785CB02AF789760012CF67 /* EmailRegisterViewModel.swift in Sources */,
 				BA6CF9172A1B0CF90066B55E /* ProvisionalRegistrationView.swift in Sources */,
-				BA5580042CB1362000DB20BD /* TestView.swift in Sources */,
+				BA5580042CB1362000DB20BD /* DebugView.swift in Sources */,
 				BA85A1632A1B0EF2009C1CDD /* HomeView.swift in Sources */,
 				BA6CF9102A1B0C280066B55E /* AppleMusicAuthView.swift in Sources */,
 				BA967EF62B0A3DDC008AB3CF /* JoinRoomError.swift in Sources */,
@@ -824,7 +824,7 @@
 				BA7AC8832C6A67C5009B252B /* DeleteButtonView.swift in Sources */,
 				BA7AC8842C6A67C5009B252B /* EmailRegisterViewModel.swift in Sources */,
 				BA7AC8852C6A67C5009B252B /* ProvisionalRegistrationView.swift in Sources */,
-				BA5580032CB1362000DB20BD /* TestView.swift in Sources */,
+				BA5580032CB1362000DB20BD /* DebugView.swift in Sources */,
 				BA7AC8862C6A67C5009B252B /* HomeView.swift in Sources */,
 				BA7AC8872C6A67C5009B252B /* AppleMusicAuthView.swift in Sources */,
 				BA7AC8882C6A67C5009B252B /* JoinRoomError.swift in Sources */,

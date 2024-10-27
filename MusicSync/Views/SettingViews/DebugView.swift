@@ -8,12 +8,12 @@
 import SwiftUI
 import MusicKit
 
-struct TestView: View {
-    @State var song: Song!
+struct DebugView: View {
+    @State var song: Song?
 
     var body: some View {
-        Text("title: " + song.title)
-        Text("artist: " + song.artistName)
+        Text("title: " + (song?.title ?? ""))
+        Text("artist: " + (song?.artistName ?? ""))
 
         List {
             
@@ -22,5 +22,5 @@ struct TestView: View {
 }
 
 #Preview {
-    TestView()
+    DebugView()
 }

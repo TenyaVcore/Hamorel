@@ -85,7 +85,9 @@ struct SettingView: View {
 
 #if DEBUG
             Section {
-                TestView()
+                NavigationLink(value: NavigationLinkItem.debug) {
+                    Text("デバッグ")
+                }
             } header: {
                 Text("デバッグ")
             }

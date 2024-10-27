@@ -113,6 +113,8 @@ struct HomeView: View {
                         ProvisionalRegistrationView(path: $path)
                     case .license:
                         LicenseView()
+                    case .debug:
+                        DebugView()
                     }
                 }
             }
