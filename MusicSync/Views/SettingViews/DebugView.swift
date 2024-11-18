@@ -13,6 +13,7 @@ struct DebugView: View {
     @State var artistText: String = ""
     @State var titleText: String = ""
     let model = AppleMusicLibraryModel()
+    let syncModel = MusicSyncSongModel()
 
     var body: some View {
         List {
@@ -34,6 +35,24 @@ struct DebugView: View {
                     try model.createPlaylist(from: MusicItemCollection(arrayLiteral: song!))
                 } catch {
                     print(error)
+                }
+            }
+            Button("並行に取得しプレイリスト作成") {
+                Task {
+                    do {
+                        let songs = try await model.loadLibrary(limit: 0)
+                        print("songs")
+                        print(songs)
+                        let syncSongs = songs.toMusicSyncSongCollection()
+                        print("syncSongs")
+                        print(syncSongs)
+                        let ItemCollection = await syncSongs.toMusicItemCollection()
+                        print("ItemCollection")
+                        print(ItemCollection)
+                        try model.createPlaylist(from: ItemCollection)
+                    } catch {
+                        print(error)
+                    }
                 }
             }
         }
