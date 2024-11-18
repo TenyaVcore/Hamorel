@@ -31,7 +31,6 @@ class CreatePlaylistViewModel: ObservableObject {
             do {
                 users = try await storeModel.downloadRoomData(roomPin: roomPin)
                 let downloadData: [[MusicSyncSong]]  = try await storeModel.downloadSongs(users: users)
-
                 songs = downloadData[0]
                 for i in 1..<downloadData.count {
                     songs = musicSyncSongModel.merge(item1: songs, item2: downloadData[i])
@@ -45,11 +44,14 @@ class CreatePlaylistViewModel: ObservableObject {
     }
 
     func createPlaylist() {
-        do {
-            try appleMusicModel.createPlaylist(from: songs.toMusicItemCollection(), playlistName: playlistName)
-        } catch {
-            print("create error: \(error.localizedDescription)")
-            isCreateError = true
+        Task {
+            let musicItem = await songs.toMusicItemCollection()
+            do {
+                try appleMusicModel.createPlaylist(from: musicItem, playlistName: playlistName)
+            } catch {
+                print("create error: \(error.localizedDescription)")
+                isCreateError = true
+            }
         }
     }
 }
