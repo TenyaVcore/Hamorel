@@ -89,7 +89,6 @@
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		BA7316812CCE6CC80006CAB0 /* MusicSyncTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = MusicSyncTests; sourceTree = "<group>"; };
-		BA7316852CCE6CCC0006CAB0 /* MusicSyncUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = MusicSyncUITests; sourceTree = "<group>"; };
 		BA7316C52CCE6D860006CAB0 /* MusicSync */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (BA73171C2CCE6D860006CAB0 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, BA73171D2CCE6D860006CAB0 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = MusicSync; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -162,7 +161,6 @@
 				BA4660FD2B0F9F6700CF7678 /* .gitignore */,
 				BA7316C52CCE6D860006CAB0 /* MusicSync */,
 				BA7316812CCE6CC80006CAB0 /* MusicSyncTests */,
-				BA7316852CCE6CCC0006CAB0 /* MusicSyncUITests */,
 				BA6CF8C42A1B0A480066B55E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -254,9 +252,6 @@
 			);
 			dependencies = (
 				BA6CF8DF2A1B0A4A0066B55E /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				BA7316852CCE6CCC0006CAB0 /* MusicSyncUITests */,
 			);
 			name = MusicSyncUITests;
 			productName = MusicSyncUITests;
@@ -720,7 +715,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P4P28KTQQK;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tenya.MusicSyncTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -741,7 +736,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P4P28KTQQK;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tenya.MusicSyncTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -759,6 +754,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P4P28KTQQK;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tenya.MusicSyncUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -776,6 +772,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P4P28KTQQK;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tenya.MusicSyncUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
