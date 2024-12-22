@@ -6,6 +6,7 @@
 //
 
 struct MusicSyncSongModel {
+    /// MusicSongの配列をANDで足し合わせます。
     func merge(item1: [MusicSyncSong], item2: [MusicSyncSong]) -> [MusicSyncSong] {
         var mergedItem: [MusicSyncSong] = []
         let (longerItem, smallerItem) = item1.count > item2.count ? (item1, item2) : (item2, item1)
