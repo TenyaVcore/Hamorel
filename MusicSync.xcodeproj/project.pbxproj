@@ -71,8 +71,8 @@
 			membershipExceptions = (
 				"Develop-Info.plist",
 				Info.plist,
-				"Preview Content/Preview Assets.xcassets",
 				"SupportFile/GoogleService-info/develop/GoogleService-Info.plist",
+				"SupportFile/Preview Content/Preview Assets.xcassets",
 			);
 			target = BA6CF8C22A1B0A480066B55E /* MusicSync */;
 		};
@@ -791,7 +791,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"MusicSync/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MusicSync/SupportFile/Preview Content\"";
 				DEVELOPMENT_TEAM = P4P28KTQQK;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -829,7 +829,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"MusicSync/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MusicSync/SupportFile/Preview Content\"";
 				DEVELOPMENT_TEAM = P4P28KTQQK;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
