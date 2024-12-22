@@ -71,9 +71,9 @@
 			membershipExceptions = (
 				Assets.xcassets,
 				"Develop-Info.plist",
-				"GoogleService-info/develop/GoogleService-Info.plist",
 				Info.plist,
 				"Preview Content/Preview Assets.xcassets",
+				"SupportFile/GoogleService-info/develop/GoogleService-Info.plist",
 			);
 			target = BA6CF8C22A1B0A480066B55E /* MusicSync */;
 		};
@@ -82,8 +82,8 @@
 			membershipExceptions = (
 				Assets.xcassets,
 				"Develop-Info.plist",
-				"GoogleService-info/release/GoogleService-Info.plist",
 				Info.plist,
+				"SupportFile/GoogleService-info/release/GoogleService-Info.plist",
 			);
 			target = BA7AC8512C6A67C5009B252B /* MusicSync-Develop */;
 		};
