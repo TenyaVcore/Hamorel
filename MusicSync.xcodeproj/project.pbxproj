@@ -69,6 +69,7 @@
 		BA73171C2CCE6D860006CAB0 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Assets.xcassets,
 				"Develop-Info.plist",
 				"GoogleService-info/develop/GoogleService-Info.plist",
 				Info.plist,
@@ -79,6 +80,7 @@
 		BA73171D2CCE6D860006CAB0 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Assets.xcassets,
 				"Develop-Info.plist",
 				"GoogleService-info/release/GoogleService-Info.plist",
 				Info.plist,
