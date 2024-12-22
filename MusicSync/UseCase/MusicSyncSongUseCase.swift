@@ -1,19 +1,9 @@
 //
-//  MusicSyncSongModel.swift
+//  MusicSyncSongUseCase.swift
 //  MusicSync
 //
-//  Created by 田川展也 on R 6/08/02.
+//  Created by 田川展也 on 12/22/R6.
 //
-
-struct MusicSyncSong: Codable, Equatable {
-    var title: String
-    var artist: String
-    var appleMusicID: String?
-
-    static func == (lhs: MusicSyncSong, rhs: MusicSyncSong) -> Bool {
-        lhs.title == rhs.title && lhs.artist == rhs.artist
-    }
-}
 
 struct MusicSyncSongModel {
     func merge(item1: [MusicSyncSong], item2: [MusicSyncSong]) -> [MusicSyncSong] {
