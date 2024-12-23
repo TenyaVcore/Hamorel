@@ -12,8 +12,9 @@ struct DebugView: View {
     @State var song: Song?
     @State var artistText: String = ""
     @State var titleText: String = ""
-    let model = AppleMusicLibraryModel()
-    let syncModel = MusicSyncSongModel()
+    let loadLibraryUseCase = AppleMusicLoadLibraryUseCase()
+    let createPlaylistUseCase = AppleMusicCreatePlaylistUseCase()
+    let syncModel = MusicSyncSongUseCase()
 
     var body: some View {
         List {
@@ -24,7 +25,7 @@ struct DebugView: View {
             Button("曲を検索") {
                 Task {
                     do {
-                        song = try await model.getSong(artist: artistText, title: titleText)
+                        song = try await createPlaylistUseCase.getSong(artist: artistText, title: titleText)
                     } catch {
                         print(error)
                     }
@@ -32,27 +33,11 @@ struct DebugView: View {
             }
             Button("プレイリスト作成") {
                 do {
-                    try model.createPlaylist(from: MusicItemCollection(arrayLiteral: song!))
+                    try createPlaylistUseCase.createPlaylist(
+                        from: loadLibraryUseCase.convertToMusicSyncSongCollection(from: [song!]))
+
                 } catch {
                     print(error)
-                }
-            }
-            Button("並行に取得しプレイリスト作成") {
-                Task {
-                    do {
-                        let songs = try await model.loadLibrary(limit: 0)
-                        print("songs")
-                        print(songs)
-                        let syncSongs = songs.toMusicSyncSongCollection()
-                        print("syncSongs")
-                        print(syncSongs)
-                        let ItemCollection = await syncSongs.toMusicItemCollection()
-                        print("ItemCollection")
-                        print(ItemCollection)
-                        try model.createPlaylist(from: ItemCollection)
-                    } catch {
-                        print(error)
-                    }
                 }
             }
         }

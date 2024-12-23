@@ -13,11 +13,11 @@ import FirebaseFirestoreSwift
 @MainActor
 class JoinRoomViewModel: ObservableObject {
     var storeModel = FirestoreRepository()
-    var musicModel = AppleMusicLibraryModel()
+    var loadLibraryUseCase = AppleMusicLoadLibraryUseCase()
     var authModel = FirebaseAuthModel()
     var db = Firestore.firestore()
-    var songs = MusicItemCollection<Song>()
-    
+    var songs: [MusicSyncSong] = []
+
     @Published var usersData: [UserData]
     @Published var isLoading = true
     @Published var isError = false
@@ -28,11 +28,9 @@ class JoinRoomViewModel: ObservableObject {
     @State private var roomListener: ListenerRegistration?
 
     init(usersData: [UserData] = [UserData](), 
-         model: FirestoreRepository = FirestoreRepository(),
-         musicModel: AppleMusicLibraryModel = AppleMusicLibraryModel()) {
+         model: FirestoreRepository = FirestoreRepository()) {
         self.usersData = usersData
         self.storeModel = model
-        self.musicModel = musicModel
     }
 
     func addListener() {
@@ -69,7 +67,7 @@ class JoinRoomViewModel: ObservableObject {
                 if Auth.auth().currentUser == nil {
                     try await authModel.loginAsGuestAsync()
                 }
-                songs = try await musicModel.loadLibrary(limit: 0)
+                songs = try await loadLibraryUseCase.loadLibrary(limit: 0)
                 print("fetch songs")
                 self.usersData = try await storeModel.joinRoom(roomPin: roomPin, userName: userName)
                 print("join room")

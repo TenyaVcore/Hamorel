@@ -13,8 +13,8 @@ import FirebaseFirestoreSwift
 @MainActor
 class CreatePlaylistViewModel: ObservableObject {
     var storeModel = FirestoreRepository()
-    var appleMusicModel = AppleMusicLibraryModel()
-    var musicSyncSongModel = MusicSyncSongModel()
+    var appleMusicCreatePlaylistUseCase = AppleMusicCreatePlaylistUseCase()
+    var musicSyncSongUseCase = MusicSyncSongUseCase()
 
     var songs: [MusicSyncSong] = []
 
@@ -33,7 +33,7 @@ class CreatePlaylistViewModel: ObservableObject {
                 let downloadData: [[MusicSyncSong]]  = try await storeModel.downloadSongs(users: users)
                 songs = downloadData[0]
                 for i in 1..<downloadData.count {
-                    songs = musicSyncSongModel.merge(item1: songs, item2: downloadData[i])
+                    songs = musicSyncSongUseCase.merge(item1: songs, item2: downloadData[i])
                 }
                 isLoading = false
             } catch {
@@ -45,9 +45,8 @@ class CreatePlaylistViewModel: ObservableObject {
 
     func createPlaylist() {
         Task {
-            let musicItem = await songs.toMusicItemCollection()
             do {
-                try appleMusicModel.createPlaylist(from: musicItem, playlistName: playlistName)
+                try appleMusicCreatePlaylistUseCase.createPlaylist(from: songs, playlistName: playlistName)
             } catch {
                 print("create error: \(error.localizedDescription)")
                 isCreateError = true

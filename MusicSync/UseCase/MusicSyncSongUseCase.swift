@@ -5,7 +5,7 @@
 //  Created by 田川展也 on 12/22/R6.
 //
 
-struct MusicSyncSongModel {
+struct MusicSyncSongUseCase {
     /// MusicSongの配列をANDで足し合わせます。
     func merge(item1: [MusicSyncSong], item2: [MusicSyncSong]) -> [MusicSyncSong] {
         var mergedItem: [MusicSyncSong] = []
