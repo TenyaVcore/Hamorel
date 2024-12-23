@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MusicKit
 
 struct AppleMusicAuthView: View {
 

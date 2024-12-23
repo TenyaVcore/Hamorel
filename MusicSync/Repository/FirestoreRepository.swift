@@ -8,7 +8,6 @@
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import MusicKit
 import SwiftUI
 import UIKit
 

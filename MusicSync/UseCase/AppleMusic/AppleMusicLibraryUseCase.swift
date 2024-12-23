@@ -5,7 +5,7 @@
 //  Created by 田川展也 on R 5/05/22.
 //
 
-import Foundation
+import Foundation.NSJSONSerialization
 import MusicKit
 
 struct AppleMusicLoadLibraryUseCase {

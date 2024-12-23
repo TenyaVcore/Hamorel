@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MusicKit
 import Firebase
 import FirebaseFirestoreSwift
 
