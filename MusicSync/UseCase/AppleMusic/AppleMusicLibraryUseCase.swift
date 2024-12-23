@@ -43,6 +43,7 @@ struct AppleMusicLoadLibraryUseCase {
     private struct MusicMetaData: Codable {
         let meta: Meta
 
+        // swiftlint:disable nesting
         struct Meta: Codable {
             let musicKit_identifierSet: MusicKitIdentifierSet
         }
@@ -55,6 +56,7 @@ struct AppleMusicLoadLibraryUseCase {
             let kind: String
             let value: String
         }
+        // swiftlint:enable nesting
     }
 
 }
