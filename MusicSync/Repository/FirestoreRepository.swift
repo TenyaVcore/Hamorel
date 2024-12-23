@@ -152,9 +152,3 @@ struct FirestoreRepository: @unchecked Sendable {
         db.collection("Room").document(roomPin).setData(["nextFlag": false, "isEnable": false])
     }
 }
-
-// firestoreに保存するデータモデル
-struct UserData: Identifiable, Codable, Hashable {
-    var id: String
-    var name: String
-}
