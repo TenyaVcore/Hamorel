@@ -58,12 +58,11 @@ class CreateRoomViewModel: ObservableObject {
     }
     
     func pushNext() {
-        let storeModel = FirestoreRepository()
         self.nextFlag = true
         listenRoomUseCase.stopListening()
         Task {
             do {
-                try await storeModel.pushNext(roomPin: roomPin)
+                try await createRoomUseCase.pushNext(roomPin: roomPin)
             } catch {
                 self.isError = true
             }
@@ -71,9 +70,8 @@ class CreateRoomViewModel: ObservableObject {
     }
 
     func deleteGroup() {
-        let storeModel = FirestoreRepository()
         listenRoomUseCase.stopListening()
-        storeModel.deleteRoom(roomPin: roomPin)
+        createRoomUseCase.deleteRoom(roomPin: roomPin)
     }
 
     func onAppear(userName: String) async {

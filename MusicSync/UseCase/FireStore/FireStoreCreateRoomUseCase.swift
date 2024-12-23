@@ -7,7 +7,7 @@
 
 import UIKit.UIDevice
 
-struct CreateRoomUseCase {
+struct CreateRoomUseCase: Sendable {
     private let repo = FirestoreRepository()
 
     func createRoom(hostName: String) async throws -> String {
@@ -38,4 +38,11 @@ struct CreateRoomUseCase {
         try await repo.uploadSongs(songs: songs, userID: uniqueId)
     }
 
+    func pushNext(roomPin: String) async throws {
+        try await repo.pushNext(roomPin: roomPin)
+    }
+
+    func deleteRoom(roomPin: String) {
+        repo.deleteRoom(roomPin: roomPin)
+    }
 }
