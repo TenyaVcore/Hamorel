@@ -5,47 +5,39 @@
 //  Created by 田川展也 on R 5/05/22.
 //
 
-import SwiftUI
-import Combine
 import Firebase
-import FirebaseFirestoreSwift
 
 @MainActor
 class CreateRoomViewModel: ObservableObject {
     private let loadLibraryUseCase = AppleMusicLoadLibraryUseCase()
     private let createRoomUseCase = CreateRoomUseCase()
+    private let listenRoomUseCase = ListenRoomUseCase()
     private let authModel = FirebaseAuthModel()
-    private let db = Firestore.firestore()
 
     @Published var usersData: [UserData]
     @Published var isLoading = true
     @Published var isError = false
     @Published var roomPin = "--- ---"
     @Published var nextFlag = false
-    @State private var listener: ListenerRegistration?
 
     init(usersData: [UserData] = [UserData]()) {
         self.usersData = usersData
     }
 
     func addListener() {
-        listener = db.collection("Room").document(roomPin).collection("Member")
-            .addSnapshotListener { (querySnapshot, error) in
-                guard let document = querySnapshot?.documents else {
-                    print("Error fetching document: \(error!)")
-                    return
-                }
-                self.usersData = document.map { (queryDocumentSnapshot) -> UserData in
-                    let data = queryDocumentSnapshot.data()
+        listenRoomUseCase.listenRoom(roomPin: roomPin) { result in
+            switch result {
+            case .success(let data):
+                self.usersData = data.map { data -> UserData in
                     let name = data["name"] as? String ?? ""
                     let id = data["id"] as? String ?? "000000"
                     return UserData(id: id, name: name)
                 }
+            case .failure(let error):
+                print("Error fetching document: \(error.localizedDescription)")
+                return
             }
-    }
-
-    func removeListener() {
-        listener?.remove()
+        }
     }
 
     func createGroup(userName: String) async {
@@ -68,7 +60,7 @@ class CreateRoomViewModel: ObservableObject {
     func pushNext() {
         let storeModel = FirestoreRepository()
         self.nextFlag = true
-        self.listener?.remove()
+        listenRoomUseCase.stopListening()
         Task {
             do {
                 try await storeModel.pushNext(roomPin: roomPin)
@@ -80,7 +72,7 @@ class CreateRoomViewModel: ObservableObject {
 
     func deleteGroup() {
         let storeModel = FirestoreRepository()
-        self.listener?.remove()
+        listenRoomUseCase.stopListening()
         storeModel.deleteRoom(roomPin: roomPin)
     }
 
@@ -89,5 +81,4 @@ class CreateRoomViewModel: ObservableObject {
         await createGroup(userName: userName)
         usersData = [UserData(id: uniqueId, name: userName)]
     }
-
 }

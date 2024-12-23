@@ -5,7 +5,6 @@
 //  Created by 田川展也 on R 5/11/09.
 //
 
-import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
@@ -23,7 +22,7 @@ struct FirestoreRepository: @unchecked Sendable {
             .setData(["nextFlag": false, "isEnable": true])
         try ref.document(String(roomPin)).collection("Member").document(userID).setData(from: userData)
     }
-    
+
     func uploadSongs(songs: [MusicSyncSong], userID: String) async throws {
         let batchSize = 3000
         let ref = db.collection("Songs").document(userID).collection("Songs")
