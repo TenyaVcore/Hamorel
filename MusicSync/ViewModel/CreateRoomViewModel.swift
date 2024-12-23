@@ -13,6 +13,7 @@ import FirebaseFirestoreSwift
 @MainActor
 class CreateRoomViewModel: ObservableObject {
     private let loadLibraryUseCase = AppleMusicLoadLibraryUseCase()
+    private let createRoomUseCase = CreateRoomUseCase()
     private let authModel = FirebaseAuthModel()
     private let db = Firestore.firestore()
 
@@ -48,17 +49,14 @@ class CreateRoomViewModel: ObservableObject {
     }
 
     func createGroup(userName: String) async {
-        let storeModel = FirestoreRepository()
         do {
             if Auth.auth().currentUser == nil {
                 try await authModel.loginAsGuestAsync()
             }
             let musicSyncSongs = try await loadLibraryUseCase.loadLibrary(limit: 0)
 
-            roomPin = try await storeModel.createRoom(host: userName)
-            Task {
-                try await storeModel.uploadSongs(item: musicSyncSongs)
-            }
+            roomPin = try await createRoomUseCase.createRoom(hostName: userName)
+            try await createRoomUseCase.uploadSongs(songs: musicSyncSongs)
             self.addListener()
             self.isLoading = false
         } catch {

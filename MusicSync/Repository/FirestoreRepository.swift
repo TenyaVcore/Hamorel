@@ -8,52 +8,32 @@
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import SwiftUI
-import UIKit
 
 struct FirestoreRepository: @unchecked Sendable {
     let db = Firestore.firestore()
 
-    func createRoom(host: String) async throws -> String {
-        let uniqueId: String = await UIDevice.current.identifierForVendor!.uuidString
-        let userData = UserData(id: uniqueId, name: host)
-        var failCount: Int = 0
-        var roomPin = Int.random(in: 100000...999999)
-        let ref = db.collection("Room")
-
-        // すでに存在していないroomPinを探索
-        while true {
-            do {
-                try await ref.document(String(roomPin)).getDocument()
-                print("find roomPin")
-                break
-            } catch {
-                roomPin = Int.random(in: 100000...999999)
-                failCount += 1
-                if failCount > 10 {
-                    print("can not find roomPin")
-                    throw CreateRoomError.canNotFindRoomPin10Times
-                }
-            }
-        }
-        try await ref.document(String(roomPin))
-            .setData(["nextFlag": false, "isEnable": true])
-        try ref.document(String(roomPin)).collection("Member").document(uniqueId).setData(from: userData)
-
-        return String(roomPin)
+    func isExistRoom(roomPin: Int) async throws -> Bool {
+        let document = try await db.collection("Room").document(String(roomPin)).getDocument()
+        return document.exists
     }
 
-    func uploadSongs(item: [MusicSyncSong]) async throws {
+    func createRoom(roomPin: Int, userID: String, userData: UserData) async throws {
+        let ref = db.collection("Room")
+        try await ref.document(String(roomPin))
+            .setData(["nextFlag": false, "isEnable": true])
+        try ref.document(String(roomPin)).collection("Member").document(userID).setData(from: userData)
+    }
+    
+    func uploadSongs(songs: [MusicSyncSong], userID: String) async throws {
         let batchSize = 3000
-        let uniqueId: String = await UIDevice.current.identifierForVendor!.uuidString
-        let ref = db.collection("Songs").document(uniqueId).collection("Songs")
+        let ref = db.collection("Songs").document(userID).collection("Songs")
         let batch = db.batch()
         var count = 1
         var startIndex = 0
 
-        while startIndex < item.count {
-            let endIndex = min(startIndex + batchSize, item.count)
-            let separatedItem: [MusicSyncSong] = Array(item[startIndex..<endIndex])
+        while startIndex < songs.count {
+            let endIndex = min(startIndex + batchSize, songs.count)
+            let separatedItem: [MusicSyncSong] = Array(songs[startIndex..<endIndex])
 
             try batch.setData(from: separatedItem,
                               forDocument: ref.document(String(count)))
