@@ -74,7 +74,7 @@ struct SettingView: View {
             } header: {
                 Text("ユーザ情報の変更")
             }
-            
+
             Section {
                 NavigationLink(value: NavigationLinkItem.license) {
                     Text("ライセンス")

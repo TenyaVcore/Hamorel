@@ -57,7 +57,7 @@ class CreateRoomViewModel: ObservableObject {
             self.isError = true
         }
     }
-    
+
     func pushNext() {
         self.nextFlag = true
         listenRoomUseCase.stopListening()

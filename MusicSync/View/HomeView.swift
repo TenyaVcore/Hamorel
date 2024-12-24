@@ -77,7 +77,7 @@ struct HomeView: View {
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
                         NavigationLink(value: NavigationLinkItem.setting) {
-                            Image(systemName: "gearshape.fill")       
+                            Image(systemName: "gearshape.fill")
                                 .foregroundColor(.white)
                                 .font(.title)
                         }

@@ -22,14 +22,14 @@ struct CreatePlaylistView: View {
                         .cornerRadius(12)
                         .padding(.horizontal, 5)
                         .frame(maxHeight: 450)
-                    
+
                     VStack {
                         Text("プレイリストを作成")
                             .font(.title)
                             .fontWeight(.bold)
                             .foregroundColor(.white)
                             .padding(.top, 15)
-                        
+
                         List(viewModel.users, id: \.self) { user in
                             MemberListCell(name: user.name)
                         }
@@ -39,12 +39,12 @@ struct CreatePlaylistView: View {
                         .padding(.bottom, 15)
                     }
                 }
-                
+
                 Text("プレイリスト名")
                     .font(.title2)
                     .fontWeight(.bold)
                     .padding(.top, 10)
-                
+
                 TextField("プレイリスト名を入力", text: $viewModel.playlistName)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.horizontal, 30)
@@ -59,7 +59,7 @@ struct CreatePlaylistView: View {
                 }
                 .padding(.top, 15)
                 .disabled($viewModel.playlistName.wrappedValue.isEmpty)
-                
+
                 Button {
                     viewModel.isReturnHome = true
                 } label: {

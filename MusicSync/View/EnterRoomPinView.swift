@@ -54,13 +54,13 @@ struct EnterRoomPinView: View {
                 }, label: {
                     DeleteButtonView()
                 })
-                
+
                 Button(action: {
                     viewModel.pushNumButton(num: 0)
                 }, label: {
                     NumberButtonView(text: String(0))
                 })
-                
+
                 Button(action: {
                     viewModel.deleteNum()
                 }, label: {

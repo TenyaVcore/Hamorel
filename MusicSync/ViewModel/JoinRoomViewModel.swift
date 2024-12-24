@@ -26,7 +26,7 @@ class JoinRoomViewModel: ObservableObject {
     @State private var listener: ListenerRegistration?
     @State private var roomListener: ListenerRegistration?
 
-    init(usersData: [UserData] = [UserData](), 
+    init(usersData: [UserData] = [UserData](),
          model: FirestoreRepository = FirestoreRepository()) {
         self.usersData = usersData
         self.storeModel = model
@@ -46,7 +46,7 @@ class JoinRoomViewModel: ObservableObject {
                     return UserData(id: id, name: name)
                 }
             }
-        
+
         roomListener = db.collection("Room").document(roomPin).addSnapshotListener({ (querySnapshot, error) in
             guard let data = querySnapshot?.data() else {
                 print("Error fetching document: \(error!)")

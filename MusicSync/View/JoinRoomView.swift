@@ -11,12 +11,12 @@ import Combine
 struct JoinRoomView: View {
     @StateObject var viewModel = JoinRoomViewModel()
     @Binding var path: [NavigationLinkItem]
-    
+
     // 前のviewからの引き継ぎ
     var userName: String
     var roomPin: String
     @State var cancellable: AnyCancellable!
-    
+
     var body: some View {
         ZStack {
             VStack {
@@ -25,28 +25,28 @@ struct JoinRoomView: View {
                         .foregroundStyle(Color("color_primary"))
                         .frame(width: 340, height: 120)
                         .cornerRadius(20)
-                    
+
                     VStack {
                         Text("Room Pin")
                             .font(.largeTitle)
                             .foregroundStyle(.white)
                             .bold()
-                        
+
                         Text(String(viewModel.roomPin))
                             .font(.largeTitle)
                             .foregroundStyle(.white)
                             .bold()
                     }
                 }
-                
+
                 Text("ルームに参加中のメンバー \(viewModel.usersData.count)/5 ")
                     .font(.title2)
-                
+
                 List(viewModel.usersData) { userData in
                     MemberListCell(name: userData.name)
                 }
                 .listStyle(PlainListStyle())
-                
+
                 Button(action: {
                     path.removeLast()
                 }, label: {
@@ -57,7 +57,7 @@ struct JoinRoomView: View {
                 })
                 .padding(.bottom, 10)
             }
-            
+
             LoadingView(message: "ルームに参加中")
                 .opacity(viewModel.isLoading ? 1 : 0)
                 .animation(.easeInOut, value: viewModel.isLoading)

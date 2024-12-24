@@ -1,5 +1,5 @@
 //
-//  MusicSyncSongModelTest.swift
+//  MusicSyncSongUseCaseTest.swift
 //  MusicSyncTests
 //
 //  Created by 田川展也 on R 6/08/12.
@@ -8,7 +8,7 @@
 import XCTest
 @testable import MusicSync
 
-class MusicSyncSongModelTests: XCTestCase {
+class MusicSyncSongUseCaseTests: XCTestCase {
 
     var useCase: MusicSyncSongUseCase!
 
