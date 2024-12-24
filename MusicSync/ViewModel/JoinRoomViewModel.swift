@@ -12,6 +12,7 @@ import FirebaseFirestoreSwift
 @MainActor
 class JoinRoomViewModel: ObservableObject {
     var storeModel = FirestoreRepository()
+    private let listenRoomUseCase = ListenRoomUseCase()
     var loadLibraryUseCase = AppleMusicLoadLibraryUseCase()
     var authModel = FirebaseAuthModel()
     var db = Firestore.firestore()
@@ -33,31 +34,35 @@ class JoinRoomViewModel: ObservableObject {
     }
 
     func addListener() {
-        listener = db.collection("Room").document(roomPin).collection("Member")
-            .addSnapshotListener { (querySnapshot, error) in
-                guard let document = querySnapshot?.documents else {
-                    print("Error fetching document: \(error!)")
-                    return
-                }
-                self.usersData = document.map { (queryDocumentSnapshot) -> UserData in
-                    let data = queryDocumentSnapshot.data()
+        listenRoomUseCase.listenMember(roomPin: roomPin) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let data):
+                self.usersData = data.map { data -> UserData in
                     let name = data["name"] as? String ?? ""
                     let id = data["id"] as? String ?? "000000"
                     return UserData(id: id, name: name)
                 }
-            }
-
-        roomListener = db.collection("Room").document(roomPin).addSnapshotListener({ (querySnapshot, error) in
-            guard let data = querySnapshot?.data() else {
-                print("Error fetching document: \(error!)")
+            case .failure(let error):
+                print("Error fetching document: \(error)")
                 return
             }
-            self.nextFlag = data["nextFlag"] as? Bool ?? false
-            if data["isEnable"] as? Bool ?? true == false {
-                self.errorMessage = "ルームが解散されました"
-                self.isError = true
+        }
+
+        listenRoomUseCase.listenRoom(roomPin: roomPin) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let data):
+                self.nextFlag = data["nextFlag"] as? Bool ?? false
+                if data["isEnable"] as? Bool ?? true == false {
+                    self.errorMessage = "ルームが解散されました"
+                    self.isError = true
+                }
+            case .failure(let error):
+                print("Error fetching document: \(error)")
+                return
             }
-        })
+        }
     }
 
     func joinGroup(userName: String) {

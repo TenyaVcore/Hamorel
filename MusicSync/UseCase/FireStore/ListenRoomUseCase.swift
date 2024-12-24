@@ -9,13 +9,13 @@ import Observation
 import FirebaseFirestore
 
 final class ListenRoomUseCase {
-    var listener: ListenerRegistration?
-
+    var memberListener: ListenerRegistration?
+    var roomListener: ListenerRegistration?
     /// ドキュメントの変更を監視
        /// - Parameters:
        ///   - roomPin: ルームピン
        ///   - completion: 変更が通知されたときのコールバック
-       func listenRoom(
+       func listenMember(
            roomPin: String,
            completion: @escaping (Result<[[String: Any]], Error>) -> Void
        ) {
@@ -23,22 +23,48 @@ final class ListenRoomUseCase {
            let documentRef = db.collection("Room").document(roomPin).collection("Member")
 
            // リスナーを追加
-           listener = documentRef.addSnapshotListener { documentSnapshot, error in
+           memberListener = documentRef.addSnapshotListener { querySnapshot, error in
                if let error = error {
                    completion(.failure(error))
                    return
                }
 
-               if let documentSnapshot = documentSnapshot {
-                   let data = documentSnapshot.documents.map { $0.data() }
+               if let querySnapshot {
+                   let data = querySnapshot.documents.map { $0.data() }
                    completion(.success(data))
+               } else {
+                   completion(.failure(NSError(domain: "ListenRoomUseCase", code: 0, userInfo: nil)))
                }
            }
        }
 
+    func listenRoom(
+        roomPin: String,
+        completion: @escaping (Result<[String: Any], Error>) -> Void
+    ) {
+        let db = Firestore.firestore()
+        let documentRef = db.collection("Room").document(roomPin)
+
+        // リスナーを追加
+        roomListener = documentRef.addSnapshotListener { documentSnapshot, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            if let data = documentSnapshot?.data() {
+                completion(.success(data))
+            } else {
+                completion(.failure(NSError(domain: "ListenRoomUseCase", code: 0, userInfo: nil)))
+            }
+        }
+    }
+
        /// リスナーを解除
        func stopListening() {
-           listener?.remove()
-           listener = nil
+           memberListener?.remove()
+           roomListener?.remove()
+           memberListener = nil
+           roomListener = nil
        }
 }

@@ -25,7 +25,8 @@ class CreateRoomViewModel: ObservableObject {
     }
 
     func addListener() {
-        listenRoomUseCase.listenRoom(roomPin: roomPin) { result in
+        listenRoomUseCase.listenMember(roomPin: roomPin) { [weak self] result in
+            guard let self else { return }
             switch result {
             case .success(let data):
                 self.usersData = data.map { data -> UserData in
