@@ -11,9 +11,19 @@ import FirebaseFirestoreSwift
 struct FirestoreRepository: @unchecked Sendable {
     let db = Firestore.firestore()
 
-    func isExistRoom(roomPin: Int) async throws -> Bool {
-        let document = try await db.collection("Room").document(String(roomPin)).getDocument()
-        return document.exists
+    func isExistRoom(roomPin: String) async throws -> Bool {
+        let document = try await db.collection("Room").document(roomPin).getDocument()
+        // documentが存在しない場合はfalseを返す
+        if !document.exists { return false }
+        let data = document.data()
+        // isEnable(部屋が有効)がtrueかつnextFlag(部屋の確定)がfalseの場合はtrueを返す
+        guard let isEnable = data?["isEnable"] as? Bool,
+              let nextFlag = data?["nextFlag"] as? Bool,
+              isEnable,
+              !nextFlag
+        else { return false }
+
+        return true
     }
 
     func createRoom(roomPin: Int, userID: String, userData: UserData) async throws {
@@ -73,32 +83,22 @@ struct FirestoreRepository: @unchecked Sendable {
         return songs
     }
 
-    func joinRoom(roomPin: String, userName: String) async throws -> [UserData] {
-        let uniqueId: String = await UIDevice.current.identifierForVendor!.uuidString
+    func joinRoom(roomPin: String, userData: UserData) async throws -> [UserData] {
         let roomRef = db.collection("Room").document(roomPin)
-        var usersData = [UserData]()
-
-        guard let data = try await roomRef.getDocument().data(),
-              let isEnable = data["isEnable"] as? Bool,
-              let nextFlag = data["nextFlag"] as? Bool,
-                isEnable, !nextFlag
-            else {
-            throw JoinRoomError.roomNotFound
-        }
+        let isExistRoom = try await isExistRoom(roomPin: roomPin)
+        if  !isExistRoom { throw JoinRoomError.roomNotFound }
 
         let roomData = try await roomRef.collection("Member").getDocuments()
         if roomData.count > 4 {
             throw JoinRoomError.roomIsFull
         }
 
-        let userData = UserData(id: uniqueId, name: userName)
-        try db.collection("Room").document(roomPin).collection("Member").document(uniqueId).setData(from: userData)
+        try db.collection("Room").document(roomPin).collection("Member").document(userData.id).setData(from: userData)
 
-        usersData = roomData.documents.map { (queryDocumentSnapshot) -> UserData in
+        var usersData = roomData.documents.map { (queryDocumentSnapshot) -> UserData in
             let data = queryDocumentSnapshot.data()
             let name = data["name"] as? String ?? ""
             let id = data["id"] as? String ?? "000000"
-
             return UserData(id: id, name: name)
         }
         usersData.append(userData)

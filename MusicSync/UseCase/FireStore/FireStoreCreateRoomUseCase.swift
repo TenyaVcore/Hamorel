@@ -15,7 +15,7 @@ struct CreateRoomUseCase: Sendable {
 
         for i in 0...maxIter {
             roomPin = Int.random(in: 100000...999999)
-            let isExist = try await repo.isExistRoom(roomPin: roomPin)
+            let isExist = try await repo.isExistRoom(roomPin: String(roomPin))
             if isExist {
                 print("find roomPin")
                 break
