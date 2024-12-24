@@ -83,18 +83,18 @@ struct FirestoreRepository: @unchecked Sendable {
         return songs
     }
 
-    func joinRoom(roomPin: String, userData: UserData) async throws -> [UserData] {
-        let roomRef = db.collection("Room").document(roomPin)
-        let isExistRoom = try await isExistRoom(roomPin: roomPin)
-        if  !isExistRoom { throw JoinRoomError.roomNotFound }
+    func countRoomMembers(roomPin: String) async throws -> Int {
+        let roomData = try await db.collection("Room").document(roomPin).collection("Member").getDocuments()
+        return roomData.count
+    }
 
-        let roomData = try await roomRef.collection("Member").getDocuments()
-        if roomData.count > 4 {
-            throw JoinRoomError.roomIsFull
-        }
-
+    func joinRoom(roomPin: String, userData: UserData) async throws {
         try db.collection("Room").document(roomPin).collection("Member").document(userData.id).setData(from: userData)
+    }
 
+    func fetchRoomMembers(roomPin: String, userData: UserData) async throws -> [UserData] {
+        let roomRef = db.collection("Room").document(roomPin)
+        let roomData = try await roomRef.collection("Member").getDocuments()
         var usersData = roomData.documents.map { (queryDocumentSnapshot) -> UserData in
             let data = queryDocumentSnapshot.data()
             let name = data["name"] as? String ?? ""
@@ -110,15 +110,12 @@ struct FirestoreRepository: @unchecked Sendable {
         try await db.collection("Room").document(roomPin).setData(["nextFlag": true, "isEnable": true])
     }
 
-    func exitRoom(roomPin: String) async throws {
-        let uniqueId: String = await UIDevice.current.identifierForVendor!.uuidString
-
+    func exitRoom(roomPin: String, id: String) async throws {
         do {
-
             try await db.collection("Room")
                 .document(roomPin)
                 .collection("Member")
-                .document(uniqueId)
+                .document(id)
                 .delete()
             print("Document successfully removed from \(roomPin)!")
         } catch let error {

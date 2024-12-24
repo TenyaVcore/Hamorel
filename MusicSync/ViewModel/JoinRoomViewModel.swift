@@ -7,15 +7,14 @@
 
 import SwiftUI
 import Firebase
-import FirebaseFirestoreSwift
 
 @MainActor
 class JoinRoomViewModel: ObservableObject {
-    var storeModel = FirestoreRepository()
     private let listenRoomUseCase = ListenRoomUseCase()
-    var loadLibraryUseCase = AppleMusicLoadLibraryUseCase()
+    private let joinRoomUseCase = JoinRoomUseCase()
+    private var loadLibraryUseCase = AppleMusicLoadLibraryUseCase()
     var authModel = FirebaseAuthModel()
-    var db = Firestore.firestore()
+
     var songs: [MusicSyncSong] = []
 
     @Published var usersData: [UserData]
@@ -24,13 +23,10 @@ class JoinRoomViewModel: ObservableObject {
     @Published var nextFlag = false
     @Published var errorMessage = "ルーム参加中にエラーが発生しました。もう一度お試しください"
     @Published var roomPin = "000000"
-    @State private var listener: ListenerRegistration?
-    @State private var roomListener: ListenerRegistration?
 
     init(usersData: [UserData] = [UserData](),
          model: FirestoreRepository = FirestoreRepository()) {
         self.usersData = usersData
-        self.storeModel = model
     }
 
     func addListener() {
@@ -60,7 +56,7 @@ class JoinRoomViewModel: ObservableObject {
         }
     }
 
-    func joinGroup(userName: String) {
+    func joinGroup(userData: UserData) {
         Task {
             do {
                 if Auth.auth().currentUser == nil {
@@ -68,7 +64,8 @@ class JoinRoomViewModel: ObservableObject {
                 }
                 songs = try await loadLibraryUseCase.loadLibrary(limit: 0)
                 print("fetch songs")
-                self.usersData = try await storeModel.joinRoom(roomPin: roomPin, userName: userName)
+                self.usersData = try await joinRoomUseCase
+                    .joinRoom(roomPin: roomPin, userData: userData)
                 print("join room")
                 self.addListener()
                 self.isLoading = false
@@ -82,7 +79,8 @@ class JoinRoomViewModel: ObservableObject {
     }
 
     func exitGroup() async throws {
-        try await storeModel.exitRoom(roomPin: roomPin)
-        listener?.remove()
+        // FIXME: userData[0]ではない
+        try await joinRoomUseCase.exitRoom(roomPin: roomPin, userData: usersData[0])
+        listenRoomUseCase.stopListening()
     }
 }
