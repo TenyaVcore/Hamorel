@@ -5,14 +5,11 @@
 //  Created by 田川展也 on 12/23/R6.
 //
 
-import UIKit.UIDevice
-
 struct CreateRoomUseCase: Sendable {
     private let repo = FirestoreRepository()
 
-    func createRoom(hostName: String) async throws -> String {
-        let uniqueId: String = await UIDevice.current.identifierForVendor!.uuidString
-        let userData = UserData(id: uniqueId, name: hostName)
+    func createRoom(id: String, hostName: String) async throws -> String {
+        let userData = UserData(id: id, name: hostName)
         let maxIter = 10
         var roomPin = 0
 
@@ -29,13 +26,12 @@ struct CreateRoomUseCase: Sendable {
             }
         }
 
-        try await repo.createRoom(roomPin: roomPin, userID: uniqueId, userData: userData)
+        try await repo.createRoom(roomPin: roomPin, userID: id, userData: userData)
         return String(roomPin)
     }
 
-    func uploadSongs(songs: [MusicSyncSong]) async throws {
-        let uniqueId: String = await UIDevice.current.identifierForVendor!.uuidString
-        try await repo.uploadSongs(songs: songs, userID: uniqueId)
+    func uploadSongs(id: String, songs: [MusicSyncSong]) async throws {
+        try await repo.uploadSongs(songs: songs, userID: id)
     }
 
     func pushNext(roomPin: String) async throws {
