@@ -10,11 +10,11 @@ import XCTest
 
 class MusicSyncSongModelTests: XCTestCase {
 
-    var model: MusicSyncSongModel!
+    var useCase: MusicSyncSongUseCase!
 
     override func setUp() {
         super.setUp()
-        model = MusicSyncSongModel()
+        useCase = MusicSyncSongUseCase()
     }
 
     func testMergeWithEqualArrays() {
@@ -27,7 +27,7 @@ class MusicSyncSongModelTests: XCTestCase {
             MusicSyncSong(title: "Song2", artist: "Artist2", appleMusicID: "4")
         ]
 
-        let merged = model.merge(item1: songs1, item2: songs2)
+        let merged = useCase.merge(item1: songs1, item2: songs2)
 
         XCTAssertEqual(merged.count, 2)
         XCTAssertEqual(merged[0].title, "Song1")
@@ -46,7 +46,7 @@ class MusicSyncSongModelTests: XCTestCase {
             MusicSyncSong(title: "Song4", artist: "Artist4", appleMusicID: "4")
         ]
 
-        let merged = model.merge(item1: songs1, item2: songs2)
+        let merged = useCase.merge(item1: songs1, item2: songs2)
 
         XCTAssertEqual(merged.count, 0)
     }
@@ -63,7 +63,7 @@ class MusicSyncSongModelTests: XCTestCase {
             MusicSyncSong(title: "Song4", artist: "Artist4", appleMusicID: "6")
         ]
 
-        let merged = model.merge(item1: songs1, item2: songs2)
+        let merged = useCase.merge(item1: songs1, item2: songs2)
 
         XCTAssertEqual(merged.count, 2)
         XCTAssertEqual(merged[0].title, "Song2")
@@ -76,7 +76,7 @@ class MusicSyncSongModelTests: XCTestCase {
         let songs1: [MusicSyncSong] = []
         let songs2: [MusicSyncSong] = []
 
-        let merged = model.merge(item1: songs1, item2: songs2)
+        let merged = useCase.merge(item1: songs1, item2: songs2)
 
         XCTAssertEqual(merged.count, 0)
     }
