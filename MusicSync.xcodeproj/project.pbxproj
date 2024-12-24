@@ -88,6 +88,7 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		BA0D6F342D1AFA3500A21596 /* ci_scripts */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ci_scripts; sourceTree = "<group>"; };
 		BA7316812CCE6CC80006CAB0 /* MusicSyncTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = MusicSyncTests; sourceTree = "<group>"; };
 		BA7316C52CCE6D860006CAB0 /* MusicSync */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (BA73171C2CCE6D860006CAB0 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, BA73171D2CCE6D860006CAB0 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = MusicSync; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -157,6 +158,7 @@
 		BA6CF8BA2A1B0A480066B55E = {
 			isa = PBXGroup;
 			children = (
+				BA0D6F342D1AFA3500A21596 /* ci_scripts */,
 				BA8542AB2AFE1D2800434765 /* .swiftlint.yml */,
 				BA4660FD2B0F9F6700CF7678 /* .gitignore */,
 				BA7316C52CCE6D860006CAB0 /* MusicSync */,
