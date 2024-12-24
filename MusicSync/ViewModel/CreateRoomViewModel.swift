@@ -29,11 +29,7 @@ class CreateRoomViewModel: ObservableObject {
             guard let self else { return }
             switch result {
             case .success(let data):
-                self.usersData = data.map { data -> UserData in
-                    let name = data["name"] as? String ?? ""
-                    let id = data["id"] as? String ?? "000000"
-                    return UserData(id: id, name: name)
-                }
+                self.usersData = data
             case .failure(let error):
                 print("Error fetching document: \(error.localizedDescription)")
                 return

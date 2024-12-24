@@ -38,14 +38,9 @@ class JoinRoomViewModel: ObservableObject {
             guard let self = self else { return }
             switch result {
             case .success(let data):
-                self.usersData = data.map { data -> UserData in
-                    let name = data["name"] as? String ?? ""
-                    let id = data["id"] as? String ?? "000000"
-                    return UserData(id: id, name: name)
-                }
+                self.usersData = data
             case .failure(let error):
                 print("Error fetching document: \(error)")
-                return
             }
         }
 
@@ -53,14 +48,14 @@ class JoinRoomViewModel: ObservableObject {
             guard let self = self else { return }
             switch result {
             case .success(let data):
-                self.nextFlag = data["nextFlag"] as? Bool ?? false
-                if data["isEnable"] as? Bool ?? true == false {
+                self.nextFlag = data.0
+                let isEnable = data.1
+                if isEnable == false {
                     self.errorMessage = "ルームが解散されました"
                     self.isError = true
                 }
             case .failure(let error):
                 print("Error fetching document: \(error)")
-                return
             }
         }
     }

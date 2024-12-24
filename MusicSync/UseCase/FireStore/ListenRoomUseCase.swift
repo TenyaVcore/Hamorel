@@ -17,7 +17,7 @@ final class ListenRoomUseCase {
        ///   - completion: 変更が通知されたときのコールバック
        func listenMember(
            roomPin: String,
-           completion: @escaping (Result<[[String: Any]], Error>) -> Void
+           completion: @escaping (Result<[UserData], Error>) -> Void
        ) {
            let db = Firestore.firestore()
            let documentRef = db.collection("Room").document(roomPin).collection("Member")
@@ -29,9 +29,15 @@ final class ListenRoomUseCase {
                    return
                }
 
+               // データをUserDataに変換
                if let querySnapshot {
                    let data = querySnapshot.documents.map { $0.data() }
-                   completion(.success(data))
+                   let userData = data.map { data -> UserData in
+                       let name = data["name"] as? String ?? ""
+                       let id = data["id"] as? String ?? "000000"
+                       return UserData(id: id, name: name)
+                   }
+                   completion(.success(userData))
                } else {
                    completion(.failure(NSError(domain: "ListenRoomUseCase", code: 0, userInfo: nil)))
                }
@@ -40,7 +46,7 @@ final class ListenRoomUseCase {
 
     func listenRoom(
         roomPin: String,
-        completion: @escaping (Result<[String: Any], Error>) -> Void
+        completion: @escaping (Result<(Bool, Bool), Error>) -> Void
     ) {
         let db = Firestore.firestore()
         let documentRef = db.collection("Room").document(roomPin)
@@ -53,7 +59,9 @@ final class ListenRoomUseCase {
             }
 
             if let data = documentSnapshot?.data() {
-                completion(.success(data))
+                let nextFlag = data["nextFlag"] as? Bool ?? false
+                let isEnable = data["isEnable"] as? Bool ?? false
+                completion(.success((nextFlag, isEnable)))
             } else {
                 completion(.failure(NSError(domain: "ListenRoomUseCase", code: 0, userInfo: nil)))
             }
