@@ -6,7 +6,6 @@
 //
 
 import FirebaseFirestore
-import FirebaseFirestoreSwift
 
 struct FirestoreRepository: Sendable {
     func isExistRoom(roomPin: String) async throws -> Bool {

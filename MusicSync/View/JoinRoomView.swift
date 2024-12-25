@@ -64,8 +64,8 @@ struct JoinRoomView: View {
         }
         .onAppear {
             viewModel.roomPin = roomPin
-            // FIXME: userDataを正しく渡す
-            viewModel.joinGroup(userData: UserData(id: "", name: userName))
+            let userData = StoreUserUseCase.shared.fetchUser()
+            viewModel.joinGroup(userData: userData)
             self.cancellable = viewModel.$nextFlag.sink {
                 if $0 {
                     path.append(NavigationLinkItem.playlist(viewModel.roomPin))

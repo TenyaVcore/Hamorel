@@ -79,8 +79,8 @@ class JoinRoomViewModel: ObservableObject {
     }
 
     func exitGroup() async throws {
-        // FIXME: userData[0]ではない
-        try await joinRoomUseCase.exitRoom(roomPin: roomPin, userData: usersData[0])
+        let user = StoreUserUseCase.shared.fetchUser()
+        try await joinRoomUseCase.exitRoom(roomPin: roomPin, userData: user)
         listenRoomUseCase.stopListening()
     }
 }
