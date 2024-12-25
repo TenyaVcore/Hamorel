@@ -8,10 +8,9 @@
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct FirestoreRepository: @unchecked Sendable {
-    let db = Firestore.firestore()
-
+struct FirestoreRepository: Sendable {
     func isExistRoom(roomPin: String) async throws -> Bool {
+        let db = Firestore.firestore()
         let document = try await db.collection("Room").document(roomPin).getDocument()
         // documentが存在しない場合はfalseを返す
         if !document.exists { return false }
@@ -27,6 +26,7 @@ struct FirestoreRepository: @unchecked Sendable {
     }
 
     func createRoom(roomPin: Int, userID: String, userData: UserData) async throws {
+        let db = Firestore.firestore()
         let ref = db.collection("Room")
         try await ref.document(String(roomPin))
             .setData(["nextFlag": false, "isEnable": true])
@@ -34,6 +34,7 @@ struct FirestoreRepository: @unchecked Sendable {
     }
 
     func uploadSongs(songs: [MusicSyncSong], userID: String) async throws {
+        let db = Firestore.firestore()
         let batchSize = 3000
         let ref = db.collection("Songs").document(userID).collection("Songs")
         let batch = db.batch()
@@ -53,6 +54,7 @@ struct FirestoreRepository: @unchecked Sendable {
     }
 
     func downloadRoomData(roomPin: String) async throws -> [UserData] {
+        let db = Firestore.firestore()
         var users: [UserData] = []
         let members =  try await db.collection("Room").document(roomPin).collection("Member").getDocuments()
         members.documents.forEach { member in
@@ -62,12 +64,12 @@ struct FirestoreRepository: @unchecked Sendable {
             } catch {
                 print(error)
             }
-
         }
         return users
     }
 
     func downloadSongs(users: [UserData]) async throws -> [[MusicSyncSong]] {
+        let db = Firestore.firestore()
         var songs: [[MusicSyncSong]] = []
         for user in users {
             var userSongs = [MusicSyncSong]()
@@ -84,15 +86,18 @@ struct FirestoreRepository: @unchecked Sendable {
     }
 
     func countRoomMembers(roomPin: String) async throws -> Int {
+        let db = Firestore.firestore()
         let roomData = try await db.collection("Room").document(roomPin).collection("Member").getDocuments()
         return roomData.count
     }
 
     func joinRoom(roomPin: String, userData: UserData) async throws {
+        let db = Firestore.firestore()
         try db.collection("Room").document(roomPin).collection("Member").document(userData.id).setData(from: userData)
     }
 
     func fetchRoomMembers(roomPin: String, userData: UserData) async throws -> [UserData] {
+        let db = Firestore.firestore()
         let roomRef = db.collection("Room").document(roomPin)
         let roomData = try await roomRef.collection("Member").getDocuments()
         var usersData = roomData.documents.map { (queryDocumentSnapshot) -> UserData in
@@ -107,10 +112,12 @@ struct FirestoreRepository: @unchecked Sendable {
     }
 
     func pushNext(roomPin: String) async throws {
+        let db = Firestore.firestore()
         try await db.collection("Room").document(roomPin).setData(["nextFlag": true, "isEnable": true])
     }
 
     func exitRoom(roomPin: String, id: String) async throws {
+        let db = Firestore.firestore()
         do {
             try await db.collection("Room")
                 .document(roomPin)
@@ -125,6 +132,7 @@ struct FirestoreRepository: @unchecked Sendable {
     }
 
     func deleteRoom(roomPin: String) {
+        let db = Firestore.firestore()
         db.collection("Room").document(roomPin).setData(["nextFlag": false, "isEnable": false])
     }
 }
