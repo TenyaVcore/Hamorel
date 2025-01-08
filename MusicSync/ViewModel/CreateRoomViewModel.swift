@@ -6,6 +6,7 @@
 //
 
 import Firebase
+import SwiftUICore
 
 @MainActor
 class CreateRoomViewModel: ObservableObject {
@@ -14,13 +15,13 @@ class CreateRoomViewModel: ObservableObject {
     private let listenRoomUseCase = ListenRoomUseCase()
     private let authModel = FirebaseAuthModel()
 
-    @Published var usersData: [UserData]
+    @Published var usersData: [UserData] = []
     @Published var isLoading = true
     @Published var isError = false
     @Published var roomPin = "--- ---"
     @Published var nextFlag = false
 
-    init(usersData: [UserData] = [UserData]()) {
+    init(usersData: [UserData]) {
         self.usersData = usersData
     }
 
@@ -37,16 +38,17 @@ class CreateRoomViewModel: ObservableObject {
         }
     }
 
-    func createGroup(userName: String) async {
+    func createGroup(user: UserData) async {
         do {
             if Auth.auth().currentUser == nil {
                 try await authModel.loginAsGuestAsync()
             }
             let musicSyncSongs = try await loadLibraryUseCase.loadLibrary(limit: 0)
 
-            let uniqueID: String = UIDevice.current.identifierForVendor!.uuidString
-            roomPin = try await createRoomUseCase.createRoom(id: uniqueID, hostName: userName)
-            try await createRoomUseCase.uploadSongs(id: uniqueID, songs: musicSyncSongs)
+            roomPin = try await createRoomUseCase
+                .createRoom(user: user)
+            try await createRoomUseCase
+                .uploadSongs(user: user, songs: musicSyncSongs)
             self.addListener()
             self.isLoading = false
         } catch {
@@ -55,15 +57,15 @@ class CreateRoomViewModel: ObservableObject {
         }
     }
 
-    func pushNext() {
+    func onTappedNextButton() async -> Bool {
         self.nextFlag = true
         listenRoomUseCase.stopListening()
-        Task {
-            do {
-                try await createRoomUseCase.pushNext(roomPin: roomPin)
-            } catch {
-                self.isError = true
-            }
+        do {
+            try await createRoomUseCase.pushNext(roomPin: roomPin)
+            return true
+        } catch {
+            self.isError = true
+            return false
         }
     }
 
@@ -72,9 +74,15 @@ class CreateRoomViewModel: ObservableObject {
         createRoomUseCase.deleteRoom(roomPin: roomPin)
     }
 
-    func onAppear(userName: String) async {
-        let uniqueId: String = UIDevice.current.identifierForVendor!.uuidString
-        await createGroup(userName: userName)
-        usersData = [UserData(id: uniqueId, name: userName)]
+    func onAppear() async {
+        let user = StoreUserUseCase.shared.fetchUser()
+        await createGroup(user: user)
+        usersData = [user]
+    }
+
+    func onDisappear() {
+        if !nextFlag {
+            deleteGroup()
+        }
     }
 }

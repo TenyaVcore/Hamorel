@@ -9,9 +9,8 @@ import SwiftUI
 
 struct CreatePlaylistView: View {
     @StateObject var viewModel = CreatePlaylistViewModel()
-    @Binding var path: [NavigationLinkItem]
+    @EnvironmentObject var router: Router
 
-    var adMob = AdCoordinator()
     var roomPin: String
 
     var body: some View {
@@ -50,8 +49,7 @@ struct CreatePlaylistView: View {
                     .padding(.horizontal, 30)
 
                 Button {
-                    viewModel.createPlaylist()
-                    adMob.presentAd()
+                    viewModel.onTappedAddAppleMusicButton()
                 } label: {
                     ButtonView(text: "AppleMusicに追加する",
                                buttonColor: $viewModel.playlistName
@@ -61,7 +59,7 @@ struct CreatePlaylistView: View {
                 .disabled($viewModel.playlistName.wrappedValue.isEmpty)
 
                 Button {
-                    viewModel.isReturnHome = true
+                    viewModel.onTappedReturnHomeButton()
                 } label: {
                     ButtonView(text: "ホームに戻る", textColor: .black, buttonColor: Color("color_secondary"))
                 }
@@ -75,13 +73,12 @@ struct CreatePlaylistView: View {
             }
         }
         .onAppear {
-            adMob.loadAd()
-            viewModel.downloadSongs(roomPin: roomPin)
+            viewModel.onAppear(roomPin: roomPin)
         }
         .navigationBarBackButtonHidden(true)
         .alert("ホームに戻りますか", isPresented: $viewModel.isReturnHome) {
             Button("ホームに戻る", role: .destructive) {
-                path.removeAll()
+                router.popToRoot()
             }
             Button("キャンセル", role: .cancel) {
                 viewModel.isReturnHome = false
@@ -106,10 +103,7 @@ struct CreatePlaylistView: View {
 }
 
 struct createPlaylistView_Previews: PreviewProvider {
-    var viewModel = CreatePlaylistViewModel()
-    @State static var state = true
-    @State static var path = [NavigationLinkItem]()
     static var previews: some View {
-        CreatePlaylistView(path: $path, roomPin: "0")
+        CreatePlaylistView(roomPin: "0")
     }
 }

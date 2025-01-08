@@ -9,13 +9,8 @@ import SwiftUI
 import Firebase
 
 struct EmailRegisterView: View {
-
-    @State private var name: String = ""
-    @State private var email: String = ""
-    @State private var password: String = ""
-    @State private var errorMessage = ""
-    @Binding var path: [NavigationLinkItem]
     @StateObject var viewModel = EmailRegisterViewModel()
+    @EnvironmentObject var router: Router
 
     var body: some View {
         VStack {
@@ -29,43 +24,41 @@ struct EmailRegisterView: View {
                     .fontWeight(.bold)
             }
 
-            Text(errorMessage)
+            Text(viewModel.errorMessage)
                 .foregroundStyle(Color.red)
                 .font(.caption)
                 .padding()
 
             Text("ユーザー名")
-            TextField("name", text: $name)
+            TextField("name", text: $viewModel.name)
                 .padding(.bottom, 20)
                 .padding(.horizontal, 20)
                 .textFieldStyle(.roundedBorder)
                 .autocapitalization(.none)
 
             Text("メールアドレス")
-            TextField("email address", text: $email)
+            TextField("email address", text: $viewModel.email)
                 .padding(.bottom, 20)
                 .padding(.horizontal, 20)
                 .textFieldStyle(.roundedBorder)
                 .autocapitalization(.none)
 
             Text("パスワード")
-            SecureField("password", text: $password)
+            SecureField("password", text: $viewModel.password)
                 .padding(.bottom, 20)
                 .padding(.horizontal, 20)
                 .textFieldStyle(.roundedBorder)
                 .autocapitalization(.none)
 
-            Button(action: {
-                viewModel.createUser(email: email, name: name, password: password) { error in
-                    if let error = error {
-                        errorMessage = error
-                    } else {
-                        path.append(NavigationLinkItem.provision)
+            Button(
+                action: {
+                    viewModel.onTappedRegisterButton { result in
+                        if result { self.router.push(.provision) }
                     }
-                }
-            }, label: {
-                ButtonView(text: "登録する", buttonColor: .primary)
-            }).padding()
+                },
+                label: {
+                    ButtonView(text: "登録する", buttonColor: .primary)
+                }).padding()
         }
     }
 }
@@ -73,6 +66,6 @@ struct EmailRegisterView: View {
 struct EmailRegisterView_Previews: PreviewProvider {
     @State static var previewPath = [NavigationLinkItem]()
     static var previews: some View {
-        EmailRegisterView(path: $previewPath)
+        EmailRegisterView()
     }
 }

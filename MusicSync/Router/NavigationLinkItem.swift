@@ -1,8 +1,8 @@
 //
-//  NavigationItem.swift
+//  NavigationLinkItem.swift
 //  MusicSync
 //
-//  Created by 田川展也 on R 5/11/02.
+//  Created by 田川展也 on 12/25/R6.
 //
 
 enum NavigationLinkItem: Hashable {

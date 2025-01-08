@@ -24,12 +24,12 @@ struct FirestoreRepository: Sendable {
         return true
     }
 
-    func createRoom(roomPin: Int, userID: String, userData: UserData) async throws {
+    func createRoom(roomPin: Int, userID: String, user: UserData) async throws {
         let db = Firestore.firestore()
         let ref = db.collection("Room")
         try await ref.document(String(roomPin))
             .setData(["nextFlag": false, "isEnable": true])
-        try ref.document(String(roomPin)).collection("Member").document(userID).setData(from: userData)
+        try ref.document(String(roomPin)).collection("Member").document(userID).setData(from: user)
     }
 
     func uploadSongs(songs: [MusicSyncSong], userID: String) async throws {

@@ -7,13 +7,14 @@
 
 import SwiftUI
 import Firebase
+import Combine
 
 @MainActor
 class JoinRoomViewModel: ObservableObject {
     private let listenRoomUseCase = ListenRoomUseCase()
     private let joinRoomUseCase = JoinRoomUseCase()
     private var loadLibraryUseCase = AppleMusicLoadLibraryUseCase()
-    var authModel = FirebaseAuthModel()
+    private var authModel = FirebaseAuthModel()
 
     var songs: [MusicSyncSong] = []
 
@@ -22,14 +23,35 @@ class JoinRoomViewModel: ObservableObject {
     @Published var isError = false
     @Published var nextFlag = false
     @Published var errorMessage = "ルーム参加中にエラーが発生しました。もう一度お試しください"
-    @Published var roomPin = "000000"
+    @Published var roomPin: String
 
     init(usersData: [UserData] = [UserData](),
-         model: FirestoreRepository = FirestoreRepository()) {
+         model: FirestoreRepository = FirestoreRepository(),
+         roomPin: String
+    ) {
         self.usersData = usersData
+        self.roomPin = roomPin
     }
 
-    func addListener() {
+    func onAppear() async {
+        let userData = StoreUserUseCase.shared.fetchUser()
+        joinGroup(userData: userData)
+        do {
+            if !nextFlag {
+                await exitGroup()
+            }
+        } catch {
+            print(error)
+        }
+    }
+
+    func onTappedExitButton() {
+        Task {
+            await exitGroup()
+        }
+    }
+
+    private func addListener() {
         listenRoomUseCase.listenMember(roomPin: roomPin) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -56,7 +78,7 @@ class JoinRoomViewModel: ObservableObject {
         }
     }
 
-    func joinGroup(userData: UserData) {
+    private func joinGroup(userData: UserData) {
         Task {
             do {
                 if Auth.auth().currentUser == nil {
@@ -78,9 +100,13 @@ class JoinRoomViewModel: ObservableObject {
         }
     }
 
-    func exitGroup() async throws {
-        let user = StoreUserUseCase.shared.fetchUser()
-        try await joinRoomUseCase.exitRoom(roomPin: roomPin, userData: user)
-        listenRoomUseCase.stopListening()
+    private func exitGroup() async {
+        do {
+            let user = StoreUserUseCase.shared.fetchUser()
+            try await joinRoomUseCase.exitRoom(roomPin: roomPin, userData: user)
+            listenRoomUseCase.stopListening()
+        } catch {
+
+        }
     }
 }

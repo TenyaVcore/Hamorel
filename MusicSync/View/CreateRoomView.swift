@@ -8,10 +8,8 @@
 import SwiftUI
 
 struct CreateRoomView: View {
-    @StateObject var viewModel = CreateRoomViewModel()
-    @Binding var path: [NavigationLinkItem]
-
-    var userName: String
+    @StateObject var viewModel = CreateRoomViewModel(usersData: [])
+    @EnvironmentObject var router: Router
 
     var body: some View {
         ZStack {
@@ -44,8 +42,10 @@ struct CreateRoomView: View {
                 .listStyle(PlainListStyle())
 
                 Button(action: {
-                    viewModel.pushNext()
-                    path.append(NavigationLinkItem.playlist(String(viewModel.roomPin)))
+                    Task {
+                        let result = await viewModel.onTappedNextButton()
+                        if result { self.router.push(.playlist(viewModel.roomPin))}
+                }
                 }, label: {
                     ButtonView(text: "次へ",
                                buttonColor: viewModel.usersData.count <= 1 ? .gray : Color("color_primary")
@@ -56,7 +56,7 @@ struct CreateRoomView: View {
 
                 Button(action: {
                     viewModel.deleteGroup()
-                    path.removeLast()
+                    router.pop()
                 }, label: {
                     ButtonView(text: "roomを解散",
                                textColor: .black,
@@ -72,23 +72,19 @@ struct CreateRoomView: View {
         }
         .navigationBarBackButtonHidden(true)
         .task {
-            await viewModel.onAppear(userName: userName)
+            await viewModel.onAppear()
         }
         .onDisappear {
-            if !viewModel.nextFlag {
-                viewModel.deleteGroup()
-            }
+            viewModel.onDisappear()
         }
-        .alert("エラーが発生しました。もう一度お試しください", isPresented: $viewModel.isError, actions: {
-            Button("OK") { path.removeLast() }
-        })
+        .alert("エラーが発生しました。もう一度お試しください", isPresented: $viewModel.isError) {
+            Button("OK") { router.pop() }
+        }
     }
 }
 
 struct createGroupView_Previews: PreviewProvider {
-    @State static var state = true
-    @State static var path = [NavigationLinkItem]()
     static var previews: some View {
-        CreateRoomView(path: $path, userName: "preuser")
+        CreateRoomView()
     }
 }

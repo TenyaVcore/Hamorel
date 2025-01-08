@@ -8,40 +8,28 @@
 import SwiftUI
 import Firebase
 
+@MainActor
 class EmailRegisterViewModel: ObservableObject {
-    let authModel = FirebaseAuthModel()
+    private let authModel = FirebaseAuthModel()
 
-    func validateForm(name: String, email: String, password: String) -> String? {
-        var errorMessage: String?
-        // name
-        if name.count < 2 || name.count > 20 {
-            errorMessage = "ユーザー名は2文字以上20文字以下で入力してください"
-            return errorMessage
-        }
+    @Published var name: String = ""
+    @Published var email: String = ""
+    @Published var password: String = ""
+    @Published var errorMessage = ""
 
-        // email
-        if !email.contains("@") {
-            errorMessage = "メールアドレスを正しく入力してください"
-            return errorMessage
+    func onTappedRegisterButton(completion: @escaping (Bool) -> Void) {
+        createUser(email: email, name: name, password: password) { [weak self] error in
+            guard let self else { return }
+            if let error = error {
+                errorMessage = error
+                completion(false)
+            } else {
+                completion(true)
+            }
         }
-
-        // password
-        if password.count < 8 || password.count > 20 {
-            errorMessage = "パスワードは8文字以上20文字以下で入力してください"
-            return errorMessage
-        }
-        if password.rangeOfCharacter(from: .decimalDigits) == nil {
-            errorMessage = "パスワードは文字列と数字の両方を含めてください"
-            return errorMessage
-        }
-        if Int(password) != nil {
-            errorMessage = "パスワードは文字列と数字の両方を含めてください"
-            return errorMessage
-        }
-        return errorMessage
     }
 
-    func createUser(email: String, name: String, password: String, completion: @escaping (String?) -> Void) {
+    private func createUser(email: String, name: String, password: String, completion: @escaping (String?) -> Void) {
         let errorMessage = validateForm(name: name, email: email, password: password)
         if let errorMessage = errorMessage {
             completion(errorMessage)
@@ -72,5 +60,30 @@ class EmailRegisterViewModel: ObservableObject {
                 completion(nil)
             }
         }
+    }
+
+    private func validateForm(name: String, email: String, password: String) -> String? {
+        // name
+        if name.count < 2 || name.count > 20 {
+            return "ユーザー名は2文字以上20文字以下で入力してください"
+        }
+
+        // email
+        if !email.contains("@") {
+            return "メールアドレスを正しく入力してください"
+        }
+
+        // password
+        if password.count < 8 || password.count > 20 {
+            return "パスワードは8文字以上20文字以下で入力してください"
+        }
+        if password.rangeOfCharacter(from: .decimalDigits) == nil {
+            return "パスワードは文字列と数字の両方を含めてください"
+        }
+        if Int(password) != nil {
+            return "パスワードは文字列と数字の両方を含めてください"
+        }
+
+        return nil
     }
 }

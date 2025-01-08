@@ -6,14 +6,10 @@
 //
 
 import SwiftUI
-import Firebase
 
 struct PasswordResetView: View {
-
-    @State var email: String = ""
-    @State var errorMessage: String = ""
-    @State var isSuccessSending = false
-    @Binding var path: [NavigationLinkItem]
+    @ObservedObject private var viewModel = PasswordResetViewModel()
+    @EnvironmentObject private var router: Router
 
     var body: some View {
         VStack {
@@ -38,44 +34,32 @@ struct PasswordResetView: View {
                 }
             }
 
-            TextField("メールアドレスを入力", text: $email)
+            TextField("メールアドレスを入力", text: $viewModel.email)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal, 60)
                 .padding(.top, 60)
 
-            Text(errorMessage)
+            Text(viewModel.errorMessage)
                 .foregroundColor(.red)
                 .padding(.bottom, 50)
 
             Button {
-                Auth.auth().sendPasswordReset(withEmail: email) { error in
-                    if let error = error {
-                        switch error.localizedDescription {
-                        case "The email address is badly formatted.":
-                            errorMessage = "メールアドレスの形式が正しくありません"
-                        default:
-                            errorMessage = "エラーが発生しました"
-                        }
-                    } else {
-                        isSuccessSending = true
-                    }
-                }
+                viewModel.onTappedSendButton()
             } label: {
-                ButtonView(text: "メールを送信", buttonColor: email == "" ? .gray : Color("color_primary"))
+                ButtonView(text: "メールを送信", buttonColor: viewModel.email == "" ? .gray : Color("color_primary"))
             }
-            .disabled(email == "")
+            .disabled(viewModel.email == "")
         }
-        .alert("パスワード再設定用のメールを送信しました", isPresented: $isSuccessSending) {
+        .alert("パスワード再設定用のメールを送信しました", isPresented: $viewModel.isSuccessSending) {
             Button("OK") {
-                path.removeAll()
+                router.popToRoot()
             }
         }
     }
 }
 
 struct PasswordResetView_Previews: PreviewProvider {
-    @State static var path = [NavigationLinkItem]()
     static var previews: some View {
-        PasswordResetView(path: $path)
+        PasswordResetView()
     }
 }

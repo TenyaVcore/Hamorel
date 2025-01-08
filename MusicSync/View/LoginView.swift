@@ -13,7 +13,7 @@ struct LogInView: View {
     @State private var password: String = ""
     @State private var errorMessage = ""
     @State private var isSuccessLogin = false
-    @Binding var path: [NavigationLinkItem]
+    @EnvironmentObject var router: Router
 
     var model = FirebaseAuthModel()
 
@@ -67,15 +67,12 @@ struct LogInView: View {
         }
         .alert("ログインに成功しました", isPresented: $isSuccessLogin) {
             Button("OK") {
-                path.removeAll()
+                router.popToRoot()
             }
         }
     }
 }
 
-struct LoginView_Previews: PreviewProvider {
-    @State static var path = [NavigationLinkItem]()
-    static var previews: some View {
-        LogInView(path: $path)
-    }
+#Preview {
+    LogInView()
 }

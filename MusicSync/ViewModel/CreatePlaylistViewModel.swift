@@ -14,6 +14,7 @@ class CreatePlaylistViewModel: ObservableObject {
     var storeModel = FirestoreRepository()
     var appleMusicCreatePlaylistUseCase = AppleMusicCreatePlaylistUseCase()
     var musicSyncSongUseCase = MusicSyncSongUseCase()
+    var adMob = AdCoordinator()
 
     var songs: [MusicSyncSong] = []
 
@@ -24,6 +25,20 @@ class CreatePlaylistViewModel: ObservableObject {
     @Published var isDownloadError = false
     @Published var isSuccessCreate = false
     @Published var playlistName = "MusicSyncPlaylist"
+
+    func onAppear(roomPin: String) {
+        adMob.loadAd()
+        downloadSongs(roomPin: roomPin)
+    }
+
+    func onTappedAddAppleMusicButton() {
+        createPlaylist()
+        adMob.presentAd()
+    }
+
+    func onTappedReturnHomeButton() {
+        isReturnHome = true
+    }
 
     func downloadSongs(roomPin: String) {
         Task {

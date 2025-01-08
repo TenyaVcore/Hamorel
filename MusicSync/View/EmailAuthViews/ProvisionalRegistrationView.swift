@@ -8,26 +8,23 @@
 import SwiftUI
 
 struct ProvisionalRegistrationView: View {
-    @Binding var path: [NavigationLinkItem]
+    @EnvironmentObject var router: Router
 
     var body: some View {
         VStack {
             Text("メールアドレスに確認メールを送信しました")
 
             Button {
-                path.removeLast(path.count - 1)
+                router.popToRoot()
             } label: {
                 ButtonView(text: "ログイン画面に戻る", buttonColor: .primary)
             }
 
-            Text("メールが届かない場合")
+            Text("メールが届かない場合は迷惑メールフォルダをご確認ください")
         }
     }
 }
 
-struct ProvisionalRegistrationView_Previews: PreviewProvider {
-    @State static var path = [NavigationLinkItem]()
-    static var previews: some View {
-        ProvisionalRegistrationView(path: $path)
-    }
+#Preview {
+    ProvisionalRegistrationView()
 }

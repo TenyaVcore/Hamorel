@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct EnterRoomPinView: View {
-    @Binding var path: [NavigationLinkItem]
-    @StateObject var viewModel = EnterRoomPinViewModel()
+    @StateObject private var viewModel = EnterRoomPinViewModel()
+    @EnvironmentObject private var router: Router
 
     var body: some View {
         VStack {
@@ -40,7 +40,7 @@ struct EnterRoomPinView: View {
                 HStack {
                     ForEach(row * 3 - 2...row * 3, id: \.self) { num in
                         Button(action: {
-                            viewModel.pushNumButton(num: num)
+                            viewModel.onTappedNumButton(num: num)
                         }, label: {
                             NumberButtonView(text: String(num))
                         })
@@ -50,19 +50,19 @@ struct EnterRoomPinView: View {
 
             HStack {
                 Button(action: {
-                    viewModel.deleteNum()
+                    viewModel.onTappedDeleteButton()
                 }, label: {
                     DeleteButtonView()
                 })
 
                 Button(action: {
-                    viewModel.pushNumButton(num: 0)
+                    viewModel.onTappedNumButton(num: 0)
                 }, label: {
                     NumberButtonView(text: String(0))
                 })
 
                 Button(action: {
-                    viewModel.deleteNum()
+                    viewModel.onTappedDeleteButton()
                 }, label: {
                     DeleteButtonView()
                 })
@@ -74,7 +74,7 @@ struct EnterRoomPinView: View {
             .padding(.top, 10)
 
             Button(action: {
-                path.removeLast()
+                router.pop()
             }, label: {
                 ButtonView(text: "戻る", textColor: .black, buttonColor: Color("color_secondary"))
             })
@@ -84,6 +84,5 @@ struct EnterRoomPinView: View {
 }
 
 #Preview {
-    @Previewable @State var path = [NavigationLinkItem]()
-    return EnterRoomPinView(path: $path)
+    return EnterRoomPinView()
 }

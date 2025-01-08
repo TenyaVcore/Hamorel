@@ -7,18 +7,18 @@
 import SwiftUI
 
 struct HomeView: View {
-    init(viewModel: HomeViewModel) {
+    init(viewModel: HomeViewModel = HomeViewModel()) {
         self._viewModel = StateObject(wrappedValue: viewModel)
     }
 
     @StateObject var viewModel: HomeViewModel = HomeViewModel()
-    @State private var path: [NavigationLinkItem] = []
+    @EnvironmentObject var router: Router
 
     var body: some View {
         let bounds = UIScreen.main.bounds
         let screenHeight = Int(bounds.height)
 
-            NavigationStack(path: $path) {
+        NavigationStack(path: $router.path) {
                 VStack {
                     Spacer()
 
@@ -90,32 +90,7 @@ struct HomeView: View {
                     await viewModel.onAppear()
                 }
                 .navigationDestination(for: NavigationLinkItem.self) { item in
-                    switch item {
-                    case .create:
-                        CreateRoomView(path: $path, userName: viewModel.name)
-                    case .enter:
-                        EnterRoomPinView(path: $path)
-                    case .join(let roomPin):
-                        JoinRoomView(path: $path, userName: viewModel.name, roomPin: roomPin)
-                    case .playlist(let roomPin):
-                        CreatePlaylistView(path: $path, roomPin: roomPin)
-                    case .home:
-                        HomeView(viewModel: HomeViewModel())
-                    case .setting:
-                        SettingView()
-                    case .login:
-                        LogInView(path: $path)
-                    case .passwordReset:
-                        PasswordResetView(path: $path)
-                    case .register:
-                        EmailRegisterView(path: $path)
-                    case .provision:
-                        ProvisionalRegistrationView(path: $path)
-                    case .license:
-                        LicenseView()
-                    case .debug:
-                        DebugView()
-                    }
+                    router.navigate(item: item)
                 }
             }
     }

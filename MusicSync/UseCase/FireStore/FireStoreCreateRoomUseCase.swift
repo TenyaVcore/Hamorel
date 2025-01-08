@@ -8,8 +8,7 @@
 struct CreateRoomUseCase: Sendable {
     private let repo = FirestoreRepository()
 
-    func createRoom(id: String, hostName: String) async throws -> String {
-        let userData = UserData(id: id, name: hostName)
+    func createRoom(user: UserData) async throws -> String {
         let maxIter = 10
         var roomPin = 0
 
@@ -26,12 +25,13 @@ struct CreateRoomUseCase: Sendable {
             }
         }
 
-        try await repo.createRoom(roomPin: roomPin, userID: id, userData: userData)
+        try await repo
+            .createRoom(roomPin: roomPin, userID: user.id, user: user)
         return String(roomPin)
     }
 
-    func uploadSongs(id: String, songs: [MusicSyncSong]) async throws {
-        try await repo.uploadSongs(songs: songs, userID: id)
+    func uploadSongs(user: UserData, songs: [MusicSyncSong]) async throws {
+        try await repo.uploadSongs(songs: songs, userID: user.id)
     }
 
     func pushNext(roomPin: String) async throws {

@@ -24,8 +24,10 @@ struct MusicSyncApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegete
 
     var body: some Scene {
+        @StateObject var router = Router()
         WindowGroup {
             HomeView(viewModel: HomeViewModel())
         }
+        .environmentObject(router)
     }
 }

@@ -6,16 +6,14 @@
 //
 
 import SwiftUI
-import Combine
 
 struct JoinRoomView: View {
-    @StateObject var viewModel = JoinRoomViewModel()
-    @Binding var path: [NavigationLinkItem]
+    @StateObject private var viewModel: JoinRoomViewModel
+    @EnvironmentObject private var router: Router
 
-    // 前のviewからの引き継ぎ
-    var userName: String
-    var roomPin: String
-    @State var cancellable: AnyCancellable!
+    init (roomPin: String) {
+        _viewModel = StateObject(wrappedValue: JoinRoomViewModel(roomPin: roomPin))
+    }
 
     var body: some View {
         ZStack {
@@ -48,7 +46,7 @@ struct JoinRoomView: View {
                 .listStyle(PlainListStyle())
 
                 Button(action: {
-                    path.removeLast()
+                    viewModel.onTappedExitButton()
                 }, label: {
                     ButtonView(text: "roomを退出",
                                textColor: .black,
@@ -62,28 +60,11 @@ struct JoinRoomView: View {
                 .opacity(viewModel.isLoading ? 1 : 0)
                 .animation(.easeInOut, value: viewModel.isLoading)
         }
-        .onAppear {
-            viewModel.roomPin = roomPin
-            let userData = StoreUserUseCase.shared.fetchUser()
-            viewModel.joinGroup(userData: userData)
-            self.cancellable = viewModel.$nextFlag.sink {
-                if $0 {
-                    path.append(NavigationLinkItem.playlist(viewModel.roomPin))
-                }
-            }
-        }
-        .task {
-            do {
-                if !viewModel.nextFlag {
-                    try await viewModel.exitGroup()
-                }
-                cancellable.cancel()
-            } catch {
-                print(error)
-            }
+        .navigationDestination(isPresented: $viewModel.nextFlag) {
+            router.navigate(item: .playlist(viewModel.roomPin))
         }
         .alert(viewModel.errorMessage, isPresented: $viewModel.isError, actions: {
-            Button("OK") { path.removeLast() }
+            Button("OK") { router.pop() }
         })
     }
 }
@@ -91,7 +72,6 @@ struct JoinRoomView: View {
 struct JoinGroupView_Previews: PreviewProvider {
     @State static var path = [NavigationLinkItem]()
     static var previews: some View {
-
-        JoinRoomView(path: $path, userName: "userName", roomPin: "333333")
+        JoinRoomView(roomPin: "333333")
     }
 }
