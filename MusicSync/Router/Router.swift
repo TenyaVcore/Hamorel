@@ -47,7 +47,7 @@ final class Router: ObservableObject {
     }
 
     func pop() {
-        if path.count > 1 {
+        if path.count >= 1 {
             path.removeLast()
         }
     }
