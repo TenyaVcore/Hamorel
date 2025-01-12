@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CreateRoomView: View {
-    @StateObject var viewModel = CreateRoomViewModel(usersData: [])
+    @StateObject var viewModel = CreateRoomViewModel()
     @EnvironmentObject var router: Router
 
     var body: some View {

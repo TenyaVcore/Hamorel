@@ -5,7 +5,6 @@
 //  Created by 田川展也 on R 5/05/22.
 //
 
-import Firebase
 import SwiftUICore
 
 @MainActor
@@ -13,7 +12,7 @@ class CreateRoomViewModel: ObservableObject {
     private let loadLibraryUseCase = AppleMusicLoadLibraryUseCase()
     private let createRoomUseCase = CreateRoomUseCase()
     private let listenRoomUseCase = ListenRoomUseCase()
-    private let authModel = FirebaseAuthModel()
+    private let authUseCase = AuthUseCase()
 
     @Published var usersData: [UserData] = []
     @Published var isLoading = true
@@ -21,37 +20,15 @@ class CreateRoomViewModel: ObservableObject {
     @Published var roomPin = "--- ---"
     @Published var nextFlag = false
 
-    init(usersData: [UserData]) {
-        self.usersData = usersData
+    func onAppear() async {
+        let user = authUseCase.fetchUser()
+        usersData = [user]
+        await createGroup(user: user)
     }
 
-    func addListener() {
-        listenRoomUseCase.listenMember(roomPin: roomPin) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case .success(let data):
-                self.usersData = data
-            case .failure(let error):
-                print("Error fetching document: \(error.localizedDescription)")
-                return
-            }
-        }
-    }
-
-    private func createGroup(user: UserData) async {
-        do {
-            if Auth.auth().currentUser == nil {
-                try await authModel.loginAsGuestAsync()
-            }
-            let musicSyncSongs = try await loadLibraryUseCase.loadLibrary(limit: 0)
-
-            roomPin = try await createRoomUseCase.createRoom(user: user)
-            try await createRoomUseCase.uploadSongs(user: user, songs: musicSyncSongs)
-            self.addListener()
-            self.isLoading = false
-        } catch {
-            print("error:\(error.localizedDescription)")
-            self.isError = true
+    func onDisappear() {
+        if !nextFlag {
+            deleteGroup()
         }
     }
 
@@ -67,20 +44,36 @@ class CreateRoomViewModel: ObservableObject {
         }
     }
 
-    func deleteGroup() {
+    private func createGroup(user: UserData) async {
+        do {
+            authUseCase.loginAsGuestIfAnonymous()
+            async let musicSyncSongs = try loadLibraryUseCase.loadLibrary(limit: 0)
+            async let createdRoomPin = createRoomUseCase.createRoom(user: user)
+            try await createRoomUseCase.uploadSongs(user: user, songs: musicSyncSongs)
+            await self.roomPin = try createdRoomPin
+            self.addListener()
+            self.isLoading = false
+        } catch {
+            print("error:\(error.localizedDescription)")
+            self.isError = true
+        }
+    }
+
+    private func addListener() {
+        listenRoomUseCase.listenMember(roomPin: roomPin) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let data):
+                self.usersData = data
+            case .failure(let error):
+                print("Error fetching document: \(error.localizedDescription)")
+                return
+            }
+        }
+    }
+
+    private func deleteGroup() {
         listenRoomUseCase.stopListening()
         createRoomUseCase.deleteRoom(roomPin: roomPin)
-    }
-
-    func onAppear() async {
-        let user = StoreUserUseCase.shared.fetchUser()
-        await createGroup(user: user)
-        usersData = [user]
-    }
-
-    func onDisappear() {
-        if !nextFlag {
-            deleteGroup()
-        }
     }
 }
