@@ -45,10 +45,8 @@ class CreateRoomViewModel: ObservableObject {
             }
             let musicSyncSongs = try await loadLibraryUseCase.loadLibrary(limit: 0)
 
-            roomPin = try await createRoomUseCase
-                .createRoom(user: user)
-            try await createRoomUseCase
-                .uploadSongs(user: user, songs: musicSyncSongs)
+            roomPin = try await createRoomUseCase.createRoom(user: user)
+            try await createRoomUseCase.uploadSongs(user: user, songs: musicSyncSongs)
             self.addListener()
             self.isLoading = false
         } catch {

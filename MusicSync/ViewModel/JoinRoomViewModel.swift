@@ -7,7 +7,6 @@
 
 import SwiftUI
 import Firebase
-import Combine
 
 @MainActor
 class JoinRoomViewModel: ObservableObject {
@@ -36,12 +35,8 @@ class JoinRoomViewModel: ObservableObject {
     func onAppear() async {
         let userData = StoreUserUseCase.shared.fetchUser()
         joinGroup(userData: userData)
-        do {
-            if !nextFlag {
-                await exitGroup()
-            }
-        } catch {
-            print(error)
+        if !nextFlag {
+            await exitGroup()
         }
     }
 
