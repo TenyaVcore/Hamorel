@@ -14,6 +14,7 @@ struct DebugView: View {
     @State var titleText: String = ""
     let loadLibraryUseCase = AppleMusicLoadLibraryUseCase()
     let createPlaylistUseCase = AppleMusicCreatePlaylistUseCase()
+    let firestoreRepo = FirestoreRepository()
     let syncModel = MusicSyncSongUseCase()
 
     var body: some View {
@@ -22,22 +23,33 @@ struct DebugView: View {
             Text("artist: " + (song?.artistName ?? ""))
             TextField("artist", text: $artistText)
             TextField("title", text: $titleText)
-            Button("曲を検索") {
+
+//            Button("曲を検索") {
+//                Task {
+//                    do {
+//                        song = try await createPlaylistUseCase.getSong(artist: artistText, title: titleText)
+//                    } catch {
+//                        print(error)
+//                    }
+//                }
+//            }
+
+//            Button("プレイリスト作成") {
+//                do {
+//                    try createPlaylistUseCase.createPlaylist(
+//                        from: loadLibraryUseCase.convertToMusicSyncSongCollection(from: [song!]))
+//
+//                } catch {
+//                    print(error)
+//                }
+//            }
+
+            Button("ルーム作成") {
                 Task {
                     do {
-                        song = try await createPlaylistUseCase.getSong(artist: artistText, title: titleText)
-                    } catch {
-                        print(error)
-                    }
-                }
-            }
-            Button("プレイリスト作成") {
-                do {
-                    try createPlaylistUseCase.createPlaylist(
-                        from: loadLibraryUseCase.convertToMusicSyncSongCollection(from: [song!]))
-
-                } catch {
-                    print(error)
+                        try await firestoreRepo
+                            .createRoom(roomPin: 100000, user: UserData(id: "111", name: "test"))
+                    } catch { print(error) }
                 }
             }
         }

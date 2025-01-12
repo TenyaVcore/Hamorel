@@ -39,14 +39,14 @@ struct AppleMusicCreatePlaylistUseCase {
         return MusicItemCollection(Songs)
     }
 
-    func getSong(from catalogID: String) async throws -> Song {
+    private func getSong(from catalogID: String) async throws -> Song {
         var request = MusicCatalogResourceRequest<Song>(matching: \.id, equalTo: MusicItemID(catalogID))
         request.limit = 1
         let response = try await request.response()
         return response.items[0]
     }
 
-    func getSong(artist: String, title: String) async throws -> Song {
+    private func getSong(artist: String, title: String) async throws -> Song {
         var request = MusicCatalogSearchRequest(term: "\(artist) \(title)", types: [Song.self])
         request.limit = 1
         let response = try await request.response()

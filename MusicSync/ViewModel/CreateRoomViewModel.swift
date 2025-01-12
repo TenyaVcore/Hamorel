@@ -38,7 +38,7 @@ class CreateRoomViewModel: ObservableObject {
         }
     }
 
-    func createGroup(user: UserData) async {
+    private func createGroup(user: UserData) async {
         do {
             if Auth.auth().currentUser == nil {
                 try await authModel.loginAsGuestAsync()
