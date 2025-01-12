@@ -8,9 +8,18 @@
 struct AuthUseCase: Sendable {
     let repo = FirebaseAuthRepository()
 
-    func fetchUser() async throws -> UserData? {
+    /// ユーザー情報を取得する
+    ///
+    /// - Note: ログインしていない場合はゲストログインを行う
+    /// - Throws: ゲストログインに失敗した場合
+    /// - Returns: ユーザー情報
+    func fetchUser() async throws -> UserData {
         let user = repo.fetchUser()
-        return user
+        if let user {
+            return user
+        } else {
+            return try await repo.loginAsGuest()
+        }
     }
 
     func loginAsGuestIfNotLoggedIn() async throws {

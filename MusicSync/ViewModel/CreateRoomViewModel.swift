@@ -21,9 +21,13 @@ class CreateRoomViewModel: ObservableObject {
     @Published var nextFlag = false
 
     func onAppear() async {
-        let user = authUseCase.fetchUser()
-        usersData = [user]
-        await createGroup(user: user)
+        do {
+            let user = try await authUseCase.fetchUser()
+            usersData = [user]
+            await createGroup(user: user)
+        } catch {
+            self.isError = true
+        }
     }
 
     func onDisappear() {
@@ -44,9 +48,14 @@ class CreateRoomViewModel: ObservableObject {
         }
     }
 
+    func deleteGroup() {
+        listenRoomUseCase.stopListening()
+        createRoomUseCase.deleteRoom(roomPin: roomPin)
+    }
+
     private func createGroup(user: UserData) async {
         do {
-            authUseCase.loginAsGuestIfAnonymous()
+            try await authUseCase.loginAsGuestIfNotLoggedIn()
             async let musicSyncSongs = try loadLibraryUseCase.loadLibrary(limit: 0)
             async let createdRoomPin = createRoomUseCase.createRoom(user: user)
             try await createRoomUseCase.uploadSongs(user: user, songs: musicSyncSongs)
@@ -70,10 +79,5 @@ class CreateRoomViewModel: ObservableObject {
                 return
             }
         }
-    }
-
-    private func deleteGroup() {
-        listenRoomUseCase.stopListening()
-        createRoomUseCase.deleteRoom(roomPin: roomPin)
     }
 }
