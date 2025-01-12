@@ -1,5 +1,5 @@
 //
-//  FireStoreCreateRoomUseCase.swift
+//  CreateRoomUseCase.swift
 //  MusicSync
 //
 //  Created by 田川展也 on 12/23/R6.
@@ -15,7 +15,7 @@ struct CreateRoomUseCase: Sendable {
         for i in 0...maxIter {
             roomPin = Int.random(in: 100000...999999)
             let isExist = try await repo.isExistRoom(roomPin: String(roomPin))
-            if isExist {
+            if !isExist {
                 print("find roomPin")
                 break
             }
