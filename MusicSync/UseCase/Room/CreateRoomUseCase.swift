@@ -26,7 +26,7 @@ struct CreateRoomUseCase: Sendable {
         }
 
         try await repo
-            .createRoom(roomPin: roomPin, userID: user.id, user: user)
+            .createRoom(roomPin: roomPin, user: user)
         return String(roomPin)
     }
 
