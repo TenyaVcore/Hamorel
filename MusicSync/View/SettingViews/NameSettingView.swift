@@ -6,14 +6,17 @@
 //
 
 import SwiftUI
-import Firebase
 
 struct NameSettingView: View {
-    @AppStorage("name") var name = "ゲストユーザー"
     @State var updateName: String = ""
+    @State var isError = false
     @Environment(\.dismiss) private var dismiss
 
-    let model = FirebaseAuthModel()
+    let repo = FirebaseAuthRepository()
+
+    init() {
+        updateName = repo.fetchUser()?.name ?? "GuestUser"
+    }
 
     var body: some View {
         VStack {
@@ -23,17 +26,19 @@ struct NameSettingView: View {
                 .bold()
 
             TextField("ユーザー名を入力してください", text: $updateName)
-                .onAppear {
-                    updateName = name
-                }
                 .textFieldStyle(.roundedBorder)
                 .autocapitalization(.none)
                 .padding(60)
 
             Button {
-                name = updateName
-                model.changeUserName(newName: updateName)
-                dismiss()
+                Task {
+                    do {
+                        try await repo.changeUserName(newName: updateName)
+                        dismiss()
+                    } catch {
+                        isError = true
+                    }
+                }
             } label: {
                 ButtonView(text: "OK", buttonColor: .blue)
             }
@@ -43,6 +48,11 @@ struct NameSettingView: View {
                 dismiss()
             } label: {
                 ButtonView(text: "キャンセル", buttonColor: .gray)
+            }
+        }
+        .alert("エラーが発生しました", isPresented: $isError) {
+            Button("OK") {
+                isError = false
             }
         }
     }

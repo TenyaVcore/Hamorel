@@ -1,5 +1,5 @@
 //
-//  PassworkResetVIewModel.swift
+//  PassworsResetViewModel.swift
 //  MusicSync
 //
 //  Created by 田川展也 on 12/26/R6.
@@ -13,7 +13,6 @@ class PasswordResetViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var errorMessage: String = ""
     @Published var isSuccessSending = false
-
 
     func onTappedSendButton() {
         Auth.auth().sendPasswordReset(withEmail: email) { [weak self] error in

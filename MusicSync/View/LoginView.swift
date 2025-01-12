@@ -13,9 +13,10 @@ struct LogInView: View {
     @State private var password: String = ""
     @State private var errorMessage = ""
     @State private var isSuccessLogin = false
+    @State private var isError = false
     @EnvironmentObject var router: Router
 
-    var model = FirebaseAuthModel()
+    var model = FirebaseAuthRepository()
 
     var body: some View {
         VStack {
@@ -54,11 +55,11 @@ struct LogInView: View {
             }.padding()
 
             Button {
-                model.loginAsGuest { error in
-                    if error != nil {
-                        errorMessage = "エラーが発生しました"
-                    } else {
-                        isSuccessLogin = true
+                Task {
+                    do {
+                        try await model.loginAsGuest()
+                    } catch {
+                        isError = true
                     }
                 }
             } label: {
@@ -69,6 +70,9 @@ struct LogInView: View {
             Button("OK") {
                 router.popToRoot()
             }
+        }
+        .alert("エラーが発生しました", isPresented: $isError) {
+            Button("OK") {}
         }
     }
 }
