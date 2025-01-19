@@ -5,9 +5,7 @@
 //  Created by 田川展也 on R 5/05/22.
 //
 
-import SwiftUI
-import Firebase
-import FirebaseFirestoreSwift
+import SwiftUICore
 
 @MainActor
 class CreatePlaylistViewModel: ObservableObject {
@@ -18,7 +16,6 @@ class CreatePlaylistViewModel: ObservableObject {
 
     var songs: [MusicSyncSong] = []
 
-    @Published var users: [UserData] = []
     @Published var isLoading = true
     @Published var isReturnHome = false
     @Published var isCreateError = false
@@ -40,10 +37,10 @@ class CreatePlaylistViewModel: ObservableObject {
         isReturnHome = true
     }
 
-    func downloadSongs(roomPin: String) {
+    private func downloadSongs(roomPin: String) {
         Task {
             do {
-                users = try await storeModel.downloadRoomData(roomPin: roomPin)
+                let users = try await storeModel.downloadRoomData(roomPin: roomPin)
                 let downloadData: [[MusicSyncSong]]  = try await storeModel.downloadSongs(users: users)
                 songs = downloadData[0]
                 for i in 1..<downloadData.count {
@@ -57,7 +54,7 @@ class CreatePlaylistViewModel: ObservableObject {
         }
     }
 
-    func createPlaylist() {
+    private func createPlaylist() {
         Task {
             do {
                 try appleMusicCreatePlaylistUseCase.createPlaylist(from: songs, playlistName: playlistName)
