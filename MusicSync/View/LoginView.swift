@@ -8,15 +8,13 @@
 import SwiftUI
 import Firebase
 
-struct LogInView: View {
+struct LogInView<Repo: AuthRepositoryProtocol>: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var errorMessage = ""
     @State private var isSuccessLogin = false
     @State private var isError = false
     @EnvironmentObject var router: Router
-
-    var model = FirebaseAuthRepository()
 
     var body: some View {
         VStack {
@@ -57,7 +55,7 @@ struct LogInView: View {
             Button {
                 Task {
                     do {
-                        try await model.loginAsGuest()
+                        try await Repo.loginAsGuest()
                     } catch {
                         isError = true
                     }
@@ -78,5 +76,5 @@ struct LogInView: View {
 }
 
 #Preview {
-    LogInView()
+    LogInView<FirebaseAuthRepository>()
 }

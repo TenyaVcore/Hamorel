@@ -9,7 +9,7 @@ import SwiftUICore
 
 @MainActor
 class PasswordResetViewModel: ObservableObject {
-    let authUseCase = AuthUseCase()
+    let authUseCase = AuthUseCase<FirebaseAuthRepository>()
     @Published var email: String = ""
     @Published var errorMessage: String = ""
     @Published var isSuccessSending = false

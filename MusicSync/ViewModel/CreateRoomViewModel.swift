@@ -12,7 +12,7 @@ class CreateRoomViewModel: ObservableObject {
     private let loadLibraryUseCase = AppleMusicLoadLibraryUseCase()
     private let createRoomUseCase = CreateRoomUseCase<FirestoreRepository>()
     private let listenRoomUseCase = ListenRoomUseCase()
-    private let authUseCase = AuthUseCase()
+    private let authUseCase = AuthUseCase<FirebaseAuthRepository>()
 
     @Published var usersData: [UserData] = []
     @Published var isLoading = true

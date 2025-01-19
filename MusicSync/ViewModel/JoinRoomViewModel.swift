@@ -13,7 +13,7 @@ class JoinRoomViewModel: ObservableObject {
     private let listenRoomUseCase = ListenRoomUseCase()
     private let joinRoomUseCase = JoinRoomUseCase<FirestoreRepository>()
     private var loadLibraryUseCase = AppleMusicLoadLibraryUseCase()
-    private var authUseCase = AuthUseCase()
+    private var authUseCase = AuthUseCase<FirebaseAuthRepository>()
 
     var songs: [MusicSyncSong] = []
 

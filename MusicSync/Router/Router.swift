@@ -27,7 +27,7 @@ final class Router: ObservableObject {
             case .setting:
                 SettingView()
             case .login:
-                LogInView()
+                LogInView<FirebaseAuthRepository>()
             case .passwordReset:
                 PasswordResetView()
             case .register:

@@ -8,8 +8,7 @@
 import Foundation.NSError
 import FirebaseAuth
 
-struct EmailRegisterUseCase {
-    private let repo = FirebaseAuthRepository()
+struct EmailRegisterUseCase<Repo: AuthRepositoryProtocol> {
 
     /// ユーザー名、メールアドレス、パスワードのバリデーション
     ///
@@ -40,7 +39,7 @@ struct EmailRegisterUseCase {
     }
 
     func createUser(name: String, email: String, password: String) async throws {
-        try await repo.createUser(email: email, name: name, password: password)
+        try await Repo.createUser(email: email, name: name, password: password)
     }
 
     func convertErrorToMessage(error: Error) -> String {

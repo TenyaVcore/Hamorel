@@ -5,32 +5,30 @@
 //  Created by 田川展也 on 1/12/R7.
 //
 
-struct AuthUseCase: Sendable {
-    let repo = FirebaseAuthRepository()
-
+struct AuthUseCase<Repo: AuthRepositoryProtocol>: Sendable {
     /// ユーザー情報を取得する
     ///
     /// - Note: ログインしていない場合はゲストログインを行う
     /// - Throws: ゲストログインに失敗した場合
     /// - Returns: ユーザー情報
     func fetchUser() async throws -> UserData {
-        let user = repo.fetchUser()
+        let user = Repo.fetchUser()
         if let user {
             return user
         } else {
-            return try await repo.loginAsGuest()
+            return try await Repo.loginAsGuest()
         }
     }
 
     func loginAsGuestIfNotLoggedIn() async throws {
-        let isLoggedIn = repo.isLoggedIn()
+        let isLoggedIn = Repo.isLoggedIn()
         if !isLoggedIn {
-            try await repo.loginAsGuest()
+            try await Repo.loginAsGuest()
         }
     }
 
     func sendPasswordReset(email: String) async throws {
-        try await repo.sendPasswordReset(email: email)
+        try await Repo.sendPasswordReset(email: email)
     }
 
 }

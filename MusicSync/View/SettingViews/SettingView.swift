@@ -65,7 +65,7 @@ struct SettingView: View {
                     Text("ユーザー名:　\(name)")
                 }
                 .fullScreenCover(isPresented: $isSettingName) {
-                    NameSettingView()
+                    NameSettingView<FirebaseAuthRepository>()
                 }
 
                 NavigationLink(value: NavigationLinkItem.passwordReset) {

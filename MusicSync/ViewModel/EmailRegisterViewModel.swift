@@ -10,7 +10,7 @@ import Firebase
 
 @MainActor
 class EmailRegisterViewModel: ObservableObject {
-    private let useCase = EmailRegisterUseCase()
+    private let useCase = EmailRegisterUseCase<FirebaseAuthRepository>()
 
     @Published var name: String = ""
     @Published var email: String = ""

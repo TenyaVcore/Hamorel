@@ -8,24 +8,36 @@
 import Firebase
 import SwiftUI
 
-struct FirebaseAuthRepository {
+protocol AuthRepositoryProtocol {
+    static func isLoggedIn() -> Bool
+    static func isAnonymous() -> Bool
+    static func fetchUser() -> UserData?
+    static func createUser(email: String, name: String, password: String) async throws
+    @discardableResult static func loginAsGuest() async throws -> UserData
+    static func changeUserName(newName: String) async throws
+    static func sendPasswordReset(email: String) async throws
+}
 
-    func isLoggedIn() -> Bool {
+enum FirebaseAuthRepository {}
+
+extension FirebaseAuthRepository: AuthRepositoryProtocol {
+
+    static func isLoggedIn() -> Bool {
         return Auth.auth().currentUser != nil
     }
 
-    func isAnonymous() -> Bool {
+    static func isAnonymous() -> Bool {
         return Auth.auth().currentUser?.isAnonymous ?? true
     }
 
-    func fetchUser() -> UserData? {
+    static func fetchUser() -> UserData? {
         let user = Auth.auth().currentUser
         guard let user = user else { return nil }
 
         return UserData(id: user.uid, name: user.displayName ?? "ユーザー名未設定")
     }
 
-    func createUser(email: String, name: String, password: String) async throws {
+    static func createUser(email: String, name: String, password: String) async throws {
         let result = try await Auth.auth().createUser(withEmail: email, password: password)
         let request = result.user.createProfileChangeRequest()
         request.displayName = name
@@ -35,18 +47,18 @@ struct FirebaseAuthRepository {
 
     // ゲストログインし、UserDataを返す
     @discardableResult
-    func loginAsGuest() async throws -> UserData {
+    static func loginAsGuest() async throws -> UserData {
         let result = try await Auth.auth().signInAnonymously()
         return UserData(id: result.user.uid, name: "GuestUser")
     }
 
-    func changeUserName(newName: String) async throws {
+    static func changeUserName(newName: String) async throws {
         let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
         changeRequest?.displayName = newName
         try await changeRequest?.commitChanges()
     }
 
-    func sendPasswordReset(email: String) async throws {
+    static func sendPasswordReset(email: String) async throws {
         try await Auth.auth().sendPasswordReset(withEmail: email)
     }
 }

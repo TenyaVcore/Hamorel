@@ -7,15 +7,13 @@
 
 import SwiftUI
 
-struct NameSettingView: View {
+struct NameSettingView<Repo: AuthRepositoryProtocol>: View {
     @State var updateName: String = ""
     @State var isError = false
     @Environment(\.dismiss) private var dismiss
 
-    let repo = FirebaseAuthRepository()
-
     init() {
-        updateName = repo.fetchUser()?.name ?? "GuestUser"
+        updateName = Repo.fetchUser()?.name ?? "GuestUser"
     }
 
     var body: some View {
@@ -33,7 +31,7 @@ struct NameSettingView: View {
             Button {
                 Task {
                     do {
-                        try await repo.changeUserName(newName: updateName)
+                        try await Repo.changeUserName(newName: updateName)
                         dismiss()
                     } catch {
                         isError = true
@@ -60,6 +58,6 @@ struct NameSettingView: View {
 
 struct NameSettingView_Previews: PreviewProvider {
     static var previews: some View {
-        NameSettingView()
+        NameSettingView<FirebaseAuthRepository>()
     }
 }
