@@ -45,4 +45,8 @@ struct FirebaseAuthRepository {
         changeRequest?.displayName = newName
         try await changeRequest?.commitChanges()
     }
+
+    func sendPasswordReset(email: String) async throws {
+        try await Auth.auth().sendPasswordReset(withEmail: email)
+    }
 }

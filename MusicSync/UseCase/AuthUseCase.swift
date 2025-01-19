@@ -29,4 +29,8 @@ struct AuthUseCase: Sendable {
         }
     }
 
+    func sendPasswordReset(email: String) async throws {
+        try await repo.sendPasswordReset(email: email)
+    }
+
 }
