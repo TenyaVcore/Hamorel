@@ -13,7 +13,7 @@ class JoinRoomViewModel: ObservableObject {
     private let listenRoomUseCase = ListenRoomUseCase()
     private let joinRoomUseCase = JoinRoomUseCase()
     private var loadLibraryUseCase = AppleMusicLoadLibraryUseCase()
-    private var authModel = FirebaseAuthModel()
+    private var authUseCase = AuthUseCase()
 
     var songs: [MusicSyncSong] = []
 
@@ -33,10 +33,15 @@ class JoinRoomViewModel: ObservableObject {
     }
 
     func onAppear() async {
-        let userData = StoreUserUseCase.shared.fetchUser()
-        joinGroup(userData: userData)
-        if !nextFlag {
-            await exitGroup()
+        do {
+            try await authUseCase.loginAsGuestIfNotLoggedIn()
+            let userData = try await authUseCase.fetchUser()
+            joinGroup(userData: userData)
+            if !nextFlag {
+                await exitGroup()
+            }
+        } catch {
+            self.isError = true
         }
     }
 
@@ -76,9 +81,6 @@ class JoinRoomViewModel: ObservableObject {
     private func joinGroup(userData: UserData) {
         Task {
             do {
-                if Auth.auth().currentUser == nil {
-                    try await authModel.loginAsGuestAsync()
-                }
                 songs = try await loadLibraryUseCase.loadLibrary(limit: 0)
                 print("fetch songs")
                 self.usersData = try await joinRoomUseCase
@@ -97,11 +99,11 @@ class JoinRoomViewModel: ObservableObject {
 
     private func exitGroup() async {
         do {
-            let user = StoreUserUseCase.shared.fetchUser()
-            try await joinRoomUseCase.exitRoom(roomPin: roomPin, userData: user)
             listenRoomUseCase.stopListening()
+            let user = try await authUseCase.fetchUser()
+            try await joinRoomUseCase.exitRoom(roomPin: roomPin, userData: user)
         } catch {
-
+            // 何もしない
         }
     }
 }
