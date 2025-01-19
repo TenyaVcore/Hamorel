@@ -8,21 +8,23 @@
 import FirebaseFirestore
 
 protocol RemoteDBProtocol {
-    func isExistRoom(roomPin: String) async throws -> Bool
-    func createRoom(roomPin: Int, user: UserData) async throws
-    func uploadSongs(songs: [MusicSyncSong], userID: String) async throws
-    func downloadRoomData(roomPin: String) async throws -> [UserData]
-    func downloadSongs(users: [UserData]) async throws -> [[MusicSyncSong]]
-    func countRoomMembers(roomPin: String) async throws -> Int
-    func joinRoom(roomPin: String, userData: UserData) async throws
-    func fetchRoomMembers(roomPin: String, userData: UserData) async throws -> [UserData]
-    func pushNext(roomPin: String) async throws
-    func exitRoom(roomPin: String, id: String) async throws
-    func deleteRoom(roomPin: String)
+    static func isExistRoom(roomPin: String) async throws -> Bool
+    static func createRoom(roomPin: Int, user: UserData) async throws
+    static func uploadSongs(songs: [MusicSyncSong], userID: String) async throws
+    static func downloadRoomData(roomPin: String) async throws -> [UserData]
+    static func downloadSongs(users: [UserData]) async throws -> [[MusicSyncSong]]
+    static func countRoomMembers(roomPin: String) async throws -> Int
+    static func joinRoom(roomPin: String, userData: UserData) async throws
+    static func fetchRoomMembers(roomPin: String, userData: UserData) async throws -> [UserData]
+    static func pushNext(roomPin: String) async throws
+    static func exitRoom(roomPin: String, id: String) async throws
+    static func deleteRoom(roomPin: String)
 }
 
-struct FirestoreRepository: RemoteDBProtocol, Sendable {
-    func isExistRoom(roomPin: String) async throws -> Bool {
+enum FirestoreRepository {}
+
+extension FirestoreRepository: RemoteDBProtocol, Sendable {
+    static func isExistRoom(roomPin: String) async throws -> Bool {
         let db = Firestore.firestore()
         let document = try await db.collection("Room").document(roomPin).getDocument()
         // documentが存在しない場合はfalseを返す
@@ -38,7 +40,7 @@ struct FirestoreRepository: RemoteDBProtocol, Sendable {
         return true
     }
 
-    func createRoom(roomPin: Int, user: UserData) async throws {
+    static func createRoom(roomPin: Int, user: UserData) async throws {
         let db = Firestore.firestore()
         let ref = db.collection("Room")
         try await ref.document(String(roomPin))
@@ -46,7 +48,7 @@ struct FirestoreRepository: RemoteDBProtocol, Sendable {
         try ref.document(String(roomPin)).collection("Member").document(user.id).setData(from: user)
     }
 
-    func uploadSongs(songs: [MusicSyncSong], userID: String) async throws {
+    static func uploadSongs(songs: [MusicSyncSong], userID: String) async throws {
         let db = Firestore.firestore()
         let batchSize = 3000
         let ref = db.collection("Songs").document(userID).collection("Songs")
@@ -66,7 +68,7 @@ struct FirestoreRepository: RemoteDBProtocol, Sendable {
         try await batch.commit()
     }
 
-    func downloadRoomData(roomPin: String) async throws -> [UserData] {
+    static func downloadRoomData(roomPin: String) async throws -> [UserData] {
         let db = Firestore.firestore()
         var users: [UserData] = []
         let members =  try await db.collection("Room").document(roomPin).collection("Member").getDocuments()
@@ -81,7 +83,7 @@ struct FirestoreRepository: RemoteDBProtocol, Sendable {
         return users
     }
 
-    func downloadSongs(users: [UserData]) async throws -> [[MusicSyncSong]] {
+    static func downloadSongs(users: [UserData]) async throws -> [[MusicSyncSong]] {
         let db = Firestore.firestore()
         var songs: [[MusicSyncSong]] = []
         for user in users {
@@ -98,18 +100,18 @@ struct FirestoreRepository: RemoteDBProtocol, Sendable {
         return songs
     }
 
-    func countRoomMembers(roomPin: String) async throws -> Int {
+    static func countRoomMembers(roomPin: String) async throws -> Int {
         let db = Firestore.firestore()
         let roomData = try await db.collection("Room").document(roomPin).collection("Member").getDocuments()
         return roomData.count
     }
 
-    func joinRoom(roomPin: String, userData: UserData) async throws {
+    static func joinRoom(roomPin: String, userData: UserData) async throws {
         let db = Firestore.firestore()
         try db.collection("Room").document(roomPin).collection("Member").document(userData.id).setData(from: userData)
     }
 
-    func fetchRoomMembers(roomPin: String, userData: UserData) async throws -> [UserData] {
+    static func fetchRoomMembers(roomPin: String, userData: UserData) async throws -> [UserData] {
         let db = Firestore.firestore()
         let roomRef = db.collection("Room").document(roomPin)
         let roomData = try await roomRef.collection("Member").getDocuments()
@@ -124,12 +126,12 @@ struct FirestoreRepository: RemoteDBProtocol, Sendable {
         return usersData
     }
 
-    func pushNext(roomPin: String) async throws {
+    static func pushNext(roomPin: String) async throws {
         let db = Firestore.firestore()
         try await db.collection("Room").document(roomPin).setData(["nextFlag": true, "isEnable": true])
     }
 
-    func exitRoom(roomPin: String, id: String) async throws {
+    static func exitRoom(roomPin: String, id: String) async throws {
         let db = Firestore.firestore()
         do {
             try await db.collection("Room")
@@ -144,7 +146,7 @@ struct FirestoreRepository: RemoteDBProtocol, Sendable {
         }
     }
 
-    func deleteRoom(roomPin: String) {
+    static func deleteRoom(roomPin: String) {
         let db = Firestore.firestore()
         db.collection("Room").document(roomPin).setData(["nextFlag": false, "isEnable": false])
     }

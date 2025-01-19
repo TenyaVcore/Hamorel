@@ -8,13 +8,12 @@
 import SwiftUI
 import MusicKit
 
-struct DebugView: View {
+struct DebugView<Repo: RemoteDBProtocol>: View {
     @State var song: Song?
     @State var artistText: String = ""
     @State var titleText: String = ""
     let loadLibraryUseCase = AppleMusicLoadLibraryUseCase()
     let createPlaylistUseCase = AppleMusicCreatePlaylistUseCase()
-    let firestoreRepo = FirestoreRepository()
     let syncModel = MusicSyncSongUseCase()
 
     var body: some View {
@@ -47,7 +46,7 @@ struct DebugView: View {
             Button("ルーム作成") {
                 Task {
                     do {
-                        try await firestoreRepo
+                        try await Repo
                             .createRoom(roomPin: 100000, user: UserData(id: "111", name: "test"))
                     } catch { print(error) }
                 }
@@ -57,5 +56,5 @@ struct DebugView: View {
 }
 
 #Preview {
-    DebugView()
+    DebugView<FirestoreRepository>()
 }

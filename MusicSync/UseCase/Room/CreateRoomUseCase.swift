@@ -5,8 +5,7 @@
 //  Created by 田川展也 on 12/23/R6.
 //
 
-struct CreateRoomUseCase: Sendable {
-    private let repo = FirestoreRepository()
+struct CreateRoomUseCase<Repo: RemoteDBProtocol>: Sendable {
 
     func createRoom(user: UserData) async throws -> String {
         let maxIter = 10
@@ -14,7 +13,7 @@ struct CreateRoomUseCase: Sendable {
 
         for i in 0...maxIter {
             roomPin = Int.random(in: 100000...999999)
-            let isExist = try await repo.isExistRoom(roomPin: String(roomPin))
+            let isExist = try await Repo.isExistRoom(roomPin: String(roomPin))
             if !isExist {
                 print("find roomPin")
                 break
@@ -25,20 +24,19 @@ struct CreateRoomUseCase: Sendable {
             }
         }
 
-        try await repo
-            .createRoom(roomPin: roomPin, user: user)
+        try await Repo.createRoom(roomPin: roomPin, user: user)
         return String(roomPin)
     }
 
     func uploadSongs(user: UserData, songs: [MusicSyncSong]) async throws {
-        try await repo.uploadSongs(songs: songs, userID: user.id)
+        try await Repo.uploadSongs(songs: songs, userID: user.id)
     }
 
     func pushNext(roomPin: String) async throws {
-        try await repo.pushNext(roomPin: roomPin)
+        try await Repo.pushNext(roomPin: roomPin)
     }
 
     func deleteRoom(roomPin: String) {
-        repo.deleteRoom(roomPin: roomPin)
+        Repo.deleteRoom(roomPin: roomPin)
     }
 }

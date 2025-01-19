@@ -10,7 +10,7 @@ import SwiftUICore
 @MainActor
 class CreateRoomViewModel: ObservableObject {
     private let loadLibraryUseCase = AppleMusicLoadLibraryUseCase()
-    private let createRoomUseCase = CreateRoomUseCase()
+    private let createRoomUseCase = CreateRoomUseCase<FirestoreRepository>()
     private let listenRoomUseCase = ListenRoomUseCase()
     private let authUseCase = AuthUseCase()
 
@@ -59,7 +59,7 @@ class CreateRoomViewModel: ObservableObject {
             async let musicSyncSongs = try loadLibraryUseCase.loadLibrary(limit: 0)
             async let createdRoomPin = createRoomUseCase.createRoom(user: user)
             try await createRoomUseCase.uploadSongs(user: user, songs: musicSyncSongs)
-            await self.roomPin = try createdRoomPin
+            self.roomPin = try await createdRoomPin
             self.addListener()
             self.isLoading = false
         } catch {

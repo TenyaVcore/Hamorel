@@ -8,14 +8,14 @@
 import SwiftUICore
 
 @MainActor
-class CreatePlaylistViewModel: ObservableObject {
-    var storeModel = FirestoreRepository()
+class CreatePlaylistViewModel<Repo: RemoteDBProtocol>: ObservableObject {
     var appleMusicCreatePlaylistUseCase = AppleMusicCreatePlaylistUseCase()
     var musicSyncSongUseCase = MusicSyncSongUseCase()
     var adMob = AdCoordinator()
 
     var songs: [MusicSyncSong] = []
 
+    @Published var users: [UserData] = []
     @Published var isLoading = true
     @Published var isReturnHome = false
     @Published var isCreateError = false
@@ -37,11 +37,11 @@ class CreatePlaylistViewModel: ObservableObject {
         isReturnHome = true
     }
 
-    private func downloadSongs(roomPin: String) {
+    func downloadSongs(roomPin: String) {
         Task {
             do {
-                let users = try await storeModel.downloadRoomData(roomPin: roomPin)
-                let downloadData: [[MusicSyncSong]]  = try await storeModel.downloadSongs(users: users)
+                users = try await Repo.downloadRoomData(roomPin: roomPin)
+                let downloadData: [[MusicSyncSong]]  = try await Repo.downloadSongs(users: users)
                 songs = downloadData[0]
                 for i in 1..<downloadData.count {
                     songs = musicSyncSongUseCase.merge(item1: songs, item2: downloadData[i])

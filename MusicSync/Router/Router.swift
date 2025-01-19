@@ -37,7 +37,7 @@ final class Router: ObservableObject {
             case .license:
                 LicenseView()
             case .debug:
-                DebugView()
+                DebugView<FirestoreRepository>()
             }
         }
     }

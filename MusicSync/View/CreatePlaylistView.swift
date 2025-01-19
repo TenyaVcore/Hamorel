@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CreatePlaylistView: View {
-    @StateObject var viewModel = CreatePlaylistViewModel()
+    @StateObject var viewModel = CreatePlaylistViewModel<FirestoreRepository>()
     @EnvironmentObject var router: Router
 
     var roomPin: String

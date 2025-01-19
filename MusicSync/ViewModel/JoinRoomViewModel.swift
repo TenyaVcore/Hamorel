@@ -11,7 +11,7 @@ import Firebase
 @MainActor
 class JoinRoomViewModel: ObservableObject {
     private let listenRoomUseCase = ListenRoomUseCase()
-    private let joinRoomUseCase = JoinRoomUseCase()
+    private let joinRoomUseCase = JoinRoomUseCase<FirestoreRepository>()
     private var loadLibraryUseCase = AppleMusicLoadLibraryUseCase()
     private var authUseCase = AuthUseCase()
 
@@ -25,7 +25,6 @@ class JoinRoomViewModel: ObservableObject {
     @Published var roomPin: String
 
     init(usersData: [UserData] = [UserData](),
-         model: FirestoreRepository = FirestoreRepository(),
          roomPin: String
     ) {
         self.usersData = usersData
