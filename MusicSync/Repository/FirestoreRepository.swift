@@ -7,7 +7,21 @@
 
 import FirebaseFirestore
 
-struct FirestoreRepository: Sendable {
+protocol RemoteDBProtocol {
+    func isExistRoom(roomPin: String) async throws -> Bool
+    func createRoom(roomPin: Int, user: UserData) async throws
+    func uploadSongs(songs: [MusicSyncSong], userID: String) async throws
+    func downloadRoomData(roomPin: String) async throws -> [UserData]
+    func downloadSongs(users: [UserData]) async throws -> [[MusicSyncSong]]
+    func countRoomMembers(roomPin: String) async throws -> Int
+    func joinRoom(roomPin: String, userData: UserData) async throws
+    func fetchRoomMembers(roomPin: String, userData: UserData) async throws -> [UserData]
+    func pushNext(roomPin: String) async throws
+    func exitRoom(roomPin: String, id: String) async throws
+    func deleteRoom(roomPin: String)
+}
+
+struct FirestoreRepository: RemoteDBProtocol, Sendable {
     func isExistRoom(roomPin: String) async throws -> Bool {
         let db = Firestore.firestore()
         let document = try await db.collection("Room").document(roomPin).getDocument()
