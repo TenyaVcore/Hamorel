@@ -5,19 +5,15 @@
 //  Created by 田川展也 on R 6/08/12.
 //
 
-import XCTest
+import Testing
 @testable import MusicSync
 
-class MusicSyncSongUseCaseTests: XCTestCase {
+struct MusicSyncSongUseCaseTests {
 
-    var useCase: MusicSyncSongUseCase!
+    var useCase = MusicSyncSongUseCase()
 
-    override func setUp() {
-        super.setUp()
-        useCase = MusicSyncSongUseCase()
-    }
-
-    func testMergeWithEqualArrays() {
+    @Test
+    func mergeWithEqualArrays() {
         let songs1 = [
             MusicSyncSong(title: "Song1", artist: "Artist1", appleMusicID: "1"),
             MusicSyncSong(title: "Song2", artist: "Artist2", appleMusicID: "2")
@@ -29,13 +25,14 @@ class MusicSyncSongUseCaseTests: XCTestCase {
 
         let merged = useCase.merge(item1: songs1, item2: songs2)
 
-        XCTAssertEqual(merged.count, 2)
-        XCTAssertEqual(merged[0].title, "Song1")
-        XCTAssertEqual(merged[0].artist, "Artist1")
-        XCTAssertEqual(merged[1].title, "Song2")
-        XCTAssertEqual(merged[1].artist, "Artist2")
+        #expect(merged.count == 2)
+        #expect(merged[0].title == "Song1")
+        #expect(merged[0].artist == "Artist1")
+        #expect(merged[1].title == "Song2")
+        #expect(merged[1].artist == "Artist2")
     }
 
+    @Test
     func testMergeWithDifferentArrays() {
         let songs1 = [
             MusicSyncSong(title: "Song1", artist: "Artist1", appleMusicID: "1"),
@@ -48,9 +45,10 @@ class MusicSyncSongUseCaseTests: XCTestCase {
 
         let merged = useCase.merge(item1: songs1, item2: songs2)
 
-        XCTAssertEqual(merged.count, 0)
+        #expect(merged.count == 0)
     }
 
+    @Test
     func testMergeWithPartiallyOverlappingArrays() {
         let songs1 = [
             MusicSyncSong(title: "Song1", artist: "Artist1", appleMusicID: "1"),
@@ -65,11 +63,11 @@ class MusicSyncSongUseCaseTests: XCTestCase {
 
         let merged = useCase.merge(item1: songs1, item2: songs2)
 
-        XCTAssertEqual(merged.count, 2)
-        XCTAssertEqual(merged[0].title, "Song2")
-        XCTAssertEqual(merged[0].artist, "Artist2")
-        XCTAssertEqual(merged[1].title, "Song3")
-        XCTAssertEqual(merged[1].artist, "Artist3")
+        #expect(merged.count == 2)
+        #expect(merged[0].title == "Song2")
+        #expect(merged[0].artist == "Artist2")
+        #expect(merged[1].title == "Song3")
+        #expect(merged[1].artist == "Artist3")
     }
 
     func testMergeWithEmptyArrays() {
@@ -78,6 +76,6 @@ class MusicSyncSongUseCaseTests: XCTestCase {
 
         let merged = useCase.merge(item1: songs1, item2: songs2)
 
-        XCTAssertEqual(merged.count, 0)
+        #expect(merged.count == 0)
     }
 }
