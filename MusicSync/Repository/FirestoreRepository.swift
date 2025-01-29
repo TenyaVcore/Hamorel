@@ -7,12 +7,10 @@
 
 import FirebaseFirestore
 
-protocol RemoteDBProtocol {
+protocol RoomDBProtocol {
     static func isExistRoom(roomPin: String) async throws -> Bool
     static func createRoom(roomPin: Int, user: UserData) async throws
-    static func uploadSongs(songs: [MusicSyncSong], userID: String) async throws
     static func downloadRoomData(roomPin: String) async throws -> [UserData]
-    static func downloadSongs(users: [UserData]) async throws -> [[MusicSyncSong]]
     static func countRoomMembers(roomPin: String) async throws -> Int
     static func joinRoom(roomPin: String, userData: UserData) async throws
     static func fetchRoomMembers(roomPin: String, userData: UserData) async throws -> [UserData]
@@ -21,9 +19,14 @@ protocol RemoteDBProtocol {
     static func deleteRoom(roomPin: String)
 }
 
+protocol SongDBProtocol {
+    static func uploadSongs(songs: [MusicSyncSong], userID: String) async throws
+    static func downloadSongs(users: [UserData]) async throws -> [[MusicSyncSong]]
+}
+
 enum FirestoreRepository {}
 
-extension FirestoreRepository: RemoteDBProtocol, Sendable {
+extension FirestoreRepository: RoomDBProtocol, SongDBProtocol, Sendable {
     static func isExistRoom(roomPin: String) async throws -> Bool {
         let db = Firestore.firestore()
         let document = try await db.collection("Room").document(roomPin).getDocument()

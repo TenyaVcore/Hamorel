@@ -8,7 +8,7 @@
 import SwiftUI
 import MusicKit
 
-struct DebugView<Repo: RemoteDBProtocol>: View {
+struct DebugView<Repo: RoomDBProtocol>: View {
     @State var song: Song?
     @State var artistText: String = ""
     @State var titleText: String = ""

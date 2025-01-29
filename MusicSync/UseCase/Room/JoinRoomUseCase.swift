@@ -5,7 +5,7 @@
 //  Created by 田川展也 on 12/25/R6.
 //
 
-struct JoinRoomUseCase<Repo: RemoteDBProtocol> {
+struct JoinRoomUseCase<Repo: RoomDBProtocol> {
 
     func joinRoom(roomPin: String, userData: UserData) async throws -> [UserData] {
         // 部屋が入室可能か確認

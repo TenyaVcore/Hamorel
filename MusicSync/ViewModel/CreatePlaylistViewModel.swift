@@ -8,7 +8,7 @@
 import SwiftUICore
 
 @MainActor
-class CreatePlaylistViewModel<Repo: RemoteDBProtocol>: ObservableObject {
+class CreatePlaylistViewModel<Repo: RoomDBProtocol & SongDBProtocol>: ObservableObject {
     var appleMusicCreatePlaylistUseCase = AppleMusicCreatePlaylistUseCase()
     var musicSyncSongUseCase = MusicSyncSongUseCase()
     var adMob = AdCoordinator()

@@ -5,7 +5,7 @@
 //  Created by 田川展也 on 12/23/R6.
 //
 
-struct CreateRoomUseCase<Repo: RemoteDBProtocol>: Sendable {
+struct CreateRoomUseCase<Repo: RoomDBProtocol & SongDBProtocol>: Sendable {
 
     func createRoom(user: UserData) async throws -> String {
         let maxIter = 10
