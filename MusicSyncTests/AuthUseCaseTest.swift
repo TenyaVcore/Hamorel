@@ -12,17 +12,13 @@ struct AuthUseCaseTest {
     struct LoggedInMockAuthRepository: AuthRepositoryProtocol {
         static func isLoggedIn() -> Bool { true }
         static func isAnonymous() -> Bool { false }
-
         static func fetchUser() -> MusicSync.UserData? {
             UserData(id: "111", name: "logged in user")
         }
-
         static func createUser(email: String, name: String, password: String) async throws {}
-
         static func loginAsGuest() async throws -> MusicSync.UserData {
             UserData(id: "222", name: "guest user")
         }
-
         static func changeUserName(newName: String) async throws {}
         static func sendPasswordReset(email: String) async throws {}
     }
@@ -30,17 +26,11 @@ struct AuthUseCaseTest {
     struct NotLoggedInMockAuthRepository: AuthRepositoryProtocol {
         static func isLoggedIn() -> Bool { false }
         static func isAnonymous() -> Bool { false }
-
-        static func fetchUser() -> MusicSync.UserData? {
-            nil
-        }
-
+        static func fetchUser() -> MusicSync.UserData? { nil }
         static func createUser(email: String, name: String, password: String) async throws {}
-
         static func loginAsGuest() async throws -> MusicSync.UserData {
             UserData(id: "222", name: "guest user")
         }
-
         static func changeUserName(newName: String) async throws {}
         static func sendPasswordReset(email: String) async throws {}
     }
