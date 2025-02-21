@@ -9,14 +9,16 @@ import Testing
 @testable import MusicSync
 
 struct CreateRoomUseCaseTest {
-
-    struct FoundRoomPinRepo: RoomDBProtocol {
+    struct FoundRoomPinRepo: RoomDBProtocol, SongDBProtocol {
+        static func uploadSongs(songs: [MusicSync.MusicSyncSong], userID: String) async throws {}
+        static func downloadSongs(users: [MusicSync.UserData]) async throws -> [[MusicSync.MusicSyncSong]] { [[]] }
         static func isExistRoom(roomPin: String) async throws -> Bool { false }
         static func createRoom(roomPin: Int, user: MusicSync.UserData) async throws {}
         static func downloadRoomData(roomPin: String) async throws -> [MusicSync.UserData] { [] }
         static func countRoomMembers(roomPin: String) async throws -> Int { 1 }
         static func joinRoom(roomPin: String, userData: MusicSync.UserData) async throws {}
-        static func fetchRoomMembers(roomPin: String, userData: MusicSync.UserData) async throws -> [MusicSync.UserData] { [] }
+        static func fetchRoomMembers(roomPin: String, userData: MusicSync.UserData) async throws
+                -> [MusicSync.UserData] { [] }
         static func pushNext(roomPin: String) async throws {}
         static func exitRoom(roomPin: String, id: String) async throws {}
         static func deleteRoom(roomPin: String) {}
@@ -28,7 +30,4 @@ struct CreateRoomUseCaseTest {
         #expect(roomPin.isEmpty == false)
         #expect(Int(roomPin) != nil)
     }
-
-
-
 }
