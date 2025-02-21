@@ -7,7 +7,12 @@
 
 import GoogleMobileAds
 
-class AdCoordinator: NSObject {
+protocol AdProtocol {
+    func loadAd()
+    func presentAd()
+}
+
+class AdCoordinator: NSObject, AdProtocol {
   private var ad: GADInterstitialAd?
 
   func loadAd() {
