@@ -1,4 +1,4 @@
-# MusicSync
+# Hamorel
 ## 環境
 
 - Language: Swift
