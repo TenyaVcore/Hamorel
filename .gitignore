@@ -7,8 +7,6 @@ xcuserdata/
 
 ## ソースコード管理(SCM)に関する設定ファイル
 *.xcscmblueprint
-## Xcode8以前のファイル　Xcode9以降はxcscmblueprintに含まれている
-*.xccheckout
 
 ## compatibility with Xcode 3 and earlier (ignoring not required starting Xcode 4)
 ## ビルド時に生成されるバイナリやリソース
@@ -37,11 +35,6 @@ DerivedData/
 *.perspectivev3
 !default.perspectivev3
 
-## Obj-C/Swift specific
-## Objective-Cのヘッダーマップ
-*.hmap
-
-
 ## アプリのアーカイブ
 *.ipa
 *.dSYM.zip
@@ -55,26 +48,3 @@ playground.xcworkspace
 
 # Swift Package Manager
 .build/
-
-# CocoaPods
-# Pods/
-# *.xcworkspace
-
-# Carthage
-Carthage/Build/
-
-# Accio dependency management
-Dependencies/
-.accio/
-
-# fastlane
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots/**/*.png
-fastlane/test_output
-
-# Code Injection
-iOSInjectionProject/
-MusicSync.xcodeproj/project.xcworkspace/xcuserdata/tagawanobuya.xcuserdatad/UserInterfaceState.xcuserstate
-MusicSync.xcodeproj/xcuserdata/tagawanobuya.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
-MusicSync.xcodeproj/project.xcworkspace/xcuserdata/tagawanobuya.xcuserdatad/UserInterfaceState.xcuserstate

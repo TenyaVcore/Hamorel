@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BA6CF8C22A1B0A480066B55E"
-               BuildableName = "MusicSync.app"
-               BlueprintName = "MusicSync"
+               BuildableName = "Hamorel.app"
+               BlueprintName = "Hamorel"
                ReferencedContainer = "container:MusicSync.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -68,8 +68,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BA6CF8C22A1B0A480066B55E"
-            BuildableName = "MusicSync.app"
-            BlueprintName = "MusicSync"
+            BuildableName = "Hamorel.app"
+            BlueprintName = "Hamorel"
             ReferencedContainer = "container:MusicSync.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -85,8 +85,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BA6CF8C22A1B0A480066B55E"
-            BuildableName = "MusicSync.app"
-            BlueprintName = "MusicSync"
+            BuildableName = "Hamorel.app"
+            BlueprintName = "Hamorel"
             ReferencedContainer = "container:MusicSync.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
