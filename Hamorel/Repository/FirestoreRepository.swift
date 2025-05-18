@@ -62,8 +62,13 @@ extension FirestoreRepository: RoomDBProtocol, SongDBProtocol, Sendable {
         while startIndex < songs.count {
             let endIndex = min(startIndex + batchSize, songs.count)
             let separatedItem: [HamorelSong] = Array(songs[startIndex..<endIndex])
+            let songDict: [String: HamorelSong] =
+                Dictionary(uniqueKeysWithValues:
+                    separatedItem.enumerated().map { (index, song) in
+                        (String(index), song)
+                    })
 
-            try batch.setData(from: separatedItem,
+            try batch.setData(from: songDict,
                               forDocument: ref.document(String(count)))
             count += 1
             startIndex += batchSize
