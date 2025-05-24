@@ -60,6 +60,9 @@ struct JoinRoomView: View {
                 .opacity(viewModel.isLoading ? 1 : 0)
                 .animation(.easeInOut, value: viewModel.isLoading)
         }
+        .task {
+            await viewModel.onAppear()
+        }
         .navigationDestination(isPresented: $viewModel.nextFlag) {
             router.navigate(item: .playlist(viewModel.roomPin))
         }
