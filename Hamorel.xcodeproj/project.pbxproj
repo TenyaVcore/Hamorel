@@ -47,20 +47,12 @@
 			remoteGlobalIDString = BA6CF8C22A1B0A480066B55E;
 			remoteInfo = MusicSync;
 		};
-		BA6CF8DE2A1B0A4A0066B55E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BA6CF8BB2A1B0A480066B55E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BA6CF8C22A1B0A480066B55E;
-			remoteInfo = MusicSync;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		BA4660FD2B0F9F6700CF7678 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		BA6CF8C32A1B0A480066B55E /* Hamorel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hamorel.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA6CF8D32A1B0A4A0066B55E /* MusicSyncTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicSyncTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA6CF8DD2A1B0A4A0066B55E /* MusicSyncUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicSyncUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA6CF8D32A1B0A4A0066B55E /* HamorelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HamorelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA7AC8A32C6A67C5009B252B /* Hamorel-Develop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hamorel-Develop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8542AB2AFE1D2800434765 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,13 +115,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BA6CF8DA2A1B0A4A0066B55E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		BA7AC8892C6A67C5009B252B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -171,8 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				BA6CF8C32A1B0A480066B55E /* Hamorel.app */,
-				BA6CF8D32A1B0A4A0066B55E /* MusicSyncTests.xctest */,
-				BA6CF8DD2A1B0A4A0066B55E /* MusicSyncUITests.xctest */,
+				BA6CF8D32A1B0A4A0066B55E /* HamorelTests.xctest */,
 				BA7AC8A32C6A67C5009B252B /* Hamorel-Develop.app */,
 			);
 			name = Products;
@@ -221,9 +205,9 @@
 			productReference = BA6CF8C32A1B0A480066B55E /* Hamorel.app */;
 			productType = "com.apple.product-type.application";
 		};
-		BA6CF8D22A1B0A4A0066B55E /* MusicSyncTests */ = {
+		BA6CF8D22A1B0A4A0066B55E /* HamorelTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BA6CF8EA2A1B0A4A0066B55E /* Build configuration list for PBXNativeTarget "MusicSyncTests" */;
+			buildConfigurationList = BA6CF8EA2A1B0A4A0066B55E /* Build configuration list for PBXNativeTarget "HamorelTests" */;
 			buildPhases = (
 				BA6CF8CF2A1B0A4A0066B55E /* Sources */,
 				BA6CF8D02A1B0A4A0066B55E /* Frameworks */,
@@ -237,28 +221,10 @@
 			fileSystemSynchronizedGroups = (
 				BA7316812CCE6CC80006CAB0 /* HamorelTests */,
 			);
-			name = MusicSyncTests;
+			name = HamorelTests;
 			productName = MusicSyncTests;
-			productReference = BA6CF8D32A1B0A4A0066B55E /* MusicSyncTests.xctest */;
+			productReference = BA6CF8D32A1B0A4A0066B55E /* HamorelTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		BA6CF8DC2A1B0A4A0066B55E /* MusicSyncUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BA6CF8ED2A1B0A4A0066B55E /* Build configuration list for PBXNativeTarget "MusicSyncUITests" */;
-			buildPhases = (
-				BA6CF8D92A1B0A4A0066B55E /* Sources */,
-				BA6CF8DA2A1B0A4A0066B55E /* Frameworks */,
-				BA6CF8DB2A1B0A4A0066B55E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				BA6CF8DF2A1B0A4A0066B55E /* PBXTargetDependency */,
-			);
-			name = MusicSyncUITests;
-			productName = MusicSyncUITests;
-			productReference = BA6CF8DD2A1B0A4A0066B55E /* MusicSyncUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		BA7AC8512C6A67C5009B252B /* Hamorel-Develop */ = {
 			isa = PBXNativeTarget;
@@ -318,10 +284,6 @@
 						LastSwiftMigration = 1540;
 						TestTargetID = BA6CF8C22A1B0A480066B55E;
 					};
-					BA6CF8DC2A1B0A4A0066B55E = {
-						CreatedOnToolsVersion = 14.3;
-						TestTargetID = BA6CF8C22A1B0A480066B55E;
-					};
 				};
 			};
 			buildConfigurationList = BA6CF8BE2A1B0A480066B55E /* Build configuration list for PBXProject "Hamorel" */;
@@ -344,8 +306,7 @@
 			targets = (
 				BA6CF8C22A1B0A480066B55E /* Hamorel */,
 				BA7AC8512C6A67C5009B252B /* Hamorel-Develop */,
-				BA6CF8D22A1B0A4A0066B55E /* MusicSyncTests */,
-				BA6CF8DC2A1B0A4A0066B55E /* MusicSyncUITests */,
+				BA6CF8D22A1B0A4A0066B55E /* HamorelTests */,
 			);
 		};
 /* End PBXProject section */
@@ -359,13 +320,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		BA6CF8D12A1B0A4A0066B55E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BA6CF8DB2A1B0A4A0066B55E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -479,13 +433,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BA6CF8D92A1B0A4A0066B55E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		BA7AC8652C6A67C5009B252B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -504,11 +451,6 @@
 			isa = PBXTargetDependency;
 			target = BA6CF8C22A1B0A480066B55E /* Hamorel */;
 			targetProxy = BA6CF8D42A1B0A4A0066B55E /* PBXContainerItemProxy */;
-		};
-		BA6CF8DF2A1B0A4A0066B55E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BA6CF8C22A1B0A480066B55E /* Hamorel */;
-			targetProxy = BA6CF8DE2A1B0A4A0066B55E /* PBXContainerItemProxy */;
 		};
 		BA7AC8522C6A67C5009B252B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -719,13 +661,13 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tenya.MusicSyncTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tenya.HamorelTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MusicSync.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MusicSync";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hamorel.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hamorel";
 			};
 			name = Debug;
 		};
@@ -740,48 +682,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tenya.MusicSyncTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tenya.HamorelTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MusicSync.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MusicSync";
-			};
-			name = Release;
-		};
-		BA6CF8EE2A1B0A4A0066B55E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P4P28KTQQK;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tenya.MusicSyncUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = MusicSync;
-			};
-			name = Debug;
-		};
-		BA6CF8EF2A1B0A4A0066B55E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = P4P28KTQQK;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.tenya.MusicSyncUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = MusicSync;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hamorel.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Hamore";
 			};
 			name = Release;
 		};
@@ -879,20 +785,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BA6CF8EA2A1B0A4A0066B55E /* Build configuration list for PBXNativeTarget "MusicSyncTests" */ = {
+		BA6CF8EA2A1B0A4A0066B55E /* Build configuration list for PBXNativeTarget "HamorelTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BA6CF8EB2A1B0A4A0066B55E /* Debug */,
 				BA6CF8EC2A1B0A4A0066B55E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BA6CF8ED2A1B0A4A0066B55E /* Build configuration list for PBXNativeTarget "MusicSyncUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BA6CF8EE2A1B0A4A0066B55E /* Debug */,
-				BA6CF8EF2A1B0A4A0066B55E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
