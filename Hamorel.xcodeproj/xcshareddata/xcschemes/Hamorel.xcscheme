@@ -35,7 +35,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BA9D4D362DE35EB4006E072A"
+               BlueprintIdentifier = "BA6CF8D22A1B0A4A0066B55E"
                BuildableName = "HamorelTests.xctest"
                BlueprintName = "HamorelTests"
                ReferencedContainer = "container:Hamorel.xcodeproj">

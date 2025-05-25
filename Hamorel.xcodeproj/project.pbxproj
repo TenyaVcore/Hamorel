@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA4660F72B0F9C6700CF7678 /* LicenseList in Frameworks */ = {isa = PBXBuildFile; productRef = BA4660F62B0F9C6700CF7678 /* LicenseList */; };
+		BA57D7212DE36A190058AAA5 /* LicenseList in Frameworks */ = {isa = PBXBuildFile; productRef = BA57D7202DE36A190058AAA5 /* LicenseList */; };
 		BA6CF8F22A1B0B090066B55E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BA6CF8F12A1B0B090066B55E /* FirebaseAnalytics */; };
 		BA6CF8F42A1B0B090066B55E /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = BA6CF8F32A1B0B090066B55E /* FirebaseAnalyticsOnDeviceConversion */; };
 		BA6CF8F62A1B0B090066B55E /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BA6CF8F52A1B0B090066B55E /* FirebaseAnalyticsSwift */; };
@@ -90,12 +90,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA4660F72B0F9C6700CF7678 /* LicenseList in Frameworks */,
 				BA6CF8F62A1B0B090066B55E /* FirebaseAnalyticsSwift in Frameworks */,
 				BA6CF8F22A1B0B090066B55E /* FirebaseAnalytics in Frameworks */,
 				BA6CF90A2A1B0B090066B55E /* FirebaseInstallations in Frameworks */,
 				BA6CF8F42A1B0B090066B55E /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				BA6CF9042A1B0B090066B55E /* FirebaseFirestore in Frameworks */,
+				BA57D7212DE36A190058AAA5 /* LicenseList in Frameworks */,
 				BA6CF8FA2A1B0B090066B55E /* FirebaseAppCheck in Frameworks */,
 				BA6CF9062A1B0B090066B55E /* FirebaseFirestoreCombine-Community in Frameworks */,
 				BA6CF8F82A1B0B090066B55E /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
@@ -178,7 +178,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				BA4660F92B0F9CD800CF7678 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				BA7316C52CCE6D860006CAB0 /* Hamorel */,
@@ -198,8 +197,8 @@
 				BA6CF9052A1B0B090066B55E /* FirebaseFirestoreCombine-Community */,
 				BA6CF9072A1B0B090066B55E /* FirebaseFirestoreSwift */,
 				BA6CF9092A1B0B090066B55E /* FirebaseInstallations */,
-				BA4660F62B0F9C6700CF7678 /* LicenseList */,
 				BA70AB992B944B7D0041B369 /* GoogleMobileAds */,
+				BA57D7202DE36A190058AAA5 /* LicenseList */,
 			);
 			productName = MusicSync;
 			productReference = BA6CF8C32A1B0A480066B55E /* Hamorel.app */;
@@ -239,7 +238,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				BA7AC8522C6A67C5009B252B /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				BA7316C52CCE6D860006CAB0 /* Hamorel */,
@@ -297,8 +295,8 @@
 			mainGroup = BA6CF8BA2A1B0A480066B55E;
 			packageReferences = (
 				BA6CF8F02A1B0B090066B55E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				BA4660F52B0F9C6700CF7678 /* XCRemoteSwiftPackageReference "LicenseList" */,
 				BA70AB982B944B7D0041B369 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				BA57D71F2DE36A190058AAA5 /* XCRemoteSwiftPackageReference "LicenseList" */,
 			);
 			productRefGroup = BA6CF8C42A1B0A480066B55E /* Products */;
 			projectDirPath = "";
@@ -443,18 +441,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		BA4660F92B0F9CD800CF7678 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = BA4660F82B0F9CD800CF7678 /* PrepareLicenseList */;
-		};
 		BA6CF8D52A1B0A4A0066B55E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BA6CF8C22A1B0A480066B55E /* Hamorel */;
 			targetProxy = BA6CF8D42A1B0A4A0066B55E /* PBXContainerItemProxy */;
-		};
-		BA7AC8522C6A67C5009B252B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = BA4660F82B0F9CD800CF7678 /* PrepareLicenseList */;
 		};
 /* End PBXTargetDependency section */
 
@@ -806,12 +796,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		BA4660F52B0F9C6700CF7678 /* XCRemoteSwiftPackageReference "LicenseList" */ = {
+		BA57D71F2DE36A190058AAA5 /* XCRemoteSwiftPackageReference "LicenseList" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/cybozu/LicenseList";
+			repositoryURL = "https://github.com/cybozu/LicenseList.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.4.0;
+				minimumVersion = 2.0.2;
 			};
 		};
 		BA6CF8F02A1B0B090066B55E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -857,15 +847,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		BA4660F62B0F9C6700CF7678 /* LicenseList */ = {
+		BA57D7202DE36A190058AAA5 /* LicenseList */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = BA4660F52B0F9C6700CF7678 /* XCRemoteSwiftPackageReference "LicenseList" */;
+			package = BA57D71F2DE36A190058AAA5 /* XCRemoteSwiftPackageReference "LicenseList" */;
 			productName = LicenseList;
-		};
-		BA4660F82B0F9CD800CF7678 /* PrepareLicenseList */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BA4660F52B0F9C6700CF7678 /* XCRemoteSwiftPackageReference "LicenseList" */;
-			productName = "plugin:PrepareLicenseList";
 		};
 		BA6CF8F12A1B0B090066B55E /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
