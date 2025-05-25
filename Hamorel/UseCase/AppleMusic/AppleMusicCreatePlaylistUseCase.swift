@@ -15,42 +15,48 @@ struct AppleMusicCreatePlaylistUseCase {
             try await MusicLibrary.shared.createPlaylist(name: playlistName, items: musicItemCollection)
         }
     }
-
+    
     func convertToMusicItemCollection(from HamorelSongs: [HamorelSong]) async -> MusicItemCollection<Song> {
-        var Songs: [Song] = []
-
+        var songs: [Song] = []
+        
         await withTaskGroup(of: Song?.self) { group in
             for song in HamorelSongs {
                 // Apple Music IDがあればそれを使って曲を取得、なければアーティスト名と曲名で検索
                 group.addTask {
-                    if let catalogID = song.appleMusicID {
-                        return try? await getSong(from: catalogID)
-                    } else {
-                        return try? await getSong(artist: song.artist, title: song.title)
+                    do {
+                        if let catalogID = song.appleMusicID {
+                            return try await getSong(from: catalogID)
+                        } else {
+                            return try await getSong(artist: song.artist, title: song.title)
+                        }
+                    } catch {
+                        print("song convert error: \(error)")
+                        return nil
+                    }
+                }
+                for await song in group {
+                    if let song {
+                        songs.append(song)
                     }
                 }
             }
-            for await song in group {
-                if let song = song {
-                    Songs.append(song)
-                }
-            }
         }
-        return MusicItemCollection(Songs)
+        return MusicItemCollection(songs)
     }
-
+    
+    
     private func getSong(from catalogID: String) async throws -> Song {
         var request = MusicCatalogResourceRequest<Song>(matching: \.id, equalTo: MusicItemID(catalogID))
         request.limit = 1
         let response = try await request.response()
         return response.items[0]
     }
-
+    
     private func getSong(artist: String, title: String) async throws -> Song {
         var request = MusicCatalogSearchRequest(term: "\(artist) \(title)", types: [Song.self])
         request.limit = 1
         let response = try await request.response()
-
+        
         guard let song = response.songs.first else {
             throw FetchError.songNotFound
         }
@@ -61,7 +67,7 @@ struct AppleMusicCreatePlaylistUseCase {
         }
         return song
     }
-
+    
     enum FetchError: Error {
         case songNotFound
         case songMismatch

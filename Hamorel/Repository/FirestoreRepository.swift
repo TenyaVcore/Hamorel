@@ -39,10 +39,9 @@ extension FirestoreRepository: RoomDBProtocol, SongDBProtocol, Sendable {
               isEnable,
               !nextFlag
         else { return false }
-
         return true
     }
-
+    
     static func createRoom(roomPin: Int, user: UserData) async throws {
         let db = Firestore.firestore()
         let ref = db.collection("Room")
@@ -50,7 +49,7 @@ extension FirestoreRepository: RoomDBProtocol, SongDBProtocol, Sendable {
             .setData(["nextFlag": false, "isEnable": true])
         try ref.document(String(roomPin)).collection("Member").document(user.id).setData(from: user)
     }
-
+    
     static func uploadSongs(songs: [HamorelSong], userID: String) async throws {
         let db = Firestore.firestore()
         let batchSize = 3000
@@ -58,16 +57,16 @@ extension FirestoreRepository: RoomDBProtocol, SongDBProtocol, Sendable {
         let batch = db.batch()
         var count = 1
         var startIndex = 0
-
+        
         while startIndex < songs.count {
             let endIndex = min(startIndex + batchSize, songs.count)
             let separatedItem: [HamorelSong] = Array(songs[startIndex..<endIndex])
             let songDict: [String: HamorelSong] =
-                Dictionary(uniqueKeysWithValues:
-                    separatedItem.enumerated().map { (index, song) in
-                        (String(index), song)
-                    })
-
+            Dictionary(uniqueKeysWithValues:
+                        separatedItem.enumerated().map { (index, song) in
+                (String(index), song)
+            })
+            
             try batch.setData(from: songDict,
                               forDocument: ref.document(String(count)))
             count += 1
@@ -75,7 +74,7 @@ extension FirestoreRepository: RoomDBProtocol, SongDBProtocol, Sendable {
         }
         try await batch.commit()
     }
-
+    
     static func downloadRoomData(roomPin: String) async throws -> [UserData] {
         let db = Firestore.firestore()
         var users: [UserData] = []
@@ -90,35 +89,46 @@ extension FirestoreRepository: RoomDBProtocol, SongDBProtocol, Sendable {
         }
         return users
     }
-
+    
     static func downloadSongs(users: [UserData]) async throws -> [[HamorelSong]] {
-        let db = Firestore.firestore()
-        var songs: [[HamorelSong]] = []
-        for user in users {
-            var userSongs = [HamorelSong]()
-            let userSongsSnapshot = try await db.collection("Songs").document(user.id)
-                                                .collection("Songs").getDocuments()
-            userSongsSnapshot.documents.forEach { userSong in
-                if let userSongData = try? userSong.data(as: [HamorelSong].self) {
-                    userSongs += userSongData
+        return try await withThrowingTaskGroup(of: [HamorelSong].self) { group in
+            var songs: [[HamorelSong]] = []
+            for user in users {
+                let db = Firestore.firestore()
+                
+                group.addTask {
+                    let snapshot = try await db.collection("Songs")
+                        .document(user.id)
+                        .collection("Songs")
+                        .getDocuments()
+                    var userSongs: [HamorelSong] = []
+                    
+                    for document in snapshot.documents {
+                        let map = try document.data(as: [String: HamorelSong].self)
+                        userSongs.append(contentsOf: map.values)
+                    }
+                    return userSongs
+                }
+                
+                for try await userSongs in group {
+                    songs.append(userSongs)
                 }
             }
-            songs.append(userSongs)
+            return songs
         }
-        return songs
     }
-
+    
     static func countRoomMembers(roomPin: String) async throws -> Int {
         let db = Firestore.firestore()
         let roomData = try await db.collection("Room").document(roomPin).collection("Member").getDocuments()
         return roomData.count
     }
-
+    
     static func joinRoom(roomPin: String, userData: UserData) async throws {
         let db = Firestore.firestore()
         try db.collection("Room").document(roomPin).collection("Member").document(userData.id).setData(from: userData)
     }
-
+    
     static func fetchRoomMembers(roomPin: String, userData: UserData) async throws -> [UserData] {
         let db = Firestore.firestore()
         let roomRef = db.collection("Room").document(roomPin)
@@ -130,15 +140,15 @@ extension FirestoreRepository: RoomDBProtocol, SongDBProtocol, Sendable {
             return UserData(id: id, name: name)
         }
         usersData.append(userData)
-
+        
         return usersData
     }
-
+    
     static func pushNext(roomPin: String) async throws {
         let db = Firestore.firestore()
         try await db.collection("Room").document(roomPin).setData(["nextFlag": true, "isEnable": true])
     }
-
+    
     static func exitRoom(roomPin: String, id: String) async throws {
         let db = Firestore.firestore()
         do {
@@ -153,7 +163,7 @@ extension FirestoreRepository: RoomDBProtocol, SongDBProtocol, Sendable {
             throw error
         }
     }
-
+    
     static func deleteRoom(roomPin: String) {
         let db = Firestore.firestore()
         db.collection("Room").document(roomPin).setData(["nextFlag": false, "isEnable": false])
