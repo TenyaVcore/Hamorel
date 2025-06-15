@@ -83,7 +83,7 @@ struct HomeView: View {
                         .ignoresSafeArea()
                 }
                 .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
+                    ToolbarItem(placement: .topBarTrailing) {
                         NavigationLink(value: NavigationLinkItem.setting) {
                             Image(systemName: "gearshape.fill")
                                 .foregroundColor(.white)
