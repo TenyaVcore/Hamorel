@@ -18,10 +18,8 @@ struct SettingView: View {
     @State private var isSettingName = false
 
     @AppStorage("name") var name = "ゲストユーザー"
-
     init() {
         _appleAuthStatus = .init(initialValue: MusicAuthorization.currentStatus)
-        name = Auth.auth().currentUser?.displayName ?? "ゲストユーザー"
     }
 
     var body: some View {

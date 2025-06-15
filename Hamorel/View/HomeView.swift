@@ -22,9 +22,16 @@ struct HomeView: View {
                 VStack {
                     Spacer()
 
-                    Image("Hamorel_logo")
+                    Image("logo")
                         .resizable()
                         .scaledToFit()
+                        .frame(width: 150, height: 150)
+                    
+                    Text("Hamorel")
+                        .font(.largeTitle)
+                        .fontWeight(.heavy)
+                        .foregroundStyle(.white)
+                        
 
                     Spacer()
 
@@ -43,6 +50,7 @@ struct HomeView: View {
                             Text("友人家族と音楽で繋がろう")
                                 .font(.title3)
                                 .fontWeight(.bold)
+                                .foregroundStyle(.black)
                                 .padding(.bottom, 30)
 
                             NavigationLink(value: NavigationLinkItem.create) {
@@ -99,5 +107,6 @@ struct HomeView: View {
 struct homeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(viewModel: HomeViewModel())
+            .environmentObject(Router())
     }
 }

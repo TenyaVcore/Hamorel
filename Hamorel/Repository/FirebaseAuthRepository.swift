@@ -21,7 +21,6 @@ protocol AuthRepositoryProtocol {
 enum FirebaseAuthRepository {}
 
 extension FirebaseAuthRepository: AuthRepositoryProtocol {
-
     static func isLoggedIn() -> Bool {
         return Auth.auth().currentUser != nil
     }
@@ -33,7 +32,6 @@ extension FirebaseAuthRepository: AuthRepositoryProtocol {
     static func fetchUser() -> UserData? {
         let user = Auth.auth().currentUser
         guard let user = user else { return nil }
-
         return UserData(id: user.uid, name: user.displayName ?? "ユーザー名未設定")
     }
 

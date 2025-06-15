@@ -10,6 +10,7 @@ import SwiftUI
 struct NameSettingView<Repo: AuthRepositoryProtocol>: View {
     @State var updateName: String = ""
     @State var isError = false
+    @AppStorage("name") var name = "ゲストユーザー"
     @Environment(\.dismiss) private var dismiss
 
     init() {
@@ -32,6 +33,7 @@ struct NameSettingView<Repo: AuthRepositoryProtocol>: View {
                 Task {
                     do {
                         try await Repo.changeUserName(newName: updateName)
+                        name = updateName
                         dismiss()
                     } catch {
                         isError = true

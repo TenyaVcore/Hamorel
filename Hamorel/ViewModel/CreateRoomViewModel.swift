@@ -6,6 +6,7 @@
 //
 
 import SwiftUICore
+import SwiftUI
 
 @MainActor
 class CreateRoomViewModel: ObservableObject {
@@ -19,10 +20,12 @@ class CreateRoomViewModel: ObservableObject {
     @Published var isError = false
     @Published var roomPin = "--- ---"
     @Published var nextFlag = false
+    @AppStorage("name") var name = "ゲストユーザー"
 
     func onAppear() async {
         do {
-            let user = try await authUseCase.fetchUser()
+            var user = try await authUseCase.fetchUser()
+            user.name = name
             usersData = [user]
             await createGroup(user: user)
         } catch {
