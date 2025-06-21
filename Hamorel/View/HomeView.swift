@@ -63,18 +63,18 @@ struct HomeView: View {
                             }
                             .padding(.bottom, 10)
 
-                            Divider()
+//                            Divider()
 
-                            NavigationLink(value: NavigationLinkItem.login) {
-                                Text("ログイン")
-                                    .font(.title3)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.black)
-                                    .frame(width: 300, height: 50)
-                                    .background(Color("color_secondary"))
-                                    .cornerRadius(10)
-                            }
-                            .padding(.vertical, 10)
+//                            NavigationLink(value: NavigationLinkItem.login) {
+//                                Text("ログイン")
+//                                    .font(.title3)
+//                                    .fontWeight(.bold)
+//                                    .foregroundColor(.black)
+//                                    .frame(width: 300, height: 50)
+//                                    .background(Color("color_secondary"))
+//                                    .cornerRadius(10)
+//                            }
+//                            .padding(.vertical, 10)
                         }
                     }
                 }

@@ -9,7 +9,7 @@ import Foundation
 import MusicKit
 
 struct AppleMusicCreatePlaylistUseCase {
-    func createPlaylist(from songs: [HamorelSong], playlistName: String = "Music Sync Playlist") throws {
+    func createPlaylist(from songs: [HamorelSong], playlistName: String) throws {
         Task {
             let musicItemCollection = await convertToMusicItemCollection(from: songs)
             try await MusicLibrary.shared.createPlaylist(name: playlistName, items: musicItemCollection)

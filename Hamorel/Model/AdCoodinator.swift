@@ -19,7 +19,7 @@ class AdCoordinator: NSObject, AdProtocol {
 #if DEBUG
       let adUnitID = "ca-app-pub-3940256099942544/4411468910"
 #else
-      let adUnitID = "ca-app-pub-5449942175714797/6669029673"
+      let adUnitID = "ca-app-pub-5449942175714797/3366390128"
 #endif
     GADInterstitialAd.load(
       withAdUnitID: adUnitID, request: GADRequest()

@@ -25,18 +25,18 @@ struct SettingView: View {
     var body: some View {
         List {
             Section {
-                HStack {
-                    Text("現在のログインステータス：")
-
-                    switch Auth.auth().currentUser?.isAnonymous {
-                    case true:
-                        Text("ゲストとしてログイン")
-                    case false:
-                        Text("メールアドレスでログイン")
-                    default:
-                        Text("未選択")
-                    }
-                }
+//                HStack {
+//                    Text("現在のログインステータス：")
+//
+//                    switch Auth.auth().currentUser?.isAnonymous {
+//                    case true:
+//                        Text("ゲストとしてログイン")
+//                    case false:
+//                        Text("メールアドレスでログイン")
+//                    default:
+//                        Text("未選択")
+//                    }
+//                }
                 HStack {
                     Text("現在のApple Music ステータス:")
 
@@ -66,9 +66,9 @@ struct SettingView: View {
                     NameSettingView<FirebaseAuthRepository>()
                 }
 
-                NavigationLink(value: NavigationLinkItem.passwordReset) {
-                    Text("パスワードの変更")
-                }
+//                NavigationLink(value: NavigationLinkItem.passwordReset) {
+//                    Text("パスワードの変更")
+//                }
             } header: {
                 Text("ユーザ情報の変更")
             }
@@ -91,30 +91,30 @@ struct SettingView: View {
             }
 #endif
 
-            if Auth.auth().currentUser?.isAnonymous != nil {
-                Button(action: {
-                    self.logOutAlert = true
-                }, label: {
-                    Text("ログアウト")
-                        .foregroundColor(.red)
-                        .bold()
-                })
-                .alert("本当にログアウトしますか？", isPresented: $logOutAlert) {
-                    Button("キャンセル") {}
-
-                    Button("OK") {
-                        do {
-                            try Auth.auth().signOut()
-                        } catch let error as NSError {
-                            print(error)
-                        }
-                    }
-                }
-            } else {
-                NavigationLink(value: NavigationLinkItem.login) {
-                    Text("ログイン")
-                }
-            }
+//            if Auth.auth().currentUser?.isAnonymous != nil {
+//                Button(action: {
+//                    self.logOutAlert = true
+//                }, label: {
+//                    Text("ログアウト")
+//                        .foregroundColor(.red)
+//                        .bold()
+//                })
+//                .alert("本当にログアウトしますか？", isPresented: $logOutAlert) {
+//                    Button("キャンセル") {}
+//
+//                    Button("OK") {
+//                        do {
+//                            try Auth.auth().signOut()
+//                        } catch let error as NSError {
+//                            print(error)
+//                        }
+//                    }
+//                }
+//            } else {
+//                NavigationLink(value: NavigationLinkItem.login) {
+//                    Text("ログイン")
+//                }
+//            }
         }
     }
 }
